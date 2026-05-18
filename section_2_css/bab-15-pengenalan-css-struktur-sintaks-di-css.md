@@ -37,7 +37,7 @@ h1 {
 Mari kita bedah anatominya:
 
 - **Selector (Siapa yang ingin dihias?):** Dalam contoh di atas, `h1` adalah selector. Kita memberi tahu browser: "Cari semua tag `<h1>` yang ada di HTML".
-- **Property (Apanya yang mau diubah?):** Di dalam kurung kurawal, ada kata `color` dan `font-size`. Ini adalah atribut yang ingin kita modifikasi arsitekturnya.
+- **Property (Apanya yang mau diubah?):** Di dalam kurung kurawal, ada kata `color` dan `font-size`. Ini adalah properti yang ingin kita modifikasi arsitekturnya.
 - **Value (Mau diubah jadi apa?):** Di sebelah kanan tanda titik dua `:`, ada nilai `blue` dan `24px`. Inilah instruksi spesifiknya.
 
 ### 3. Aturan Penulisan (Tanda Baca)

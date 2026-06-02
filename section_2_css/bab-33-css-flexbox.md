@@ -1,112 +1,459 @@
 # Bab 33: CSS Flexbox
 
 ## Tujuan Pembelajaran
-- Memahami konsep Flexbox sebagai sistem tata letak 1-Dimensi yang fleksibel.
+
+- Memahami konsep Flexbox sebagai sistem tata letak satu dimensi yang fleksibel.
 - Menguasai pengaturan poros utama (`Main Axis`) dan poros silang (`Cross Axis`).
 - Mampu mendistribusikan ruang antar elemen dengan berbagai variasi `justify-content` dan `align-items`.
-- Mengatur properti individual pada sisi Anak (Item) seperti `flex-grow` dan `flex-basis`.
-- Mampu memusatkan elemen secara sempurna (Centering) dengan trik rahasia.
+- Mengatur properti individual pada elemen anak seperti `flex-grow`, `flex-shrink`, dan `flex-basis`.
+- Mampu memusatkan elemen secara sempurna secara horizontal maupun vertikal.
+
+---
 
 ## Materi Utama
 
-Ini adalah revolusi terbesar dalam sejarah gaya *styling* Web Modern. Di masa lalu, jika programmer ingin membuat 3 kotak berjajar menyamping dengan jarak sama rata, mereka harus pusing berurusan dengan properti kuno seperti `float` atau hitungan Margin/Persen matematika yang rentan meleset merusak halaman web.
+Sebelum Flexbox hadir, pengembang web harus mengandalkan teknik seperti `float` atau perhitungan `margin` dan persentase secara manual hanya untuk membuat beberapa kotak berjajar secara horizontal. Pendekatan tersebut rentan terhadap inkonsistensi tampilan di berbagai ukuran layar.
 
-Sejak kemunculan **Flexbox (Flexible Box)**, tata letak menyamping atau menumpuk tiba-tiba menjadi sangat ajaib, santai, dan anti pecah!
+Sejak diperkenalkannya **Flexbox (Flexible Box Layout)**, pengelolaan tata letak elemen — baik berjajar maupun bertumpuk — menjadi jauh lebih terstruktur, ringkas, dan andal.
+
+---
 
 ### 1. Konsep Poros: Main Axis & Cross Axis
 
-Ini adalah fondasi kunci. Flexbox bekerja secara Spesialis **1 Dimensi**. Artinya, di suatu waktu ia murni hanya fokus menata deret menyamping vertikal (Baris) ATAU tumpukan meruncing (Kolom).
+Flexbox adalah sistem tata letak **satu dimensi**, artinya pada satu waktu ia hanya mengelola satu arah — baik secara horizontal (baris) maupun vertikal (kolom).
 
-Bayangkan sebuah **Rel Kereta Api**.
-- **Main Axis (Poros Utama)**: Arah kereta api dibariskan berjalan (Secara default/bawaan: Kiri ke Kanan).
-- **Cross Axis (Poros Silang)**: Arah yang memotong rel secara tegak lurus (Secara default: Atas ke Bawah).
+Untuk memahami Flexbox, penting untuk terlebih dahulu memahami dua poros utamanya:
 
-Jika kamu nanti mengubah arahnya menjadi baris kolom ke bawah, maka Main Axis-nya merubah orientasi menjadi Atas ke Bawah, dan Cross Axis-nya jadi Kiri ke Kanan.
+- **Main Axis (Poros Utama)**: Arah utama di mana elemen anak disusun. Secara default, arahnya adalah dari kiri ke kanan.
+- **Cross Axis (Poros Silang)**: Arah yang tegak lurus terhadap Main Axis. Secara default, arahnya adalah dari atas ke bawah.
 
-### 2. Deklarasi Kekuatan Flexbox (Properti Si Bapak)
+Kedua poros ini akan bertukar orientasi apabila arah susunan diubah. Jika `flex-direction` diubah menjadi `column`, maka Main Axis berubah menjadi arah atas ke bawah, dan Cross Axis menjadi kiri ke kanan.
 
-Untuk mengaktifkan tenaga sulap Flexbox, kita harus menerapkannya ke Bapak Wadahnya (**Container / Parent**), BUKAN menaruh instruksinya ke tag anak-anak box di dalamnya.
+**Ilustrasi Poros:**
+
+```
+flex-direction: row (default)
+
+Main Axis  →  [ Item 1 ] [ Item 2 ] [ Item 3 ]
+                ↕
+          Cross Axis
+```
+
+```
+flex-direction: column
+
+Main Axis  ↓  [ Item 1 ]
+              [ Item 2 ]
+              [ Item 3 ]
+               ↔
+          Cross Axis
+```
+
+---
+
+### 2. Mengaktifkan Flexbox (Properti pada Elemen Induk)
+
+Untuk mengaktifkan Flexbox, properti `display: flex` diterapkan pada **elemen induk (container/parent)**, bukan pada elemen anaknya. Seluruh elemen anak di dalamnya akan secara otomatis menjadi **flex item**.
 
 ```css
-.wadah-bapak {
-    display: flex; /* Sabuk hitam diaktifkan! */
-    border: 2px solid black;
-    height: 300px;
+.wadah {
+  display: flex;
+  border: 2px solid black;
+  height: 300px;
 }
+
 .kotak-anak {
-    background-color: orange;
-    width: 50px;
+  background-color: orange;
+  width: 50px;
 }
 ```
-*Hasil Instan:* Sifat alami tag `div` anak yang tadinya egois "Nurunin Baris ke Bawah memakan 1 layar penuh (Block)", akan mendadak ciut dipaksa berjejer mematuhi antrian sejajar Menyamping dari Kiri ke Kanan!
 
-### 3. Penentuan Arah Rel Kereta (`flex-direction`)
+Setelah `display: flex` diterapkan, elemen anak yang sebelumnya bersifat `block` (mengambil satu baris penuh secara vertikal) akan langsung berjajar secara horizontal dari kiri ke kanan.
 
-Atur rel kereta berjalan kemana:
-- `row` (Default): Anak berjejer mendatar dari kiri ke kanan.
-- `row-reverse`: Berjejer mendatar secara terbalik! (Anak pertama/bungsu malah dipaksa terdepan di kiri, yang membalik urutan berjejer dari Kanan ke Kiri).
-- `column`: Memaksa rel kereta putar balik untuk baris antrian memanjang tumpukan Atas ke Bawah.
-- `column-reverse`: Tumpukan ke bawah layar lalu ditarik naiki terbang mumbul urutannya ke atas.
+**Contoh Lengkap — Daftar Menu Navigasi:**
 
-### 4. Distribusi Jarak Poros Utama (`justify-content`)
+```html
+<!-- HTML -->
+<nav class="navigasi">
+  <a class="nav-item" href="#">Beranda</a>
+  <a class="nav-item" href="#">Produk</a>
+  <a class="nav-item" href="#">Tentang Kami</a>
+  <a class="nav-item" href="#">Kontak</a>
+</nav>
+```
 
-Jika masih ada ruangan sisa saat anak ditaruh berjejeran di atas Rel Main Axis (mendatar *row*), bagaimana sisa sela kerenggangannya disebar?
+```css
+/* CSS */
+.navigasi {
+  display: flex;
+  background-color: #2c3e50;
+  padding: 12px 24px;
+}
 
-- `flex-start` (Default): Semua anak mepet jongkok di garis *Start* ujung kiri.
-- `flex-end`: Semua anak numpuk bergerombol menepi nempel tembok di *End* ujung kanan.
-- `center`: Semua anak bergerombol jadi satu asik rapat berkumpul di titik persis tengah-tengah rentang layar!
-- `space-between`: Anak ke-satu nempel tembok kiri batas mati, anak terakhir mentok tembok kanan, sisanya dibagi jarak super longgar adil merata di rongga perantara perutnya.
-- `space-around`: Jarak dibagi merata secara komplit, TAPI ditambahi sisa nafas spasi sedikit perbatasan di pinggir paling kiri kanan rel.
-- `space-evenly`: Jarak spasi kosong mutlak dibelah rasio ukur persis presisi seukuran kotak sama rata ke tiap-tiap antar selipan bata.
+.nav-item {
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
 
-*(Hafalan Praktis: `justify-content` adalah fokusmu jika ingin ngatur sebaran Jarak KANAN-KIRI asalkan bentuk keretamu Jejer Mendatar "Row").*
+.nav-item:hover {
+  background-color: #34495e;
+}
+```
 
-### 5. Perataan Poros Silang / Sumbu Baliknya (`align-items`)
+---
 
-Jika si Bapak punya perut Lebar dan Tinggi layang renggang lebar (`height: 300px`), dan gerbong anak dilempar menjejer mendatar asyik Kiri Kanan... pertanyaan besarnya: Apakah tubuh gerbong itu mengambang nyundul tempel atap perut bapaknya, ataukah guling ke dasar lantai pijakannya?
+### 3. Menentukan Arah Susunan (`flex-direction`)
 
-- `stretch` (Default): Karet elastis mengubah anak memanjang ngotot nutupin setinggi-tingginya sampai nyundul nempel atap atas hingga telapak nabrak plat landasan dasar kaki pantat bapaknya sekaligus!
-- `flex-start`: Ngambang jongkok ditarik gravitasi nampak nempel di jajaran langit-langit Atap.
-- `center`: Ngambang mengudara asyik seimbang di titk jantung perut atas-bawah.
-- `flex-end`: Berendam nempel di pantat aspal bumi terbawah.
+Properti `flex-direction` menentukan arah Main Axis, yaitu arah di mana elemen anak disusun.
 
-**Analogi Tusuk Sate:**
-- Bapak wadah (`display: flex;`) adalah cerutu Panggangan Sate arang melintang panjang.
-- Anak-anak kotaknya adalah Potongan Daging lezat tipis-tipis.
-- `flex-direction: row` adalah batang Tusuk bambu Horizontal memanjang menjepit sekumpulan daging.
-- `justify-content` ibarat pak juru panggang ngatur-ngatur geser melonggarkan jarak renggang daging satu dengan sebelah kirinya dan daging kanannya untuk dibakar disepanjang bambu sate.
-- `align-items` ibarat menata di rak nomor mana daging diposisikan, apakah mau merapat dicium tinggi di dekat rak atap teratas jauh dari arang, atau diturunkan menempel panas di rak bara api terbawah?
+- `row` *(default)*: Elemen anak berjajar dari kiri ke kanan.
+- `row-reverse`: Elemen anak berjajar dari kanan ke kiri (urutan elemen terbalik).
+- `column`: Elemen anak bertumpuk dari atas ke bawah.
+- `column-reverse`: Elemen anak bertumpuk dari bawah ke atas (urutan elemen terbalik).
 
-### 6. Properti Kekuasaan untuk Anak (Si Item Flex)
+**Contoh:**
 
-Sang anak panggangan sate itu sendiri nyatanya ternyata juga dapat dipersenjatai status mandiri:
+```html
+<!-- HTML -->
+<div class="wadah-kolom">
+  <div class="item">Item 1</div>
+  <div class="item">Item 2</div>
+  <div class="item">Item 3</div>
+</div>
+```
 
-- **`flex-grow`**: Tingkat Nafsu Rakus. Seberapa doyan si anak mau meregangkan badannya menghisap sisa area kosong bapaknya? (Beri nilai `flex-grow: 1;` maka dia meral menyolong ruang kosong sepenuhnya memanjangkan diri sendirian).
-- **`flex-shrink`**: Nilai keikhlasan si anak untuk nyusut menciut kurus menelan luka kalah apabila lebar layar monitor mulai kepepet sesak menyempit total.
-- **`flex-basis`**: Nilai modal lebar ideal (`width`) murni si anak sebelum diizinkan perang di arena susut menyusut layar *grow/shrink* tadi (Sering dipakai setingan persen lebar kasarnya, eg: `flex-basis: 50%`).
-- **`align-self`**: Kelakuan anak nakal. Dia memecahkan diri dari keseragaman instruksi `align-items` bapaknya, lantas bebas memilih titik berdiri ngambang vertikal posisi aneh lain cuman bagi dia sendiri!
+```css
+/* CSS */
+.wadah-kolom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-**Analogi Kasir Supermarket (flex-grow):**
-Bayangkan Bapak `display:flex` itu antrian Pita Kasir.
-Anak-anaknya si kasir jejer berbaris manis. Namun anak ke-2 diberi jampi `flex-grow: 1;`.. Ia menjelma jadi raksasa gendut mengangkang membuka lengannya panjang menyabotase seluruh celah nafas spasi yang ada lalu memaksa pelanggan mepet, sementara kasir anak lainnya ngalah badannya tetep kurus-kering minggir ketendang pelan!
+.item {
+  background-color: steelblue;
+  color: white;
+  padding: 12px;
+  border-radius: 4px;
+}
+```
 
-### Trik Super Rahasia: Centering Sempurna Vertikal & Horisontal!
+---
 
-Jurus rahasia turun-temurun yang telah sukses mengakhiri ratusan jam mimpi buruk stress Programmer era batu Zaman Netscape zaman dahulu selama 15 Tahun kebingungan!
-Cara ini meletakkan Kotak Login persis mutlak ada di tengah-tengah Monitor Kordinat X (Mendatar) maupun Kordinat Y-nya (Tinggi)!
+### 4. Distribusi Ruang pada Main Axis (`justify-content`)
+
+Properti `justify-content` mengatur bagaimana ruang kosong yang tersisa pada Main Axis didistribusikan di antara elemen anak.
+
+- `flex-start` *(default)*: Semua elemen anak berkumpul di awal Main Axis (ujung kiri pada `row`).
+- `flex-end`: Semua elemen anak berkumpul di akhir Main Axis (ujung kanan pada `row`).
+- `center`: Semua elemen anak dikelompokkan di titik tengah Main Axis.
+- `space-between`: Elemen pertama menempel di awal, elemen terakhir menempel di akhir, dan ruang kosong dibagi rata di antara elemen-elemen yang tersisa.
+- `space-around`: Ruang kosong dibagi rata di sekeliling setiap elemen, sehingga jarak di tepi (kiri dan kanan terluar) setengah dari jarak antar elemen.
+- `space-evenly`: Seluruh ruang kosong — termasuk di tepi — dibagi secara benar-benar merata sehingga setiap jarak memiliki ukuran yang identik.
+
+**Contoh Lengkap — Baris Tombol Aksi:**
+
+```html
+<!-- HTML -->
+<div class="baris-tombol">
+  <button class="tombol">Batal</button>
+  <button class="tombol">Simpan Draft</button>
+  <button class="tombol tombol-utama">Publikasikan</button>
+</div>
+```
+
+```css
+/* CSS */
+.baris-tombol {
+  display: flex;
+  justify-content: flex-end; /* Semua tombol menempel ke kanan */
+  gap: 12px;
+  padding: 16px;
+  border-top: 1px solid #ddd;
+}
+
+.tombol {
+  padding: 8px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.tombol-utama {
+  background-color: steelblue;
+  color: white;
+  border-color: steelblue;
+}
+```
+
+> **Catatan:** `justify-content` bekerja pada arah Main Axis. Jika `flex-direction: column`, maka `justify-content` mengatur distribusi secara vertikal, bukan horizontal.
+
+---
+
+### 5. Perataan pada Cross Axis (`align-items`)
+
+Properti `align-items` mengatur bagaimana elemen anak diposisikan pada Cross Axis (arah tegak lurus terhadap Main Axis).
+
+- `stretch` *(default)*: Elemen anak diregangkan untuk mengisi seluruh tinggi elemen induk.
+- `flex-start`: Elemen anak diposisikan di awal Cross Axis (ujung atas pada `row`).
+- `center`: Elemen anak diposisikan di titik tengah Cross Axis.
+- `flex-end`: Elemen anak diposisikan di akhir Cross Axis (ujung bawah pada `row`).
+- `baseline`: Elemen anak disejajarkan berdasarkan garis dasar teksnya (baseline tipografi).
+
+**Analogi:**
+
+Bayangkan elemen induk sebagai sebuah rel kereta panjang. Elemen anak adalah gerbong-gerbong yang berjalan di atasnya:
+- `justify-content` mengatur jarak antar gerbong di sepanjang rel (Main Axis).
+- `align-items` mengatur posisi vertikal setiap gerbong terhadap rel — apakah menempel ke atas, ke bawah, atau mengambang di tengah (Cross Axis).
+
+**Contoh Lengkap — Kartu Produk dengan Tinggi Berbeda:**
+
+```html
+<!-- HTML -->
+<div class="galeri-produk">
+  <div class="kartu">
+    <h3>Produk A</h3>
+    <p>Deskripsi singkat.</p>
+  </div>
+  <div class="kartu">
+    <h3>Produk B</h3>
+    <p>Deskripsi yang lebih panjang dan memerlukan dua baris teks untuk ditampilkan.</p>
+  </div>
+  <div class="kartu">
+    <h3>Produk C</h3>
+    <p>Deskripsi singkat.</p>
+  </div>
+</div>
+```
+
+```css
+/* CSS */
+.galeri-produk {
+  display: flex;
+  align-items: stretch; /* Semua kartu memiliki tinggi yang sama */
+  gap: 16px;
+  padding: 24px;
+}
+
+.kartu {
+  flex: 1;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+```
+
+---
+
+### 6. Properti pada Elemen Anak (Flex Item)
+
+Selain properti pada elemen induk, setiap elemen anak dapat memiliki properti tersendiri untuk mengatur perilakunya secara individual.
+
+- **`flex-grow`**: Menentukan seberapa besar porsi ruang kosong yang akan diserap oleh elemen ini. Nilai `0` berarti tidak menyerap ruang tambahan; nilai `1` berarti menyerap seluruh ruang kosong yang tersedia. Jika beberapa elemen anak memiliki `flex-grow: 1`, ruang kosong dibagi rata di antara mereka.
+- **`flex-shrink`**: Menentukan seberapa besar elemen ini akan menyusut ketika ruang yang tersedia tidak cukup. Nilai default adalah `1` (boleh menyusut). Nilai `0` berarti elemen tidak akan menyusut.
+- **`flex-basis`**: Menentukan ukuran awal elemen sebelum ruang kosong didistribusikan. Dapat menggunakan nilai piksel, persentase, atau `auto`.
+- **`align-self`**: Mengganti nilai `align-items` dari elemen induk untuk elemen tertentu saja, sehingga satu elemen dapat memiliki perataan Cross Axis yang berbeda dari elemen lainnya.
+
+**Properti Singkat `flex`:**
+
+Ketiga properti `flex-grow`, `flex-shrink`, dan `flex-basis` dapat ditulis dalam satu baris menggunakan properti singkat `flex`:
+
+```css
+/* flex: <grow> <shrink> <basis> */
+.item {
+  flex: 1 1 auto; /* grow=1, shrink=1, basis=auto */
+}
+
+/* Penulisan singkat yang umum */
+.item {
+  flex: 1; /* Setara dengan flex: 1 1 0 */
+}
+```
+
+**Contoh Lengkap — Tata Letak Artikel dengan Sidebar:**
+
+```html
+<!-- HTML -->
+<div class="layout-artikel">
+  <main class="konten-utama">
+    <h1>Judul Artikel</h1>
+    <p>Isi artikel yang panjang...</p>
+  </main>
+  <aside class="sidebar">
+    <h2>Artikel Terkait</h2>
+    <p>Tautan ke artikel lainnya.</p>
+  </aside>
+</div>
+```
+
+```css
+/* CSS */
+.layout-artikel {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  align-items: flex-start; /* Tinggi masing-masing kolom mengikuti kontennya */
+}
+
+.konten-utama {
+  flex: 3; /* Mengambil 3 bagian dari total ruang yang tersedia */
+}
+
+.sidebar {
+  flex: 1; /* Mengambil 1 bagian dari total ruang yang tersedia */
+  background-color: #f5f5f5;
+  padding: 16px;
+  border-radius: 8px;
+}
+```
+
+---
+
+### 7. Penanganan Baris Baru (`flex-wrap`)
+
+Secara default, seluruh elemen anak dipaksa masuk dalam satu baris meskipun lebar totalnya melebihi lebar elemen induk. Properti `flex-wrap` mengatur perilaku ini.
+
+- `nowrap` *(default)*: Semua elemen anak berada dalam satu baris; elemen dapat menyusut jika ruang tidak cukup.
+- `wrap`: Elemen anak akan berpindah ke baris baru jika ruang tidak mencukupi.
+- `wrap-reverse`: Sama seperti `wrap`, namun baris baru terbentuk ke arah atas.
+
+**Contoh Lengkap — Galeri Foto Responsif:**
+
+```html
+<!-- HTML -->
+<div class="galeri-foto">
+  <div class="foto">Foto 1</div>
+  <div class="foto">Foto 2</div>
+  <div class="foto">Foto 3</div>
+  <div class="foto">Foto 4</div>
+  <div class="foto">Foto 5</div>
+  <div class="foto">Foto 6</div>
+</div>
+```
+
+```css
+/* CSS */
+.galeri-foto {
+  display: flex;
+  flex-wrap: wrap;   /* Elemen yang tidak muat akan turun ke baris berikutnya */
+  gap: 12px;
+  padding: 16px;
+}
+
+.foto {
+  flex-basis: calc(33.333% - 8px); /* Tiga kolom per baris */
+  min-width: 150px;                /* Lebar minimum sebelum turun baris */
+  height: 120px;
+  background-color: steelblue;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+```
+
+---
+
+### 8. Memusatkan Elemen Secara Sempurna
+
+Salah satu penggunaan Flexbox yang paling umum adalah menempatkan sebuah elemen tepat di tengah layar secara horizontal maupun vertikal sekaligus. Teknik ini mengatasi tantangan klasik yang sebelumnya memerlukan solusi yang rumit.
 
 ```css
 .super-parent-layar {
-    /* Nyalakan Dewa Flex! */
-    display: flex;
-
-    /* Posisi taruh jidat tengahkan sumbu mendatar X! */
-    justify-content: center; 
-    
-    /* Gantung asik terbang di awang tengah sumbu Y (ketinggian) */
-    align-items: center; 
-
-    /* Kasih modal aspal tinggi pijakan 1 layar Full Monitor penuh TV-nya penonton */
-    height: 100vh;
+  display: flex;
+  justify-content: center; /* Memusatkan pada Main Axis (horizontal) */
+  align-items: center;     /* Memusatkan pada Cross Axis (vertikal) */
+  height: 100vh;           /* Tinggi penuh viewport agar pemusatan vertikal bekerja */
 }
 ```
+
+**Contoh Lengkap — Halaman Login Terpusat:**
+
+```html
+<!-- HTML -->
+<div class="halaman-login">
+  <div class="form-login">
+    <h2>Masuk ke Akun Anda</h2>
+    <input type="email" placeholder="Alamat Email" />
+    <input type="password" placeholder="Kata Sandi" />
+    <button class="tombol-masuk">Masuk</button>
+  </div>
+</div>
+```
+
+```css
+/* CSS */
+.halaman-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.form-login {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-login h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.form-login input {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.tombol-masuk {
+  padding: 10px;
+  background-color: steelblue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.tombol-masuk:hover {
+  background-color: #2a6496;
+}
+```
+
+---
+
+### Kesimpulan
+
+Flexbox adalah sistem tata letak CSS yang dirancang untuk menyusun elemen dalam satu dimensi secara efisien dan responsif. Dengan memahami konsep poros, properti pada elemen induk, serta properti individual pada elemen anak, hampir semua kebutuhan tata letak horizontal dan vertikal dapat diselesaikan dengan kode yang bersih dan ringkas.
+
+**Ringkasan Properti Flexbox:**
+
+| Properti | Diterapkan Pada | Fungsi |
+|---|---|---|
+| `display: flex` | Induk | Mengaktifkan Flexbox pada elemen induk |
+| `flex-direction` | Induk | Menentukan arah Main Axis |
+| `justify-content` | Induk | Distribusi ruang pada Main Axis |
+| `align-items` | Induk | Perataan elemen pada Cross Axis |
+| `flex-wrap` | Induk | Mengatur perpindahan ke baris baru |
+| `gap` | Induk | Jarak antar elemen anak |
+| `flex-grow` | Anak | Porsi penyerapan ruang kosong |
+| `flex-shrink` | Anak | Tingkat penyusutan saat ruang sempit |
+| `flex-basis` | Anak | Ukuran awal elemen sebelum distribusi ruang |
+| `align-self` | Anak | Perataan Cross Axis individual |
+| `flex` | Anak | Singkatan dari grow, shrink, dan basis |

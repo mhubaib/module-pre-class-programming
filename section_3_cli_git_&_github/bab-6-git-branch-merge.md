@@ -1,4 +1,4 @@
-# Bab 63: Git Branch & Merge
+# Bab 6: Git Branch & Merge
 
 ## Tujuan Pembelajaran
 

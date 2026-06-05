@@ -1,4 +1,4 @@
-# Bab 64: Pengenalan & Setup GitHub
+# Bab 7: Pengenalan & Setup GitHub
 
 ## Tujuan Pembelajaran
 
@@ -144,7 +144,7 @@ git remote -v
 git push -u origin main
 ```
 
-> **Catatan:** Perintah `git push` untuk mengirim kode ke GitHub akan dibahas secara lengkap di Bab 65. Langkah di atas cukup untuk memahami bahwa `git remote add` adalah cara Git "mengenal" alamat repositori di GitHub.
+> **Catatan:** Perintah `git push` untuk mengirim kode ke GitHub akan dibahas secara lengkap di Bab 8. Langkah di atas cukup untuk memahami bahwa `git remote add` adalah cara Git "mengenal" alamat repositori di GitHub.
 
 ---
 

@@ -1,4 +1,4 @@
-# Bab 62: Git History & Commit
+# Bab 5: Git History & Commit
 
 ## Tujuan Pembelajaran
 

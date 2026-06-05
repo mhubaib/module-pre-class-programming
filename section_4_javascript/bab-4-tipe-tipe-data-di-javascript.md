@@ -4,91 +4,213 @@
 
 - Mengenali fungsi utama tipe data dalam mengelola informasi.
 - Membedakan tipe data Primitif (String, Number, Boolean, Undefined, Null) dan Non-Primitif (Object, Array).
-- Menggunakan perintah `typeof` untuk mengecek jenis suatu variabel aslinya secara dinamis.
+- Menggunakan operator `typeof` untuk memeriksa tipe data sebuah variabel secara dinamis.
+
+---
 
 ## Materi Utama
 
-JavaScript memiliki jenis wujud informasi yang bisa ia kenali, yang disebut dengan **Tipe Data**. Tanpa mengetahui tipe datanya, komputer tidak akan mengerti bahwa angka `5` bisa dijumlahkan, sementara huruf `"A"` hanya bisa ditampilkan.
+JavaScript memiliki berbagai jenis nilai yang dapat disimpan dan diproses, yang dikenal sebagai **Tipe Data**. Tanpa informasi tipe data, komputer tidak akan tahu bahwa angka `5` dapat dijumlahkan, sementara teks `"A"` hanya dapat ditampilkan.
 
-Uniknya, sistem tipe data Javascript sangat **Dinamis (Dynamic Typing)**. Artinya, sebuah kotak laci variabel bisa awalnya diisi dengan angka bulat, lalu selang sepuluh detik kemudian ditimpa dengan teks huruf alfabet tanpa membuat sistem memunculkan galat marah (Error). Komputer Javascript akan beradaptasi paham secara instan.
+Salah satu karakteristik unik JavaScript adalah sistem **_Dynamic Typing_** — sebuah variabel dapat diisi dengan tipe data apa pun, dan bahkan dapat diubah tipenya sewaktu-waktu tanpa menghasilkan error. JavaScript akan menyesuaikan diri secara otomatis.
 
-Tipe Data dipisahkan menjadi dua kasta: **Primitif (Asli Sederhana)** dan **Non-Primitif (Kompleks/Majemuk)**.
+```javascript
+// JavaScript menerima perubahan tipe data tanpa error
+let data = 42; // awalnya Number
+data = "empat puluh"; // diubah menjadi String — JavaScript tidak keberatan
+data = true; // diubah lagi menjadi Boolean
+```
+
+Tipe data dibagi menjadi dua kelompok: **Primitif** dan **Non-Primitif**.
+
+---
 
 ### 1. Tipe Data Primitif
 
-Ini ibarat menyumpankan 1 wujud satuan informasi dasar ke dalam kotak variabel.
+Tipe data primitif menyimpan **satu nilai tunggal** dalam sebuah variabel.
 
-**A. String (Teks/Huruf)**
-Digunakan untuk menyimpan huruf teks atau kalimat utuh. Tandanya adalah kamu mutlak harus **mengurung** teks tersebut menggunakan tanda kutip tunggal (`''`), kutip ganda (`""`), atau _backtick_ (` `` `).
+#### A. String (Teks)
+
+Digunakan untuk menyimpan teks atau kalimat. Nilai String harus diapit oleh tanda kutip tunggal (`''`), kutip ganda (`""`), atau _backtick_ (` `` `).
 
 ```javascript
 let namaSiswa = "Budi Hartono";
 let kotaTinggal = "Bandung";
-const dompetDigital = "Rp 150.000"; // Teks, bukan angka mutlak untuk perhitungan kalkulator
+const keterangan = `Siswa tinggal di ${kotaTinggal}`; // Template literal dengan backtick
+
+// Perhatikan: angka dalam kutip adalah String, bukan Number
+const hargaTampil = "Rp 150.000"; // Ini teks, tidak bisa dihitung secara matematis
 ```
 
-**B. Number (Angka)**
-Menyimpan angka bilangan bulat, minus, maupun hitungan angka desimal (koma). Penulisannya **TIDAK dikurung** dengan kutip sama sekali. (Catatan dunia komputer, untuk membuat "koma", kita wajib memakai simbol Titik `.` karena bahasa acuan koding standar internasional memihak aturan Inggis).
+> **Catatan:** _Backtick_ (`` ` ``) memiliki kemampuan tambahan bernama _Template Literal_ — memungkinkan penyisipan nilai variabel langsung ke dalam teks menggunakan `${}`.
+
+#### B. Number (Angka)
+
+Digunakan untuk menyimpan angka bulat, negatif, maupun desimal. Penulisannya **tidak** menggunakan tanda kutip. Untuk angka desimal, gunakan titik (`.`), bukan koma.
 
 ```javascript
 let umur = 25;
 let suhuAir = -7;
-const nilaiPhi = 3.14; // Angka Desimal
+const nilaiPhi = 3.14;
+let persentase = 98.6;
 ```
 
-**C. Boolean (Logika Benar / Salah)**
-Tipe data ini sangat ringan, ia hanya merekam dua sifat kepastian mutlak yang saklek: **`true`** (Benar) dan **`false`** (Salah).
-Sering dipakai untuk mencatat indikator stempel status.
+**Nilai Number khusus yang perlu diketahui:**
 
 ```javascript
-let sudahMenikah = false;
-let sakelarLampuNyala = true;
+console.log(10 / 0); // Output: Infinity
+console.log("abc" * 2); // Output: NaN (Not a Number — hasil operasi yang tidak valid)
 ```
 
-**D. Undefined (Belum Ditentukan)**
-Terjadi murni ketika sebuah laci nama variabel dipesan diciptakan namun **belum diisikan nilai sekecil apapun** kedalamnya.
+#### C. Boolean (Logika)
+
+Boolean hanya memiliki dua kemungkinan nilai: **`true`** (benar) dan **`false`** (salah). Tipe ini sangat sering digunakan untuk menyimpan status atau kondisi.
+
+```javascript
+let sudahLogin = false;
+let lampiNyala = true;
+let formTerkirim = false;
+
+// Boolean juga dihasilkan dari operasi perbandingan
+console.log(10 > 5); // Output: true
+console.log(3 === 7); // Output: false
+```
+
+#### D. Undefined (Belum Didefinisikan)
+
+Terjadi ketika sebuah variabel dideklarasikan namun **belum diberi nilai**. JavaScript secara otomatis mengisi variabel tersebut dengan `undefined`.
 
 ```javascript
 let namaAnak;
-console.log(namaAnak); // Hasil layarnya adalah: undefined (Data belum terdefinisi).
+console.log(namaAnak); // Output: undefined
+console.log(typeof namaAnak); // Output: "undefined"
 ```
 
-**E. Null (Kosong yang Disengaja)**
-Walau statusnya mirip menganga seperti fungsi di atasnya, ia sangat berbeda fungsi secara takdirnya. `null` adalah keadaan dimana programmer **secara sadar kemauannya** mendeklarasikan mengosongkan melompongkan bak variabel. (Bukan terjadi tidak sengaja kayak `undefined`).
+#### E. Null (Kosong yang Disengaja)
+
+`null` adalah nilai yang secara **sengaja** ditetapkan oleh programmer untuk menyatakan bahwa sebuah variabel saat ini tidak memiliki nilai. Berbeda dari `undefined` yang terjadi secara otomatis, `null` adalah keputusan eksplisit.
+
+```javascript
+let dataPengguna = null; // Sengaja dikosongkan karena data belum dimuat
+
+// Setelah data dimuat dari server, baru diisi nilainya
+dataPengguna = { nama: "Budi", umur: 25 };
+```
+
+**Perbedaan `undefined` vs `null`:**
+
+|          | `undefined`                        | `null`                                      |
+| -------- | ---------------------------------- | ------------------------------------------- |
+| Penyebab | Otomatis oleh JavaScript           | Disengaja oleh programmer                   |
+| Artinya  | Variabel belum pernah diberi nilai | Variabel sengaja dikosongkan                |
+| `typeof` | `"undefined"`                      | `"object"` _(perilaku historis JavaScript)_ |
+
+---
 
 ### 2. Tipe Data Non-Primitif
 
-Tipe ini berfungsi meletakkan gerombolan banyak nilai informasi dasar merangkap ke dalam 1 slot variabel yang sama rapinya.
+Tipe data non-primitif digunakan untuk menyimpan **kumpulan nilai** dalam satu variabel.
 
-**A. Array (Daftar Kumpulan)**
-Dipakai jika kau butuh meletakkan deretan rak sepatu kumpulan banyak data berurutan. Format kurungnya mutlak memakai **Kurung Siku `[]`**.
+#### A. Array (Daftar Berurutan)
+
+Digunakan untuk menyimpan daftar beberapa nilai secara berurutan dalam satu variabel. Ditulis menggunakan **kurung siku `[]`**, dengan setiap nilai dipisahkan oleh koma.
 
 ```javascript
 let daftarBuah = ["Apel", "Jeruk", "Mangga"];
-let deretUjian = [90, 85, 88, 100];
+let nilaiUjian = [90, 85, 88, 100];
+let campuran = ["Budi", 25, true]; // Array bisa menyimpan tipe data berbeda
 ```
 
-**B. Object (Data Lengkap Strukturnya)**
-Digunakan saat satu benda itu memiliki berbagai identitas mendetail yang terkait nama sifatnya sendiri-sendiri (Contoh: Biodata Manusia, Detail Barang Tokopedia). Format kurungnya memakai pasangan **Kurung Kurawal `{}`**.
+Setiap nilai dalam array dapat diakses menggunakan **indeks** yang dimulai dari angka `0`:
 
 ```javascript
-// Sebuah wadah laci Object yang punya property nama, umur, pekerjaan.
-let dataKtpUser = {
+console.log(daftarBuah[0]); // Output: "Apel"    ← indeks ke-0
+console.log(daftarBuah[1]); // Output: "Jeruk"   ← indeks ke-1
+console.log(daftarBuah[2]); // Output: "Mangga"  ← indeks ke-2
+```
+
+#### B. Object (Data Terstruktur)
+
+Digunakan ketika sebuah entitas memiliki beberapa atribut yang terkait satu sama lain — misalnya data pengguna yang memiliki nama, umur, dan alamat. Ditulis menggunakan **kurung kurawal `{}`** dengan format `kunci: nilai`.
+
+```javascript
+let dataUser = {
   namaLengkap: "Joko Anwar",
-  umurPengguna: 28,
+  umur: 28,
   alamat: "Sleman",
+  sudahLogin: true,
 };
 ```
 
-### 3. Cek Asal Usul Tipe (Fitur `typeof`)
+Nilai dalam object dapat diakses menggunakan **notasi titik** (`.`) atau **notasi kurung siku**:
 
-Karena Javascript sanggup mengubah nilai wujud seenaknya (dinamis), kamu barangkali kelak bingung pas membaca sistem, "Variabel ini aselinya didalemnya nyimpen String atau Number sik?". Tanyalah jurus sakti utilitas pengeceknya dengan mantera: `typeof`.
+```javascript
+console.log(dataUser.namaLengkap); // Output: "Joko Anwar"
+console.log(dataUser.umur); // Output: 28
+console.log(dataUser["alamat"]); // Output: "Sleman"
+```
+
+---
+
+### 3. Memeriksa Tipe Data (`typeof`)
+
+Karena JavaScript bersifat dinamis, kadang kamu perlu memastikan tipe data dari sebuah variabel, terutama ketika bekerja dengan data yang datang dari luar (misalnya dari input pengguna atau server). Gunakan operator `typeof` untuk memeriksanya.
 
 ```javascript
 let umur = 50;
-console.log(typeof umur); // Browser komputer membalas info: "number"
-
 let tahun = "2025";
-console.log(typeof tahun); // Browser berbunyi melapor: "string".
-// Walau wujudnya mirip bilangan tahun, tapi akibat dipenjara dalam jeruji kutip "", maka statusnya di mata mesin dianggap huruf huruf Teks murni yang tak bisa diikutsertakan ke dalam pertambahan matmatika silang sembarangan.
+let aktif = true;
+let data;
+
+console.log(typeof umur); // Output: "number"
+console.log(typeof tahun); // Output: "string"
+console.log(typeof aktif); // Output: "boolean"
+console.log(typeof data); // Output: "undefined"
 ```
+
+**Mengapa `"2025"` bertipe String, bukan Number?**
+
+```javascript
+let tahun = "2025";
+// Meskipun isinya tampak seperti angka,
+// karena diapit tanda kutip, JavaScript memperlakukannya sebagai teks.
+
+console.log(typeof tahun); // Output: "string"
+console.log(tahun + 1); // Output: "20251"  ← penggabungan teks, bukan penjumlahan!
+
+let tahunAngka = 2025;
+console.log(tahunAngka + 1); // Output: 2026  ← penjumlahan matematika yang benar
+```
+
+**Contoh penggunaan `typeof` dalam program:**
+
+```javascript
+function tampilkanInfo(nilai) {
+  console.log("Nilai  :", nilai);
+  console.log("Tipe   :", typeof nilai);
+}
+
+tampilkanInfo(42); // Nilai: 42      | Tipe: number
+tampilkanInfo("Halo"); // Nilai: Halo    | Tipe: string
+tampilkanInfo(true); // Nilai: true    | Tipe: boolean
+tampilkanInfo([1, 2, 3]); // Nilai: [1,2,3] | Tipe: object
+tampilkanInfo({ nama: "X" }); // Nilai: {nama:X}| Tipe: object
+```
+
+---
+
+### Kesimpulan
+
+Memahami tipe data adalah fondasi yang diperlukan untuk menulis logika program yang benar. Banyak bug dalam JavaScript terjadi karena ketidaktahuan tentang tipe data — misalnya menjumlahkan angka yang tidak sengaja tersimpan sebagai String, atau mengakses properti dari variabel yang bernilai `null`.
+
+**Ringkasan Tipe Data:**
+
+| Tipe Data   | Kelompok     | Contoh Nilai                          |
+| ----------- | ------------ | ------------------------------------- |
+| `String`    | Primitif     | `"Halo"`, `'Budi'`, `` `Teks` ``      |
+| `Number`    | Primitif     | `25`, `-7`, `3.14`, `NaN`, `Infinity` |
+| `Boolean`   | Primitif     | `true`, `false`                       |
+| `Undefined` | Primitif     | `undefined` (otomatis)                |
+| `Null`      | Primitif     | `null` (disengaja)                    |
+| `Array`     | Non-Primitif | `["Apel", "Jeruk"]`, `[1, 2, 3]`      |
+| `Object`    | Non-Primitif | `{ nama: "Budi", umur: 25 }`          |

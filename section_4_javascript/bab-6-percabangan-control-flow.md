@@ -2,103 +2,282 @@
 
 ## Tujuan Pembelajaran
 
-- Memahami konsep logika kondisional membelokkan arah jalan persimpangan program.
-- Menulis logika `if`, `else if`, dan `else` berdasarkan serangkaian syarat pengecekan operator.
-- Menguasai perbandingan jamak bercabang statis menggunakan tata susun struktur kaku rapi bernama `switch/case`.
-- Mengenali nilai _Truthy_ dan _Falsy_ tak terbantahkan pada evaluasi Boolean dasar rahasia sang JS.
-
-## Materi Utama
-
-Komputer sejatinya sangat menurut, ia akan membaca kodingan kaku lurus terus lari merunut pelan membaca mengeksekusi merambat barikade runtut eksekusi instruksi turun membaris vertikal persis arah tegak dari paling baris atas mentok hingga ke paling dasar kodinganmu terbawah layaknya aliran sungai gravitasi mendatar tumpah.
-
-Namun di dalam dunia nyata, program aplikasimu pasti dihadapkan oleh **suatu pilihan kondisi persimpangan hidup realita kacamata**. "Jikalau si User lupa memasukkan input Nomor KTP, Janganlah diizinkan Lanjut nge-Save Data Formulirnya!".
-
-Di sinilah peran pintu penjaga tikungan **Control Flow**!
-
-### 1. Struktur Kendali Dasar: `if...else` Logika Kondisi
-
-Perintah `if` (JIKALAU) adalah pilar penyangga jalan masuk gerbang memeriksa memvalidasi nilai mutlak dari `Boolean` (True ataukah False).
-
-**A. Kondisi Pemeriksaan Tunggal Blok Mandiri (`if` Utama)**
-
-```javascript
-let sisaBensinDarah = 10;
-
-// Blok Pintu Pemeriksaan Penjaga Mulai :
-if (sisaBensinDarah < 20) {
-  // Kalau benar terbukti syaratnya dipenuhi sah (True), maka mesin gerbang ini dibuka paksa terjalankan:
-  console.log(
-    "Hei.. Lampu Peringatan Darah Bahan Bakarmu Menipis Parah Segera isikan Bensin ke SPBU",
-  );
-}
-```
-
-**B. Kondisi Alternatif Sandaran Terakhir Akhir Sisa Jaga Kandang (`else` Blok)**
-Apabila gerbang pemeriksaan gerbang `if` tak penuhi spesifikasi lolos alias bernilai gagal tertolak mutlak `false`, kemana takdir alur logika membuang hasil larinya mesin program? Disinilah dipasang kantung ranjang tidur penutup panti jompo pengaman alternatif `else`.
-
-```javascript
-let nilaiRaporSiswa = 60;
-
-if (nilaiRaporSiswa >= 75) {
-  console.log("SELAMAT. Kau Tuntas Lulus Lanjut Menikmati Pergi Liburan!");
-} else {
-  // Dipanggil merespon otomatis murni mengeksekusi hal hal sisa terbuang keping karena kondisi ujian porsi pertama if di hancurkan.
-  console.log(
-    "Mati Kau Nangis Kudu Wajib Bayar Hutang Lakukan Ujian Remidi Remedial Ngulang di Kelas Mengabdi!!",
-  );
-}
-```
-
-**C. Rantai Logika Pemeriksaan Berlapis Tahapan Uji Cabang Tingkat Tinggi (`else if`)**
-Terkadang dunia tak sempit terbatas 2 pilihan jalan warna belok Hitam & Putih semata. Ketika kondisional berjejal menghamba jenjang 3 pilihan rentang lebih berturut terhubung.. selipkan sambungkan balok kerangka jenjang jembatan `else if`.
-
-```javascript
-let lampuSinyalJalanTop = "kuning";
-
-if (lampuSinyalJalanTop === "merah") {
-  console.log("Berhenti Totallah di Tempat!");
-} else if (lampuSinyalJalanTop === "kuning") {
-  console.log(
-    "Kurangi Tarikan Perlanhan Injek Remmu.. Awas siap berenti mundur..",
-  );
-} else if (lampuSinyalJalanTop === "hijau") {
-  console.log("Injak Pedal Gas Kuat Melaju!");
-} else {
-  // Filter saringan aspal paling penutup tong sampah mentok tak tersisa bila semuanya tiada cocok tak karuan warna yg tertulis biru gelap sekalipun
-  console.log(
-    "Tinggalkan Mobil Hancur! Tiang Lampu Jalan Traffic Light Nya Sedang Eror Dihack!",
-  );
-}
-```
-
-### 2. Saklar Penyeleksi Nilai Pasti: `switch / case`
-
-Jika suatu saat kamu bosan menderet panjang ketikan nulis untaian ranting cekcok tali kabel panjang pakai rumus syarat pengecek kesetaraan kembar `if (... === ...)` yang tiada habis berlarut panjang mengunyah merusak visual capek baris-baris rumit, JavaScript memberimu pil sakti penyeimbang rapi khusus bernama pintu **`switch`**.
-
-Ia sanggup membelah rute sangat lurus mutlak mengecek sebuah "Label Variabel Nilai Kasus Tetap" yang pastinya kaku terukur.
-
-```javascript
-let hariUrutanKini = 3;
-
-switch (hariUrutanKini) {
-  case 1:
-    console.log("Senin Awal Membuka Minggu Yang Kejam");
-    break; // Tali Jangkar Rem Pemberhentian Mandat Eksekusi mesin Wajib Dipasang
-  case 2:
-    console.log("Selasa Semangat Melanjutkan");
-    break;
-  case 3:
-    console.log("Rebo Puncak Lelah Puncak Minggu Bertarung Keras");
-    break;
-  default: // Fungsinya mirip panti jompo `else` pembuangan terakhir tak kenal target
-    console.log("Angkanya Bukan Rentang Hari Sah Libur Sembarang..");
-}
-```
-
-**Peraturan Sakti Mutlak Pakai `Switch`**: Anda haram kelewatan tiada luput membubuhkan gembok portal berbunyi kalimat perantai perintah instruksi suci `break;` diselusup penghujung masing-masing lantai blok instruksi selasar _case_, sebab bila sengaja atau amnesia terlewat menulis baris patahan break ini, aliran kucuran eksekusi perintah JS nya akan membludak blong kebablasan numpang bocor merembes meluber ikut mengeksekusi hasil cetak terminal bawah lantainya secara bersamaan (Sebuah Fenomena Kelalaian Programmer Pemula dinamakan _"Kejadian Fatal Fall-through"_).
+- Memahami konsep percabangan sebagai cara membelokkan alur eksekusi program.
+- Menulis logika `if`, `else if`, dan `else` berdasarkan kondisi tertentu.
+- Menguasai seleksi nilai menggunakan struktur `switch/case`.
+- Memahami konsep nilai _Truthy_ dan _Falsy_ dalam evaluasi kondisi JavaScript.
 
 ---
 
-**(Rahasia Singkat Tambahan Ahli Uji Coba Lulus Mutlak Terjamin / Truthy & Falsy)**
-Javascript punya logika mesin bawah sadar evaluasi instan bawaan pabrik murni yang mana semua seluruh wadah jenis Tipe Data di sistemnya akan di-CAP mengiyakan dianggap bernilai Boolean Sah Lolos Lulus Positif `true` (istilah dewanya di sebut = **Truthy**)...
-KECUALI nilai racun daftar gerombloan enam data kutukan yang melompong murni bernilai palsu kegagalan negatif saklek `false` (**Daftar Hitam Falsy Values**) : `false`, angka `0`, serpihan teks kutip kosong sama sekali bolong `""`, variabel gagal pesanan `null`, janin variabel terbuang `undefined`, plus nanah gagal ngitung angka `NaN`. Murni hafal diluar jidat kepala logikamu.
+## Materi Utama
+
+Secara default, JavaScript membaca dan mengeksekusi kode dari baris pertama hingga baris terakhir secara berurutan, seperti aliran air dari atas ke bawah. Namun dalam program nyata, kita sering perlu membuat keputusan: "Jika pengguna belum mengisi formulir, jangan izinkan data disimpan."
+
+Di sinilah peran **Control Flow** — mekanisme yang memungkinkan program mengambil jalur eksekusi yang berbeda berdasarkan kondisi tertentu.
+
+---
+
+### 1. Struktur Kondisional: `if`, `else if`, dan `else`
+
+Perintah `if` memeriksa apakah sebuah kondisi bernilai `true`. Jika ya, blok kode di dalamnya akan dieksekusi. Jika tidak, blok tersebut dilewati.
+
+#### A. `if` — Kondisi Tunggal
+
+```javascript
+let sisaBensin = 10;
+
+if (sisaBensin < 20) {
+  console.log("Peringatan: Bahan bakar hampir habis, segera isi ulang.");
+}
+// Output: Peringatan: Bahan bakar hampir habis, segera isi ulang.
+```
+
+Jika `sisaBensin` bernilai 25 atau lebih, blok di dalam `if` tidak akan dieksekusi dan program melanjutkan ke baris berikutnya.
+
+#### B. `if...else` — Dua Alternatif
+
+`else` menyediakan blok kode alternatif yang dieksekusi ketika kondisi `if` tidak terpenuhi.
+
+```javascript
+let nilaiUjian = 60;
+
+if (nilaiUjian >= 75) {
+  console.log("Selamat, kamu lulus!");
+} else {
+  console.log("Kamu perlu mengikuti ujian remedial.");
+}
+// Output: Kamu perlu mengikuti ujian remedial.
+```
+
+#### C. `if...else if...else` — Banyak Alternatif
+
+Ketika ada lebih dari dua kemungkinan, gunakan `else if` untuk menambahkan kondisi tambahan.
+
+```javascript
+let lampu = "kuning";
+
+if (lampu === "merah") {
+  console.log("Berhenti.");
+} else if (lampu === "kuning") {
+  console.log("Bersiap, kurangi kecepatan.");
+} else if (lampu === "hijau") {
+  console.log("Jalan.");
+} else {
+  console.log("Warna lampu tidak dikenali.");
+}
+// Output: Bersiap, kurangi kecepatan.
+```
+
+JavaScript memeriksa kondisi dari atas ke bawah secara berurutan. Begitu satu kondisi terpenuhi, blok tersebut dieksekusi dan seluruh sisa kondisi `else if` maupun `else` dilewati.
+
+**Contoh lengkap — Sistem penilaian:**
+
+```javascript
+let nilai = 82;
+let predikat;
+
+if (nilai >= 90) {
+  predikat = "A";
+} else if (nilai >= 80) {
+  predikat = "B";
+} else if (nilai >= 70) {
+  predikat = "C";
+} else if (nilai >= 60) {
+  predikat = "D";
+} else {
+  predikat = "E";
+}
+
+console.log("Nilai  :", nilai); // Output: Nilai  : 82
+console.log("Predikat:", predikat); // Output: Predikat: B
+```
+
+---
+
+### 2. Seleksi Nilai Tetap: `switch / case`
+
+Ketika kamu perlu membandingkan sebuah variabel dengan banyak kemungkinan nilai yang tetap dan spesifik, `switch` menawarkan struktur yang lebih rapi dibandingkan deretan `else if`.
+
+```javascript
+let hariKe = 3;
+
+switch (hariKe) {
+  case 1:
+    console.log("Senin");
+    break;
+  case 2:
+    console.log("Selasa");
+    break;
+  case 3:
+    console.log("Rabu");
+    break;
+  case 4:
+    console.log("Kamis");
+    break;
+  case 5:
+    console.log("Jumat");
+    break;
+  default:
+    console.log("Hari tidak valid.");
+}
+// Output: Rabu
+```
+
+**Cara kerja `switch`:**
+
+1. Nilai dalam `switch(...)` dibandingkan dengan setiap `case` menggunakan perbandingan ketat (`===`).
+2. Ketika kecocokan ditemukan, blok kode di bawah `case` tersebut dieksekusi.
+3. Perintah `break` menghentikan eksekusi dan keluar dari blok `switch`.
+4. `default` adalah blok yang dieksekusi jika tidak ada `case` yang cocok — setara dengan `else`.
+
+**Peringatan — _Fall-through_:**
+
+Jika `break` tidak ditulis, eksekusi akan berlanjut ke `case` berikutnya secara otomatis, meskipun nilainya tidak cocok. Perilaku ini disebut _fall-through_ dan umumnya merupakan sumber bug.
+
+```javascript
+let hari = 2;
+
+switch (hari) {
+  case 1:
+    console.log("Senin");
+  // break tidak ditulis!
+  case 2:
+    console.log("Selasa");
+  // break tidak ditulis!
+  case 3:
+    console.log("Rabu");
+    break;
+}
+// Output:
+// Selasa
+// Rabu   ← ikut tereksekusi karena tidak ada break di case 2
+```
+
+Namun, _fall-through_ terkadang dimanfaatkan secara sengaja untuk mengelompokkan beberapa `case` dengan perilaku yang sama:
+
+```javascript
+let bulan = 4;
+
+switch (bulan) {
+  case 4:
+  case 6:
+  case 9:
+  case 11:
+    console.log("Bulan ini memiliki 30 hari.");
+    break;
+  case 2:
+    console.log("Bulan ini memiliki 28 atau 29 hari.");
+    break;
+  default:
+    console.log("Bulan ini memiliki 31 hari.");
+}
+// Output: Bulan ini memiliki 30 hari.
+```
+
+**Perbandingan `if...else if` vs `switch`:**
+
+|                       | `if...else if`                                      | `switch`                                                          |
+| --------------------- | --------------------------------------------------- | ----------------------------------------------------------------- |
+| Cocok untuk           | Kondisi dengan rentang nilai atau ekspresi kompleks | Perbandingan satu variabel dengan nilai-nilai tetap yang spesifik |
+| Operator perbandingan | Bebas (`>`, `<`, `===`, dll.)                       | Hanya `===` (ketat)                                               |
+| Keterbacaan           | Bisa panjang jika banyak kondisi                    | Lebih rapi untuk banyak nilai tetap                               |
+
+---
+
+### 3. Truthy dan Falsy
+
+Dalam kondisi `if`, JavaScript tidak hanya menerima nilai Boolean (`true`/`false`) — ia akan mengevaluasi nilai apa pun dan menentukan apakah nilai tersebut dianggap "benar" atau "salah".
+
+- **Truthy**: Nilai yang dianggap `true` oleh JavaScript saat dievaluasi sebagai kondisi.
+- **Falsy**: Nilai yang dianggap `false` oleh JavaScript saat dievaluasi sebagai kondisi.
+
+**Daftar nilai Falsy (hanya 6):**
+
+```javascript
+false; // Boolean false
+0; // Angka nol
+(""); // String kosong
+null; // Nilai null
+undefined; // Variabel yang belum diberi nilai
+NaN; // Not a Number
+```
+
+**Semua nilai lainnya adalah Truthy**, termasuk:
+
+```javascript
+true          // Boolean true
+1             // Angka selain 0 (termasuk negatif)
+"halo"        // String yang tidak kosong
+[]            // Array kosong sekalipun
+{}            // Object kosong sekalipun
+```
+
+**Contoh — Falsy dalam kondisi `if`:**
+
+```javascript
+let namaPengguna = ""; // String kosong — Falsy
+
+if (namaPengguna) {
+  console.log("Halo,", namaPengguna);
+} else {
+  console.log("Nama pengguna belum diisi."); // Ini yang dieksekusi
+}
+// Output: Nama pengguna belum diisi.
+```
+
+**Contoh — Truthy dalam kondisi `if`:**
+
+```javascript
+let dataPengguna = { nama: "Budi", umur: 25 }; // Object — Truthy
+
+if (dataPengguna) {
+  console.log("Data ditemukan:", dataPengguna.nama); // Ini yang dieksekusi
+}
+// Output: Data ditemukan: Budi
+```
+
+**Penerapan praktis — Validasi input:**
+
+```javascript
+function prosesFormulir(namaInput, emailInput) {
+  if (!namaInput) {
+    console.log("Error: Nama tidak boleh kosong.");
+    return;
+  }
+
+  if (!emailInput) {
+    console.log("Error: Email tidak boleh kosong.");
+    return;
+  }
+
+  console.log("Formulir berhasil dikirim untuk:", namaInput);
+}
+
+prosesFormulir("", "budi@email.com");
+// Output: Error: Nama tidak boleh kosong.
+
+prosesFormulir("Budi", "");
+// Output: Error: Email tidak boleh kosong.
+
+prosesFormulir("Budi", "budi@email.com");
+// Output: Formulir berhasil dikirim untuk: Budi
+```
+
+---
+
+### Kesimpulan
+
+Percabangan adalah mekanisme fundamental yang memungkinkan program berperilaku secara dinamis berdasarkan kondisi yang berbeda. Dengan menguasai `if...else`, `switch`, dan konsep Truthy/Falsy, kamu memiliki kontrol penuh atas alur eksekusi program — fondasi yang diperlukan untuk membangun logika yang lebih kompleks.
+
+**Ringkasan:**
+
+| Konsep    | Kegunaan                                                                         |
+| --------- | -------------------------------------------------------------------------------- |
+| `if`      | Mengeksekusi blok kode jika kondisi bernilai `true`                              |
+| `else`    | Blok alternatif jika kondisi `if` tidak terpenuhi                                |
+| `else if` | Menambahkan kondisi tambahan di antara `if` dan `else`                           |
+| `switch`  | Membandingkan satu variabel dengan banyak nilai tetap                            |
+| `break`   | Menghentikan eksekusi di dalam blok `switch`                                     |
+| `default` | Blok fallback di `switch` jika tidak ada `case` yang cocok                       |
+| Truthy    | Nilai yang dianggap `true` saat dievaluasi sebagai kondisi                       |
+| Falsy     | Enam nilai yang dianggap `false`: `false`, `0`, `""`, `null`, `undefined`, `NaN` |

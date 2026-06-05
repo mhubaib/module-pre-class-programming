@@ -1,6 +1,7 @@
-# Bab 38: Variable di JavaScript
+# Bab 3: Variable di JavaScript
 
 ## Tujuan Pembelajaran
+
 - Memahami konsep dasar Variabel sebagai wadah penyimpan data.
 - Mengetahui cara mendeklarasikan variabel dengan syntax modern (`let` dan `const`).
 - Memahami alasan mengapa penggunaan `var` sudah banyak ditinggalkan.
@@ -12,12 +13,12 @@ Dalam memproses informasi, sebuah program perlu tempat untuk "mengingat" sebuah 
 
 **Analogi Variabel:**
 Bayangkan variabel sebagai sebuah **Kotak Laci**.
-Bayangkan kamu memiliki laci kosong. Kamu menempelkan label nama di depan laci tersebut dengan tulisan "Koleksi Kemeja". Lalu, kamu memasukkan beberapa kemeja ke dalamnya. Kapan pun kamu butuh kemeja, kamu tidak perlu mencari di seluruh lemari, kamu cukup membuka laci bernama "Koleksi Kemeja" tadi dan isinya akan keluar. 
+Bayangkan kamu memiliki laci kosong. Kamu menempelkan label nama di depan laci tersebut dengan tulisan "Koleksi Kemeja". Lalu, kamu memasukkan beberapa kemeja ke dalamnya. Kapan pun kamu butuh kemeja, kamu tidak perlu mencari di seluruh lemari, kamu cukup membuka laci bernama "Koleksi Kemeja" tadi dan isinya akan keluar.
 Di pemrograman, "Koleksi Kemeja" adalah nama variabelnya, dan isinya adalah "Data"-nya.
 
 ### 1. Deklarasi Bersama Variabel Modern: `let` dan `const`
 
-Sampai tahun 2015, JavaScript hanya memiliki satu cara membuat variabel, yaitu menggunakan perintah `var`. Namun, perintah ini memiliki beberapa celah sistem yang sering memicu *error* (bug) di aplikasi besar berskala industri.
+Sampai tahun 2015, JavaScript hanya memiliki satu cara membuat variabel, yaitu menggunakan perintah `var`. Namun, perintah ini memiliki beberapa celah sistem yang sering memicu _error_ (bug) di aplikasi besar berskala industri.
 
 Oleh karena itu, pada pembaharuan ECMAScript 6 (ES6), lahirlah dua kata kunci pelindung baru: `let` dan `const`. Kedua ini wajib kita gunakan sekarang. Kapan penggunaannya?
 
@@ -45,13 +46,13 @@ console.log(skorPemain); // Nilai yang akan keluar adalah 50.
 const nilaiPhi = 3.14;
 
 // Jika di baris selanjutnya kamu bandel mencoba menimpanya:
-nilaiPhi = 3.15; 
+nilaiPhi = 3.15;
 
 // HASIL: BROWSER AKAN ERROR! Program otomatis berhenti menjaga ketetapan nilaiPhi.
 ```
 
 **Kapan harus pakai yang mana?**
-Sebagai praktik pemrograman modern (*Best Practice*), **selalu mulailah dengan menggunakan `const`** saat membuat elemen wadah apa pun (Entah array, object, ID User, dll). Jika suatu saat logikamu membutuhkannya untuk diobrak-abrik/diubah, barulah kamu ubah kata kuncinya menjadi tipe `let`.  Ini menciptakan jaring pengaman agar programmu lebih solid dan minim masalah yang disebsbkan kerusakan tertimpa.
+Sebagai praktik pemrograman modern (_Best Practice_), **selalu mulailah dengan menggunakan `const`** saat membuat elemen wadah apa pun (Entah array, object, ID User, dll). Jika suatu saat logikamu membutuhkannya untuk diobrak-abrik/diubah, barulah kamu ubah kata kuncinya menjadi tipe `let`. Ini menciptakan jaring pengaman agar programmu lebih solid dan minim masalah yang disebsbkan kerusakan tertimpa.
 
 ### 2. Aturan Menamai Kotak Variabel
 

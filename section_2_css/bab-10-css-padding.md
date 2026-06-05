@@ -1,4 +1,4 @@
-# Bab 24: CSS Padding
+# Bab 10: CSS Padding
 
 ## Tujuan Pembelajaran
 
@@ -8,7 +8,7 @@
 
 ## Materi Utama
 
-Mengingat kembali konsep **Box Model** di Bab 22, kita tahu bahwa setiap elemen HTML adalah sebuah kotak. Terkadang, teks di dalam kotak terlalu mepet dengan tepi kotaknya sendiri, membuatnya terlihat sesak dan sulit dibaca. Di sinilah **Padding** bertugas menyelamatkan desainmu.
+Mengingat kembali konsep **Box Model** di Bab 8 CSS yang lalu, kita tahu bahwa setiap elemen HTML adalah sebuah kotak. Terkadang, teks di dalam kotak terlalu mepet dengan tepi kotaknya sendiri, membuatnya terlihat sesak dan sulit dibaca. Di sinilah **Padding** bertugas menyelamatkan desainmu.
 
 ### 1. Apa itu Padding?
 

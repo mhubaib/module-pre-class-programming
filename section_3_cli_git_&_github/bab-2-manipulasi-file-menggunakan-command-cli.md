@@ -1,4 +1,4 @@
-# Bab 59: Manipulasi File Menggunakan Command CLI
+# Bab 2: Manipulasi File Menggunakan Command CLI
 
 ## Tujuan Pembelajaran
 
@@ -10,7 +10,7 @@
 
 ## Materi Utama
 
-Setelah memahami apa itu CLI di Bab 58, sekarang saatnya kamu mempraktikkan perintah-perintah untuk menavigasi folder dan mengelola file tanpa perlu menggunakan mouse.
+Setelah memahami apa itu CLI di Bab 1 yang lalu, sekarang saatnya kamu mempraktikkan perintah-perintah untuk menavigasi folder dan mengelola file tanpa perlu menggunakan mouse.
 
 > **Catatan:** Perintah-perintah dalam modul ini adalah standar yang digunakan di Linux, macOS, dan aplikasi **Git Bash** di Windows.
 

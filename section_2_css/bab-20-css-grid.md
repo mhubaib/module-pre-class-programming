@@ -1,4 +1,4 @@
-# Bab 34: CSS Grid
+# Bab 20: CSS Grid
 
 ## Tujuan Pembelajaran
 
@@ -12,7 +12,7 @@
 
 ## Materi Utama
 
-Pada Bab 33, kita telah mempelajari Flexbox sebagai sistem tata letak satu dimensi. Flexbox sangat handal untuk menyusun elemen dalam satu arah — baik secara horizontal maupun vertikal — namun tidak keduanya secara bersamaan.
+Pada Bab 19 yang lalu, kita telah mempelajari Flexbox sebagai sistem tata letak satu dimensi. Flexbox sangat handal untuk menyusun elemen dalam satu arah — baik secara horizontal maupun vertikal — namun tidak keduanya secara bersamaan.
 
 Ketika kita perlu membangun tata letak yang lebih kompleks — seperti kerangka halaman dengan navigasi di atas, sidebar di kiri, area konten utama di tengah, dan footer di bawah — kita membutuhkan sistem yang mampu bekerja dalam **dua dimensi secara simultan**.
 

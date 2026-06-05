@@ -1,6 +1,7 @@
-# Bab 52: JS DOM (Manipulasi DOM & DOM API)
+# Bab 16: JS DOM (Manipulasi DOM & DOM API)
 
 ## Tujuan Pembelajaran
+
 - Memahami konsep Document Object Model (DOM) sebagai jembatan antara HTML dan JavaScript.
 - Menguasai cara menyeleksi elemen HTML manggunakan DOM API (`querySelector`, `getElementById`).
 - Mampu mengubah isi teks, gaya (style), dan kelas (class) dari sebuah elemen.
@@ -8,13 +9,13 @@
 
 ## Materi Utama
 
-Sejauh ini, kita menjalankan kode JavaScript dan melihat hasilnya tersembunyi di balik layar (di dalam *Console Browser*). Sekarang, saatnya JavaScript keluar dari bilik layar hitam dan mulai menyentuh, merombak, dan memanipulasi elemen-elemen HTML (judul, paragraf, tombol) yang dilihat langsung oleh pengunjung web.
+Sejauh ini, kita menjalankan kode JavaScript dan melihat hasilnya tersembunyi di balik layar (di dalam _Console Browser_). Sekarang, saatnya JavaScript keluar dari bilik layar hitam dan mulai menyentuh, merombak, dan memanipulasi elemen-elemen HTML (judul, paragraf, tombol) yang dilihat langsung oleh pengunjung web.
 
 Ilmu untuk menyentuh elemen HTML menggunakan JavaScript ini disebut dengan **Manipulasi DOM**.
 
 ### 1. Apa itu DOM?
 
-**DOM (Document Object Model)** adalah cara browser mengubah struktur teks HTML yang kamu tulis menjadi sebuah "Pohon Keluarga Berbentuk Object" di dalam memorinya. 
+**DOM (Document Object Model)** adalah cara browser mengubah struktur teks HTML yang kamu tulis menjadi sebuah "Pohon Keluarga Berbentuk Object" di dalam memorinya.
 
 Ketika browser melihat tag `<body>`, ia akan membuat sebuah Object untuk merepresentasikannya. Semua elemen di dalam halamanmu dirangkai menjadi struktur objek yang bercabang dari satu induk tertinggi yang bernama `document`. Melalui objek `document` inilah JavaScript bisa memerintah, mengubah, atau menghapus elemen HTML.
 
@@ -24,9 +25,11 @@ Langkah pertama sebelum memanipulasi elemen adalah "menemukan/menangkap" elemen 
 
 **A. Mencari Lewat ID Mutlak (`getElementById`)**
 Menangkap satu elemen spesifik yang memiliki atribut `id` tertentu.
+
 ```html
 <h1 id="judul-utama">Selamat Datang</h1>
 ```
+
 ```javascript
 // Tangkap elemennya dan simpan ke dalam variabel
 const elemenJudul = document.getElementById("judul-utama");
@@ -34,6 +37,7 @@ const elemenJudul = document.getElementById("judul-utama");
 
 **B. Pencari Universal Modern (`querySelector` & `querySelectorAll`)**
 Ini adalah cara yang paling direkomendasikan saat ini. Kamu bisa mencari elemen layaknya kamu sedang menulis penyeleksi CSS (Bab 16).
+
 - `querySelector` : Hanya mengambil **satu** elemen pertama yang cocok.
 - `querySelectorAll` : Mengambil **semua** elemen yang cocok dan menggabungkannya ke dalam sebuah kumpulan (seperti Array).
 
@@ -50,6 +54,7 @@ const semuaParagraf = document.querySelectorAll("p");
 Setelah elemen berhasil ditangkap ke dalam wadah variabel, kita bisa merombaknya semau kita!
 
 **A. Mengubah Teks Isi (`textContent` dan `innerHTML`)**
+
 ```javascript
 const teksStatus = document.querySelector("#status-user");
 
@@ -61,7 +66,8 @@ teksStatus.innerHTML = "Status: <strong>Aktif</strong>";
 ```
 
 **B. Mengubah Gaya Kosmetik Langsung (`style`)**
-JavaScript juga bisa menimpa warna dan properti CSS secara langsung (Inline Edit). Penulisan nama properti yang dua kata diubah menjadi *Camel Case* (contoh: `background-color` menjadi `backgroundColor`).
+JavaScript juga bisa menimpa warna dan properti CSS secara langsung (Inline Edit). Penulisan nama properti yang dua kata diubah menjadi _Camel Case_ (contoh: `background-color` menjadi `backgroundColor`).
+
 ```javascript
 const kotakPeringatan = document.querySelector(".alert");
 
@@ -70,7 +76,8 @@ kotakPeringatan.style.display = "none"; // Menghilangkan kotak dari layar
 ```
 
 **C. Mengelola Kelas CSS (`classList`)**
-Daripada menulis *style* manual satu persatu dari JS yang merepotkan, lebih baik kita cukup menambah atau menghapus "Class" CSS dari elemen tersebut.
+Daripada menulis _style_ manual satu persatu dari JS yang merepotkan, lebih baik kita cukup menambah atau menghapus "Class" CSS dari elemen tersebut.
+
 ```javascript
 const tombolMenu = document.querySelector(".menu");
 
@@ -86,9 +93,10 @@ tombolMenu.classList.toggle("mode-gelap");
 
 ### 4. Menciptakan Elemen Baru dari Nol
 
-Terkadang, kita ingin menambahkan elemen yang sebelumnya sama sekali tidak ada di file HTML (misalnya: membuat notifikasi *bubble chat* baru ketika ada pesan masuk).
+Terkadang, kita ingin menambahkan elemen yang sebelumnya sama sekali tidak ada di file HTML (misalnya: membuat notifikasi _bubble chat_ baru ketika ada pesan masuk).
 
 Langkah-langkahnya: Buat elemennya -> Isi kontennya -> Sisipkan ke dalam halaman.
+
 ```javascript
 // 1. Ciptakan elemen <li> kosong di memoriawang-awang
 const kotakPesanBaru = document.createElement("li");

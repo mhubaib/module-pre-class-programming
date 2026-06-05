@@ -1,4 +1,4 @@
-# Bab 30: CSS Pseudo Classes
+# Bab 16: CSS Pseudo Classes
 
 ## Tujuan Pembelajaran
 

@@ -1,4 +1,4 @@
-# Bab 28: Display & Position di CSS
+# Bab 14: Display & Position di CSS
 
 ## Tujuan Pembelajaran
 

@@ -10,7 +10,7 @@
 
 ## Materi Utama
 
-Setelah berhasil memasang dan mengonfigurasi Git di Bab 60, sekarang kita akan masuk ke inti dari cara kerja Git sehari-hari. Menggunakan Git itu seperti mendokumentasikan proses pembangunan sebuah gedung: ada saatnya kamu meletakkan batu bata, dan ada saatnya kamu mengambil foto untuk mencatat kemajuan yang sudah dicapai.
+Setelah berhasil memasang dan mengonfigurasi Git di Bab 3 yang lalu, sekarang kita akan masuk ke inti dari cara kerja Git sehari-hari. Menggunakan Git itu seperti mendokumentasikan proses pembangunan sebuah gedung: ada saatnya kamu meletakkan batu bata, dan ada saatnya kamu mengambil foto untuk mencatat kemajuan yang sudah dicapai.
 
 ---
 

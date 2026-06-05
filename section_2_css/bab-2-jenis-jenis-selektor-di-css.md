@@ -1,4 +1,4 @@
-# Bab 16: Jenis-jenis Selektor di CSS
+# Bab 2: Jenis-jenis Selektor di CSS
 
 ## Tujuan Pembelajaran
 

@@ -1,4 +1,4 @@
-# Bab 22: CSS Box Model
+# Bab 8: CSS Box Model
 
 ## Tujuan Pembelajaran
 

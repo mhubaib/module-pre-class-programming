@@ -1,4 +1,4 @@
-# Bab 66: Merge Conflict
+# Bab 9: Merge Conflict
 
 ## Tujuan Pembelajaran
 

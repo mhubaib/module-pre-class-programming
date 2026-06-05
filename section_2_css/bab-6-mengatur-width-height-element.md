@@ -1,4 +1,4 @@
-# Bab 20: Mengatur Width & Height Element
+# Bab 6: Mengatur Width & Height Element
 
 ## Tujuan Pembelajaran
 

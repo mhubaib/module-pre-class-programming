@@ -1,4 +1,4 @@
-# Bab 15: Pengenalan CSS & Struktur Sintaks di CSS
+# Bab 1: Pengenalan CSS & Struktur Sintaks di CSS
 
 ## Tujuan Pembelajaran
 

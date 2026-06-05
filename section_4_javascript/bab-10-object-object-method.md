@@ -1,6 +1,7 @@
-# Bab 46: Object & Object Method
+# Bab 10: Object & Object Method
 
 ## Tujuan Pembelajaran
+
 - Memahami konsep Object sebagai struktur data pengelompokan identitas yang kompleks.
 - Membaca dan memodifikasi properti di dalam sebuah Object (Dot notation & Bracket notation).
 - Membedakan antara variabel biasa (Properti) dengan fungsi yang hidup di dalam Object (Method).
@@ -18,23 +19,26 @@ Object selalu dibuat menggunakan sepasang **Kurung Kurawal `{}`**. Elemen di dal
 ```javascript
 // Mendeklarasikan profil detail mobil menggunakan struktur Object
 const mobilImpian = {
-    merek: "Toyota",
-    model: "Supra",
-    tahunKeluaran: 2024,
-    warna: "Silver",
-    mesinMenyala: false
+  merek: "Toyota",
+  model: "Supra",
+  tahunKeluaran: 2024,
+  warna: "Silver",
+  mesinMenyala: false,
 };
 ```
+
 Perhatikan struktur di atas:
+
 - `merek`, `model`, `tahunKeluaran` disebut sebagai **Key (Kunci/Properti)**. (Aturan namanya sama ketatnya seperti menamai variabel).
 - `"Toyota"`, `2024`, `false` disebut sebagai **Value (Nilai Data/Isi)**.
 
 ### 2. Berinteraksi dengan Object (Membaca & Menulis)
 
-Komputer tidak menggunakan nomor absen/index `0` seperti array jika kamu ingin memanggil tahun keluaran mobilnya. Kamu cukup memanggil langsung nama kuncinya (namanya *Key-value pair*).
+Komputer tidak menggunakan nomor absen/index `0` seperti array jika kamu ingin memanggil tahun keluaran mobilnya. Kamu cukup memanggil langsung nama kuncinya (namanya _Key-value pair_).
 
 **A. Dot Notation (Jalur Titik Murni)**
-Ini adalah standar emas yang paling sering dipakai *programmer* untuk membaca properti mutlak karena ketikannya lebih bersih.
+Ini adalah standar emas yang paling sering dipakai _programmer_ untuk membaca properti mutlak karena ketikannya lebih bersih.
+
 ```javascript
 // Memanggil nama propertinya dengan Titik `.`
 console.log(mobilImpian.merek); // Layar mencetak: "Toyota"
@@ -46,6 +50,7 @@ mobilImpian.warna = "Hitam Matte";
 
 **B. Bracket Notation (Jalur Kurung Siku)**
 Digunakan jika nama properti kuncinya berupa huruf aneh berspasi, atau jika kamu memanggil namanya melalui wadah variabel acak dari luar.
+
 ```javascript
 // Membaca identitas lewat jalur nama bungkus kurung siku string
 console.log(mobilImpian["model"]); // Layar mencetak: "Supra"
@@ -62,26 +67,26 @@ Jika di dalam perut `Object` kamu menyelipkan fungsi seutuhnya (`function()`), m
 
 ```javascript
 const ksatriaGame = {
-    namaPanggung: "Bima",
-    nyawaHP: 100,
-    
-    // Ini dinamakan METHOD: Sebuah Function yang diikat hidup melekat di dalam Object!
-    serangMusuh: function() {
-        console.log("Pedang Diayunkan! Ciiaaat!");
-    },
-    
-    terkenaHit: function() {
-        console.log("Aduh sakit!!");
-        // Kata kunci rahasia "this." digunakan untuk menunjuk/memanggil saudara se-objeknya sendiri
-        this.nyawaHP -= 10; 
-    }
+  namaPanggung: "Bima",
+  nyawaHP: 100,
+
+  // Ini dinamakan METHOD: Sebuah Function yang diikat hidup melekat di dalam Object!
+  serangMusuh: function () {
+    console.log("Pedang Diayunkan! Ciiaaat!");
+  },
+
+  terkenaHit: function () {
+    console.log("Aduh sakit!!");
+    // Kata kunci rahasia "this." digunakan untuk menunjuk/memanggil saudara se-objeknya sendiri
+    this.nyawaHP -= 10;
+  },
 };
 
-// Menjalankan method dalam object 
-ksatriaGame.serangMusuh();     // Cetak: Pedang Diayunkan! Ciiaaat!
-ksatriaGame.terkenaHit();      // Cetak: Aduh sakit!!
+// Menjalankan method dalam object
+ksatriaGame.serangMusuh(); // Cetak: Pedang Diayunkan! Ciiaaat!
+ksatriaGame.terkenaHit(); // Cetak: Aduh sakit!!
 console.log(ksatriaGame.nyawaHP); // Darah sekarang mengurang otomatis tersisa bulat ke 90!
 ```
 
 **Konsep Sakti Bawaan (`this`)**
-Pada bedah fungsi `terkenaHit` di atas, kata kunci `this` bukan sekadar mantra kosong. Di dalam rumah Object, `this` adalah cara komputer merujuk ke *"diriku sendiri (Tuan KsatriaBima ini)"*. Jadi, `this.nyawaHP` diterjemahkan secara harfiah menjadi `"Ambil properti nyawaHP milik diriku Objectku sendiri ini, lalu kurangi 10"`.
+Pada bedah fungsi `terkenaHit` di atas, kata kunci `this` bukan sekadar mantra kosong. Di dalam rumah Object, `this` adalah cara komputer merujuk ke _"diriku sendiri (Tuan KsatriaBima ini)"_. Jadi, `this.nyawaHP` diterjemahkan secara harfiah menjadi `"Ambil properti nyawaHP milik diriku Objectku sendiri ini, lalu kurangi 10"`.

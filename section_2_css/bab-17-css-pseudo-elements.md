@@ -1,4 +1,4 @@
-# Bab 31: CSS Pseudo Elements
+# Bab 17: CSS Pseudo Elements
 
 ## Tujuan Pembelajaran
 

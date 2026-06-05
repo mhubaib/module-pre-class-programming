@@ -1,4 +1,4 @@
-# Bab 65: GitHub Workflow (Fork, Clone, Pull, Push, PR)
+# Bab 8: GitHub Workflow (Fork, Clone, Pull, Push, PR)
 
 ## Tujuan Pembelajaran
 
@@ -12,7 +12,7 @@
 
 ## Materi Utama
 
-Setelah memiliki akun GitHub dan repositori pertama (Bab 64), kini saatnya mempelajari alur kerja pengiriman dan penerimaan kode antara komputer lokal dan GitHub.
+Setelah memiliki akun GitHub dan repositori pertama (Bab 7 yang lalu), kini saatnya mempelajari alur kerja pengiriman dan penerimaan kode antara komputer lokal dan GitHub.
 
 Terdapat dua arah aliran kode yang perlu dipahami:
 

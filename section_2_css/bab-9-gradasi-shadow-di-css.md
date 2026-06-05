@@ -1,4 +1,4 @@
-# Bab 23: Gradasi & Shadow di CSS
+# Bab 9: Gradasi & Shadow di CSS
 
 ## Tujuan Pembelajaran
 

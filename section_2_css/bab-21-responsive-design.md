@@ -1,4 +1,4 @@
-# Bab 35: Responsive Design
+# Bab 21: Responsive Design
 
 ## Tujuan Pembelajaran
 

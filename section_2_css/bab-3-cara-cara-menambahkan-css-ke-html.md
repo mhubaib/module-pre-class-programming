@@ -1,4 +1,4 @@
-# Bab 17: Cara-cara Menambahkan CSS ke HTML
+# Bab 3: Cara-cara Menambahkan CSS ke HTML
 
 ## Tujuan Pembelajaran
 

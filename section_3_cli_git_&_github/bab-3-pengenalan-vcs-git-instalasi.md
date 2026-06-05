@@ -1,4 +1,4 @@
-# Bab 60: Pengenalan VCS (Git) & Instalasi
+# Bab 3: Pengenalan VCS (Git) & Instalasi
 
 ## Tujuan Pembelajaran
 

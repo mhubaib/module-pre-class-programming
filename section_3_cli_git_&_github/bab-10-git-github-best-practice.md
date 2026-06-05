@@ -1,4 +1,4 @@
-# Bab 67: Git & GitHub Best Practice
+# Bab 10: Git & GitHub Best Practice
 
 ## Tujuan Pembelajaran
 

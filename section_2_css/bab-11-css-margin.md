@@ -1,4 +1,4 @@
-# Bab 25: CSS Margin
+# Bab 11: CSS Margin
 
 ## Tujuan Pembelajaran
 
@@ -9,7 +9,7 @@
 
 ## Materi Utama
 
-Jika Padding di Bab 24 mengatur urusan "ruang di dalam kotak", maka sekarang kita membahas urusan tetangga. **Margin** mengatur urusan di "luar kotak".
+Jika Padding di Bab 10 yang lalu mengatur urusan "ruang di dalam kotak", maka sekarang kita membahas urusan tetangga. **Margin** mengatur urusan di "luar kotak".
 
 Tanpa Margin, dua buah paragraf akan saling bertabrakan kening layaknya baris tanpa spasi.
 

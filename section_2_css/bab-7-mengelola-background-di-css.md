@@ -1,4 +1,4 @@
-# Bab 21: Mengelola Background di CSS
+# Bab 7: Mengelola Background di CSS
 
 ## Tujuan Pembelajaran
 
@@ -9,7 +9,7 @@
 
 ## Materi Utama
 
-Setelah kita belajar memberikan warna pada latar belakang di Bab 19, kini saatnya kita melangkah lebih jauh. Memasang gambar pemandangan atau pola tekstur sebagai latar belakang bisa memberikan kesan mewah dan bercerita pada websitemu.
+Setelah kita belajar memberikan warna pada latar belakang di Bab 5 CSS, kini saatnya kita melangkah lebih jauh. Memasang gambar pemandangan atau pola tekstur sebagai latar belakang bisa memberikan kesan mewah dan bercerita pada websitemu.
 
 ### 1. Memasang Gambar Latar (`background-image`)
 

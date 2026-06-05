@@ -1,4 +1,4 @@
-# Bab 27: Teks, Format Teks, & Font di CSS
+# Bab 13: Teks, Format Teks, & Font di CSS
 
 ## Tujuan Pembelajaran
 

@@ -1,4 +1,4 @@
-# Bab 26: CSS Border & Outline
+# Bab 12: CSS Border & Outline
 
 ## Tujuan Pembelajaran
 

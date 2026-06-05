@@ -10,7 +10,7 @@
 
 ## Materi Utama
 
-Jika Git (Bab 60) adalah alat untuk mencatat versi kode di komputermu sendiri, maka **GitHub** adalah platform berbasis web tempat kode tersebut disimpan secara online, dibagikan, dan dikerjakan bersama. Di sinilah jutaan pengembang di seluruh dunia menyimpan proyek, berkolaborasi, dan memamerkan hasil pekerjaan mereka.
+Jika Git (Bab 3) adalah alat untuk mencatat versi kode di komputermu sendiri, maka **GitHub** adalah platform berbasis web tempat kode tersebut disimpan secara online, dibagikan, dan dikerjakan bersama. Di sinilah jutaan pengembang di seluruh dunia menyimpan proyek, berkolaborasi, dan memamerkan hasil pekerjaan mereka.
 
 ---
 

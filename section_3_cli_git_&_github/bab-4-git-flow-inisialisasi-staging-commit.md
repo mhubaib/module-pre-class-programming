@@ -1,4 +1,4 @@
-# Bab 61: Git Flow (Inisialisasi, Staging, Commit)
+# Bab 4: Git Flow (Inisialisasi, Staging, Commit)
 
 ## Tujuan Pembelajaran
 

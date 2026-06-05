@@ -1,4 +1,4 @@
-# Bab 58: Pengenalan CLI
+# Bab 1: Pengenalan CLI
 
 ## Tujuan Pembelajaran
 

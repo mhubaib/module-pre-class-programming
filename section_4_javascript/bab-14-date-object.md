@@ -2,90 +2,265 @@
 
 ## Tujuan Pembelajaran
 
-- Memahami kegunaan Date Object dalam JavaScript untuk manajemen waktu nyata.
-- Mampu membuat object penanda waktu, baik waktu saat ini maupun waktu spesifik di masa lampau/depan.
-- Mampu membedah dan mengambil data hitungan bulan, hari, tahun menggunakan _Date Methods_.
+- Memahami kegunaan Date Object dalam JavaScript untuk manajemen waktu.
+- Mampu membuat objek tanggal untuk waktu saat ini maupun waktu spesifik.
+- Mampu mengekstrak dan memformat komponen tanggal menggunakan _Date Methods_.
+- Mengenal Setter Methods untuk memodifikasi nilai tanggal.
+
+---
 
 ## Materi Utama
 
-Dalam membuat aplikasi, waktu adalah kordinat mutlak kehidupan yang tak bisa dihiraukan. Kapan User mendaftarkan akun? Jam berapa batas akhir (deadline) pembayaran Shopee ini akan basi / kadaluarsa?
+Dalam membangun aplikasi, informasi waktu hampir selalu diperlukan — kapan pengguna mendaftar, kapan batas pembayaran, berapa lama sejak unggahan terakhir. JavaScript menyediakan **Date Object** sebagai alat bawaan untuk membuat, mengakses, dan memanipulasi data waktu.
 
-JavaScript menyediakan mesin waktu bawaan paten yang bernama **Date Object**.
+---
 
-Ini adalah sebuah pabrik struktur objek khusus (seperti Bab 46) yang di dalamnya telah dibekali puluhan method otomatis sakti untuk meraba mencerna detak detik almanak waktu Gregorian kalender dunia (dan sangat bergantung akurat menyesuaikan jam zona waktu (_Timezone_) OS sistem bawaan asal muasal komputer sang penontonmu sendiri).
+### 1. Membuat Date Object
 
-### 1. Mencetak Cetak Biru Waktu (Instance Date Baru)
+Untuk membuat objek tanggal, gunakan kata kunci `new Date()` dengan huruf `D` kapital.
 
-Untuk menyalakan mesin pemanggil waktu, kita diwajibkan menggunakan deklarasi ritual kalimat `new Date()`. Menulisnya pakai awalan huruf Kapital **D**.
+#### A. Waktu Saat Ini
 
 ```javascript
-/* MENCATAT DETIK SAAT INI (REAL-TIME LAPTOP DIBUKA) */
-let waktuSekarang = new Date();
-console.log(waktuSekarang);
-// Tercetak format ribet kasar mesin utuh, misal: "Wed Oct 25 2024 15:30:00 GMT+0700 (Western Indonesia Time)"
+const sekarang = new Date();
+console.log(sekarang);
+// Output: Wed Jun 04 2026 14:30:00 GMT+0700 (Western Indonesia Time)
+// Format mentah ini belum siap ditampilkan langsung ke antarmuka — perlu diekstrak lebih lanjut
+```
 
-/* MEMBUAT CATAAN WAKTU KHUSUS MASA LALU/DEPAN */
-// Format Standar: new Date(Tahun, IndeksBulan, Tanggal, Jam, Menit, Detik);
-// Catatan Kutukan Javascript = INDEKS BULAN DIMULAI DARI ANGKA 0 (0 itu Januari, 11 itu Desember).
+#### B. Waktu Spesifik
 
-let hariKemerdekaan = new Date(1945, 7, 17, 10, 0, 0);
-// 7 merujuk ke Bulan Agustus (karena 0 itu Januari).
+```javascript
+// Format: new Date(tahun, indeksBulan, tanggal, jam, menit, detik)
+// Penting: indeks bulan dimulai dari 0 (Januari = 0, Desember = 11)
+const hariKemerdekaan = new Date(1945, 7, 17, 10, 0, 0);
+// Bulan 7 = Agustus (bukan Juli)
 console.log(hariKemerdekaan);
+// Output: Fri Aug 17 1945 10:00:00
+
+// Alternatif — menggunakan format string ISO (lebih mudah dibaca)
+const peluncuran = new Date("2026-01-15");
+console.log(peluncuran);
+// Output: Thu Jan 15 2026 00:00:00
 ```
 
-### 2. Membedah Objek Tanggal dengan Date Methods (Alat Ekstrak)
+> **Perhatian — Indeks Bulan Dimulai dari 0:** Ini adalah salah satu sumber kebingungan yang paling umum di JavaScript. Januari = `0`, Februari = `1`, ..., Desember = `11`. Selalu tambahkan `1` saat menampilkan nomor bulan ke pengguna.
 
-Format mentah balikan kasar _"Wed Oct 25 2024 dll"_ dari `new Date()` di atas mustahil dan jelek sekali untuk dipamerkan tertulis dipajang ke hadapan Layar Web tampilan (_UI_) pengunjungmu. Kita diharuskan mengekstrak memecah nilai mentah itu murni spesifik pertitel elemen detiknya.
+---
 
-Gunakan senjata utilitas fungsi "Getters" (Pengekstrak) milik Object Date ini:
+### 2. Getter Methods — Mengekstrak Komponen Tanggal
 
-- `getFullYear()` : Memeras mengambil data 4 digit tahun (eg: 2025).
-- `getMonth()` : Mengintip nomer indeks bulannya (Ingat, angkanya balik mutlak berkisar 0 - 11 mulainya).
-- `getDate()` : Menoreh mencabut tanggalnya pas di bulan tersebut (1 - 31).
-- `getDay()` : Mengembalikan nomer baris antrian hari mingguan abjad. (Dimulai mutlak Angka Hari 0 = Minggu, 1 = Senin, dst sampai 6 = Sabtu).
-- `getHours()`, `getMinutes()`, `getSeconds()` : Untuk menarik intip nilai penunjuk rincian waktu detaknya jam.
+Format mentah dari `new Date()` tidak layak ditampilkan langsung ke antarmuka. Gunakan Getter Methods untuk mengekstrak nilai tertentu.
 
-**Contoh Kasus Pengolahan Tampil Rapi:**
-Kita mau mencetak tulisan kalender rapi bergaya Indonesia: "Tahun: 2024, Tanggal 15".
+| Method           | Mengembalikan                | Rentang Nilai              |
+| ---------------- | ---------------------------- | -------------------------- |
+| `.getFullYear()` | Tahun (4 digit)              | misalnya `2026`            |
+| `.getMonth()`    | Indeks bulan                 | `0` (Jan) – `11` (Des)     |
+| `.getDate()`     | Tanggal dalam bulan          | `1` – `31`                 |
+| `.getDay()`      | Indeks hari dalam seminggu   | `0` (Minggu) – `6` (Sabtu) |
+| `.getHours()`    | Jam                          | `0` – `23`                 |
+| `.getMinutes()`  | Menit                        | `0` – `59`                 |
+| `.getSeconds()`  | Detik                        | `0` – `59`                 |
+| `.getTime()`     | Millisecond sejak 1 Jan 1970 | Angka besar (timestamp)    |
 
 ```javascript
-let almanakKini = new Date();
+const sekarang = new Date();
 
-let tahunTerambil = almanakKini.getFullYear();
-let tanggalToko = almanakKini.getDate();
-let indeksBulan = almanakKini.getMonth();
+const tahun = sekarang.getFullYear();
+const bulan = sekarang.getMonth() + 1; // +1 karena indeks dimulai dari 0
+const tanggal = sekarang.getDate();
+const jam = sekarang.getHours();
+const menit = sekarang.getMinutes();
 
-console.log(
-  "Faktur Dibuat Pada: " +
-    tanggalToko +
-    "-" +
-    (indeksBulan + 1) +
-    "-" +
-    tahunTerambil,
-);
-// Layar Mulus Mencetak: "Faktur Dibuat Pada: 15-10-2024"
+console.log("Tanggal:", tanggal + "-" + bulan + "-" + tahun);
+// Output: Tanggal: 4-6-2026
 
-// (Perhatikan kita akalin di atas `indeksBulan + 1` agar angka bulannya manusiawi dibaca pas, bukan turun selisih 1 hitungan karena hitungan nol JS!)
+console.log("Waktu:", jam + ":" + menit);
+// Output: Waktu: 14:30
 ```
 
-### 3. Manipulasi Mengubah Waktu (_Setter Methods_)
-
-Selain sekedar mengekstrak ("Get"), object Date juga sanggup mutlak mengubah / loncat memaju-mundurkan patokan rekam jejak ("Set").
-
-- `setFullYear(2099)` : Menyulap data ubahan menendang rekam ke masa depan.
-- `setDate(25)` : Memodifikasi paksa tanggalnya.
+**Contoh — Menampilkan nama hari:**
 
 ```javascript
-let kalenderCicilan = new Date(); // Hari ini
+const namaHari = [
+  "Minggu",
+  "Senin",
+  "Selasa",
+  "Rabu",
+  "Kamis",
+  "Jumat",
+  "Sabtu",
+];
+const namaBulan = [
+  "Januari",
+  "Februari",
+  "Maret",
+  "April",
+  "Mei",
+  "Juni",
+  "Juli",
+  "Agustus",
+  "September",
+  "Oktober",
+  "November",
+  "Desember",
+];
 
-// Memerintahkan waktu melompat paksa ke tanggal 30 (Bayaran Hutang):
-kalenderCicilan.setDate(30);
+const sekarang = new Date();
+const hari = namaHari[sekarang.getDay()];
+const tgl = sekarang.getDate();
+const bln = namaBulan[sekarang.getMonth()];
+const thn = sekarang.getFullYear();
 
-console.log(
-  "Silahkan Tuntaskan Bayaran di Tanggal: " + kalenderCicilan.getDate(),
-);
+console.log(hari + ", " + tgl + " " + bln + " " + thn);
+// Output: Kamis, 4 Juni 2026
 ```
 
-Date Object di JavaScript sering kali ditakuti dibenci pemula karena logikanya sering tak terkalibrasi lurus gara-gara format sistem _Indeks 0_ bulannya yang gila aneh, ditambah perihnya senggolan antar zona waktu dunia nyata.
+---
 
-Maka wajar kelak suatu saat jika proyemu sudah masuk kerumitan skala dewa, biasanya tim ahli Developer akan menyerah lalu menggunakan bantuan ekstensi (_Library_) _pihak ketiga eksternal_ seperti `date-fns` atau `Luxon` agar manajemen format hitung mundur waktunya (Semisal fitur _Di-Upload 2 Hari Yang Lalu_) jadi mutlak tak mudah meleset eror berantakan kalakulasi di segala browser!
+### 3. Memformat Tanggal untuk Ditampilkan
+
+JavaScript menyediakan beberapa cara untuk memformat tanggal menjadi teks yang dapat dibaca.
+
+#### A. Manual dengan Getter Methods
+
+Cara yang paling fleksibel karena kamu bisa mengatur format sesuai kebutuhan:
+
+```javascript
+function formatTanggal(date) {
+  const tgl = String(date.getDate()).padStart(2, "0");
+  const bln = String(date.getMonth() + 1).padStart(2, "0");
+  const thn = date.getFullYear();
+  return tgl + "/" + bln + "/" + thn;
+}
+
+const fakturDibuat = new Date();
+console.log("Tanggal Faktur:", formatTanggal(fakturDibuat));
+// Output: Tanggal Faktur: 04/06/2026
+```
+
+#### B. Menggunakan `toLocaleDateString()`
+
+Method bawaan untuk memformat tanggal sesuai lokal tertentu:
+
+```javascript
+const tanggal = new Date("2026-06-04");
+
+console.log(tanggal.toLocaleDateString("id-ID"));
+// Output: 4/6/2026
+
+console.log(
+  tanggal.toLocaleDateString("id-ID", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }),
+);
+// Output: Kamis, 4 Juni 2026
+```
+
+---
+
+### 4. Setter Methods — Memodifikasi Tanggal
+
+Selain membaca nilai, Date Object juga memiliki Setter Methods untuk mengubah komponen tanggal.
+
+| Method                | Fungsi                       |
+| --------------------- | ---------------------------- |
+| `.setFullYear(tahun)` | Mengubah tahun               |
+| `.setMonth(bulan)`    | Mengubah bulan (indeks 0–11) |
+| `.setDate(tanggal)`   | Mengubah tanggal             |
+| `.setHours(jam)`      | Mengubah jam                 |
+
+```javascript
+const batasTagihan = new Date();
+
+// Tetapkan tanggal jatuh tempo ke tanggal 30 bulan ini
+batasTagihan.setDate(30);
+
+const tgl = batasTagihan.getDate();
+const bln = batasTagihan.getMonth() + 1;
+const thn = batasTagihan.getFullYear();
+
+console.log("Batas Pembayaran: " + tgl + "/" + bln + "/" + thn);
+// Output: Batas Pembayaran: 30/6/2026
+```
+
+---
+
+### 5. Perbandingan dan Selisih Waktu
+
+Date Object menyimpan waktu sebagai **timestamp** — jumlah millisecond sejak 1 Januari 1970. Ini memungkinkan perbandingan dan perhitungan selisih antar tanggal.
+
+```javascript
+const tanggalMulai = new Date("2026-01-01");
+const tanggalAkhir = new Date("2026-06-04");
+
+// Hitung selisih dalam millisecond
+const selisihMs = tanggalAkhir - tanggalMulai;
+
+// Konversi ke hari
+const selisihHari = Math.floor(selisihMs / (1000 * 60 * 60 * 24));
+console.log("Selisih:", selisihHari, "hari");
+// Output: Selisih: 154 hari
+```
+
+**Contoh — Menghitung hari menuju suatu tanggal:**
+
+```javascript
+function hitungHariMenuju(targetTanggal) {
+  const sekarang = new Date();
+  const target = new Date(targetTanggal);
+  const selisihMs = target - sekarang;
+
+  if (selisihMs < 0) {
+    return "Tanggal sudah terlewat.";
+  }
+
+  const hari = Math.ceil(selisihMs / (1000 * 60 * 60 * 24));
+  return hari + " hari lagi";
+}
+
+console.log(hitungHariMenuju("2026-12-31")); // Output: (jumlah hari menuju akhir tahun)
+console.log(hitungHariMenuju("2025-01-01")); // Output: Tanggal sudah terlewat.
+```
+
+---
+
+### 6. Catatan tentang Library Tanggal Pihak Ketiga
+
+Meskipun Date Object sudah memadai untuk kebutuhan dasar, ia memiliki beberapa keterbatasan yang dikenal di kalangan pengembang:
+
+- Indeks bulan yang dimulai dari 0 sering memicu bug.
+- Parsing format tanggal dari string tidak konsisten di semua browser.
+- Tidak ada dukungan bawaan untuk format yang ramah pengguna seperti "2 hari yang lalu".
+- Penanganan zona waktu (_timezone_) cukup kompleks untuk kasus lintas negara.
+
+Untuk proyek yang memerlukan manajemen tanggal yang lebih kompleks, pengembang biasanya menggunakan library pihak ketiga:
+
+| Library      | Keunggulan                              |
+| ------------ | --------------------------------------- |
+| **date-fns** | Ringan, modular, banyak fungsi utilitas |
+| **Luxon**    | Dukungan timezone yang kuat, API modern |
+| **Day.js**   | Sangat ringan, API mirip Moment.js      |
+
+---
+
+### Kesimpulan
+
+Date Object adalah alat bawaan JavaScript untuk bekerja dengan waktu. Dengan memahami cara membuat objek tanggal, mengekstrak komponen, memformatnya untuk ditampilkan, dan menghitung selisih antar tanggal, kamu dapat menangani sebagian besar kebutuhan manajemen waktu dalam aplikasi web.
+
+**Ringkasan:**
+
+| Konsep / Method               | Fungsi                                                     |
+| ----------------------------- | ---------------------------------------------------------- |
+| `new Date()`                  | Membuat objek tanggal untuk waktu saat ini                 |
+| `new Date(tahun, bulan, tgl)` | Membuat objek tanggal spesifik (bulan dimulai dari 0)      |
+| `.getFullYear()`              | Mengambil tahun                                            |
+| `.getMonth()`                 | Mengambil indeks bulan (0–11), tambahkan +1 untuk tampilan |
+| `.getDate()`                  | Mengambil tanggal dalam bulan                              |
+| `.getDay()`                   | Mengambil indeks hari dalam seminggu (0 = Minggu)          |
+| `.getTime()`                  | Mengambil timestamp (ms sejak 1 Jan 1970)                  |
+| `.setDate(n)`                 | Mengubah tanggal                                           |
+| `.toLocaleDateString()`       | Memformat tanggal sesuai lokal                             |

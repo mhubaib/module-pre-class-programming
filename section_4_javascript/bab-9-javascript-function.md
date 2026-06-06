@@ -2,95 +2,291 @@
 
 ## Tujuan Pembelajaran
 
-- Memahami konsep Function sebagai blok alat mesin pabrik cetak mesin untuk mendaur ulang logika kode.
-- Menguasai format struktur mutlak anatomi Function (Parameter dan Return).
-- Mengenal variasi tipe fungsi rahasia terbaru: _Arrow Function_ ringkas yang revolusioner.
+- Memahami konsep Function sebagai blok kode yang dapat digunakan kembali.
+- Menguasai anatomi Function: deklarasi, parameter, argumen, dan `return`.
+- Mengenal variasi penulisan fungsi: Function Expression dan Arrow Function.
+
+---
 
 ## Materi Utama
 
-Dalam membedah membangun website yang rumit, terkadang kamu menemui insiden dimana kamu terpaksa harus **mengetik tumpukan logika baris kode yang berfungsi hitungan serupa yang sama persis sifat berulangnya** diberbagai rentetan sudut file dan diulang-ulang.
-Ini menganggar hukum dewa koding: _Mendaur Ulang Kode (DRY: Don't Repeat Yourself)_. Karena hal ini kotor merepotkan di perbaikannya kelak.
+Saat membangun program yang kompleks, kamu mungkin menemukan situasi di mana logika yang sama perlu dijalankan di beberapa tempat yang berbeda. Menyalin dan menempelkan kode yang sama berulang kali melanggar prinsip dasar pemrograman yang disebut **DRY — _Don't Repeat Yourself_**.
 
-Solusinya mutlak: Serahkan ke Mesin **Function** (Fungsi).
+Solusinya adalah **Function** (Fungsi) — sebuah blok kode yang diberi nama, dapat dipanggil kapan saja dan sebanyak yang dibutuhkan, tanpa perlu menuliskan ulang logikanya.
 
-Bayangkan sebuah **Fungsi (Function)** itu bagaikan alat pabrik cetak mesin Giling Blender buah Jus. Kau rakit dulu onderdil mata pisaunya (buat blok `function`-nya), lantas kau tinggal setorkan berulangkali lempar buah mangga ke corong input (lempar nilai masukannya), lalu mesinnya diam-diam otomatis menghancurkan matematis mangga terolah tersebut menjadi air jus (kembalian nilai), dan kau tinggal mewadahi ampas jus keluarannya berulang ulang asyik secara mudah!
+**Analogi:**
 
-### 1. Deklarasi Anatomi Dasar Fungsi (Fungsi Reguler Standar)
+Bayangkan sebuah fungsi seperti mesin blender. Kamu merakitnya sekali, lalu tinggal memasukkan bahan (input), dan mesin secara otomatis mengolahnya menjadi hasil (output). Kamu tidak perlu merakit ulang mesinnya setiap kali ingin membuat jus.
 
-Untuk membuat membuat cetak biru mesin blender ini, kamu memakai kata instruksi kunci awalan: `function` lalu tuliskan identitas nama fungsi tersebut (_biasakan pakai kata aksi kata kerja aktif Camel Case_), ditidurkan kebalutan kurung `()`, dan disatukan blok pemrosesan perut lambungnya si kurung kurawal `{}`.
+---
+
+### 1. Deklarasi dan Pemanggilan Fungsi
+
+Untuk membuat fungsi, gunakan kata kunci `function`, diikuti nama fungsi, tanda kurung `()`, dan blok kode dalam kurung kurawal `{}`.
 
 ```javascript
-/* 1. MENCIPTAKAN MERAKIT MESIN FUNGSI */
-function sapaanPerkenalan() {
-  console.log("Halo Pelanggan Terhormat! Mari Menyelesaikan Tagihan Belanja.");
+// 1. Mendefinisikan fungsi
+function tampilkanSambutan() {
+  console.log("Selamat datang! Silakan selesaikan proses pembayaran.");
 }
 
-/* 2. EKSEKUSI PEMANGGILAN MUTLAK GILING PABRIK FUNGSI */
-// Meski kau buat 1000 baris asik diatas, jika tak ada perintah aksi "Pemanggilan Eksekusi Function ()", fungsimu ga akan nyala nyetak kelayar selamanya.
-sapaanPerkenalan();
-// Hasil Layar : "Halo Pelanggan Terhormat! Mari Menyelesaikan Tagihan Belanja."
+// 2. Memanggil fungsi
+tampilkanSambutan();
+// Output: Selamat datang! Silakan selesaikan proses pembayaran.
 ```
 
-### 2. Lubang Input Variasi Corong (Parameter) dan Data Celah (Argument)
-
-Mesin aslinya tak asyik kalau ia mencetak tulisan kaku statis terus menerus tanpa pembeda interaksi gilir.
-Untuk merubah mesin jadi dinamis meladeni nilai dinamis.. buatlah lubang di jidat kurungnya yang bernama **Parameter**.
-
-- **Parameter**: Laci nama corong khusus buat corong selang tangkapan di mulut si deklarasi `function ()`.
-- **Argument**: Benda angka yang mutlak disodorkan ditembakkan pasang kedalam telinga si fungsi saat proses Panggilan kerjanya eksekusi.
+Fungsi tidak akan dieksekusi hanya karena sudah didefinisikan. Ia harus **dipanggil** secara eksplisit menggunakan nama fungsi diikuti tanda kurung `()`.
 
 ```javascript
-// Membikin mesin pertambahan dinamis dengan 2 corong bolong (angkaA dan angkaB).
-// Kedua lubang nama nilai diatas tersebut bebas dinamai sembarang mutlak.
-function hitungTambahPenjumlahan(varAngkaA, varAngkaB) {
-  let hasilTotal = varAngkaA + varAngkaB;
-  console.log("Totalnya adalah mutlak berjumlah mutlak : " + hasilTotal);
+// Fungsi dapat dipanggil berkali-kali
+tampilkanSambutan(); // Dipanggil pertama kali
+tampilkanSambutan(); // Dipanggil kedua kali
+tampilkanSambutan(); // Dipanggil ketiga kali
+// Ketiganya mencetak output yang sama tanpa menulis ulang logika
+```
+
+---
+
+### 2. Parameter dan Argumen
+
+Fungsi yang hanya menghasilkan output tetap kurang fleksibel. Agar fungsi dapat bekerja dengan data yang berbeda-beda, gunakan **Parameter**.
+
+- **Parameter**: Nama variabel yang dideklarasikan di dalam tanda kurung fungsi sebagai "pintu masuk" data.
+- **Argumen**: Nilai nyata yang diberikan ke fungsi saat dipanggil.
+
+```javascript
+// "namaDepan" dan "namaBelakang" adalah parameter
+function sapa(namaDepan, namaBelakang) {
+  console.log("Halo,", namaDepan, namaBelakang + "!");
 }
 
-// Melempar masuk argument nyata (melempar mangganya):
-hitungTambahPenjumlahan(5, 7); // Tercetak: 12
-hitungTambahPenjumlahan(100, 25); // Setengah detik ganti cetak: 125
+// "Budi" dan "Santoso" adalah argumen
+sapa("Budi", "Santoso"); // Output: Halo, Budi Santoso!
+sapa("Ani", "Rahayu"); // Output: Halo, Ani Rahayu!
 ```
 
-### 3. Jembatan Penghubung Kembalian Air Sirup Mesin (`return`)
+**Parameter dengan nilai default:**
 
-Sering kali mesin tak boleh nyetak seenaknya merusak tampilan _console_ langsung berdarah tumpah ruah kotor berjejal. Seringnya mesin murni dilarang log ke layar, ia **diharuskan meretur merubah mengembalikan membungkus angka mentah berdarah di botol botol tertutup kembali utuh** ke arah jalur depan sang agen pemesan instruksi agar angkanya bisa diolah di-save kedalam database pendaftaran!
-
-Mantera ini murni adalah hak eksklusif hak milik perintah `return`. Saat palu hakim `return` dieksekusi berjalan diketok.. seketika itu putaran tugas sang mesin function ditutup langsung tak bersisa seketika mutlak.
+Jika argumen tidak diberikan saat pemanggilan, kamu dapat mendefinisikan nilai default untuk parameter:
 
 ```javascript
-function cekBiayaDiskon(hargaPenuh) {
-  let potongan = hargaPenuh * 0.5; // Potong dikali setengah
-
-  // Mesin disuruh membungkus ulang angka aspal diskon diam-diam diam bungkam diserahkan meretur mutlak hasilnya..
-  return potongan;
-
-  // (Bila seumpama asiknya aja kamu mengetik asal nyelip baris intruksi console.log dibawah baris return ini.. mutlak instruksi console bawahmu tidak bakalan tereksekusi dibaca dijalankan..).
+function hitungDiskon(harga, persentase = 10) {
+  return harga - (harga * persentase) / 100;
 }
 
-// Beda banget manggil eksekusinya: (angkanya tak langsung meledak nyembur kelayar terminal diam hening!)
-cekBiayaDiskon(50000);
-
-// Kita tangkap sembunyikan curi botol angka balikan "25000" hasil returnnya, masukan tuangkan ke laci botol baru untuk dipamer kelayar.
-let hitungHasilReturnya = cekBiayaDiskon(50000);
-console.log(hitungHasilReturnya); // Murni tercetak 25000
+console.log(hitungDiskon(100000, 20)); // Output: 80000 — menggunakan persentase 20
+console.log(hitungDiskon(100000)); // Output: 90000 — menggunakan default 10
 ```
 
-### 4. Panah Cinta Mutakhir: Rahasia ES6 `Arrow Function`
-
-Pada 2015, JS mengenalkan syntax gaul revolusioner singkat nulis yang membuat ketikan _function_ yang kuno panjang boros abjad dipangkas dipotong kompas habis menjadi sintaks satu baris panah panahan pendek ciamik gila: Menggunakan pisau sakti **Arrow `=>`**.
+**Contoh lengkap — Fungsi dengan beberapa parameter:**
 
 ```javascript
-// Model fungsi kaku gaya jadul (Murni Standar Normal Bawaan Nenek Moyang) :
-let fungsiHitungJadul = function (x, y) {
+function tampilkanProduk(nama, harga, stok) {
+  console.log("Produk :", nama);
+  console.log("Harga  : Rp", harga);
+  console.log("Stok   :", stok, "unit");
+  console.log("---");
+}
+
+tampilkanProduk("Sepatu Lari", 350000, 25);
+tampilkanProduk("Kaos Polos", 85000, 100);
+// Output:
+// Produk : Sepatu Lari
+// Harga  : Rp 350000
+// Stok   : 25 unit
+// ---
+// Produk : Kaos Polos
+// Harga  : Rp 85000
+// Stok   : 100 unit
+// ---
+```
+
+---
+
+### 3. Mengembalikan Nilai: `return`
+
+Sejauh ini, fungsi hanya mencetak output ke konsol. Namun dalam banyak kasus, kita perlu fungsi untuk **mengembalikan nilai** yang dapat disimpan ke variabel atau digunakan dalam ekspresi lain.
+
+Gunakan perintah `return` untuk mengembalikan nilai dari dalam fungsi.
+
+```javascript
+function hitungDiskon(harga) {
+  let potongan = harga * 0.5;
+  return potongan; // Nilai ini dikembalikan ke pemanggil fungsi
+}
+
+// Nilai kembalian ditangkap dalam variabel
+let hargaSetelahDiskon = hitungDiskon(50000);
+console.log(hargaSetelahDiskon); // Output: 25000
+
+// Atau langsung digunakan dalam ekspresi
+console.log("Total:", hitungDiskon(80000) + hitungDiskon(60000)); // Output: Total: 70000
+```
+
+**Perilaku penting `return`:**
+
+Begitu `return` dieksekusi, fungsi langsung berhenti. Kode setelah `return` tidak akan pernah dijalankan.
+
+```javascript
+function cekUmur(umur) {
+  if (umur < 18) {
+    return "Belum memenuhi syarat.";
+    // Baris di bawah ini tidak akan pernah dieksekusi
+    console.log("Ini tidak akan muncul.");
+  }
+  return "Memenuhi syarat.";
+}
+
+console.log(cekUmur(15)); // Output: Belum memenuhi syarat.
+console.log(cekUmur(20)); // Output: Memenuhi syarat.
+```
+
+**Perbedaan fungsi dengan dan tanpa `return`:**
+
+```javascript
+// Tanpa return — hanya mencetak, tidak bisa digunakan lebih lanjut
+function cetakTotal(a, b) {
+  console.log(a + b);
+}
+let hasil = cetakTotal(3, 4); // Mencetak 7
+console.log(hasil); // Output: undefined — tidak ada nilai yang dikembalikan
+
+// Dengan return — nilai dapat disimpan dan digunakan kembali
+function hitungTotal(a, b) {
+  return a + b;
+}
+let total = hitungTotal(3, 4);
+console.log(total); // Output: 7
+console.log(total * 2); // Output: 14 — dapat digunakan dalam operasi lain
+```
+
+---
+
+### 4. Function Expression
+
+Selain menggunakan deklarasi `function`, kamu juga dapat mendefinisikan fungsi dan menyimpannya dalam sebuah variabel. Ini disebut **Function Expression**.
+
+```javascript
+// Function Expression — fungsi disimpan dalam variabel
+const hitungLuasPersegiPanjang = function (panjang, lebar) {
+  return panjang * lebar;
+};
+
+console.log(hitungLuasPersegiPanjang(5, 3)); // Output: 15
+```
+
+**Perbedaan antara Function Declaration dan Function Expression:**
+
+|                                        | Function Declaration  | Function Expression                              |
+| -------------------------------------- | --------------------- | ------------------------------------------------ |
+| Sintaks                                | `function nama() {}`  | `const nama = function() {}`                     |
+| Dapat dipanggil sebelum didefinisikan? | Ya (_hoisting_)       | Tidak                                            |
+| Penggunaan umum                        | Fungsi utama dan umum | Fungsi yang diberikan sebagai nilai atau argumen |
+
+---
+
+### 5. Arrow Function (ES6)
+
+Diperkenalkan pada ES6 (2015), **Arrow Function** adalah cara penulisan fungsi yang lebih ringkas menggunakan simbol panah `=>`.
+
+**Konversi dari Function Expression ke Arrow Function:**
+
+```javascript
+// Function Expression (cara lama)
+const kali = function (x, y) {
   return x * y;
 };
 
-// --- DIUBAH MENULAR GAYA GAUL ARROW FUNCTION (Super Mutakhir Pendek Sakti Sebaris) --- :
-let fungsiPanahCepat = (x, y) => x * y;
+// Arrow Function (cara modern)
+const kali = (x, y) => {
+  return x * y;
+};
 
-// Hasil ketikan gila sebaris itu otomatis sudah termasuk dibungkus dikasih perintah 'return' balikan instannya oleh JS langsung! Wow! Canggih efisien ketikannya!
-console.log(fungsiPanahCepat(3, 4)); // Layar mutlak menyorakkan hasil silang: 12.
+// Arrow Function ringkas — jika hanya satu ekspresi, kurung kurawal dan return dapat dihilangkan
+const kali = (x, y) => x * y;
+
+console.log(kali(3, 4)); // Output: 12
 ```
 
-_Catatan Sampingan Dunia Nyata:_ Industri Framework Web termahsyur di abad ini yakni perpustakaan dunia koding **React**, mewajibkan penganut pengikutnya nyaris mutlak mutlak 100% menggunakan jurus gaya tulis format peredam ringkas padat berisi **Arrow Function** di segalam nafas detak proyek mereka ketimbang fungsi kuno function(). Jadi wajib hafalkan bentuk `=>` ini di luar jidat otakmu!
+**Variasi penulisan Arrow Function:**
+
+```javascript
+// Tanpa parameter
+const salam = () => "Halo!";
+console.log(salam()); // Output: Halo!
+
+// Satu parameter — tanda kurung boleh dihilangkan
+const kuadrat = (n) => n * n;
+console.log(kuadrat(5)); // Output: 25
+
+// Dua parameter atau lebih — tanda kurung wajib ada
+const tambah = (a, b) => a + b;
+console.log(tambah(3, 7)); // Output: 10
+
+// Lebih dari satu baris — kurung kurawal dan return diperlukan kembali
+const hitungPPN = (harga) => {
+  const tarif = 0.11;
+  const pajak = harga * tarif;
+  return harga + pajak;
+};
+console.log(hitungPPN(100000)); // Output: 111000
+```
+
+> **Catatan:** Arrow Function sangat umum digunakan dalam pengembangan modern, terutama dalam framework seperti React. Biasakan diri dengan sintaks ini karena akan sering dijumpai dalam kode JavaScript profesional.
+
+---
+
+### 6. Simulasi Lengkap — Sistem Kalkulator Belanja
+
+Berikut contoh program yang menggabungkan seluruh konsep function yang telah dipelajari:
+
+```javascript
+// Fungsi-fungsi pembantu
+const hitungSubtotal = (harga, jumlah) => harga * jumlah;
+const hitungPPN = (subtotal, tarif = 0.11) => subtotal * tarif;
+const hitungTotal = (subtotal, pajak) => subtotal + pajak;
+
+function cetakStruk(namaProduk, harga, jumlah) {
+  const subtotal = hitungSubtotal(harga, jumlah);
+  const pajak = hitungPPN(subtotal);
+  const total = hitungTotal(subtotal, pajak);
+
+  console.log("================================");
+  console.log("Produk    :", namaProduk);
+  console.log("Harga     : Rp", harga);
+  console.log("Jumlah    :", jumlah);
+  console.log("Subtotal  : Rp", subtotal);
+  console.log("PPN (11%) : Rp", pajak);
+  console.log("Total     : Rp", total);
+  console.log("================================");
+}
+
+cetakStruk("Sepatu Lari", 350000, 2);
+// Output:
+// ================================
+// Produk    : Sepatu Lari
+// Harga     : Rp 350000
+// Jumlah    : 2
+// Subtotal  : Rp 700000
+// PPN (11%) : Rp 77000
+// Total     : Rp 777000
+// ================================
+```
+
+---
+
+### Kesimpulan
+
+Function adalah salah satu konsep terpenting dalam JavaScript. Dengan membungkus logika ke dalam fungsi, kamu dapat membangun program yang lebih terstruktur, mudah dibaca, dan mudah dipelihara. Arrow Function memperkuat kemampuan ini dengan sintaks yang lebih ringkas dan modern.
+
+**Ringkasan:**
+
+| Konsep               | Penjelasan                                                                 |
+| -------------------- | -------------------------------------------------------------------------- |
+| Function Declaration | Mendefinisikan fungsi dengan kata kunci `function`                         |
+| Function Expression  | Menyimpan fungsi ke dalam variabel                                         |
+| Arrow Function       | Penulisan fungsi ringkas menggunakan `=>` (ES6)                            |
+| Parameter            | Variabel penerima data yang didefinisikan saat deklarasi fungsi            |
+| Argumen              | Nilai nyata yang diberikan saat fungsi dipanggil                           |
+| `return`             | Mengembalikan nilai dari fungsi ke pemanggil; menghentikan eksekusi fungsi |
+| Nilai default        | Nilai parameter yang digunakan jika argumen tidak diberikan                |

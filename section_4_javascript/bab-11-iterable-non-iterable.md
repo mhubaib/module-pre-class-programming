@@ -1,85 +1,213 @@
-# Bab 1: Iterable & Non-Iterable
+# Bab 11: Iterable & Non-Iterable
 
 ## Tujuan Pembelajaran
 
-- Memahami konsep data sekuel terukur (Iterable) dan bongkahan utuh sepotong tunggal (Non-Iterable).
-- Mengetahui peruntukan perulangan bawaan `for...of` khusus untuk tipe Iterable.
-- Mengetahui pengunaan perulangan spesifik untuk menyisir Object dengan `for...in`.
+- Memahami konsep Iterable dan Non-Iterable dalam struktur data JavaScript.
+- Mengetahui penggunaan perulangan `for...of` untuk tipe data Iterable.
+- Mengetahui penggunaan perulangan `for...in` untuk mengiterasi properti Object.
+
+---
 
 ## Materi Utama
 
-Dalam dunia struktur data JavaScript, benda-benda dikelompokkan berdasarkan kemampuannya untuk "dijabarkan" atau diurai secara berurutan langkah demi langkah secara hitungan jari.
+Dalam JavaScript, tidak semua tipe data dapat diiterasi (disisir satu per satu). Kemampuan ini menentukan metode perulangan mana yang tepat digunakan untuk memproses sebuah data.
 
-### 1. Apa itu Iterable (Bisa Diurai / Disisir)?
+---
 
-**Iterable** adalah wadah kumpulan data terstruktur yang mana potongan isinya **bisa ditarik keluar satu per satu secara berurutan (disisir)** oleh mesin program tanpa tersesat. Mereka ini benda-benda yang otomatis punya nomor urut gerbong kordinat panjangnya (_length_).
+### 1. Iterable — Data yang Dapat Disisir Berurutan
 
-Hanya ada 2 Penguasa Raja Iterable Mutlak yang paling disering dipakai sehari-hari di JS:
+**Iterable** adalah tipe data yang elemennya dapat diakses satu per satu secara berurutan. Tipe data ini memiliki konsep "urutan" yang memungkinkan mesin perulangan mengetahui elemen mana yang harus diproses berikutnya.
 
-- **String (Teks Huruf)**: Kata "Rumah" bisa diurai huruf demi huruf => `R` - `u` - `m` - `a` - `h`.
-- **Array (Kumpulan Daftar)**: Tumpukan `["Budi", "Siti"]` jelas 100% bisa disisir orang per orang, gerbong per gerbong.
+Tipe data Iterable yang paling umum digunakan:
 
-**Kelebihan Istimewa Si Iterable: Menggunakan `for...of`**
-Karena mereka diakui bisa disisir terurut, para tipe Iterable ini dikaruniai sebuah Mesin Looping gaul super pendek dari langit ES6 modern ketimbang memakai balok kuno `for(let i=0; i<x.length)` panjang yang melelahkan. Jurus itu bernama Loop **`for...of`**.
+| Tipe Data  | Contoh            | Cara Iterasi                               |
+| ---------- | ----------------- | ------------------------------------------ |
+| **String** | `"Jakarta"`       | Karakter demi karakter: `J`, `a`, `k`, ... |
+| **Array**  | `["Budi", "Ani"]` | Elemen demi elemen: `"Budi"`, `"Ani"`      |
+| **Map**    | `new Map()`       | Pasangan key-value satu per satu           |
+| **Set**    | `new Set()`       | Nilai unik satu per satu                   |
+
+#### Perulangan `for...of`
+
+Tipe data Iterable dapat diproses menggunakan `for...of` — cara yang lebih ringkas dibandingkan `for` konvensional karena tidak memerlukan variabel penghitung indeks.
 
 ```javascript
-/* Contoh Menyisir Teks String */
-let kota = "JAKARTA";
+// Menyisir String karakter per karakter
+const kota = "JAKARTA";
 
-// "Sapu setiap 1 abjad dari si kota, tampung sementara ke laci 'huruf', cetak terus berulang!"
 for (let huruf of kota) {
   console.log(huruf);
 }
-// Layar otomatis mencetak runtut mendatar ke bawah murni 1 persatu otomatis:
+// Output:
 // J
 // A
 // K
-// (dstnya)
-
-/* Contoh Menyisir Antrean Array */
-let daftarSembako = ["Beras", "Telur", "Minyak"];
-
-for (let barang of daftarSembako) {
-  console.log("Membeli: " + barang);
-}
-// Mesin otomatis mendeteksi sendirinya ada 3 antrian, tanpa perlu kamu mengetik hitungan batasan sama sekali!
+// A
+// R
+// T
+// A
 ```
 
-### 2. Konsep Oposisi: Non-Iterable (Gumpalan Tak Terurai Tuntas)
+```javascript
+// Menyisir Array elemen per elemen
+const daftarBelanja = ["Beras", "Telur", "Minyak"];
 
-Berkebalikan total, sebagian besar tipe data lainnya di JS sifatnya adalah **Non-Iterable** (Gumpalan 1 bongkahan utuh mandul yang mustahil bisa dijabarkan per abjad).
+for (let barang of daftarBelanja) {
+  console.log("Membeli:", barang);
+}
+// Output:
+// Membeli: Beras
+// Membeli: Telur
+// Membeli: Minyak
+```
 
-- **Number**: Angka utuh murni `4500` tidak bisa diurai angkanya disisir 4 lalu 5 lalu 0 dst oleh mesin _looping for-of_.
-- **Boolean**: Kata `true` atau `false` mutlak mentok di situ sebagai status kepastian, tak bisa dijabarkan sama sekali.
-- **OBJECT `{}`**: Ini fakta unik paling menjebak! Walau isi properti Object itu sangat menjalar menjuntai panjang ada ratusan isi... Di mata komputer inti, ia tetaplah 1 Kartu KTP Gumpalan Murni Tak Bernomor Urut Kordinat Absen! Object **bukan** barang yang bisa di-_Loop_ acak sembarangan menggunakan putaran mulus `for...of`.
-
-Lalu Muncullah Masalah:
-_Gimana nasib nasibnya jika aku benar-benar dipaksa mutlak harus mengecek isi perut laci properti KTP di dalam sebuah Object satu persatu padahal dia bukan Iterable?_
-
-**Solusi Object: Menggunakan `for...in`**
-Karena Object diciptakan tiada dikaruniai nilai _Index/Length_ (Urutan Keberapanya), maka dia punya pasangan _Looping_ sedarah pelacak spesifiknya sendiri. Namanya adalah **`for...in`** (Huruf akhirnya "IN" ya, perhatikan ketajaman perbedaan penulisannya).
+**Perbandingan `for` konvensional vs `for...of`:**
 
 ```javascript
-let profilKaryawan = {
-  namaDiri: "Dono",
+const buah = ["Apel", "Jeruk", "Mangga"];
+
+// for konvensional — perlu mengelola variabel indeks secara manual
+for (let i = 0; i < buah.length; i++) {
+  console.log(buah[i]);
+}
+
+// for...of — lebih ringkas, tidak perlu indeks
+for (let item of buah) {
+  console.log(item);
+}
+
+// Keduanya menghasilkan output yang sama:
+// Apel
+// Jeruk
+// Mangga
+```
+
+Gunakan `for...of` ketika kamu hanya perlu nilai elemennya. Gunakan `for` konvensional ketika kamu juga memerlukan nomor indeks setiap elemen.
+
+**Contoh lengkap — Menghitung total nilai:**
+
+```javascript
+const nilaiUjian = [85, 92, 78, 90, 88];
+let total = 0;
+
+for (let nilai of nilaiUjian) {
+  total += nilai;
+}
+
+const rataRata = total / nilaiUjian.length;
+console.log("Total   :", total); // Output: Total   : 433
+console.log("Rata-rata:", rataRata); // Output: Rata-rata: 86.6
+```
+
+---
+
+### 2. Non-Iterable — Data yang Tidak Dapat Disisir
+
+**Non-Iterable** adalah tipe data yang tidak memiliki konsep urutan internal, sehingga tidak dapat diproses menggunakan `for...of`.
+
+| Tipe Data       | Alasan Tidak Dapat Diiterasi                                                  |
+| --------------- | ----------------------------------------------------------------------------- |
+| **Number**      | Angka seperti `4500` adalah satu nilai tunggal, bukan kumpulan                |
+| **Boolean**     | `true` atau `false` adalah status, bukan kumpulan elemen                      |
+| **Object `{}`** | Meskipun memiliki banyak properti, Object tidak memiliki urutan indeks bawaan |
+
+```javascript
+// Mencoba for...of pada Number — akan menghasilkan error
+const angka = 100;
+for (let digit of angka) {
+  // TypeError: angka is not iterable
+  console.log(digit);
+}
+```
+
+---
+
+### 3. Mengiterasi Object dengan `for...in`
+
+Karena Object bukan Iterable, `for...of` tidak dapat digunakan. JavaScript menyediakan `for...in` khusus untuk mengiterasi **kunci (key)** dari sebuah Object.
+
+```javascript
+const profilKaryawan = {
+  nama: "Dono",
   umur: 30,
   pekerjaan: "Programmer",
 };
 
-// Komputer akan ngubek ngoyak nyari Kunci-Kuncinya didalam properti object raksasa itu:
-for (let kunciKiri in profilKaryawan) {
-  console.log(
-    "Kategori: " + kunciKiri + " = Isinya: " + profilKaryawan[kunciKiri],
-  );
+for (let kunci in profilKaryawan) {
+  console.log(kunci + ":", profilKaryawan[kunci]);
 }
-
-// Hasilnya keekstrak tumpah kelayar urut satu persatu aman jaya tanpa crash:
-// Kategori: namaDiri = Isinya: Dono
-// Kategori: umur = Isinya: 30
-// Kategori: pekerjaan = Isinya: Programmer
+// Output:
+// nama: Dono
+// umur: 30
+// pekerjaan: Programmer
 ```
 
-**Kesimpulan Cepat Mutlak:**
+`for...in` memberikan nama kunci di setiap iterasi, yang kemudian dapat digunakan dengan Bracket Notation (`object[kunci]`) untuk mengakses nilainya.
 
-- Jika mau menyisir mulus daftar antrian gerbong panjang hitungan **Array/String** -> Pakailah pelacak **`for...of`**.
-- Jika kepepet mutlak mengekstrak pembedahan struktur bongkar laci isi properti **Object** -> Pakailah pelacak **`for...in`**.
+**Contoh — Mencetak semua properti secara dinamis:**
+
+```javascript
+const spesifikasiLaptop = {
+  merek: "ASUS",
+  prosesor: "Intel Core i7",
+  RAM: "16GB",
+  storage: "512GB SSD",
+  harga: 15000000,
+};
+
+console.log("=== Spesifikasi Laptop ===");
+for (let spek in spesifikasiLaptop) {
+  console.log("-", spek + ":", spesifikasiLaptop[spek]);
+}
+// Output:
+// === Spesifikasi Laptop ===
+// - merek: ASUS
+// - prosesor: Intel Core i7
+// - RAM: 16GB
+// - storage: 512GB SSD
+// - harga: 15000000
+```
+
+> **Catatan:** `for...in` juga dapat digunakan pada Array, namun hasilnya adalah indeks (`"0"`, `"1"`, `"2"`) bukan nilainya. Untuk Array, `for...of` atau `for` konvensional lebih tepat digunakan.
+
+---
+
+### 4. Perbandingan `for...of` vs `for...in`
+
+|                   | `for...of`                                   | `for...in`                                   |
+| ----------------- | -------------------------------------------- | -------------------------------------------- |
+| Digunakan untuk   | Tipe data Iterable (Array, String, Map, Set) | Object                                       |
+| Yang diiterasi    | **Nilai** elemen                             | **Kunci (key)** properti                     |
+| Mendukung Array?  | Ya — menghasilkan nilai elemen               | Ya — menghasilkan indeks (sebaiknya hindari) |
+| Mendukung Object? | Tidak — akan menghasilkan error              | Ya                                           |
+
+**Contoh perbandingan langsung:**
+
+```javascript
+const data = ["alpha", "beta", "gamma"];
+
+// for...of — menghasilkan nilai
+for (let nilai of data) {
+  console.log(nilai); // alpha, beta, gamma
+}
+
+// for...in — menghasilkan indeks
+for (let indeks in data) {
+  console.log(indeks); // "0", "1", "2"
+}
+```
+
+---
+
+### Kesimpulan
+
+Memahami perbedaan Iterable dan Non-Iterable menentukan metode perulangan yang tepat untuk setiap situasi. Menggunakan metode yang salah — misalnya `for...of` pada Object — akan menghasilkan error yang sulit didiagnosis.
+
+**Panduan cepat:**
+
+| Jika ingin mengiterasi...        | Gunakan                            |
+| -------------------------------- | ---------------------------------- |
+| Elemen Array                     | `for...of` atau `for` konvensional |
+| Karakter dalam String            | `for...of`                         |
+| Kunci properti Object            | `for...in`                         |
+| Elemen Array dengan akses indeks | `for` konvensional                 |

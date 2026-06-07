@@ -2,101 +2,264 @@
 
 ## Tujuan Pembelajaran
 
-- Memahami perlunya pemecahan file logika yang panjang menjadi modul terpisah (_Separation of Concerns_).
-- Membukakan koneksi antar file menggunakan aturan _Export_ dan _Import_.
-- Memahami perbedaan jalur suplai data: _Named Export_ versus _Default Export_.
-- Menyesuaikan struktur pemasangan modul pada dokumen HTML.
+- Memahami konsep modularisasi sebagai solusi pengelolaan kode yang besar (_Separation of Concerns_).
+- Menghubungkan antar file menggunakan `export` dan `import`.
+- Membedakan _Named Export_ dan _Default Export_ beserta cara penggunaannya.
+- Mengaktifkan sistem modul ES6 pada dokumen HTML.
+
+---
 
 ## Materi Utama
 
-Ketika aplikasi webmu semakin besar dan kompleks, menaruh seluruh kode JavaScript (ribuan baris berisi fungsi, variabel, dom manipulasi) ke dalam satu buah file `script.js` adalah awal dari bencana (_Spaghetti Code_). File akan terasa berat dibaca, kusut untuk dicari kerusakannya, dan sangat rentan mengalami bentrok (_conflict_ nama variabel ganda).
+Ketika aplikasi webmu semakin besar, menaruh seluruh kode JavaScript ke dalam satu file `script.js` menjadi masalah — file menjadi sulit dibaca, sulit diperbaiki, dan rentan terhadap konflik nama variabel (_Spaghetti Code_).
 
-Solusinya adalah pendekatan **Modularisasi**: Mencacah satu file raksasa menjadi potongan beberapa kepingan file-file kecil yang spesifik (Disebut Modul) di mana tiap file bertanggung jawab atas 1 fungsi terfokus saja. (Misalnya: satu modul khusus menangani perhitungan harga keranjang belanja, satu modul lagi untuk pengaturan tema gelap/terang).
+Solusinya adalah **Modularisasi**: memecah satu file besar menjadi beberapa file kecil yang masing-masing bertanggung jawab atas satu fungsi spesifik. Pendekatan ini dikenal sebagai **ES6 Modules** dan menjadi standar dalam pengembangan aplikasi web modern.
 
-Fitur memilah potong file ini (dikenal sebagai **ES6 Modules**) menjadi basis tumpuan di industri nyata pembuatan aplikasi yang besar.
+---
 
-### 1. Konsep Alur Export & Import
+### 1. Konsep Export dan Import
 
-Jika kita memotong-motong fungsi ke dalam beberapa file berbeda, bagaimana mereka bisa disatukan kembali saat halaman dijalankan?
+Agar fungsi atau variabel yang didefinisikan di satu file dapat digunakan di file lain, diperlukan dua mekanisme:
 
-- Fungsi yang bersedia diizinkan untuk dikirim dan dipakai di luar tempat kelahirannya, harus diselipkan penanda stempel izin keluar: **`export`**.
-- File lain yang membutuhkan fungsi tersebut harus menarik data/menjemputnya dari jembatan penyambung bernama: **`import`**.
+- **`export`** — Menandai bahwa sebuah fungsi, variabel, atau class tersedia untuk digunakan oleh file lain.
+- **`import`** — Mengambil fungsi, variabel, atau class dari file lain untuk digunakan di file saat ini.
 
-Terdapat dua tipe mode perizinan bongkar-muat (_Export_):
+```
+[ matematika.js ]  --export-->  [ app.js ]
+                   <--import--
+```
 
-### 2. Named Export (Eksport Identitas Terperinci)
+Terdapat dua jenis export: **Named Export** dan **Default Export**.
 
-Metode ini lazim dipakai manakala di dalam satu file kecil tersebut, ada **banyak** fungsi kecil-kecil yang berbeda yang ingin dikirimkan semua ke luar ruangan. Data yang dijemput nantinya wajib dikurung dengan kurung kurawal `{}` beserta nama persis yang identik (_case-sensitive_).
+---
 
-**File Sumber: `matematika.js`**
+### 2. Named Export
+
+Gunakan Named Export ketika sebuah file memiliki **lebih dari satu** fungsi atau nilai yang ingin diekspor. Saat mengimpornya, nama harus ditulis persis sama (case-sensitive) dan diapit kurung kurawal `{}`.
+
+**File sumber: `matematika.js`**
 
 ```javascript
-// Kita menempelkan stempel export pada dua fungsi sekaligus
-
+// Setiap fungsi yang diberi kata kunci "export" dapat digunakan di file lain
 export function hitungPajak(harga) {
   return harga * 0.11;
 }
 
-export function potongDiskon(harga) {
-  return harga - 10000;
+export function hitungDiskon(harga, persen) {
+  return harga - (harga * persen) / 100;
+}
+
+export const TARIF_PAJAK = 0.11;
+```
+
+**File penerima: `app.js`**
+
+```javascript
+// Nama harus persis sama dengan yang diekspor
+import { hitungPajak, hitungDiskon, TARIF_PAJAK } from "./matematika.js";
+
+const harga = 100000;
+const pajak = hitungPajak(harga);
+const akhir = hitungDiskon(harga + pajak, 10);
+
+console.log("Harga awal :", harga);
+console.log("Pajak (11%):", pajak);
+console.log("Setelah diskon 10%:", akhir);
+```
+
+**Mengimpor dengan alias:**
+
+Jika nama yang diekspor terlalu panjang atau berkonflik dengan variabel lain, kamu dapat memberi alias menggunakan kata kunci `as`:
+
+```javascript
+import { hitungPajak as hitung, hitungDiskon as diskon } from "./matematika.js";
+
+const pajak = hitung(50000);
+const akhir = diskon(50000, 20);
+```
+
+**Mengimpor seluruh isi file sekaligus:**
+
+```javascript
+import * as Matematika from "./matematika.js";
+
+console.log(Matematika.hitungPajak(100000)); // Output: 11000
+console.log(Matematika.TARIF_PAJAK); // Output: 0.11
+```
+
+---
+
+### 3. Default Export
+
+Gunakan Default Export ketika sebuah file memang dirancang untuk mengekspor **satu hal utama** saja. Keuntungannya: saat mengimport, tidak perlu kurung kurawal, dan dapat diberi nama apa saja.
+
+Setiap file hanya boleh memiliki **satu** `export default`.
+
+**File sumber: `loginSistem.js`**
+
+```javascript
+// Fungsi utama file ini diekspor sebagai default
+export default function prosesLogin(email, password) {
+  if (!email || !password) {
+    return { sukses: false, pesan: "Email dan password wajib diisi." };
+  }
+  return { sukses: true, pesan: "Login berhasil untuk " + email };
 }
 ```
 
-**File Penerima: `app-utama.js`**
+**File penerima: `app.js`**
 
 ```javascript
-// Kita tarik nama persis fungsi tadi dikurung kurawal dari rumah asalnya!
-import { hitungPajak, potongDiskon } from "./matematika.js";
+// Tanpa kurung kurawal, dan nama bebas ditentukan saat import
+import login from "./loginSistem.js";
 
-let hargaBayar = 50000;
-let hasilPajaknya = hitungPajak(hargaBayar);
-
-console.log(hasilPajaknya); // Fungsi sukses berjalan melintasi file
+const hasil = login("budi@email.com", "rahasia123");
+console.log(hasil.pesan); // Output: Login berhasil untuk budi@email.com
 ```
 
-### 3. Default Export (Mengekspor Sang Raja Utama File)
-
-Pola ini sangat populer apabila 1 file modul memang sengaja diciptakan sepenuhnya murni cuma untuk mewadahi dan melaksanakan **1 Tugas/Fungsi Utama** secara penuh tiada duanya.
-Karena ia penguasa satu-satunya dari file tersebut, penarikannya nanti bebas, tanpa kurung kurawal, dan bebas diberi nama alias julukan apa saja.
-
-**File Sumber: `LoginSistem.js`**
+**Kombinasi Named Export dan Default Export dalam satu file:**
 
 ```javascript
-// Nama fungsi tidak terlalu penting, karena ia menggunakan stempel Mutlak Bebas "default"
-export default function lakukanLoginAman() {
-  console.log("Sistem login diaktifkan...");
+// utils.js
+export default function formatRupiah(angka) {
+  return "Rp " + angka.toLocaleString("id-ID");
 }
 
-// Catatan: Hanya boleh ada maksimal 1 `export default` saja dalam satu kandang file (karena ia rajanya)!
-```
+export function formatTanggal(date) {
+  return date.toLocaleDateString("id-ID");
+}
 
-**File Penerima: `app-utama.js`**
+export const VERSI_APLIKASI = "1.0.0";
+```
 
 ```javascript
-// Karena sifat penarikannya bebas kurung kurawal, kita bisa langsung namain ajaib fungsi tersebut sesuka hati!
-import PanggilSistemKeamananMasuk from "./LoginSistem.js";
+// app.js
+import formatRupiah, { formatTanggal, VERSI_APLIKASI } from "./utils.js";
 
-// Menjalankan rajanya file LoginSistem!
-PanggilSistemKeamananMasuk();
+console.log(formatRupiah(150000)); // Output: Rp 150.000
+console.log(VERSI_APLIKASI); // Output: 1.0.0
 ```
 
-_(Di framework modern seperti React, pola struktur Default Export dipakai gencar untuk mengisolasi setiap Komponen Tampilan Visual UI agar mandiri, misal: File modul Tombol sendiri, file modul Bilah Navigasi sendiri)._
+**Perbandingan Named vs Default Export:**
 
-### 4. Aktivasi Modul di Rumah Induk HTML
+|                            | Named Export                       | Default Export                      |
+| -------------------------- | ---------------------------------- | ----------------------------------- |
+| Jumlah per file            | Tidak terbatas                     | Hanya satu                          |
+| Sintaks export             | `export function nama() {}`        | `export default function() {}`      |
+| Sintaks import             | `import { nama } from "./file.js"` | `import namaBebas from "./file.js"` |
+| Kurung kurawal saat import | Wajib                              | Tidak perlu                         |
+| Nama saat import           | Harus sama persis                  | Bebas ditentukan                    |
 
-Karena ekosistem modul ES6 melibatkan bongkar lalu lintas data di belakang tanah secara otomatis meminta izin jaringan ke sana ke mari ke file lain, sistem keamananan kuno di HTML tidak akan percaya, sehingga akan menutup (memblokir) _Import_ tersebut untuk melindungi dari serangan bahaya.
+---
 
-Kita wajib dengan sadar menitipkan sertifikat izin lencana keikutsertaan di dalam pemanggilan Skrip utama HTML-nya dengan atribut pamungkas penutup `type="module"`.
+### 4. Mengaktifkan Modul di HTML
 
-**Di dalam file HTML (`index.html`)**
+Karena ES6 Modules bekerja dengan memuat file secara dinamis melalui protokol jaringan, tag `<script>` biasa tidak cukup. Kamu perlu menambahkan atribut `type="module"` pada tag script yang menjadi titik masuk aplikasimu.
 
 ```html
+<!-- index.html -->
 <body>
-  <h1>Program Kasir Toko Modular</h1>
+  <h1>Aplikasi Kasir</h1>
 
-  <!-- INGAT! File penarik pusatnya dipasangkan lencana khusus 'module' agar bisa menyerap sistem tarikan file anaknya! -->
-  <script type="module" src="./app-utama.js"></script>
+  <!-- Atribut type="module" wajib ada agar sistem import/export bekerja -->
+  <script type="module" src="./app.js"></script>
 </body>
 ```
 
-*(Sebagai pengingat keselamatan: Di beberapa browser, agar fitur lalu-lintas file `module` lokal antar rakitanmu ini berjalan nyata, sering kali dituntut kamu harus menjalankan file indeksmu dengan bantuan Server Lokal - seperangkat *Live Server* dari plugin VSCode - dan bukannya menklik buka klik dua kali polosan semata ke Browser).*
+**Perbedaan script biasa vs script modul:**
+
+|                              | `<script src="...">` | `<script type="module" src="...">` |
+| ---------------------------- | -------------------- | ---------------------------------- |
+| Mendukung `import`/`export`? | Tidak                | Ya                                 |
+| Scope variabel               | Global               | Lokal per file                     |
+| Eksekusi                     | Sinkron              | Ditangguhkan hingga DOM selesai    |
+| `this` di tingkat atas       | `window`             | `undefined`                        |
+
+> **Catatan penting:** ES6 Modules tidak dapat dijalankan langsung dengan membuka file HTML di browser (`file://`). File harus dilayani melalui server lokal. Di VSCode, gunakan ekstensi **Live Server** untuk menjalankan server lokal secara otomatis.
+
+---
+
+### 5. Struktur Proyek dengan Modularisasi
+
+Berikut contoh struktur folder proyek yang terorganisir menggunakan modularisasi:
+
+```
+proyek-kasir/
+├── index.html
+├── css/
+│   └── style.css
+└── js/
+    ├── app.js           ← File utama (titik masuk)
+    ├── kalkulasi.js     ← Modul perhitungan harga
+    ├── tampilan.js      ← Modul manipulasi DOM
+    └── validasi.js      ← Modul validasi input
+```
+
+**`kalkulasi.js`:**
+
+```javascript
+export function hitungSubtotal(harga, jumlah) {
+  return harga * jumlah;
+}
+
+export function hitungPajak(subtotal) {
+  return subtotal * 0.11;
+}
+
+export function hitungTotal(subtotal, pajak) {
+  return subtotal + pajak;
+}
+```
+
+**`validasi.js`:**
+
+```javascript
+export function validasiInput(nilai, label) {
+  if (!nilai || nilai.trim() === "") {
+    return label + " tidak boleh kosong.";
+  }
+  return null;
+}
+```
+
+**`app.js`:**
+
+```javascript
+import { hitungSubtotal, hitungPajak, hitungTotal } from "./kalkulasi.js";
+import { validasiInput } from "./validasi.js";
+
+const harga = 75000;
+const jumlah = 3;
+
+const subtotal = hitungSubtotal(harga, jumlah);
+const pajak = hitungPajak(subtotal);
+const total = hitungTotal(subtotal, pajak);
+
+console.log("Subtotal :", subtotal); // Output: 225000
+console.log("Pajak    :", pajak); // Output: 24750
+console.log("Total    :", total); // Output: 249750
+
+const pesanError = validasiInput("", "Nama produk");
+if (pesanError) {
+  console.log(pesanError); // Output: Nama produk tidak boleh kosong.
+}
+```
+
+---
+
+### Kesimpulan
+
+Modularisasi adalah praktik wajib dalam pengembangan JavaScript skala besar. Dengan memecah kode ke dalam modul-modul yang terfokus, kode menjadi lebih mudah dibaca, diuji, dan dipelihara. Pemahaman tentang Named Export dan Default Export juga menjadi prasyarat penting sebelum belajar framework seperti React atau Vue, karena keduanya menggunakan sistem modul ES6 secara intensif.
+
+**Ringkasan:**
+
+| Konsep          | Penjelasan                                                                                |
+| --------------- | ----------------------------------------------------------------------------------------- |
+| Modularisasi    | Memecah kode ke dalam file-file kecil yang masing-masing memiliki tanggung jawab spesifik |
+| `export`        | Menandai fungsi atau variabel agar dapat digunakan di file lain                           |
+| `import`        | Mengambil fungsi atau variabel dari file lain                                             |
+| Named Export    | Mengekspor banyak hal dari satu file; import menggunakan `{}`                             |
+| Default Export  | Mengekspor satu hal utama per file; import bebas nama tanpa `{}`                          |
+| `import ... as` | Memberi alias pada sesuatu yang diimport                                                  |
+| `import * as`   | Mengimport seluruh isi file sekaligus dalam satu namespace                                |
+| `type="module"` | Atribut wajib pada tag `<script>` untuk mengaktifkan sistem modul                         |

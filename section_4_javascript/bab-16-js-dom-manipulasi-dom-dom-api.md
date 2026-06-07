@@ -3,112 +3,299 @@
 ## Tujuan Pembelajaran
 
 - Memahami konsep Document Object Model (DOM) sebagai jembatan antara HTML dan JavaScript.
-- Menguasai cara menyeleksi elemen HTML manggunakan DOM API (`querySelector`, `getElementById`).
-- Mampu mengubah isi teks, gaya (style), dan kelas (class) dari sebuah elemen.
+- Menguasai cara menyeleksi elemen HTML menggunakan DOM API (`querySelector`, `getElementById`).
+- Mampu mengubah isi teks, gaya (_style_), dan kelas (_class_) dari sebuah elemen.
 - Memahami cara menciptakan dan menyisipkan elemen baru secara dinamis ke halaman web.
+
+---
 
 ## Materi Utama
 
-Sejauh ini, kita menjalankan kode JavaScript dan melihat hasilnya tersembunyi di balik layar (di dalam _Console Browser_). Sekarang, saatnya JavaScript keluar dari bilik layar hitam dan mulai menyentuh, merombak, dan memanipulasi elemen-elemen HTML (judul, paragraf, tombol) yang dilihat langsung oleh pengunjung web.
+Sejauh ini, kita menjalankan kode JavaScript dan melihat hasilnya di Console browser. Sekarang, saatnya JavaScript mulai menyentuh dan memanipulasi elemen-elemen HTML yang terlihat langsung oleh pengunjung — judul, paragraf, tombol, dan lainnya.
 
-Ilmu untuk menyentuh elemen HTML menggunakan JavaScript ini disebut dengan **Manipulasi DOM**.
+Ilmu untuk memanipulasi elemen HTML menggunakan JavaScript disebut **Manipulasi DOM**.
+
+---
 
 ### 1. Apa itu DOM?
 
-**DOM (Document Object Model)** adalah cara browser mengubah struktur teks HTML yang kamu tulis menjadi sebuah "Pohon Keluarga Berbentuk Object" di dalam memorinya.
+**DOM (Document Object Model)** adalah representasi struktur halaman HTML dalam bentuk pohon objek yang dibuat oleh browser di dalam memorinya. Setiap elemen HTML menjadi sebuah node dalam pohon tersebut, dengan `document` sebagai akar utamanya.
 
-Ketika browser melihat tag `<body>`, ia akan membuat sebuah Object untuk merepresentasikannya. Semua elemen di dalam halamanmu dirangkai menjadi struktur objek yang bercabang dari satu induk tertinggi yang bernama `document`. Melalui objek `document` inilah JavaScript bisa memerintah, mengubah, atau menghapus elemen HTML.
+```
+document
+└── <html>
+    ├── <head>
+    │   └── <title>
+    └── <body>
+        ├── <h1>
+        ├── <p>
+        └── <div>
+            ├── <button>
+            └── <span>
+```
 
-### 2. Mengambil (Menyeleksi) Elemen HTML
+Melalui objek `document` inilah JavaScript dapat membaca, mengubah, menambah, atau menghapus elemen HTML secara dinamis tanpa perlu memuat ulang halaman.
 
-Langkah pertama sebelum memanipulasi elemen adalah "menemukan/menangkap" elemen tersebut dari halaman. Kita bisa menggunakan beberapa alat pencari (Methods) bawaan dari `document`.
+---
 
-**A. Mencari Lewat ID Mutlak (`getElementById`)**
-Menangkap satu elemen spesifik yang memiliki atribut `id` tertentu.
+### 2. Menyeleksi Elemen HTML
+
+Langkah pertama sebelum memanipulasi elemen adalah menemukannya. JavaScript menyediakan beberapa method untuk ini.
+
+#### A. `getElementById(id)`
+
+Mengembalikan satu elemen yang memiliki atribut `id` yang sesuai.
 
 ```html
+<!-- HTML -->
 <h1 id="judul-utama">Selamat Datang</h1>
 ```
 
 ```javascript
-// Tangkap elemennya dan simpan ke dalam variabel
-const elemenJudul = document.getElementById("judul-utama");
+const judulUtama = document.getElementById("judul-utama");
+console.log(judulUtama); // Output: <h1 id="judul-utama">Selamat Datang</h1>
 ```
 
-**B. Pencari Universal Modern (`querySelector` & `querySelectorAll`)**
-Ini adalah cara yang paling direkomendasikan saat ini. Kamu bisa mencari elemen layaknya kamu sedang menulis penyeleksi CSS (Bab 16).
+#### B. `querySelector(selektor)` dan `querySelectorAll(selektor)`
 
-- `querySelector` : Hanya mengambil **satu** elemen pertama yang cocok.
-- `querySelectorAll` : Mengambil **semua** elemen yang cocok dan menggabungkannya ke dalam sebuah kumpulan (seperti Array).
+Cara yang paling fleksibel dan direkomendasikan. Menggunakan sintaks selektor CSS yang sudah dipelajari.
+
+- `querySelector` — Mengembalikan **satu** elemen pertama yang cocok.
+- `querySelectorAll` — Mengembalikan **semua** elemen yang cocok dalam bentuk `NodeList`.
 
 ```javascript
-// Mengambil tombol pertama yang punya class "btn-login"
+// Menyeleksi satu elemen berdasarkan class
 const tombolMasuk = document.querySelector(".btn-login");
 
-// Mengambil SEMUA paragraf <p> di dalam halaman
+// Menyeleksi satu elemen berdasarkan id
+const formLogin = document.querySelector("#form-login");
+
+// Menyeleksi satu elemen berdasarkan tag
+const judulPertama = document.querySelector("h1");
+
+// Menyeleksi semua paragraf di halaman
 const semuaParagraf = document.querySelectorAll("p");
+
+// Menyeleksi semua item dengan class tertentu
+const semuaTombol = document.querySelectorAll(".btn");
 ```
 
-### 3. Memanipulasi Isi dan Kosmetik Elemen
-
-Setelah elemen berhasil ditangkap ke dalam wadah variabel, kita bisa merombaknya semau kita!
-
-**A. Mengubah Teks Isi (`textContent` dan `innerHTML`)**
+**Iterasi hasil `querySelectorAll`:**
 
 ```javascript
-const teksStatus = document.querySelector("#status-user");
+const semuaParagraf = document.querySelectorAll("p");
 
-// Hanya mengubah teks biasa (Aman dari retasan)
-teksStatus.textContent = "Kamu sudah Logout.";
-
-// Menyisipkan teks BERSERTA tag HTML baru di dalamnya
-teksStatus.innerHTML = "Status: <strong>Aktif</strong>";
+semuaParagraf.forEach(function (paragraf) {
+  paragraf.style.color = "gray";
+});
 ```
 
-**B. Mengubah Gaya Kosmetik Langsung (`style`)**
-JavaScript juga bisa menimpa warna dan properti CSS secara langsung (Inline Edit). Penulisan nama properti yang dua kata diubah menjadi _Camel Case_ (contoh: `background-color` menjadi `backgroundColor`).
+**Perbandingan metode seleksi:**
+
+| Method                    | Mencari Berdasarkan  | Mengembalikan                         |
+| ------------------------- | -------------------- | ------------------------------------- |
+| `getElementById("id")`    | Atribut `id`         | Satu elemen atau `null`               |
+| `querySelector(".class")` | Selektor CSS apa pun | Elemen pertama yang cocok atau `null` |
+| `querySelectorAll("p")`   | Selektor CSS apa pun | `NodeList` semua elemen yang cocok    |
+
+---
+
+### 3. Memanipulasi Konten Elemen
+
+#### A. Mengubah Teks: `textContent` dan `innerHTML`
+
+```html
+<!-- HTML -->
+<p id="status">Menunggu...</p>
+```
+
+```javascript
+const status = document.querySelector("#status");
+
+// textContent — hanya mengubah teks biasa
+// Tag HTML yang disisipkan akan ditampilkan sebagai teks literal, bukan dirender
+status.textContent = "Kamu sudah logout.";
+
+// innerHTML — mengubah teks sekaligus merender tag HTML di dalamnya
+status.innerHTML = "Status: <strong>Aktif</strong>";
+```
+
+> **Panduan keamanan:** Gunakan `textContent` untuk menampilkan data yang berasal dari input pengguna. Menggunakan `innerHTML` dengan data tidak terpercaya dapat membuka celah keamanan (_Cross-Site Scripting / XSS_). Gunakan `innerHTML` hanya untuk konten yang kamu kendalikan sendiri.
+
+#### B. Membaca dan Mengubah Atribut
+
+```javascript
+const gambar = document.querySelector("img");
+
+// Membaca atribut
+console.log(gambar.getAttribute("src")); // Output: "foto.jpg"
+console.log(gambar.getAttribute("alt")); // Output: "Deskripsi foto"
+
+// Mengubah atribut
+gambar.setAttribute("src", "foto-baru.jpg");
+gambar.setAttribute("alt", "Foto produk terbaru");
+```
+
+---
+
+### 4. Memanipulasi Gaya (Style)
+
+#### A. Mengubah Style Secara Langsung
+
+Properti CSS ditulis dalam format camelCase (contoh: `background-color` → `backgroundColor`).
 
 ```javascript
 const kotakPeringatan = document.querySelector(".alert");
 
 kotakPeringatan.style.backgroundColor = "red";
-kotakPeringatan.style.display = "none"; // Menghilangkan kotak dari layar
+kotakPeringatan.style.color = "white";
+kotakPeringatan.style.padding = "12px 16px";
+kotakPeringatan.style.display = "none"; // Menyembunyikan elemen
 ```
 
-**C. Mengelola Kelas CSS (`classList`)**
-Daripada menulis _style_ manual satu persatu dari JS yang merepotkan, lebih baik kita cukup menambah atau menghapus "Class" CSS dari elemen tersebut.
+#### B. Mengelola Class CSS (`classList`)
+
+Pendekatan yang lebih direkomendasikan adalah menambah atau menghapus class CSS, lalu mendefinisikan gayanya di file CSS. Ini memisahkan tanggung jawab antara JavaScript (logika) dan CSS (tampilan).
 
 ```javascript
-const tombolMenu = document.querySelector(".menu");
+const tombolMenu = document.querySelector(".menu-toggle");
+const navigasi = document.querySelector(".navigasi");
 
-// Menambahkan class "menu-terbuka"
-tombolMenu.classList.add("menu-terbuka");
+// Menambahkan class
+navigasi.classList.add("terbuka");
 
-// Menghapus class "menu-sembunyi"
-tombolMenu.classList.remove("menu-sembunyi");
+// Menghapus class
+navigasi.classList.remove("tersembunyi");
 
-// Menambah class jika belum ada, dan menghapusnya jika sudah ada (Sistem Saklar)
-tombolMenu.classList.toggle("mode-gelap");
+// Toggle — menambahkan class jika belum ada, menghapusnya jika sudah ada
+tombolMenu.classList.toggle("aktif");
+
+// Memeriksa apakah sebuah class ada
+if (navigasi.classList.contains("terbuka")) {
+  console.log("Menu sedang terbuka.");
+}
 ```
 
-### 4. Menciptakan Elemen Baru dari Nol
+**Contoh lengkap — Tombol toggle mode gelap:**
 
-Terkadang, kita ingin menambahkan elemen yang sebelumnya sama sekali tidak ada di file HTML (misalnya: membuat notifikasi _bubble chat_ baru ketika ada pesan masuk).
-
-Langkah-langkahnya: Buat elemennya -> Isi kontennya -> Sisipkan ke dalam halaman.
+```html
+<!-- HTML -->
+<button id="toggle-tema">Ganti Tema</button>
+<body id="halaman">
+  ...
+</body>
+```
 
 ```javascript
-// 1. Ciptakan elemen <li> kosong di memoriawang-awang
-const kotakPesanBaru = document.createElement("li");
+const tombol = document.querySelector("#toggle-tema");
+const halaman = document.querySelector("#halaman");
 
-// 2. Isi teks di dalamnya
-kotakPesanBaru.textContent = "Halo, pesan baru dari Budi!";
+tombol.addEventListener("click", function () {
+  halaman.classList.toggle("mode-gelap");
 
-// 3. Cari wadah induk (parent) tempat kotak ini akan diletakkan
-const daftarChat = document.querySelector("#list-pesan");
-
-// 4. Sisipkan elemen baru ini ke bagian penutup (anak terakhir) dari si wadah induk
-daftarChat.appendChild(kotakPesanBaru);
+  const temaAktif = halaman.classList.contains("mode-gelap")
+    ? "Gelap"
+    : "Terang";
+  tombol.textContent = "Tema: " + temaAktif;
+});
 ```
 
-Dengan menguasai keempat fondasi DOM di atas, kamu secara resmi telah bisa membuat sebuah halaman web statis yang kaku menjadi halaman aplikasi yang dinamis dan hidup! Pintu menuju pembuatan aplikasi interaktif sudah terbuka lebar.
+```css
+/* CSS */
+.mode-gelap {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+```
+
+---
+
+### 5. Menciptakan dan Menyisipkan Elemen Baru
+
+Untuk menambahkan elemen yang sebelumnya tidak ada di HTML — misalnya notifikasi baru atau item daftar dari server — ikuti tiga langkah ini:
+
+1. Buat elemen baru dengan `document.createElement(tag)`.
+2. Isi konten dan atributnya.
+3. Sisipkan ke dalam elemen induk.
+
+```javascript
+// 1. Buat elemen <li> baru
+const itemBaru = document.createElement("li");
+
+// 2. Isi kontennya
+itemBaru.textContent = "Pesan baru dari Budi";
+itemBaru.classList.add("item-pesan");
+
+// 3. Temukan elemen induk dan sisipkan
+const daftarPesan = document.querySelector("#daftar-pesan");
+daftarPesan.appendChild(itemBaru); // Disisipkan sebagai anak terakhir
+```
+
+**Metode penyisipan lainnya:**
+
+```javascript
+const wadah = document.querySelector(".wadah");
+const elemenBaru = document.createElement("p");
+elemenBaru.textContent = "Paragraf baru";
+
+// Sisipkan sebelum elemen pertama di dalam wadah
+wadah.prepend(elemenBaru);
+
+// Sisipkan setelah elemen tertentu
+const acuan = document.querySelector(".acuan");
+acuan.after(elemenBaru);
+
+// Menghapus elemen dari DOM
+const elemenDihapus = document.querySelector(".pesan-lama");
+elemenDihapus.remove();
+```
+
+**Contoh lengkap — Membuat daftar dinamis:**
+
+```html
+<!-- HTML -->
+<ul id="daftar-tugas"></ul>
+```
+
+```javascript
+const tugas = ["Belajar JavaScript", "Membuat proyek", "Review kode"];
+const daftarTugas = document.querySelector("#daftar-tugas");
+
+tugas.forEach(function (namaTugas) {
+  const item = document.createElement("li");
+  item.textContent = namaTugas;
+  daftarTugas.appendChild(item);
+});
+
+// Hasil HTML yang dihasilkan:
+// <ul id="daftar-tugas">
+//   <li>Belajar JavaScript</li>
+//   <li>Membuat proyek</li>
+//   <li>Review kode</li>
+// </ul>
+```
+
+---
+
+### Kesimpulan
+
+Manipulasi DOM adalah kemampuan inti yang mengubah halaman web statis menjadi aplikasi yang dinamis dan interaktif. Dengan menguasai cara menyeleksi elemen, mengubah kontennya, mengelola class CSS, dan menciptakan elemen baru, kamu memiliki fondasi untuk membangun antarmuka yang merespons aksi pengguna secara real-time.
+
+**Ringkasan:**
+
+| Konsep / Method                   | Fungsi                                                   |
+| --------------------------------- | -------------------------------------------------------- |
+| `document.getElementById(id)`     | Menyeleksi satu elemen berdasarkan atribut `id`          |
+| `document.querySelector(css)`     | Menyeleksi elemen pertama yang cocok dengan selektor CSS |
+| `document.querySelectorAll(css)`  | Menyeleksi semua elemen yang cocok                       |
+| `element.textContent`             | Membaca atau mengubah teks (tanpa HTML)                  |
+| `element.innerHTML`               | Membaca atau mengubah konten termasuk tag HTML           |
+| `element.setAttribute(attr, val)` | Mengubah nilai atribut elemen                            |
+| `element.style.properti`          | Mengubah gaya CSS secara langsung (inline)               |
+| `element.classList.add(cls)`      | Menambahkan class CSS                                    |
+| `element.classList.remove(cls)`   | Menghapus class CSS                                      |
+| `element.classList.toggle(cls)`   | Menambah/menghapus class secara bergantian               |
+| `element.classList.contains(cls)` | Memeriksa apakah class ada                               |
+| `document.createElement(tag)`     | Membuat elemen HTML baru                                 |
+| `parent.appendChild(child)`       | Menyisipkan elemen sebagai anak terakhir                 |
+| `element.remove()`                | Menghapus elemen dari DOM                                |

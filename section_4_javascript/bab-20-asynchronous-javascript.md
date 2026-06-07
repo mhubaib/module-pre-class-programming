@@ -1,90 +1,343 @@
-# Bab 20: Asynchronous JavaScript (Logika Tak Sinkron)
+# Bab 20: Asynchronous JavaScript
 
 ## Tujuan Pembelajaran
 
-- Membedakan paradigma eksekusi _Synchronous_ (antre linear murni) dengan _Asynchronous_ (paralel tanpa tunggu).
-- Memahami konsep antrean waktu tenggat tak pasti saat mengeksekusi operasi berat.
-- Menguasai syntax canggih ES8: `async` / `await` untuk merapikan alur bacaan kode asinkron.
+- Membedakan paradigma eksekusi _Synchronous_ dan _Asynchronous_.
+- Memahami konsep Promise sebagai wadah nilai yang akan tersedia di masa mendatang.
+- Menguasai sintaks `async` / `await` untuk menulis kode asinkron yang mudah dibaca.
+- Menangani error pada operasi asinkron menggunakan `try...catch`.
+
+---
 
 ## Materi Utama
 
-Ini adalah Bab Pendekar! Materi ini adalah pemisah batasan tersulit antara kelas programmer JS kacangan dengan programmer level madya mutlak.
+JavaScript adalah bahasa yang bersifat **Single-Threaded** — ia hanya dapat mengerjakan satu instruksi pada satu waktu, secara berurutan dari atas ke bawah. Dalam kondisi normal (disebut _Synchronous_), jika satu baris kode memerlukan waktu lama untuk selesai, seluruh program akan berhenti menunggu hingga baris tersebut selesai.
 
-Pertama-tama mari benahi fundamental cara pandangmu:
-JavaScript adalah sebuah bahasa yang terlahir cacat luhur: Ia bernyawa **"Single-Threaded"** (Hanya Punya 1 Lengan Pekerja/Terbiasa Antre Lurus Belakang).
+Ini menjadi masalah besar ketika program perlu menunggu operasi yang lambat seperti memuat data dari server, yang bisa memakan waktu beberapa detik. Layar aplikasi akan _freeze_ dan tidak merespons selama menunggu.
 
-Artinya (_Synchronous_), Javascript secara kaku selalu membaca, mengerjakan baris 1 tuntas, baris 2 tuntas, baru sudi merembes membaca perintah ke lantai baris 3. Jika baris 2 memerintahkan _"Pencarian Menghitung Bintang Semesta (1 Jam)"_, maka baris 3 tidak akan dieksekusi selama sesajennya perintah beban 1 jam sebelumnya belum terbayar tuntas terhitung selesai lunas mutlak! Semua layarmu nge-hang dan _freeze_. Ini malapetaka fatal!
+Solusinya adalah **Asynchronous JavaScript** — mekanisme yang memungkinkan operasi yang lama diproses di latar belakang, sementara program tetap berjalan dan merespons interaksi pengguna.
 
-Di sinilah dibutuhkan sihir **Asynchronous (Asinkronus)**: Seni mengerjain JS agar "Mendelagasi pekerjaan yang berat butuh nunggu waktu lama ke laci antrian bayangan belakang mesin browser", sembari lengan utamanya dibebaskan langsung loncat mengeksekusi instruksi di baris se-berikutnya sedetik kemudian tanpa ampun repot ikutan nunggu!
+---
 
-### 1. Mensimulasikan Keadaan Beban (Asinkron Bawaan Waktu)
+### 1. Synchronous vs Asynchronous
 
-Alat pendemonstrasi beban asinkron buatan klasik Javascript adalah saklar waktu: `setTimeout(FungsiTanggapan, WaktuTungguMiliDetik)`.
+**Synchronous** — setiap baris dieksekusi secara berurutan, baris berikutnya hanya dijalankan setelah baris sebelumnya selesai.
 
 ```javascript
-console.log("1. Perintah Awal Menanak Nasi Mulai...");
-
-// Kita pasang timer delegasi suruh mesin belakang Browser mendidihkannya (Butuh Nunggu 5 Detik / 5000ms):
-setTimeout(function () {
-  console.log("2. Selesai! Nasi Panas Matang!");
-}, 5000);
-
-console.log("3. Goreng Tempe Mendoan Cepat...");
-
-/*
-KRONOLOGI HASIL DI TERMINAL:
-Langkah eksekusinya melompat!
-Cetak: "1. Perintah Awal Menanak Nasi Mulai..."
-Cetak: "3. Goreng Tempe Mendoan Cepat..."
-(Lalu mesin terdiam hening jangkrik 5 detik)
-Cetak Keluar: "2. Selesai! Nasi Panas Matang!"
-*/
+console.log("Mulai");
+console.log("Tengah");
+console.log("Selesai");
+// Output (berurutan):
+// Mulai
+// Tengah
+// Selesai
 ```
 
-Mesin tidak sudi menunggu _timer 5 detik_ memblokir jalan. Dia lempar tungku nasi itu ke belakang, dan langsung gercep maju mengeksekusi gorengan baris ke tiga instan.
+**Asynchronous** — operasi yang lama dijalankan di latar belakang, dan baris berikutnya dapat terus dieksekusi tanpa menunggu.
 
-### 2. Memahami Sumpah Janji Penungguan (Promises)
-
-Pekerjaan menarik sedot data ke Server/Database adalah tugas Asinkron liar yang durasi balikan selesai beresnya amat _"Tidak pasti ketebak lamanya jam"_ karena mengikut dewa kecepatan paket kuota internet tiap pengguna!
-
-Agar antrean data berat begini berbaris damai tanpa error tumpah ruah belum jadi sudah keburu tercetak kosong (_undefined_), JS modern 2015 membentangkan alat peredam penampung wadah asinkron liar yang dinamakan _The Promise_ (Sumpah Janji).
-
-Objek _Promise_ akan mengepal mengecup pekerjaan berat tersebut dengan ikrar 3 Fase Alur Hidup:
-
-1. **Pending (Menggantung Antre)**: Kerjaannya masih ngubek-ngubek jalan di balik layar belum slesai.
-2. **Fulfilled / Resolved (Berhasil Lunas Sakti)**: Datanya komplit berhasil didapat dibungkus kembalian bawaan rejeki.
-3. **Rejected (Ditolak Merana / Error)**: Server meledak atau Putus Koneksi!
-
-### 3. Solusi Terang Mutahir Modern Pendek: Syntax `async / await`
-
-Jika di jaman 2015 programmer mengikat rantai Promise menggunakan mantera sambung-menyambung panjang lelah berbaris `fungsiBeratLama().then().then().catch()` (disebut The Callback Hell/Promise Chaining)...
-Maka di tahun 2017 turunlah wahyu Syntax **`async/await`** yang ajaib!
-
-Ini adalah cara memaksa membekukan secara elok lengan antrian (sok seolah _Synchronous_ kembali), dengan ketikan berwujud rapi tegak lurus menakjubkan tanpa ikatan sambung ribet kurung _Callback/Then_!
-
-**Bagaimana Aturan Bermainnya?**
-
-- Mutlak diwajibkan menyegel mencap jidat fungsi pembalut besarnya dengan gelar sertifikasi **`async`** (Artinya: "Hei mesin, di dalam perut kelak bakal ada antrian nunggu ga terduga lelet loh, waspada!").
-- Tempelkan palu gembok ketikan penghenti waktu pengerem paksa lengan **`await`** persis HANYA di tepi mulut fungsi sumber perkara penungguan data loding berat saja!
+`setTimeout()` adalah contoh sederhana operasi asinkron — ia menunda eksekusi sebuah fungsi tanpa memblokir program.
 
 ```javascript
-/* Anggap saja kita memanggil fungsi bayangan dari tempat lain yang menjanjikan pengiriman narik data berat API User butuh 3 detik */
+console.log("1. Mulai memasak nasi...");
 
-// 1. Label Tanda Label Ekstra di Awalan Fungsi!
-async function pamerkanBiodataUserBerapapunLamanya() {
-  console.log(
-    "Tunggu Sebentar sedang konek narik data ke Server Planet Mars...",
-  );
+setTimeout(function () {
+  console.log("2. Nasi sudah matang!");
+}, 3000); // Dieksekusi setelah 3 detik
 
-  // 2. Pasang Rem Paksa Gembok `await`!
-  // "Hei mesin lengam lengan kerja lengan.. kamu STOP NENGGONG MATI NUNGGU DISINI DIAM MUTLAK sampai Promise data lemparan paket dari ampar_NarikDataBesar() LUNAS TERRESOLVED DAPAT MASUK SELESAI di tangkat ke kotak wadah `hasilTarik`."
-  let hasilTarik = await fungsiJanji_NarikDataBesar_EntahBerapaLama();
+console.log("3. Sambil menunggu, goreng tempe...");
 
-  // (Mesin benar-benar bekumenunggu macet di baris itu dihentikan sang `await`).
+// Output (urutan tidak linear):
+// 1. Mulai memasak nasi...
+// 3. Sambil menunggu, goreng tempe...
+// (3 detik kemudian...)
+// 2. Nasi sudah matang!
+```
 
-  // Begitu Datanya beres terkirim, mesin jalan buka kran gas maju ke lantai bawahnya beres.
-  console.log("Data Lunas Didapat! Ini Tampangnya: " + hasilTarik);
+Baris ke-3 dieksekusi sebelum baris ke-2 selesai — ini adalah inti dari asynchronous.
+
+---
+
+### 2. Promise
+
+**Promise** adalah objek yang merepresentasikan nilai yang akan tersedia di masa mendatang — biasanya hasil dari operasi asinkron seperti permintaan data ke server.
+
+Sebuah Promise memiliki tiga kemungkinan status:
+
+| Status        | Keterangan                                         |
+| ------------- | -------------------------------------------------- |
+| **Pending**   | Operasi sedang berjalan, hasil belum tersedia      |
+| **Fulfilled** | Operasi berhasil, nilai tersedia                   |
+| **Rejected**  | Operasi gagal (error jaringan, server error, dll.) |
+
+**Membuat Promise:**
+
+```javascript
+const janji = new Promise(function (resolve, reject) {
+  const berhasil = true;
+
+  if (berhasil) {
+    resolve("Data berhasil dimuat."); // Fulfilled
+  } else {
+    reject("Terjadi kesalahan koneksi."); // Rejected
+  }
+});
+```
+
+**Mengonsumsi Promise dengan `.then()` dan `.catch()`:**
+
+```javascript
+janji
+  .then(function (hasil) {
+    console.log("Berhasil:", hasil);
+    // Output: Berhasil: Data berhasil dimuat.
+  })
+  .catch(function (error) {
+    console.log("Gagal:", error);
+  })
+  .finally(function () {
+    console.log("Selesai — baik berhasil maupun gagal.");
+  });
+```
+
+**Contoh Promise dengan simulasi penundaan:**
+
+```javascript
+function ambilDataPengguna(id) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      if (id > 0) {
+        resolve({ id: id, nama: "Budi Santoso", email: "budi@email.com" });
+      } else {
+        reject("ID pengguna tidak valid.");
+      }
+    }, 2000); // Simulasi waktu tunggu 2 detik
+  });
+}
+
+ambilDataPengguna(1)
+  .then(function (pengguna) {
+    console.log("Data diterima:", pengguna.nama);
+  })
+  .catch(function (error) {
+    console.log("Error:", error);
+  });
+```
+
+---
+
+### 3. `async` / `await`
+
+Sintaks `async/await` yang diperkenalkan pada ES2017 adalah cara yang lebih bersih dan mudah dibaca untuk bekerja dengan Promise. Alih-alih merantai `.then()` dan `.catch()`, kamu dapat menulis kode asinkron seolah-olah ia bersifat synchronous.
+
+**Dua aturan utama:**
+
+1. **`async`** ditulis sebelum kata kunci `function` — menandai bahwa fungsi tersebut bersifat asinkron dan selalu mengembalikan Promise.
+2. **`await`** hanya dapat digunakan di dalam fungsi `async` — ia menghentikan eksekusi hingga Promise di depannya selesai (fulfilled atau rejected).
+
+```javascript
+// Fungsi yang mengembalikan Promise (simulasi mengambil data)
+function ambilData() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve({ nama: "Budi", nilai: 95 });
+    }, 2000);
+  });
+}
+
+// Menggunakan async/await
+async function tampilkanData() {
+  console.log("Mengambil data...");
+
+  const data = await ambilData(); // Menunggu hingga Promise selesai
+
+  // Baris ini baru dieksekusi setelah data tersedia
+  console.log("Nama :", data.nama);
+  console.log("Nilai:", data.nilai);
+}
+
+tampilkanData();
+// Output:
+// Mengambil data...
+// (2 detik kemudian...)
+// Nama : Budi
+// Nilai: 95
+```
+
+**Perbandingan `.then()` vs `async/await`:**
+
+```javascript
+// Dengan .then() — bersarang dan sulit dibaca saat kompleks
+function tampilkanDenganThen() {
+  ambilDataPengguna(1)
+    .then(function (pengguna) {
+      return ambilPostinganUser(pengguna.id);
+    })
+    .then(function (postingan) {
+      console.log("Postingan:", postingan);
+    })
+    .catch(function (error) {
+      console.log("Error:", error);
+    });
+}
+
+// Dengan async/await — lebih linear dan mudah dibaca
+async function tampilkanDenganAwait() {
+  const pengguna = await ambilDataPengguna(1);
+  const postingan = await ambilPostinganUser(pengguna.id);
+  console.log("Postingan:", postingan);
 }
 ```
 
-Jurus mantera kembar ikatan `async...await` ini kelak merupakan kunci pelatuk kemudi setirmu dalam menarik pasokan pundi pundi eceran isi sembako produk harga Shopee dari Server database Backend lewat alat kurir pos khusus JS mutlak bernama sang API Fetch di Bab Paling Pamungkas Puncak Terakhir sana! (Bab 57).
+---
+
+### 4. Menangani Error dengan `try...catch`
+
+Saat menggunakan `async/await`, gunakan `try...catch` untuk menangani error yang terjadi ketika Promise ditolak (rejected).
+
+```javascript
+async function muatProfilPengguna(id) {
+  try {
+    const pengguna = await ambilDataPengguna(id);
+    console.log("Profil berhasil dimuat:", pengguna.nama);
+    return pengguna;
+  } catch (error) {
+    console.log("Gagal memuat profil:", error);
+    return null;
+  } finally {
+    console.log("Proses selesai.");
+  }
+}
+
+muatProfilPengguna(1); // Berhasil
+muatProfilPengguna(-1); // Akan menangkap error
+```
+
+---
+
+### 5. Menjalankan Beberapa Promise Secara Paralel
+
+Jika kamu memiliki beberapa operasi asinkron yang tidak saling bergantung, jalankan keduanya secara bersamaan menggunakan `Promise.all()` untuk menghemat waktu.
+
+```javascript
+function ambilDataProduk() {
+  return new Promise((resolve) =>
+    setTimeout(() => resolve(["Sepatu", "Baju"]), 1000),
+  );
+}
+
+function ambilDataPengguna(id) {
+  return new Promise((resolve) =>
+    setTimeout(() => resolve({ id, nama: "Budi" }), 1500),
+  );
+}
+
+// Berurutan — total waktu tunggu 2.5 detik (1 + 1.5)
+async function berurutan() {
+  const produk = await ambilDataProduk();
+  const pengguna = await ambilDataPengguna(1);
+  console.log(produk, pengguna);
+}
+
+// Paralel — total waktu tunggu 1.5 detik (menunggu yang terlama)
+async function paralel() {
+  const [produk, pengguna] = await Promise.all([
+    ambilDataProduk(),
+    ambilDataPengguna(1),
+  ]);
+  console.log(produk, pengguna);
+}
+```
+
+**Method `Promise` yang umum digunakan:**
+
+| Method                      | Perilaku                                                       |
+| --------------------------- | -------------------------------------------------------------- |
+| `Promise.all([...])`        | Menunggu semua Promise selesai. Gagal jika salah satu ditolak. |
+| `Promise.allSettled([...])` | Menunggu semua selesai tanpa peduli berhasil atau gagal.       |
+| `Promise.race([...])`       | Mengembalikan hasil dari Promise yang pertama kali selesai.    |
+| `Promise.any([...])`        | Mengembalikan hasil dari Promise yang pertama kali berhasil.   |
+
+---
+
+### 6. Simulasi Lengkap — Memuat dan Menampilkan Data Pengguna
+
+```javascript
+// Simulasi fungsi pengambil data (meniru perilaku Fetch API)
+function ambilPengguna(id) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      const database = {
+        1: {
+          id: 1,
+          nama: "Budi Santoso",
+          email: "budi@email.com",
+          premium: true,
+        },
+        2: {
+          id: 2,
+          nama: "Ani Rahayu",
+          email: "ani@email.com",
+          premium: false,
+        },
+      };
+
+      const pengguna = database[id];
+      if (pengguna) {
+        resolve(pengguna);
+      } else {
+        reject("Pengguna dengan ID " + id + " tidak ditemukan.");
+      }
+    }, 1500);
+  });
+}
+
+async function tampilkanProfilPengguna(id) {
+  console.log("Memuat profil pengguna ID:", id);
+
+  try {
+    const pengguna = await ambilPengguna(id);
+
+    console.log("---");
+    console.log("Nama   :", pengguna.nama);
+    console.log("Email  :", pengguna.email);
+    console.log("Status :", pengguna.premium ? "Premium" : "Reguler");
+  } catch (error) {
+    console.log("Error:", error);
+  }
+}
+
+tampilkanProfilPengguna(1);
+// Output:
+// Memuat profil pengguna ID: 1
+// (1.5 detik kemudian...)
+// ---
+// Nama   : Budi Santoso
+// Email  : budi@email.com
+// Status : Premium
+
+tampilkanProfilPengguna(99);
+// Output:
+// Memuat profil pengguna ID: 99
+// Error: Pengguna dengan ID 99 tidak ditemukan.
+```
+
+---
+
+### Kesimpulan
+
+Asynchronous JavaScript adalah konsep fundamental yang harus dikuasai sebelum bekerja dengan data dari server. Dengan memahami Promise dan sintaks `async/await`, kamu dapat menulis kode yang menangani operasi waktu-tidak-pasti dengan cara yang terstruktur, mudah dibaca, dan tidak memblokir antarmuka pengguna.
+
+Pemahaman materi ini adalah prasyarat langsung untuk mempelajari Fetch API di bab berikutnya.
+
+**Ringkasan:**
+
+| Konsep                 | Penjelasan                                                                    |
+| ---------------------- | ----------------------------------------------------------------------------- |
+| Synchronous            | Kode dieksekusi berurutan; baris berikutnya menunggu baris sebelumnya selesai |
+| Asynchronous           | Operasi lama dijalankan di latar belakang; program tidak diblokir             |
+| Promise                | Objek yang merepresentasikan nilai yang akan tersedia di masa mendatang       |
+| `.then()` / `.catch()` | Cara mengonsumsi Promise menggunakan chaining                                 |
+| `async`                | Menandai fungsi sebagai asinkron; fungsi selalu mengembalikan Promise         |
+| `await`                | Menghentikan eksekusi di dalam fungsi `async` hingga Promise selesai          |
+| `try...catch`          | Menangani error pada operasi `async/await`                                    |
+| `Promise.all()`        | Menjalankan beberapa Promise secara paralel dan menunggu semua selesai        |

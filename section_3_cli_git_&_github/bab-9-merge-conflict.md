@@ -2,7 +2,7 @@
 
 ## Tujuan Pembelajaran
 
-- Memahami penyebab terjadinya *Merge Conflict*.
+- Memahami penyebab terjadinya _Merge Conflict_.
 - Mampu membaca tanda konflik di dalam file kode.
 - Mampu menyelesaikan konflik secara aman menggunakan Visual Studio Code maupun terminal.
 
@@ -35,11 +35,11 @@ Konflik terjadi ketika dua branch mengubah **baris yang sama** pada **file yang 
 
 **Situasi yang memicu Merge Conflict:**
 
-| Situasi | Penjelasan |
-|---|---|
-| Dua branch mengubah baris yang sama | Penyebab paling umum |
-| Satu branch mengubah file, branch lain menghapusnya | Git tidak tahu apakah file harus dipertahankan atau dihapus |
-| Dua branch menambahkan baris berbeda di posisi yang berdekatan | Git merasa posisi akhirnya ambigu |
+| Situasi                                                        | Penjelasan                                                  |
+| -------------------------------------------------------------- | ----------------------------------------------------------- |
+| Dua branch mengubah baris yang sama                            | Penyebab paling umum                                        |
+| Satu branch mengubah file, branch lain menghapusnya            | Git tidak tahu apakah file harus dipertahankan atau dihapus |
+| Dua branch menambahkan baris berbeda di posisi yang berdekatan | Git merasa posisi akhirnya ambigu                           |
 
 ---
 
@@ -67,11 +67,11 @@ Di dalam file yang berkonflik, Git akan menyisipkan penanda khusus yang menandai
 
 **Penjelasan setiap penanda:**
 
-| Penanda | Artinya |
-|---|---|
-| `<<<<<<< HEAD` | Awal dari versi milikmu (branch yang sedang aktif) |
-| `=======` | Garis pemisah antara kedua versi |
-| `>>>>>>> branch-teman` | Akhir dari versi yang datang dari branch lain |
+| Penanda                | Artinya                                            |
+| ---------------------- | -------------------------------------------------- |
+| `<<<<<<< HEAD`         | Awal dari versi milikmu (branch yang sedang aktif) |
+| `=======`              | Garis pemisah antara kedua versi                   |
+| `>>>>>>> branch-teman` | Akhir dari versi yang datang dari branch lain      |
 
 Untuk melihat seluruh file yang berkonflik, gunakan `git status`:
 
@@ -249,10 +249,10 @@ Merge Conflict adalah bagian normal dari alur kerja kolaboratif menggunakan Git.
 
 **Ringkasan Perintah:**
 
-| Perintah | Fungsi |
-|---|---|
-| `git merge nama-branch` | Menggabungkan branch — dapat memicu konflik |
-| `git status` | Melihat file mana yang masih berkonflik |
-| `git add nama-file` | Menandai bahwa konflik pada file tersebut sudah diselesaikan |
-| `git commit` | Menyelesaikan proses merge setelah semua konflik ditangani |
-| `git merge --abort` | Membatalkan proses merge dan kembali ke kondisi sebelumnya |
+| Perintah                | Fungsi                                                       |
+| ----------------------- | ------------------------------------------------------------ |
+| `git merge nama-branch` | Menggabungkan branch — dapat memicu konflik                  |
+| `git status`            | Melihat file mana yang masih berkonflik                      |
+| `git add nama-file`     | Menandai bahwa konflik pada file tersebut sudah diselesaikan |
+| `git commit`            | Menyelesaikan proses merge setelah semua konflik ditangani   |
+| `git merge --abort`     | Membatalkan proses merge dan kembali ke kondisi sebelumnya   |

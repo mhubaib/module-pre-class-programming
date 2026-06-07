@@ -2,10 +2,10 @@
 
 ## Tujuan Pembelajaran
 
-- Memahami konsep *Branching* (percabangan) sebagai ruang kerja paralel yang aman.
+- Memahami konsep _Branching_ (percabangan) sebagai ruang kerja paralel yang aman.
 - Mampu membuat, berpindah, dan menghapus branch menggunakan `git branch` dan `git switch`.
 - Mampu menggabungkan perubahan dari branch fitur ke branch utama menggunakan `git merge`.
-- Memahami konsep *Merge Conflict* dan cara menanganinya.
+- Memahami konsep _Merge Conflict_ dan cara menanganinya.
 
 ---
 
@@ -179,11 +179,13 @@ main:         A --- B --- C --- D --- E
 **Contoh situasi:**
 
 Di branch `main`, baris ke-5 pada `style.css` berisi:
+
 ```css
 background-color: white;
 ```
 
 Di branch `fitur-diskon`, baris yang sama diubah menjadi:
+
 ```css
 background-color: #ffe0b2;
 ```
@@ -271,12 +273,12 @@ Branching adalah salah satu fitur terpenting Git yang memungkinkan pengembangan 
 
 **Ringkasan Perintah:**
 
-| Perintah | Fungsi |
-|---|---|
-| `git branch` | Menampilkan daftar seluruh branch |
-| `git branch nama` | Membuat branch baru |
-| `git switch nama` | Berpindah ke branch yang disebutkan |
-| `git switch -c nama` | Membuat branch baru dan langsung berpindah ke sana |
-| `git merge nama` | Menggabungkan branch yang disebutkan ke branch aktif saat ini |
-| `git branch -d nama` | Menghapus branch yang sudah di-merge |
-| `git branch -D nama` | Menghapus branch secara paksa |
+| Perintah             | Fungsi                                                        |
+| -------------------- | ------------------------------------------------------------- |
+| `git branch`         | Menampilkan daftar seluruh branch                             |
+| `git branch nama`    | Membuat branch baru                                           |
+| `git switch nama`    | Berpindah ke branch yang disebutkan                           |
+| `git switch -c nama` | Membuat branch baru dan langsung berpindah ke sana            |
+| `git merge nama`     | Menggabungkan branch yang disebutkan ke branch aktif saat ini |
+| `git branch -d nama` | Menghapus branch yang sudah di-merge                          |
+| `git branch -D nama` | Menghapus branch secara paksa                                 |

@@ -2,9 +2,9 @@
 
 ## Tujuan Pembelajaran
 
-- Mampu menulis pesan *commit* yang profesional dan bermakna.
+- Mampu menulis pesan _commit_ yang profesional dan bermakna.
 - Memahami fungsi dan cara penggunaan `.gitignore`.
-- Mengikuti standar industri dalam penamaan *branch*, penulisan commit, dan struktur proyek.
+- Mengikuti standar industri dalam penamaan _branch_, penulisan commit, dan struktur proyek.
 
 ---
 
@@ -41,14 +41,14 @@ git commit -m "chore: menambahkan node_modules ke .gitignore"
 
 **Tipe commit yang umum digunakan:**
 
-| Tipe | Digunakan untuk |
-|---|---|
-| `feat` | Menambahkan fitur baru |
-| `fix` | Memperbaiki bug |
-| `docs` | Perubahan pada dokumentasi (README, komentar kode) |
-| `style` | Perubahan format kode yang tidak memengaruhi fungsionalitas |
-| `refactor` | Perbaikan struktur kode tanpa mengubah perilakunya |
-| `chore` | Pembaruan konfigurasi, dependensi, atau alat bantu |
+| Tipe       | Digunakan untuk                                             |
+| ---------- | ----------------------------------------------------------- |
+| `feat`     | Menambahkan fitur baru                                      |
+| `fix`      | Memperbaiki bug                                             |
+| `docs`     | Perubahan pada dokumentasi (README, komentar kode)          |
+| `style`    | Perubahan format kode yang tidak memengaruhi fungsionalitas |
+| `refactor` | Perbaikan struktur kode tanpa mengubah perilakunya          |
+| `chore`    | Pembaruan konfigurasi, dependensi, atau alat bantu          |
 
 **Panduan tambahan untuk pesan commit yang baik:**
 
@@ -72,13 +72,13 @@ Tidak semua file dalam folder proyek perlu atau boleh diunggah ke GitHub. File s
 
 **Jenis file yang umum diabaikan:**
 
-| Jenis File | Contoh | Alasan |
-|---|---|---|
-| Konfigurasi rahasia | `.env`, `secrets.json` | Berisi kata sandi atau kunci API yang tidak boleh tersebar |
-| Folder dependensi | `node_modules/` | Berukuran sangat besar dan dapat diunduh ulang dari `package.json` |
-| File sistem operasi | `.DS_Store` (Mac), `Thumbs.db` (Windows) | File sampah yang tidak relevan dengan proyek |
-| File hasil kompilasi | `dist/`, `build/` | Dapat dibuat ulang dari kode sumber |
-| Log aplikasi | `*.log` | File log tidak perlu dilacak oleh Git |
+| Jenis File           | Contoh                                   | Alasan                                                             |
+| -------------------- | ---------------------------------------- | ------------------------------------------------------------------ |
+| Konfigurasi rahasia  | `.env`, `secrets.json`                   | Berisi kata sandi atau kunci API yang tidak boleh tersebar         |
+| Folder dependensi    | `node_modules/`                          | Berukuran sangat besar dan dapat diunduh ulang dari `package.json` |
+| File sistem operasi  | `.DS_Store` (Mac), `Thumbs.db` (Windows) | File sampah yang tidak relevan dengan proyek                       |
+| File hasil kompilasi | `dist/`, `build/`                        | Dapat dibuat ulang dari kode sumber                                |
+| Log aplikasi         | `*.log`                                  | File log tidak perlu dilacak oleh Git                              |
 
 **Cara membuat `.gitignore`:**
 
@@ -159,11 +159,11 @@ git switch -c docs/update-readme-instalasi
 
 **Hal yang sebaiknya dihindari dalam penamaan branch:**
 
-| Kurang Baik | Lebih Baik |
-|---|---|
-| `git switch -c cobacoba` | `git switch -c feat/halaman-galeri` |
-| `git switch -c branch-baru` | `git switch -c fix/navigasi-mobile` |
-| `git switch -c punya-budi` | `git switch -c feat/keranjang-belanja` |
+| Kurang Baik                 | Lebih Baik                             |
+| --------------------------- | -------------------------------------- |
+| `git switch -c cobacoba`    | `git switch -c feat/halaman-galeri`    |
+| `git switch -c branch-baru` | `git switch -c fix/navigasi-mobile`    |
+| `git switch -c punya-budi`  | `git switch -c feat/keranjang-belanja` |
 
 ---
 
@@ -294,12 +294,12 @@ Dunia pengembangan web terus berkembang. Tetaplah berlatih, terus membangun proy
 
 **Ringkasan Best Practice:**
 
-| Aspek | Praktik yang Direkomendasikan |
-|---|---|
-| Pesan commit | Gunakan format `[tipe]: [deskripsi]` yang jelas dan spesifik |
-| `.gitignore` | Sertakan di setiap proyek; abaikan `node_modules`, `.env`, dan file sistem |
-| Penamaan branch | Gunakan format `[tipe]/[deskripsi]`, misalnya `feat/halaman-login` |
-| Ukuran branch | Satu branch untuk satu fitur atau perbaikan |
-| Kualitas commit | Hanya commit kode yang berfungsi |
-| Dokumentasi | Selalu buat `README.md` yang menjelaskan proyek secara ringkas |
-| Sebelum push | Jalankan `git pull` terlebih dahulu untuk menghindari konflik |
+| Aspek           | Praktik yang Direkomendasikan                                              |
+| --------------- | -------------------------------------------------------------------------- |
+| Pesan commit    | Gunakan format `[tipe]: [deskripsi]` yang jelas dan spesifik               |
+| `.gitignore`    | Sertakan di setiap proyek; abaikan `node_modules`, `.env`, dan file sistem |
+| Penamaan branch | Gunakan format `[tipe]/[deskripsi]`, misalnya `feat/halaman-login`         |
+| Ukuran branch   | Satu branch untuk satu fitur atau perbaikan                                |
+| Kualitas commit | Hanya commit kode yang berfungsi                                           |
+| Dokumentasi     | Selalu buat `README.md` yang menjelaskan proyek secara ringkas             |
+| Sebelum push    | Jalankan `git pull` terlebih dahulu untuk menghindari konflik              |

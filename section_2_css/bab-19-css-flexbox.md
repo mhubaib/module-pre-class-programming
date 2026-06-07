@@ -108,7 +108,7 @@ Setelah `display: flex` diterapkan, elemen anak yang sebelumnya bersifat `block`
 
 Properti `flex-direction` menentukan arah Main Axis, yaitu arah di mana elemen anak disusun.
 
-- `row` *(default)*: Elemen anak berjajar dari kiri ke kanan.
+- `row` _(default)_: Elemen anak berjajar dari kiri ke kanan.
 - `row-reverse`: Elemen anak berjajar dari kanan ke kiri (urutan elemen terbalik).
 - `column`: Elemen anak bertumpuk dari atas ke bawah.
 - `column-reverse`: Elemen anak bertumpuk dari bawah ke atas (urutan elemen terbalik).
@@ -146,7 +146,7 @@ Properti `flex-direction` menentukan arah Main Axis, yaitu arah di mana elemen a
 
 Properti `justify-content` mengatur bagaimana ruang kosong yang tersisa pada Main Axis didistribusikan di antara elemen anak.
 
-- `flex-start` *(default)*: Semua elemen anak berkumpul di awal Main Axis (ujung kiri pada `row`).
+- `flex-start` _(default)_: Semua elemen anak berkumpul di awal Main Axis (ujung kiri pada `row`).
 - `flex-end`: Semua elemen anak berkumpul di akhir Main Axis (ujung kanan pada `row`).
 - `center`: Semua elemen anak dikelompokkan di titik tengah Main Axis.
 - `space-between`: Elemen pertama menempel di awal, elemen terakhir menempel di akhir, dan ruang kosong dibagi rata di antara elemen-elemen yang tersisa.
@@ -197,7 +197,7 @@ Properti `justify-content` mengatur bagaimana ruang kosong yang tersisa pada Mai
 
 Properti `align-items` mengatur bagaimana elemen anak diposisikan pada Cross Axis (arah tegak lurus terhadap Main Axis).
 
-- `stretch` *(default)*: Elemen anak diregangkan untuk mengisi seluruh tinggi elemen induk.
+- `stretch` _(default)_: Elemen anak diregangkan untuk mengisi seluruh tinggi elemen induk.
 - `flex-start`: Elemen anak diposisikan di awal Cross Axis (ujung atas pada `row`).
 - `center`: Elemen anak diposisikan di titik tengah Cross Axis.
 - `flex-end`: Elemen anak diposisikan di akhir Cross Axis (ujung bawah pada `row`).
@@ -206,6 +206,7 @@ Properti `align-items` mengatur bagaimana elemen anak diposisikan pada Cross Axi
 **Analogi:**
 
 Bayangkan elemen induk sebagai sebuah rel kereta panjang. Elemen anak adalah gerbong-gerbong yang berjalan di atasnya:
+
 - `justify-content` mengatur jarak antar gerbong di sepanjang rel (Main Axis).
 - `align-items` mengatur posisi vertikal setiap gerbong terhadap rel — apakah menempel ke atas, ke bawah, atau mengambang di tengah (Cross Axis).
 
@@ -220,7 +221,10 @@ Bayangkan elemen induk sebagai sebuah rel kereta panjang. Elemen anak adalah ger
   </div>
   <div class="kartu">
     <h3>Produk B</h3>
-    <p>Deskripsi yang lebih panjang dan memerlukan dua baris teks untuk ditampilkan.</p>
+    <p>
+      Deskripsi yang lebih panjang dan memerlukan dua baris teks untuk
+      ditampilkan.
+    </p>
   </div>
   <div class="kartu">
     <h3>Produk C</h3>
@@ -317,7 +321,7 @@ Ketiga properti `flex-grow`, `flex-shrink`, dan `flex-basis` dapat ditulis dalam
 
 Secara default, seluruh elemen anak dipaksa masuk dalam satu baris meskipun lebar totalnya melebihi lebar elemen induk. Properti `flex-wrap` mengatur perilaku ini.
 
-- `nowrap` *(default)*: Semua elemen anak berada dalam satu baris; elemen dapat menyusut jika ruang tidak cukup.
+- `nowrap` _(default)_: Semua elemen anak berada dalam satu baris; elemen dapat menyusut jika ruang tidak cukup.
 - `wrap`: Elemen anak akan berpindah ke baris baru jika ruang tidak mencukupi.
 - `wrap-reverse`: Sama seperti `wrap`, namun baris baru terbentuk ke arah atas.
 
@@ -339,14 +343,14 @@ Secara default, seluruh elemen anak dipaksa masuk dalam satu baris meskipun leba
 /* CSS */
 .galeri-foto {
   display: flex;
-  flex-wrap: wrap;   /* Elemen yang tidak muat akan turun ke baris berikutnya */
+  flex-wrap: wrap; /* Elemen yang tidak muat akan turun ke baris berikutnya */
   gap: 12px;
   padding: 16px;
 }
 
 .foto {
   flex-basis: calc(33.333% - 8px); /* Tiga kolom per baris */
-  min-width: 150px;                /* Lebar minimum sebelum turun baris */
+  min-width: 150px; /* Lebar minimum sebelum turun baris */
   height: 120px;
   background-color: steelblue;
   color: white;
@@ -367,8 +371,8 @@ Salah satu penggunaan Flexbox yang paling umum adalah menempatkan sebuah elemen 
 .super-parent-layar {
   display: flex;
   justify-content: center; /* Memusatkan pada Main Axis (horizontal) */
-  align-items: center;     /* Memusatkan pada Cross Axis (vertikal) */
-  height: 100vh;           /* Tinggi penuh viewport agar pemusatan vertikal bekerja */
+  align-items: center; /* Memusatkan pada Cross Axis (vertikal) */
+  height: 100vh; /* Tinggi penuh viewport agar pemusatan vertikal bekerja */
 }
 ```
 
@@ -444,16 +448,16 @@ Flexbox adalah sistem tata letak CSS yang dirancang untuk menyusun elemen dalam 
 
 **Ringkasan Properti Flexbox:**
 
-| Properti | Diterapkan Pada | Fungsi |
-|---|---|---|
-| `display: flex` | Induk | Mengaktifkan Flexbox pada elemen induk |
-| `flex-direction` | Induk | Menentukan arah Main Axis |
-| `justify-content` | Induk | Distribusi ruang pada Main Axis |
-| `align-items` | Induk | Perataan elemen pada Cross Axis |
-| `flex-wrap` | Induk | Mengatur perpindahan ke baris baru |
-| `gap` | Induk | Jarak antar elemen anak |
-| `flex-grow` | Anak | Porsi penyerapan ruang kosong |
-| `flex-shrink` | Anak | Tingkat penyusutan saat ruang sempit |
-| `flex-basis` | Anak | Ukuran awal elemen sebelum distribusi ruang |
-| `align-self` | Anak | Perataan Cross Axis individual |
-| `flex` | Anak | Singkatan dari grow, shrink, dan basis |
+| Properti          | Diterapkan Pada | Fungsi                                      |
+| ----------------- | --------------- | ------------------------------------------- |
+| `display: flex`   | Induk           | Mengaktifkan Flexbox pada elemen induk      |
+| `flex-direction`  | Induk           | Menentukan arah Main Axis                   |
+| `justify-content` | Induk           | Distribusi ruang pada Main Axis             |
+| `align-items`     | Induk           | Perataan elemen pada Cross Axis             |
+| `flex-wrap`       | Induk           | Mengatur perpindahan ke baris baru          |
+| `gap`             | Induk           | Jarak antar elemen anak                     |
+| `flex-grow`       | Anak            | Porsi penyerapan ruang kosong               |
+| `flex-shrink`     | Anak            | Tingkat penyusutan saat ruang sempit        |
+| `flex-basis`      | Anak            | Ukuran awal elemen sebelum distribusi ruang |
+| `align-self`      | Anak            | Perataan Cross Axis individual              |
+| `flex`            | Anak            | Singkatan dari grow, shrink, dan basis      |

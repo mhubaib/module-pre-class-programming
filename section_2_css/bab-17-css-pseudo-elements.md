@@ -17,11 +17,11 @@ Ciri khas penulisan Pseudo-Element yang disepakati standar modern adalah menggun
 
 **Perbedaan Pseudo-Class vs Pseudo-Element:**
 
-| | Pseudo-Class | Pseudo-Element |
-|---|---|---|
-| Simbol | `:` (satu titik dua) | `::` (dua titik dua) |
+|        | Pseudo-Class                          | Pseudo-Element                                       |
+| ------ | ------------------------------------- | ---------------------------------------------------- |
+| Simbol | `:` (satu titik dua)                  | `::` (dua titik dua)                                 |
 | Fungsi | Menargetkan **status/keadaan** elemen | Menargetkan atau menciptakan **bagian fisik** elemen |
-| Contoh | `:hover`, `:focus` | `::before`, `::first-letter` |
+| Contoh | `:hover`, `:focus`                    | `::before`, `::first-letter`                         |
 
 **Sintaks Dasar:**
 
@@ -63,7 +63,7 @@ p::first-letter {
 /* Mengubah tampilan teks yang disorot/diblok oleh mouse */
 p::selection {
   background-color: yellow; /* Latar belakang sorotan menjadi kuning */
-  color: red;               /* Warna teks yang disorot menjadi merah */
+  color: red; /* Warna teks yang disorot menjadi merah */
 }
 ```
 
@@ -72,12 +72,16 @@ p::selection {
 ```html
 <!-- HTML -->
 <article class="artikel-blog">
-  <p>Dahulu kala, di sebuah desa kecil yang dikelilingi hutan lebat,
-  hiduplah seorang anak bernama Budi yang gemar membaca buku. Setiap
-  hari ia duduk di bawah pohon besar sambil membuka halamannya.</p>
+  <p>
+    Dahulu kala, di sebuah desa kecil yang dikelilingi hutan lebat, hiduplah
+    seorang anak bernama Budi yang gemar membaca buku. Setiap hari ia duduk di
+    bawah pohon besar sambil membuka halamannya.
+  </p>
 
-  <p>Suatu pagi, ia menemukan sebuah buku misterius berwarna merah tua
-  yang tidak pernah ia lihat sebelumnya di rak perpustakaan desa.</p>
+  <p>
+    Suatu pagi, ia menemukan sebuah buku misterius berwarna merah tua yang tidak
+    pernah ia lihat sebelumnya di rak perpustakaan desa.
+  </p>
 </article>
 ```
 
@@ -89,7 +93,7 @@ p::selection {
   font-size: 400%;
   font-weight: bold;
   color: maroon;
-  float: left;        /* huruf besar diposisikan mengapung ke kiri */
+  float: left; /* huruf besar diposisikan mengapung ke kiri */
   line-height: 0.8;
   margin-right: 6px;
   font-family: Georgia, serif;
@@ -144,12 +148,12 @@ h2 {
 }
 /* Garis pendek dekoratif di bawah judul menggunakan ::after */
 h2::after {
-  content: "";        /* dikosongkan karena berfungsi sebagai elemen visual, bukan teks */
+  content: ""; /* dikosongkan karena berfungsi sebagai elemen visual, bukan teks */
   position: absolute;
-  bottom: -5px;       /* diposisikan tepat di bawah elemen H2 */
+  bottom: -5px; /* diposisikan tepat di bawah elemen H2 */
   left: 0;
-  width: 50px;        /* lebar garis dekoratif */
-  height: 4px;        /* ketebalan garis dekoratif */
+  width: 50px; /* lebar garis dekoratif */
+  height: 4px; /* ketebalan garis dekoratif */
   background-color: green;
 }
 ```
@@ -236,8 +240,10 @@ Selain keempat pseudo-element yang telah dibahas, terdapat dua lainnya yang juga
 
 ```html
 <!-- HTML -->
-<p class="artikel">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p class="artikel">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+  incididunt ut labore et dolore magna aliqua.
+</p>
 
 <input class="input-nama" type="text" placeholder="Masukkan nama lengkap..." />
 ```
@@ -269,11 +275,11 @@ Pseudo-Element adalah fitur CSS yang memungkinkan pengembang menargetkan bagian-
 
 **Ringkasan Pseudo-Element yang Telah Dipelajari:**
 
-| Pseudo-Element | Fungsi |
-|---|---|
-| `::first-letter` | Menargetkan huruf pertama dari sebuah blok teks |
-| `::first-line` | Menargetkan baris pertama yang tampil dari sebuah blok teks |
-| `::selection` | Menargetkan teks yang sedang disorot oleh pengguna |
-| `::before` | Menyisipkan konten tambahan tepat **sebelum** konten asli elemen |
-| `::after` | Menyisipkan konten tambahan tepat **sesudah** konten asli elemen |
-| `::placeholder` | Menargetkan teks placeholder di dalam elemen input form |
+| Pseudo-Element   | Fungsi                                                           |
+| ---------------- | ---------------------------------------------------------------- |
+| `::first-letter` | Menargetkan huruf pertama dari sebuah blok teks                  |
+| `::first-line`   | Menargetkan baris pertama yang tampil dari sebuah blok teks      |
+| `::selection`    | Menargetkan teks yang sedang disorot oleh pengguna               |
+| `::before`       | Menyisipkan konten tambahan tepat **sebelum** konten asli elemen |
+| `::after`        | Menyisipkan konten tambahan tepat **sesudah** konten asli elemen |
+| `::placeholder`  | Menargetkan teks placeholder di dalam elemen input form          |

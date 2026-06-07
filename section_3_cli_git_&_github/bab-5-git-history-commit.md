@@ -3,7 +3,7 @@
 ## Tujuan Pembelajaran
 
 - Mampu melihat daftar riwayat perubahan menggunakan `git log`.
-- Memahami cara membaca informasi *Commit Hash*, penulis, dan tanggal.
+- Memahami cara membaca informasi _Commit Hash_, penulis, dan tanggal.
 - Mengenal cara menampilkan log yang lebih ringkas dan mudah dibaca.
 - Mampu membandingkan perubahan kode menggunakan `git diff`.
 - Mengenal perintah `git blame` untuk menelusuri asal-usul sebuah baris kode.
@@ -39,12 +39,12 @@ git log
 
 Setiap entri dalam `git log` memuat empat informasi:
 
-| Informasi | Penjelasan |
-|---|---|
-| **Commit Hash** | Kode unik sepanjang 40 karakter yang mengidentifikasi setiap commit, seperti nomor identitas untuk setiap versi |
-| **Author** | Nama dan alamat email orang yang membuat commit tersebut |
-| **Date** | Tanggal dan waktu commit dibuat, beserta zona waktunya |
-| **Pesan Commit** | Keterangan yang ditulis oleh pembuat commit untuk menjelaskan perubahan yang dilakukan |
+| Informasi        | Penjelasan                                                                                                      |
+| ---------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Commit Hash**  | Kode unik sepanjang 40 karakter yang mengidentifikasi setiap commit, seperti nomor identitas untuk setiap versi |
+| **Author**       | Nama dan alamat email orang yang membuat commit tersebut                                                        |
+| **Date**         | Tanggal dan waktu commit dibuat, beserta zona waktunya                                                          |
+| **Pesan Commit** | Keterangan yang ditulis oleh pembuat commit untuk menjelaskan perubahan yang dilakukan                          |
 
 Untuk keluar dari tampilan `git log` yang panjang, tekan tombol **`q`**.
 
@@ -68,13 +68,13 @@ Opsi `--oneline` menampilkan hanya 7 karakter pertama dari commit hash dan pesan
 
 **Opsi tambahan yang berguna:**
 
-| Perintah | Fungsi |
-|---|---|
-| `git log --oneline` | Satu baris per commit (hash pendek + pesan) |
-| `git log --oneline -5` | Menampilkan hanya 5 commit terakhir |
-| `git log --oneline --author="Budi"` | Menampilkan commit dari satu orang tertentu |
-| `git log --oneline --since="2 days ago"` | Menampilkan commit dalam dua hari terakhir |
-| `git log --stat` | Menampilkan daftar file yang berubah di setiap commit |
+| Perintah                                 | Fungsi                                                |
+| ---------------------------------------- | ----------------------------------------------------- |
+| `git log --oneline`                      | Satu baris per commit (hash pendek + pesan)           |
+| `git log --oneline -5`                   | Menampilkan hanya 5 commit terakhir                   |
+| `git log --oneline --author="Budi"`      | Menampilkan commit dari satu orang tertentu           |
+| `git log --oneline --since="2 days ago"` | Menampilkan commit dalam dua hari terakhir            |
+| `git log --stat`                         | Menampilkan daftar file yang berubah di setiap commit |
 
 **Contoh — Menampilkan 3 commit terakhir:**
 
@@ -124,11 +124,11 @@ git diff
 
 **Variasi perintah `git diff`:**
 
-| Perintah | Fungsi |
-|---|---|
-| `git diff` | Menampilkan perubahan yang belum masuk Staging Area |
-| `git diff --staged` | Menampilkan perubahan yang sudah masuk Staging Area (sudah `git add`) |
-| `git diff nama-file.css` | Menampilkan perubahan hanya pada satu file tertentu |
+| Perintah                 | Fungsi                                                                |
+| ------------------------ | --------------------------------------------------------------------- |
+| `git diff`               | Menampilkan perubahan yang belum masuk Staging Area                   |
+| `git diff --staged`      | Menampilkan perubahan yang sudah masuk Staging Area (sudah `git add`) |
+| `git diff nama-file.css` | Menampilkan perubahan hanya pada satu file tertentu                   |
 
 > **Kebiasaan yang baik:** Jalankan `git diff` sebelum `git add` untuk memastikan perubahan yang akan dicatat sudah sesuai dengan yang dimaksud.
 
@@ -150,6 +150,7 @@ git blame index.html
 ```
 
 Perintah ini berguna untuk:
+
 - Memahami konteks sebuah perubahan — siapa yang membuatnya dan kapan.
 - Menelusuri kapan sebuah bug pertama kali dimasukkan ke dalam kode.
 - Memahami bagian kode yang tidak kamu tulis sendiri sebelum mengubahnya.
@@ -205,12 +206,12 @@ Kemampuan menelusuri riwayat adalah salah satu fitur paling berharga dari Git. D
 
 **Ringkasan Perintah:**
 
-| Perintah | Fungsi |
-|---|---|
-| `git log` | Menampilkan seluruh riwayat commit secara lengkap |
-| `git log --oneline` | Menampilkan riwayat commit secara ringkas (satu baris per commit) |
-| `git log --oneline -N` | Menampilkan N commit terakhir saja |
-| `git log --stat` | Menampilkan daftar file yang berubah di setiap commit |
-| `git diff` | Menampilkan perubahan yang belum masuk Staging Area |
-| `git diff --staged` | Menampilkan perubahan yang sudah masuk Staging Area |
-| `git blame nama-file` | Menampilkan siapa yang terakhir mengubah setiap baris di sebuah file |
+| Perintah               | Fungsi                                                               |
+| ---------------------- | -------------------------------------------------------------------- |
+| `git log`              | Menampilkan seluruh riwayat commit secara lengkap                    |
+| `git log --oneline`    | Menampilkan riwayat commit secara ringkas (satu baris per commit)    |
+| `git log --oneline -N` | Menampilkan N commit terakhir saja                                   |
+| `git log --stat`       | Menampilkan daftar file yang berubah di setiap commit                |
+| `git diff`             | Menampilkan perubahan yang belum masuk Staging Area                  |
+| `git diff --staged`    | Menampilkan perubahan yang sudah masuk Staging Area                  |
+| `git blame nama-file`  | Menampilkan siapa yang terakhir mengubah setiap baris di sebuah file |

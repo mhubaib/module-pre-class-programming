@@ -3,7 +3,7 @@
 ## Tujuan Pembelajaran
 
 - Mampu mengaktifkan Git pada sebuah folder proyek menggunakan `git init`.
-- Memahami konsep *Three States* dalam Git (Working Directory, Staging Area, Repository).
+- Memahami konsep _Three States_ dalam Git (Working Directory, Staging Area, Repository).
 - Mampu mencatat perubahan kode menggunakan perintah `git add` dan `git commit`.
 
 ---
@@ -45,11 +45,11 @@ ls -a
 
 Git tidak mencatat perubahan secara otomatis setiap kali kamu mengetik. Setiap perubahan harus melewati tiga tahapan resmi sebelum benar-benar tersimpan dalam riwayat Git.
 
-| Tahapan | Nama | Deskripsi |
-|---|---|---|
-| 1 | **Working Directory** | Area tempat kamu menulis dan mengubah kode. File di sini berstatus *Untracked* (baru) atau *Modified* (sudah diubah). |
-| 2 | **Staging Area** | Area tunggu. Tempat mengumpulkan file-file yang sudah siap untuk dicatat dalam versi berikutnya. |
-| 3 | **Repository (Local)** | Tempat penyimpanan permanen. Setiap versi yang sudah di-*commit* akan tersimpan di sini beserta seluruh riwayatnya. |
+| Tahapan | Nama                   | Deskripsi                                                                                                             |
+| ------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| 1       | **Working Directory**  | Area tempat kamu menulis dan mengubah kode. File di sini berstatus _Untracked_ (baru) atau _Modified_ (sudah diubah). |
+| 2       | **Staging Area**       | Area tunggu. Tempat mengumpulkan file-file yang sudah siap untuk dicatat dalam versi berikutnya.                      |
+| 3       | **Repository (Local)** | Tempat penyimpanan permanen. Setiap versi yang sudah di-_commit_ akan tersimpan di sini beserta seluruh riwayatnya.   |
 
 **Analogi Belanja Online:**
 
@@ -92,11 +92,11 @@ git status
 
 Istilah warna dan status yang umum muncul:
 
-| Status | Artinya |
-|---|---|
-| `Untracked` | File baru yang belum pernah dikenal oleh Git |
-| `Modified` | File yang sudah dikenal Git dan baru saja diubah |
-| `Staged` | File yang sudah masuk ke Staging Area, siap di-commit |
+| Status      | Artinya                                               |
+| ----------- | ----------------------------------------------------- |
+| `Untracked` | File baru yang belum pernah dikenal oleh Git          |
+| `Modified`  | File yang sudah dikenal Git dan baru saja diubah      |
+| `Staged`    | File yang sudah masuk ke Staging Area, siap di-commit |
 
 #### Langkah 2 — Masukkan ke Staging Area (`git add`)
 
@@ -142,11 +142,11 @@ git commit -m "Menambahkan halaman utama dan file CSS dasar"
 
 **Panduan menulis pesan commit yang baik:**
 
-| Kurang Baik | Lebih Baik |
-|---|---|
-| `git commit -m "update"` | `git commit -m "Memperbarui warna tombol pada halaman login"` |
-| `git commit -m "fix"` | `git commit -m "Memperbaiki layout yang rusak di tampilan mobile"` |
-| `git commit -m "asdfgh"` | `git commit -m "Menambahkan validasi form kontak"` |
+| Kurang Baik              | Lebih Baik                                                         |
+| ------------------------ | ------------------------------------------------------------------ |
+| `git commit -m "update"` | `git commit -m "Memperbarui warna tombol pada halaman login"`      |
+| `git commit -m "fix"`    | `git commit -m "Memperbaiki layout yang rusak di tampilan mobile"` |
+| `git commit -m "asdfgh"` | `git commit -m "Menambahkan validasi form kontak"`                 |
 
 > **Catatan:** Pesan commit yang jelas sangat penting ketika bekerja dalam tim. Anggota tim lain (atau dirimu sendiri di masa mendatang) harus bisa memahami apa yang diubah hanya dari membaca pesan commit tersebut, tanpa perlu melihat kodenya.
 
@@ -237,12 +237,12 @@ Alur kerja Git yang baru saja dipelajari — `git init`, `git add`, dan `git com
 
 **Ringkasan Perintah:**
 
-| Perintah | Fungsi |
-|---|---|
-| `git init` | Mengaktifkan Git pada folder proyek (dijalankan sekali di awal) |
-| `git status` | Menampilkan status terkini seluruh file dalam proyek |
-| `git add nama-file` | Memasukkan satu file tertentu ke Staging Area |
-| `git add .` | Memasukkan semua perubahan ke Staging Area |
-| `git commit -m "pesan"` | Menyimpan perubahan dari Staging Area ke Repository |
-| `git log` | Menampilkan riwayat seluruh commit secara lengkap |
-| `git log --oneline` | Menampilkan riwayat commit secara ringkas |
+| Perintah                | Fungsi                                                          |
+| ----------------------- | --------------------------------------------------------------- |
+| `git init`              | Mengaktifkan Git pada folder proyek (dijalankan sekali di awal) |
+| `git status`            | Menampilkan status terkini seluruh file dalam proyek            |
+| `git add nama-file`     | Memasukkan satu file tertentu ke Staging Area                   |
+| `git add .`             | Memasukkan semua perubahan ke Staging Area                      |
+| `git commit -m "pesan"` | Menyimpan perubahan dari Staging Area ke Repository             |
+| `git log`               | Menampilkan riwayat seluruh commit secara lengkap               |
+| `git log --oneline`     | Menampilkan riwayat commit secara ringkas                       |

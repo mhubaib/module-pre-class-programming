@@ -6,7 +6,7 @@
 - Mampu menyalin proyek dari GitHub ke komputer lokal (`clone`).
 - Memahami cara memperbarui kode lokal dengan perubahan terbaru dari GitHub (`pull`).
 - Mampu menyalin repositori orang lain ke akun sendiri (`fork`).
-- Mengenal konsep *Pull Request* (PR) sebagai cara berkontribusi pada proyek tim atau open source.
+- Mengenal konsep _Pull Request_ (PR) sebagai cara berkontribusi pada proyek tim atau open source.
 
 ---
 
@@ -50,11 +50,11 @@ git push -u origin main
 
 **Penjelasan opsi pada `git push`:**
 
-| Bagian | Penjelasan |
-|---|---|
-| `origin` | Nama alias untuk alamat repositori GitHub (didaftarkan via `git remote add`) |
-| `main` | Nama branch yang dikirimkan |
-| `-u` | Singkatan dari `--set-upstream`; menghubungkan branch lokal dengan branch di GitHub sehingga perintah `git push` berikutnya tidak perlu menyebutkan `origin main` lagi |
+| Bagian   | Penjelasan                                                                                                                                                             |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `origin` | Nama alias untuk alamat repositori GitHub (didaftarkan via `git remote add`)                                                                                           |
+| `main`   | Nama branch yang dikirimkan                                                                                                                                            |
+| `-u`     | Singkatan dari `--set-upstream`; menghubungkan branch lokal dengan branch di GitHub sehingga perintah `git push` berikutnya tidak perlu menyebutkan `origin main` lagi |
 
 Setelah perintah di atas berhasil, perintah push selanjutnya cukup:
 
@@ -289,11 +289,11 @@ Alur kerja GitHub yang telah dipelajari di modul ini adalah inti dari cara kerja
 
 **Ringkasan Alur dan Perintah:**
 
-| Perintah / Fitur | Arah | Fungsi |
-|---|---|---|
-| `git push` | Lokal → GitHub | Mengirim commit ke GitHub |
-| `git pull` | GitHub → Lokal | Mengambil dan menggabungkan pembaruan dari GitHub |
-| `git clone` | GitHub → Lokal | Mengunduh repositori secara lengkap (pertama kali) |
-| `git remote add origin URL` | — | Mendaftarkan alamat repositori GitHub ke proyek lokal |
-| Fork | GitHub → GitHub | Menyalin repositori orang lain ke akunmu di GitHub |
-| Pull Request (PR) | Fork → Repo Asli | Mengajukan perubahan untuk ditinjau dan digabungkan |
+| Perintah / Fitur            | Arah             | Fungsi                                                |
+| --------------------------- | ---------------- | ----------------------------------------------------- |
+| `git push`                  | Lokal → GitHub   | Mengirim commit ke GitHub                             |
+| `git pull`                  | GitHub → Lokal   | Mengambil dan menggabungkan pembaruan dari GitHub     |
+| `git clone`                 | GitHub → Lokal   | Mengunduh repositori secara lengkap (pertama kali)    |
+| `git remote add origin URL` | —                | Mendaftarkan alamat repositori GitHub ke proyek lokal |
+| Fork                        | GitHub → GitHub  | Menyalin repositori orang lain ke akunmu di GitHub    |
+| Pull Request (PR)           | Fork → Repo Asli | Mengajukan perubahan untuk ditinjau dan digabungkan   |

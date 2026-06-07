@@ -16,23 +16,24 @@ Sejauh ini, kamu mungkin sudah sangat terbiasa berinteraksi dengan komputer meng
 
 ### 1. Apa itu CLI?
 
-**CLI (Command Line Interface)** adalah antarmuka berbasis teks di mana pengguna memberikan instruksi kepada komputer dengan cara mengetikkan baris perintah (*commands*).
+**CLI (Command Line Interface)** adalah antarmuka berbasis teks di mana pengguna memberikan instruksi kepada komputer dengan cara mengetikkan baris perintah (_commands_).
 
 Bayangkan jika GUI adalah cara kita "menunjuk" apa yang kita mau, maka CLI adalah cara kita "berbicara" langsung kepada sistem operasi.
 
 **Perbandingan GUI vs CLI:**
 
-| | GUI | CLI |
-|---|---|---|
-| Cara berinteraksi | Klik, seret, dan pilih menggunakan mouse | Ketik perintah teks menggunakan keyboard |
-| Kecepatan untuk tugas kompleks | Lebih lambat (banyak langkah manual) | Lebih cepat (satu baris perintah) |
-| Kurva belajar | Mudah dipelajari sejak awal | Memerlukan waktu untuk menghafal perintah |
-| Kemampuan otomatisasi | Terbatas | Sangat tinggi |
-| Ketersediaan di server | Tidak selalu ada | Selalu tersedia |
+|                                | GUI                                      | CLI                                       |
+| ------------------------------ | ---------------------------------------- | ----------------------------------------- |
+| Cara berinteraksi              | Klik, seret, dan pilih menggunakan mouse | Ketik perintah teks menggunakan keyboard  |
+| Kecepatan untuk tugas kompleks | Lebih lambat (banyak langkah manual)     | Lebih cepat (satu baris perintah)         |
+| Kurva belajar                  | Mudah dipelajari sejak awal              | Memerlukan waktu untuk menghafal perintah |
+| Kemampuan otomatisasi          | Terbatas                                 | Sangat tinggi                             |
+| Ketersediaan di server         | Tidak selalu ada                         | Selalu tersedia                           |
 
 **Contoh perbandingan nyata:**
 
 Untuk membuat folder bernama `proyek-web` di dalam direktori `Dokumen`, kamu bisa:
+
 - **Via GUI**: Buka File Explorer → navigasi ke folder Dokumen → klik kanan → pilih "New Folder" → ketik nama folder → tekan Enter.
 - **Via CLI**: Cukup ketik satu baris perintah berikut, lalu tekan Enter:
 
@@ -46,7 +47,7 @@ Semakin kompleks tugasnya — misalnya membuat 10 folder sekaligus — perbedaan
 
 ### 2. Mengapa Programmer Menggunakan CLI?
 
-Mungkin kamu bertanya: *"Kenapa harus repot mengetik kalau bisa tinggal klik?"*
+Mungkin kamu bertanya: _"Kenapa harus repot mengetik kalau bisa tinggal klik?"_
 
 Ada beberapa alasan utama:
 
@@ -75,11 +76,11 @@ Tempat untuk mengetikkan perintah CLI disebut **Terminal** atau **Console**. Ter
 
 **Windows:**
 
-| Aplikasi | Keterangan |
-|---|---|
-| **Command Prompt (CMD)** | Terminal bawaan Windows yang paling dasar. Menggunakan sintaks perintah Windows. |
-| **PowerShell** | Versi yang lebih canggih dari CMD, dengan kemampuan otomatisasi yang lebih kuat. |
-| **Git Bash** | Terminal yang diinstal bersama Git. Menggunakan sintaks Unix/Linux, lebih umum digunakan dalam pengembangan web modern. **Ini yang akan kita gunakan di modul-modul berikutnya.** |
+| Aplikasi                 | Keterangan                                                                                                                                                                        |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Command Prompt (CMD)** | Terminal bawaan Windows yang paling dasar. Menggunakan sintaks perintah Windows.                                                                                                  |
+| **PowerShell**           | Versi yang lebih canggih dari CMD, dengan kemampuan otomatisasi yang lebih kuat.                                                                                                  |
+| **Git Bash**             | Terminal yang diinstal bersama Git. Menggunakan sintaks Unix/Linux, lebih umum digunakan dalam pengembangan web modern. **Ini yang akan kita gunakan di modul-modul berikutnya.** |
 
 **macOS dan Linux:**
 
@@ -118,8 +119,8 @@ perintah  [opsi]  [argumen]
 ```
 
 - **Perintah**: Nama aksi yang ingin dijalankan (misalnya `mkdir` untuk membuat folder).
-- **Opsi** *(opsional)*: Pengaturan tambahan yang mengubah perilaku perintah, biasanya diawali tanda `-` atau `--` (misalnya `-v` atau `--verbose`).
-- **Argumen** *(opsional)*: Target atau nilai yang diberikan kepada perintah (misalnya nama folder atau file).
+- **Opsi** _(opsional)_: Pengaturan tambahan yang mengubah perilaku perintah, biasanya diawali tanda `-` atau `--` (misalnya `-v` atau `--verbose`).
+- **Argumen** _(opsional)_: Target atau nilai yang diberikan kepada perintah (misalnya nama folder atau file).
 
 **Contoh:**
 
@@ -143,18 +144,18 @@ ls -la
 
 Berikut adalah beberapa perintah dasar yang akan sangat sering kamu gunakan selama belajar pemrograman. Perintah-perintah ini berlaku di Git Bash, macOS Terminal, dan Linux Terminal.
 
-| Perintah | Kepanjangan | Fungsi | Contoh Penggunaan |
-|---|---|---|---|
-| `pwd` | Print Working Directory | Menampilkan lokasi direktori saat ini | `pwd` |
-| `ls` | List | Menampilkan daftar file dan folder | `ls` atau `ls -la` |
-| `cd` | Change Directory | Berpindah ke direktori lain | `cd Dokumen` |
-| `mkdir` | Make Directory | Membuat folder baru | `mkdir proyek-web` |
-| `touch` | — | Membuat file baru yang kosong | `touch index.html` |
-| `rm` | Remove | Menghapus file | `rm file.txt` |
-| `rm -r` | Remove Recursive | Menghapus folder beserta isinya | `rm -r nama-folder` |
-| `cp` | Copy | Menyalin file atau folder | `cp file.txt salinan.txt` |
-| `mv` | Move | Memindahkan atau mengubah nama file | `mv lama.txt baru.txt` |
-| `clear` | — | Membersihkan tampilan terminal | `clear` |
+| Perintah | Kepanjangan             | Fungsi                                | Contoh Penggunaan         |
+| -------- | ----------------------- | ------------------------------------- | ------------------------- |
+| `pwd`    | Print Working Directory | Menampilkan lokasi direktori saat ini | `pwd`                     |
+| `ls`     | List                    | Menampilkan daftar file dan folder    | `ls` atau `ls -la`        |
+| `cd`     | Change Directory        | Berpindah ke direktori lain           | `cd Dokumen`              |
+| `mkdir`  | Make Directory          | Membuat folder baru                   | `mkdir proyek-web`        |
+| `touch`  | —                       | Membuat file baru yang kosong         | `touch index.html`        |
+| `rm`     | Remove                  | Menghapus file                        | `rm file.txt`             |
+| `rm -r`  | Remove Recursive        | Menghapus folder beserta isinya       | `rm -r nama-folder`       |
+| `cp`     | Copy                    | Menyalin file atau folder             | `cp file.txt salinan.txt` |
+| `mv`     | Move                    | Memindahkan atau mengubah nama file   | `mv lama.txt baru.txt`    |
+| `clear`  | —                       | Membersihkan tampilan terminal        | `clear`                   |
 
 **Contoh sesi terminal sederhana:**
 
@@ -192,11 +193,11 @@ Di modul-modul berikutnya, kamu akan mulai menggunakan terminal secara langsung 
 
 **Ringkasan:**
 
-| Konsep | Penjelasan Singkat |
-|---|---|
-| CLI | Antarmuka berbasis teks untuk memberi perintah kepada komputer |
-| GUI | Antarmuka berbasis grafis yang dioperasikan dengan mouse |
-| Terminal / Console | Aplikasi tempat menulis dan menjalankan perintah CLI |
-| Prompt (`$`) | Tanda bahwa terminal siap menerima perintah |
-| CMD / PowerShell | Terminal bawaan Windows |
-| Git Bash | Terminal berbasis Unix untuk Windows, direkomendasikan untuk pengembangan web |
+| Konsep             | Penjelasan Singkat                                                            |
+| ------------------ | ----------------------------------------------------------------------------- |
+| CLI                | Antarmuka berbasis teks untuk memberi perintah kepada komputer                |
+| GUI                | Antarmuka berbasis grafis yang dioperasikan dengan mouse                      |
+| Terminal / Console | Aplikasi tempat menulis dan menjalankan perintah CLI                          |
+| Prompt (`$`)       | Tanda bahwa terminal siap menerima perintah                                   |
+| CMD / PowerShell   | Terminal bawaan Windows                                                       |
+| Git Bash           | Terminal berbasis Unix untuk Windows, direkomendasikan untuk pengembangan web |

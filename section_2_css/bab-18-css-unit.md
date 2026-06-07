@@ -134,8 +134,8 @@ Satuan `em` mengacu pada **ukuran font elemen induk langsungnya**. Jika elemen i
 }
 
 .teks-anak {
-  font-size: 1.5em;   /* 1.5 × 16px = 24px */
-  padding: 2em;       /* 2 × 16px = 32px */
+  font-size: 1.5em; /* 1.5 × 16px = 24px */
+  padding: 2em; /* 2 × 16px = 32px */
 }
 ```
 
@@ -144,7 +144,9 @@ Satuan `em` mengacu pada **ukuran font elemen induk langsungnya**. Jika elemen i
 ```html
 <!-- HTML -->
 <div class="blok-kutipan">
-  <p class="teks-kutipan">"Pendidikan adalah senjata paling ampuh untuk mengubah dunia."</p>
+  <p class="teks-kutipan">
+    "Pendidikan adalah senjata paling ampuh untuk mengubah dunia."
+  </p>
   <span class="sumber">— Nelson Mandela</span>
 </div>
 ```
@@ -153,7 +155,7 @@ Satuan `em` mengacu pada **ukuran font elemen induk langsungnya**. Jika elemen i
 /* CSS */
 .blok-kutipan {
   font-size: 18px; /* Ukuran font induk sebagai acuan em */
-  padding: 1.5em;  /* 1.5 × 18px = 27px */
+  padding: 1.5em; /* 1.5 × 18px = 27px */
   border-left: 0.25em solid steelblue; /* 0.25 × 18px = 4.5px */
 }
 
@@ -184,12 +186,12 @@ html {
 }
 
 h1 {
-  font-size: 2rem;      /* 2 × 16px = 32px */
+  font-size: 2rem; /* 2 × 16px = 32px */
   margin-bottom: 1.5rem; /* 1.5 × 16px = 24px */
 }
 
 p {
-  font-size: 1rem;    /* 1 × 16px = 16px */
+  font-size: 1rem; /* 1 × 16px = 16px */
   line-height: 1.75rem; /* 1.75 × 16px = 28px */
 }
 ```
@@ -213,22 +215,22 @@ html {
 }
 
 .judul {
-  font-size: 2.5rem;     /* 40px */
-  margin-bottom: 1rem;   /* 16px */
+  font-size: 2.5rem; /* 40px */
+  margin-bottom: 1rem; /* 16px */
 }
 
 .sub-judul {
-  font-size: 1.5rem;     /* 24px */
+  font-size: 1.5rem; /* 24px */
   margin-bottom: 0.75rem; /* 12px */
 }
 
 .isi {
-  font-size: 1rem;       /* 16px */
-  line-height: 1.75rem;  /* 28px */
+  font-size: 1rem; /* 16px */
+  line-height: 1.75rem; /* 28px */
 }
 
 .catatan {
-  font-size: 0.75rem;    /* 12px */
+  font-size: 0.75rem; /* 12px */
   color: gray;
 }
 ```
@@ -270,8 +272,8 @@ Satuan ini mengukur dimensi berdasarkan **ukuran area tampilan (viewport) browse
 ```css
 /* CSS */
 .hero {
-  width: 100vw;          /* Melebar penuh mengikuti lebar layar */
-  height: 100vh;         /* Mengisi penuh tinggi layar saat pertama kali dibuka */
+  width: 100vw; /* Melebar penuh mengikuti lebar layar */
+  height: 100vh; /* Mengisi penuh tinggi layar saat pertama kali dibuka */
   background-color: #1a1a2e;
   color: white;
   display: flex;
@@ -282,7 +284,7 @@ Satuan ini mengukur dimensi berdasarkan **ukuran area tampilan (viewport) browse
 }
 
 .hero-judul {
-  font-size: 5vw;        /* Ukuran teks ikut menyesuaikan lebar layar */
+  font-size: 5vw; /* Ukuran teks ikut menyesuaikan lebar layar */
 }
 
 .hero-subjudul {
@@ -305,11 +307,11 @@ Satuan ini mengukur dimensi berdasarkan **ukuran area tampilan (viewport) browse
 
 Pemilihan satuan ukur yang tepat sangat berpengaruh pada kualitas tampilan dan ketangguhan sebuah halaman web di berbagai ukuran layar. Berikut panduan singkat penggunaannya:
 
-| Satuan | Jenis | Acuan | Digunakan Untuk |
-|---|---|---|---|
-| `px` | Absolut | Tetap | Border tipis, shadow, detail presisi kecil |
-| `%` | Relatif | Elemen induk | Lebar/tinggi elemen yang perlu elastis |
-| `em` | Relatif | Font elemen induk langsung | Spasi dan ukuran yang terkait komponen tertentu |
-| `rem` | Relatif | Font elemen `<html>` | Font, padding, dan margin secara konsisten |
-| `vw` | Relatif | Lebar viewport | Elemen yang perlu mengikuti lebar layar |
-| `vh` | Relatif | Tinggi viewport | Hero section, modal, elemen full-screen |
+| Satuan | Jenis   | Acuan                      | Digunakan Untuk                                 |
+| ------ | ------- | -------------------------- | ----------------------------------------------- |
+| `px`   | Absolut | Tetap                      | Border tipis, shadow, detail presisi kecil      |
+| `%`    | Relatif | Elemen induk               | Lebar/tinggi elemen yang perlu elastis          |
+| `em`   | Relatif | Font elemen induk langsung | Spasi dan ukuran yang terkait komponen tertentu |
+| `rem`  | Relatif | Font elemen `<html>`       | Font, padding, dan margin secara konsisten      |
+| `vw`   | Relatif | Lebar viewport             | Elemen yang perlu mengikuti lebar layar         |
+| `vh`   | Relatif | Tinggi viewport            | Hero section, modal, elemen full-screen         |

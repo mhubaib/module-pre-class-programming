@@ -26,11 +26,11 @@ Sebuah website yang responsif berperilaku seperti air — ketika dituangkan ke d
 
 **Contoh perubahan tata letak yang umum:**
 
-| Ukuran Layar | Tampilan Tata Letak |
-|---|---|
-| Ponsel (`< 600px`) | Satu kolom, elemen bertumpuk dari atas ke bawah |
-| Tablet (`600px – 992px`) | Dua kolom |
-| Desktop (`> 992px`) | Tiga kolom atau lebih, dengan sidebar |
+| Ukuran Layar             | Tampilan Tata Letak                             |
+| ------------------------ | ----------------------------------------------- |
+| Ponsel (`< 600px`)       | Satu kolom, elemen bertumpuk dari atas ke bawah |
+| Tablet (`600px – 992px`) | Dua kolom                                       |
+| Desktop (`> 992px`)      | Tiga kolom atau lebih, dengan sidebar           |
 
 ---
 
@@ -40,7 +40,7 @@ Sebelum menulis satu baris Media Query pun, terdapat satu baris kode HTML yang *
 
 ```html
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 ```
 
@@ -147,14 +147,14 @@ Media Query adalah mekanisme CSS yang memungkinkan kita menulis aturan gaya yang
 
 **Breakpoint** adalah nilai lebar layar tertentu di mana tata letak halaman akan berubah. Berikut adalah nilai breakpoint yang umum digunakan sebagai referensi, mengacu pada konvensi framework CSS seperti Bootstrap dan Tailwind CSS:
 
-| Breakpoint | Lebar | Target Perangkat |
-|---|---|---|
-| Extra Small | `< 576px` | Ponsel kecil (portrait) |
-| Small | `≥ 576px` | Ponsel besar / ponsel landscape |
-| Medium | `≥ 768px` | Tablet (portrait) |
-| Large | `≥ 992px` | Laptop / desktop kecil |
-| Extra Large | `≥ 1200px` | Desktop / monitor lebar |
-| XXL | `≥ 1400px` | Monitor sangat lebar / TV |
+| Breakpoint  | Lebar      | Target Perangkat                |
+| ----------- | ---------- | ------------------------------- |
+| Extra Small | `< 576px`  | Ponsel kecil (portrait)         |
+| Small       | `≥ 576px`  | Ponsel besar / ponsel landscape |
+| Medium      | `≥ 768px`  | Tablet (portrait)               |
+| Large       | `≥ 992px`  | Laptop / desktop kecil          |
+| Extra Large | `≥ 1200px` | Desktop / monitor lebar         |
+| XXL         | `≥ 1400px` | Monitor sangat lebar / TV       |
 
 > **Catatan:** Nilai breakpoint di atas adalah panduan umum, bukan aturan mutlak. Dalam praktiknya, breakpoint sebaiknya ditentukan berdasarkan titik di mana desain spesifik kamu mulai terlihat kurang optimal, bukan sekadar mengikuti nilai standar.
 
@@ -168,46 +168,46 @@ Berikut adalah contoh implementasi lengkap halaman responsif menggunakan pendeka
 <!-- HTML -->
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Responsif</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Responsif</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">BlogKu</div>
+      <nav class="navigasi">
+        <a href="#">Beranda</a>
+        <a href="#">Artikel</a>
+        <a href="#">Tentang</a>
+        <a href="#">Kontak</a>
+      </nav>
+    </header>
 
-  <header class="header">
-    <div class="logo">BlogKu</div>
-    <nav class="navigasi">
-      <a href="#">Beranda</a>
-      <a href="#">Artikel</a>
-      <a href="#">Tentang</a>
-      <a href="#">Kontak</a>
-    </nav>
-  </header>
+    <main class="wadah-konten">
+      <section class="daftar-artikel">
+        <article class="kartu-artikel">
+          <h2>Judul Artikel Pertama</h2>
+          <p>
+            Ringkasan isi artikel pertama yang cukup menarik untuk dibaca...
+          </p>
+        </article>
+        <article class="kartu-artikel">
+          <h2>Judul Artikel Kedua</h2>
+          <p>Ringkasan isi artikel kedua yang tidak kalah menariknya...</p>
+        </article>
+        <article class="kartu-artikel">
+          <h2>Judul Artikel Ketiga</h2>
+          <p>Ringkasan isi artikel ketiga sebagai penutup daftar...</p>
+        </article>
+      </section>
+    </main>
 
-  <main class="wadah-konten">
-    <section class="daftar-artikel">
-      <article class="kartu-artikel">
-        <h2>Judul Artikel Pertama</h2>
-        <p>Ringkasan isi artikel pertama yang cukup menarik untuk dibaca...</p>
-      </article>
-      <article class="kartu-artikel">
-        <h2>Judul Artikel Kedua</h2>
-        <p>Ringkasan isi artikel kedua yang tidak kalah menariknya...</p>
-      </article>
-      <article class="kartu-artikel">
-        <h2>Judul Artikel Ketiga</h2>
-        <p>Ringkasan isi artikel ketiga sebagai penutup daftar...</p>
-      </article>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p>© 2026 BlogKu. Hak cipta dilindungi.</p>
-  </footer>
-
-</body>
+    <footer class="footer">
+      <p>© 2026 BlogKu. Hak cipta dilindungi.</p>
+    </footer>
+  </body>
 </html>
 ```
 
@@ -289,12 +289,10 @@ body {
   font-size: 0.875rem;
 }
 
-
 /* ============================================
    Breakpoint: Tablet ke atas (≥ 768px)
    ============================================ */
 @media screen and (min-width: 768px) {
-
   /* Header: logo dan navigasi berdampingan */
   .header {
     flex-direction: row;
@@ -317,15 +315,12 @@ body {
   .kartu-artikel {
     flex: 1 1 calc(50% - 8px); /* Dua kolom dengan jarak */
   }
-
 }
-
 
 /* ============================================
    Breakpoint: Desktop ke atas (≥ 992px)
    ============================================ */
 @media screen and (min-width: 992px) {
-
   /* Konten dibatasi lebar maksimumnya dan dicentrasi */
   .wadah-konten {
     max-width: 1100px;
@@ -337,7 +332,6 @@ body {
   .kartu-artikel {
     flex: 1 1 calc(33.333% - 11px); /* Tiga kolom dengan jarak */
   }
-
 }
 ```
 
@@ -369,10 +363,10 @@ img {
 ```css
 /* Pola umum untuk membatasi lebar konten di layar besar */
 .container {
-  width: 100%;           /* Mengisi penuh di layar kecil */
-  max-width: 1200px;     /* Tidak melebihi 1200px di layar lebar */
-  margin: 0 auto;        /* Otomatis terpusat secara horizontal */
-  padding: 0 16px;       /* Jarak dari pinggir layar di mobile */
+  width: 100%; /* Mengisi penuh di layar kecil */
+  max-width: 1200px; /* Tidak melebihi 1200px di layar lebar */
+  margin: 0 auto; /* Otomatis terpusat secara horizontal */
+  padding: 0 16px; /* Jarak dari pinggir layar di mobile */
 }
 ```
 
@@ -392,11 +386,11 @@ Selamat! Kamu telah menyelesaikan seluruh modul CSS — mulai dari selektor dasa
 
 **Ringkasan Breakpoint Umum (Mobile First):**
 
-| Breakpoint | `min-width` | Target |
-|---|---|---|
-| Mobile (default) | — | Ponsel (tidak perlu `@media`) |
-| Small | `576px` | Ponsel besar / landscape |
-| Medium | `768px` | Tablet |
-| Large | `992px` | Laptop / desktop kecil |
-| Extra Large | `1200px` | Desktop / monitor lebar |
-| XXL | `1400px` | Monitor sangat lebar |
+| Breakpoint       | `min-width` | Target                        |
+| ---------------- | ----------- | ----------------------------- |
+| Mobile (default) | —           | Ponsel (tidak perlu `@media`) |
+| Small            | `576px`     | Ponsel besar / landscape      |
+| Medium           | `768px`     | Tablet                        |
+| Large            | `992px`     | Laptop / desktop kecil        |
+| Extra Large      | `1200px`    | Desktop / monitor lebar       |
+| XXL              | `1400px`    | Monitor sangat lebar          |

@@ -178,11 +178,16 @@ tr:nth-child(odd) {
 ```html
 <!-- HTML -->
 <ul class="menu-restoran">
-  <li>Nasi Goreng Spesial</li>   <!-- urutan ke-1 -->
-  <li>Mie Ayam Bakso</li>        <!-- urutan ke-2 -->
-  <li>Soto Betawi</li>           <!-- urutan ke-3 -->
-  <li>Rendang Daging</li>        <!-- urutan ke-4 -->
-  <li>Es Teh Manis</li>          <!-- urutan ke-5 (terakhir) -->
+  <li>Nasi Goreng Spesial</li>
+  <!-- urutan ke-1 -->
+  <li>Mie Ayam Bakso</li>
+  <!-- urutan ke-2 -->
+  <li>Soto Betawi</li>
+  <!-- urutan ke-3 -->
+  <li>Rendang Daging</li>
+  <!-- urutan ke-4 -->
+  <li>Es Teh Manis</li>
+  <!-- urutan ke-5 (terakhir) -->
 </ul>
 ```
 
@@ -226,12 +231,12 @@ tr:nth-child(odd) {
 
 ```css
 /* Setiap 3 elemen mulai dari elemen ke-1: 1, 4, 7, 10, ... */
-li:nth-child(3n+1) {
+li:nth-child(3n + 1) {
   color: tomato;
 }
 
 /* 5 elemen pertama saja */
-li:nth-child(-n+5) {
+li:nth-child(-n + 5) {
   font-weight: bold;
 }
 ```
@@ -309,15 +314,15 @@ Pseudo-Class adalah jalan pintas CSS agar kita tidak perlu menumpuk puluhan teks
 
 **Ringkasan Pseudo-Class yang Sudah Dipelajari:**
 
-| Pseudo-Class | Kategori | Kapan Aktif |
-|---|---|---|
-| `:hover` | Interaksi | Mouse melayang di atas elemen |
-| `:active` | Interaksi | Elemen sedang diklik/ditekan |
-| `:focus` | Interaksi | Elemen sedang aktif/dipilih |
-| `:first-child` | Struktural | Anak pertama dari induknya |
-| `:last-child` | Struktural | Anak terakhir dari induknya |
-| `:nth-child(n)` | Struktural | Anak ke-n sesuai angka/rumus |
-| `:visited` | Tautan | Link sudah pernah dikunjungi |
-| `:disabled` | Form | Elemen form dinonaktifkan |
-| `:checked` | Form | Checkbox/radio tercentang |
-| `:not(x)` | Logika | Semua elemen kecuali `x` |
+| Pseudo-Class    | Kategori   | Kapan Aktif                   |
+| --------------- | ---------- | ----------------------------- |
+| `:hover`        | Interaksi  | Mouse melayang di atas elemen |
+| `:active`       | Interaksi  | Elemen sedang diklik/ditekan  |
+| `:focus`        | Interaksi  | Elemen sedang aktif/dipilih   |
+| `:first-child`  | Struktural | Anak pertama dari induknya    |
+| `:last-child`   | Struktural | Anak terakhir dari induknya   |
+| `:nth-child(n)` | Struktural | Anak ke-n sesuai angka/rumus  |
+| `:visited`      | Tautan     | Link sudah pernah dikunjungi  |
+| `:disabled`     | Form       | Elemen form dinonaktifkan     |
+| `:checked`      | Form       | Checkbox/radio tercentang     |
+| `:not(x)`       | Logika     | Semua elemen kecuali `x`      |

@@ -24,14 +24,14 @@ Di sinilah **CSS Grid** berperan. CSS Grid adalah sistem tata letak dua dimensi 
 
 Sebelum mulai menulis kode, penting untuk memahami istilah-istilah yang digunakan dalam sistem CSS Grid. Berikut penjelasannya dengan analogi pembangunan kawasan perumahan:
 
-| Istilah | Penjelasan | Analogi |
-|:---|:---|:---|
-| **Grid Container** | Elemen induk yang memiliki `display: grid` | Seluruh area lahan kawasan perumahan |
-| **Grid Item** | Elemen anak langsung di dalam container | Bangunan-bangunan yang berdiri di kawasan tersebut |
-| **Grid Line** | Garis pembagi horizontal dan vertikal yang membentuk struktur grid | Pagar batas antar kaveling |
-| **Grid Track** | Ruang di antara dua garis grid (satu baris atau satu kolom) | Deretan blok bangunan atau jalan utama |
-| **Grid Cell** | Unit terkecil dari grid (pertemuan satu baris dan satu kolom) | Satu petak kaveling terkecil |
-| **Grid Area** | Ruang yang dikelilingi oleh empat garis grid, dapat mencakup beberapa cell | Gabungan beberapa kaveling untuk satu fungsi tertentu |
+| Istilah            | Penjelasan                                                                 | Analogi                                               |
+| :----------------- | :------------------------------------------------------------------------- | :---------------------------------------------------- |
+| **Grid Container** | Elemen induk yang memiliki `display: grid`                                 | Seluruh area lahan kawasan perumahan                  |
+| **Grid Item**      | Elemen anak langsung di dalam container                                    | Bangunan-bangunan yang berdiri di kawasan tersebut    |
+| **Grid Line**      | Garis pembagi horizontal dan vertikal yang membentuk struktur grid         | Pagar batas antar kaveling                            |
+| **Grid Track**     | Ruang di antara dua garis grid (satu baris atau satu kolom)                | Deretan blok bangunan atau jalan utama                |
+| **Grid Cell**      | Unit terkecil dari grid (pertemuan satu baris dan satu kolom)              | Satu petak kaveling terkecil                          |
+| **Grid Area**      | Ruang yang dikelilingi oleh empat garis grid, dapat mencakup beberapa cell | Gabungan beberapa kaveling untuk satu fungsi tertentu |
 
 ---
 
@@ -39,32 +39,32 @@ Sebelum mulai menulis kode, penting untuk memahami istilah-istilah yang digunaka
 
 **A. Properti untuk Elemen Induk (Container)**
 
-| Properti | Fungsi |
-|:---|:---|
-| `display: grid` | Mengaktifkan mode Grid pada elemen induk |
-| `grid-template-columns` | Menentukan jumlah dan lebar kolom |
-| `grid-template-rows` | Menentukan jumlah dan tinggi baris |
-| `gap` | Mengatur jarak antar elemen secara horizontal dan vertikal sekaligus |
-| `row-gap` / `column-gap` | Mengatur jarak khusus untuk baris atau kolom saja |
-| `justify-items` | Meratakan konten elemen anak secara horizontal di dalam cell-nya |
-| `align-items` | Meratakan konten elemen anak secara vertikal di dalam cell-nya |
-| `justify-content` | Meratakan keseluruhan grid secara horizontal jika ukurannya lebih kecil dari container |
-| `align-content` | Meratakan keseluruhan grid secara vertikal jika ukurannya lebih kecil dari container |
-| `grid-template-areas` | Mendefinisikan area bernama untuk memudahkan penempatan elemen |
-| `grid-auto-rows` / `grid-auto-columns` | Menentukan ukuran baris atau kolom yang dibuat secara otomatis (implicit grid) |
-| `grid-auto-flow` | Menentukan arah pengisian slot yang tersedia secara otomatis |
+| Properti                               | Fungsi                                                                                 |
+| :------------------------------------- | :------------------------------------------------------------------------------------- |
+| `display: grid`                        | Mengaktifkan mode Grid pada elemen induk                                               |
+| `grid-template-columns`                | Menentukan jumlah dan lebar kolom                                                      |
+| `grid-template-rows`                   | Menentukan jumlah dan tinggi baris                                                     |
+| `gap`                                  | Mengatur jarak antar elemen secara horizontal dan vertikal sekaligus                   |
+| `row-gap` / `column-gap`               | Mengatur jarak khusus untuk baris atau kolom saja                                      |
+| `justify-items`                        | Meratakan konten elemen anak secara horizontal di dalam cell-nya                       |
+| `align-items`                          | Meratakan konten elemen anak secara vertikal di dalam cell-nya                         |
+| `justify-content`                      | Meratakan keseluruhan grid secara horizontal jika ukurannya lebih kecil dari container |
+| `align-content`                        | Meratakan keseluruhan grid secara vertikal jika ukurannya lebih kecil dari container   |
+| `grid-template-areas`                  | Mendefinisikan area bernama untuk memudahkan penempatan elemen                         |
+| `grid-auto-rows` / `grid-auto-columns` | Menentukan ukuran baris atau kolom yang dibuat secara otomatis (implicit grid)         |
+| `grid-auto-flow`                       | Menentukan arah pengisian slot yang tersedia secara otomatis                           |
 
 **B. Properti untuk Elemen Anak (Item)**
 
-| Properti | Fungsi |
-|:---|:---|
-| `grid-column-start` / `grid-column-end` | Menentukan garis awal dan akhir kolom yang ditempati elemen |
-| `grid-row-start` / `grid-row-end` | Menentukan garis awal dan akhir baris yang ditempati elemen |
-| `grid-column` | Penulisan singkat untuk `grid-column-start` dan `grid-column-end` |
-| `grid-row` | Penulisan singkat untuk `grid-row-start` dan `grid-row-end` |
-| `grid-area` | Menghubungkan elemen dengan nama area dari `grid-template-areas`, atau penulisan singkat untuk posisi baris dan kolom |
-| `justify-self` | Perataan horizontal individual untuk satu elemen tertentu |
-| `align-self` | Perataan vertikal individual untuk satu elemen tertentu |
+| Properti                                | Fungsi                                                                                                                |
+| :-------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| `grid-column-start` / `grid-column-end` | Menentukan garis awal dan akhir kolom yang ditempati elemen                                                           |
+| `grid-row-start` / `grid-row-end`       | Menentukan garis awal dan akhir baris yang ditempati elemen                                                           |
+| `grid-column`                           | Penulisan singkat untuk `grid-column-start` dan `grid-column-end`                                                     |
+| `grid-row`                              | Penulisan singkat untuk `grid-row-start` dan `grid-row-end`                                                           |
+| `grid-area`                             | Menghubungkan elemen dengan nama area dari `grid-template-areas`, atau penulisan singkat untuk posisi baris dan kolom |
+| `justify-self`                          | Perataan horizontal individual untuk satu elemen tertentu                                                             |
+| `align-self`                            | Perataan vertikal individual untuk satu elemen tertentu                                                               |
 
 ---
 
@@ -222,7 +222,7 @@ Terdapat perbedaan penting antara grid yang didefinisikan secara eksplisit dan g
 
 **Analogi:**
 
-Bayangkan kamu menyiapkan 10 kursi untuk sebuah pertemuan. Jika ternyata ada 15 orang yang hadir, panitia akan menambahkan kursi tambahan secara spontan. Kursi yang disiapkan sejak awal adalah *explicit*; kursi tambahan yang ditarik mendadak adalah *implicit*.
+Bayangkan kamu menyiapkan 10 kursi untuk sebuah pertemuan. Jika ternyata ada 15 orang yang hadir, panitia akan menambahkan kursi tambahan secara spontan. Kursi yang disiapkan sejak awal adalah _explicit_; kursi tambahan yang ditarik mendadak adalah _implicit_.
 
 Ukuran baris atau kolom yang dihasilkan secara otomatis dapat diatur dengan properti `grid-auto-rows` atau `grid-auto-columns`:
 
@@ -290,7 +290,7 @@ Jarak horizontal dan vertikal juga dapat diatur secara terpisah:
 .album-foto {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  row-gap: 24px;    /* Jarak antar baris */
+  row-gap: 24px; /* Jarak antar baris */
   column-gap: 16px; /* Jarak antar kolom */
 }
 ```
@@ -313,7 +313,7 @@ Gunakan properti `grid-column` dan `grid-row` dengan format `[garis-mulai] / [ga
 ```css
 .header {
   grid-column: 1 / 4; /* Merentang dari garis 1 hingga garis 4 (mencakup seluruh 3 kolom) */
-  grid-row: 1 / 2;    /* Menempati baris pertama saja */
+  grid-row: 1 / 2; /* Menempati baris pertama saja */
 }
 ```
 
@@ -400,10 +400,18 @@ Cara kerjanya adalah dengan mendefinisikan nama area pada elemen induk menggunak
 }
 
 /* Setiap elemen anak dihubungkan ke nama areanya */
-.header  { grid-area: header; }
-.sidebar { grid-area: sidebar; }
-.konten  { grid-area: konten; }
-.footer  { grid-area: footer; }
+.header {
+  grid-area: header;
+}
+.sidebar {
+  grid-area: sidebar;
+}
+.konten {
+  grid-area: konten;
+}
+.footer {
+  grid-area: footer;
+}
 ```
 
 > **Catatan:** Setiap baris pada nilai `grid-template-areas` merepresentasikan satu baris grid. Nama yang ditulis berulang di beberapa cell menandakan bahwa elemen tersebut merentang di seluruh cell tersebut. Gunakan tanda titik (`.`) untuk menandai cell yang dibiarkan kosong.
@@ -437,11 +445,36 @@ Cara kerjanya adalah dengan mendefinisikan nama area pada elemen induk menggunak
   min-height: 100vh;
 }
 
-.mj-header  { grid-area: header;  background-color: #2c3e50; color: white; padding: 16px; }
-.mj-nav     { grid-area: nav;     background-color: #34495e; color: white; padding: 12px; }
-.mj-artikel { grid-area: artikel; background-color: #fafafa; padding: 24px; border: 1px solid #eee; }
-.mj-iklan   { grid-area: iklan;   background-color: #ecf0f1; padding: 16px; }
-.mj-footer  { grid-area: footer;  background-color: #2c3e50; color: white; padding: 16px; text-align: center; }
+.mj-header {
+  grid-area: header;
+  background-color: #2c3e50;
+  color: white;
+  padding: 16px;
+}
+.mj-nav {
+  grid-area: nav;
+  background-color: #34495e;
+  color: white;
+  padding: 12px;
+}
+.mj-artikel {
+  grid-area: artikel;
+  background-color: #fafafa;
+  padding: 24px;
+  border: 1px solid #eee;
+}
+.mj-iklan {
+  grid-area: iklan;
+  background-color: #ecf0f1;
+  padding: 16px;
+}
+.mj-footer {
+  grid-area: footer;
+  background-color: #2c3e50;
+  color: white;
+  padding: 16px;
+  text-align: center;
+}
 ```
 
 ---
@@ -452,22 +485,22 @@ CSS Grid adalah sistem tata letak dua dimensi yang menjadi solusi standar untuk 
 
 **Perbandingan Flexbox vs Grid:**
 
-| Aspek | Flexbox | CSS Grid |
-|---|---|---|
-| Dimensi | Satu dimensi (baris **atau** kolom) | Dua dimensi (baris **dan** kolom) |
+| Aspek              | Flexbox                                       | CSS Grid                                        |
+| ------------------ | --------------------------------------------- | ----------------------------------------------- |
+| Dimensi            | Satu dimensi (baris **atau** kolom)           | Dua dimensi (baris **dan** kolom)               |
 | Kendali tata letak | Dari dalam ke luar (konten menentukan ukuran) | Dari luar ke dalam (struktur menentukan ukuran) |
-| Cocok untuk | Komponen UI kecil, navigasi, deretan tombol | Tata letak halaman, galeri, struktur kompleks |
+| Cocok untuk        | Komponen UI kecil, navigasi, deretan tombol   | Tata letak halaman, galeri, struktur kompleks   |
 
 **Ringkasan Properti Utama CSS Grid:**
 
-| Properti | Diterapkan Pada | Fungsi |
-|---|---|---|
-| `display: grid` | Induk | Mengaktifkan CSS Grid |
-| `grid-template-columns` | Induk | Mendefinisikan jumlah dan lebar kolom |
-| `grid-template-rows` | Induk | Mendefinisikan jumlah dan tinggi baris |
-| `grid-template-areas` | Induk | Mendefinisikan tata letak berbasis nama area |
-| `gap` | Induk | Jarak antar elemen |
-| `grid-auto-rows` | Induk | Tinggi baris yang dibuat secara otomatis |
-| `grid-column` | Anak | Posisi dan rentang kolom elemen |
-| `grid-row` | Anak | Posisi dan rentang baris elemen |
-| `grid-area` | Anak | Nama area atau posisi elemen |
+| Properti                | Diterapkan Pada | Fungsi                                       |
+| ----------------------- | --------------- | -------------------------------------------- |
+| `display: grid`         | Induk           | Mengaktifkan CSS Grid                        |
+| `grid-template-columns` | Induk           | Mendefinisikan jumlah dan lebar kolom        |
+| `grid-template-rows`    | Induk           | Mendefinisikan jumlah dan tinggi baris       |
+| `grid-template-areas`   | Induk           | Mendefinisikan tata letak berbasis nama area |
+| `gap`                   | Induk           | Jarak antar elemen                           |
+| `grid-auto-rows`        | Induk           | Tinggi baris yang dibuat secara otomatis     |
+| `grid-column`           | Anak            | Posisi dan rentang kolom elemen              |
+| `grid-row`              | Anak            | Posisi dan rentang baris elemen              |
+| `grid-area`             | Anak            | Nama area atau posisi elemen                 |

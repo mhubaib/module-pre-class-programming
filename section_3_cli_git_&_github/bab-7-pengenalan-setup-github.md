@@ -44,29 +44,29 @@ Langkah-langkah membuat akun:
 
 Setelah masuk ke akun GitHub, terdapat beberapa elemen antarmuka yang penting untuk dipahami:
 
-| Elemen | Lokasi | Fungsi |
-|---|---|---|
-| **Dashboard** | Halaman utama setelah login | Menampilkan aktivitas terbaru dan repositori yang kamu ikuti |
-| **Profile** | Klik foto profil → Your profile | Halaman publik yang menampilkan proyekmu kepada orang lain |
-| **Repositories** | Tab di halaman profil | Daftar seluruh repositori milikmu |
-| **New (+ ikon)** | Pojok kanan atas | Tombol untuk membuat repositori baru |
-| **Explore** | Menu atas | Temukan proyek dan pengembang lain di GitHub |
+| Elemen           | Lokasi                          | Fungsi                                                       |
+| ---------------- | ------------------------------- | ------------------------------------------------------------ |
+| **Dashboard**    | Halaman utama setelah login     | Menampilkan aktivitas terbaru dan repositori yang kamu ikuti |
+| **Profile**      | Klik foto profil → Your profile | Halaman publik yang menampilkan proyekmu kepada orang lain   |
+| **Repositories** | Tab di halaman profil           | Daftar seluruh repositori milikmu                            |
+| **New (+ ikon)** | Pojok kanan atas                | Tombol untuk membuat repositori baru                         |
+| **Explore**      | Menu atas                       | Temukan proyek dan pengembang lain di GitHub                 |
 
 ---
 
 ### 4. Mengenal Repository
 
-**Repository** (sering disingkat *repo*) adalah tempat penyimpanan proyek di GitHub. Sebuah repositori berisi seluruh file proyek beserta riwayat perubahannya — sama seperti folder proyek di komputermu, namun tersimpan di server GitHub dan dapat diakses dari mana saja.
+**Repository** (sering disingkat _repo_) adalah tempat penyimpanan proyek di GitHub. Sebuah repositori berisi seluruh file proyek beserta riwayat perubahannya — sama seperti folder proyek di komputermu, namun tersimpan di server GitHub dan dapat diakses dari mana saja.
 
 Setiap repositori memiliki beberapa informasi utama:
 
-| Informasi | Penjelasan |
-|---|---|
-| **Nama** | Identitas repositori, misalnya `belajar-frontend` |
-| **Visibilitas** | **Public** (dapat dilihat siapa saja) atau **Private** (hanya kamu dan kolaborator) |
-| **Branch utama** | Branch `main` yang menjadi versi resmi proyek |
-| **README** | File `README.md` yang menjelaskan isi dan tujuan proyek |
-| **Commits** | Riwayat seluruh perubahan yang pernah dilakukan |
+| Informasi        | Penjelasan                                                                          |
+| ---------------- | ----------------------------------------------------------------------------------- |
+| **Nama**         | Identitas repositori, misalnya `belajar-frontend`                                   |
+| **Visibilitas**  | **Public** (dapat dilihat siapa saja) atau **Private** (hanya kamu dan kolaborator) |
+| **Branch utama** | Branch `main` yang menjadi versi resmi proyek                                       |
+| **README**       | File `README.md` yang menjelaskan isi dan tujuan proyek                             |
+| **Commits**      | Riwayat seluruh perubahan yang pernah dilakukan                                     |
 
 ---
 
@@ -75,7 +75,7 @@ Setiap repositori memiliki beberapa informasi utama:
 1. Klik tombol **New** (ikon `+`) di pojok kanan atas halaman GitHub.
 2. Isi formulir pembuatan repositori:
    - **Repository name**: `belajar-frontend`
-   - **Description** *(opsional)*: Deskripsi singkat tentang proyekmu
+   - **Description** _(opsional)_: Deskripsi singkat tentang proyekmu
    - **Visibility**: Pilih **Public** agar dapat dilihat oleh siapa saja
    - **Initialize this repository**: Untuk saat ini, **jangan dicentang** — kita akan menghubungkan repositori ini dengan folder lokal yang sudah ada.
 3. Klik **Create repository**.
@@ -110,6 +110,7 @@ GitHub tidak lagi mengizinkan penggunaan kata sandi untuk operasi melalui termin
 **Metode 1 — Personal Access Token (PAT):** Token yang dibuat di pengaturan akun GitHub, digunakan sebagai pengganti kata sandi saat terminal memintanya. Cocok untuk pemula.
 
 Langkah membuat PAT:
+
 1. Masuk ke GitHub → klik foto profil → **Settings**.
 2. Gulir ke bawah → klik **Developer settings** → **Personal access tokens** → **Tokens (classic)**.
 3. Klik **Generate new token**, beri nama, dan centang izin **repo**.
@@ -156,11 +157,11 @@ Di bab berikutnya, kita akan mempraktikkan cara mengirimkan kode dari komputer l
 
 **Ringkasan:**
 
-| Konsep / Perintah | Penjelasan |
-|---|---|
-| Repository (Repo) | Folder proyek yang tersimpan di GitHub beserta seluruh riwayat commitnya |
-| Public / Private | Visibilitas repositori — dapat diakses publik atau hanya oleh pemilik |
-| `git remote add origin URL` | Mendaftarkan alamat repositori GitHub ke proyek Git lokal |
-| `git remote -v` | Menampilkan daftar remote yang terdaftar |
-| PAT | Personal Access Token — pengganti kata sandi untuk autentikasi ke GitHub via terminal |
-| SSH Key | Metode autentikasi yang lebih aman untuk penggunaan jangka panjang |
+| Konsep / Perintah           | Penjelasan                                                                            |
+| --------------------------- | ------------------------------------------------------------------------------------- |
+| Repository (Repo)           | Folder proyek yang tersimpan di GitHub beserta seluruh riwayat commitnya              |
+| Public / Private            | Visibilitas repositori — dapat diakses publik atau hanya oleh pemilik                 |
+| `git remote add origin URL` | Mendaftarkan alamat repositori GitHub ke proyek Git lokal                             |
+| `git remote -v`             | Menampilkan daftar remote yang terdaftar                                              |
+| PAT                         | Personal Access Token — pengganti kata sandi untuk autentikasi ke GitHub via terminal |
+| SSH Key                     | Metode autentikasi yang lebih aman untuk penggunaan jangka panjang                    |

@@ -28,7 +28,7 @@ Dalam dunia pemrograman, masalah ini diselesaikan dengan program yang disebut **
 
 **Analogi Dokumen Sekolah:**
 
-Bayangkan VCS seperti fitur *Track Changes* di Microsoft Word, namun jauh lebih canggih. Setiap kali kamu menyimpan versi baru, VCS mencatat seluruh perubahannya secara detail — dan kamu bisa menelusuri kembali seluruh riwayat tersebut kapan pun diperlukan.
+Bayangkan VCS seperti fitur _Track Changes_ di Microsoft Word, namun jauh lebih canggih. Setiap kali kamu menyimpan versi baru, VCS mencatat seluruh perubahannya secara detail — dan kamu bisa menelusuri kembali seluruh riwayat tersebut kapan pun diperlukan.
 
 ---
 
@@ -38,7 +38,7 @@ Bayangkan VCS seperti fitur *Track Changes* di Microsoft Word, namun jauh lebih 
 
 Git membantu kita dalam tiga hal utama:
 
-- **Mencatat Riwayat Perubahan**: Setiap kali kamu menyimpan kemajuan pekerjaan (disebut *commit*), Git mencatat siapa yang membuat perubahan, kapan, dan apa yang berubah secara detail.
+- **Mencatat Riwayat Perubahan**: Setiap kali kamu menyimpan kemajuan pekerjaan (disebut _commit_), Git mencatat siapa yang membuat perubahan, kapan, dan apa yang berubah secara detail.
 - **Mesin Waktu Proyek**: Jika suatu hari kodenya tiba-tiba tidak berfungsi setelah beberapa perubahan, kamu dapat mengembalikan seluruh proyek ke kondisi versi sebelumnya yang masih berjalan dengan baik.
 - **Kolaborasi Tim**: Beberapa anggota tim dapat mengerjakan bagian proyek yang berbeda secara bersamaan, lalu menggabungkan hasilnya tanpa risiko menimpa pekerjaan satu sama lain.
 
@@ -59,15 +59,16 @@ git checkout nama-versi-yang-aman
 
 Ini adalah pertanyaan yang sangat umum di kalangan pemula. Git dan GitHub adalah dua hal yang berbeda, meskipun sering disebutkan bersamaan.
 
-| | Git | GitHub |
-|---|---|---|
-| **Jenis** | Perangkat lunak (aplikasi) | Layanan berbasis web |
-| **Lokasi** | Berjalan di komputer lokal | Berjalan di internet (cloud) |
-| **Fungsi** | Mencatat dan mengelola riwayat perubahan kode | Menyimpan dan berbagi kode secara online |
-| **Koneksi internet** | Tidak diperlukan | Diperlukan |
-| **Analogi** | Kamera foto | Platform media sosial untuk berbagi foto |
+|                      | Git                                           | GitHub                                   |
+| -------------------- | --------------------------------------------- | ---------------------------------------- |
+| **Jenis**            | Perangkat lunak (aplikasi)                    | Layanan berbasis web                     |
+| **Lokasi**           | Berjalan di komputer lokal                    | Berjalan di internet (cloud)             |
+| **Fungsi**           | Mencatat dan mengelola riwayat perubahan kode | Menyimpan dan berbagi kode secara online |
+| **Koneksi internet** | Tidak diperlukan                              | Diperlukan                               |
+| **Analogi**          | Kamera foto                                   | Platform media sosial untuk berbagi foto |
 
 Dengan analogi tersebut:
+
 - **Git** adalah **kameranya** — alat di komputermu untuk mengambil "foto" (mencatat versi) dari kodemu.
 - **GitHub** adalah **platform berbagi foto** — tempat di internet kamu mengunggah foto-foto tersebut agar bisa dilihat, diunduh, dan dikerjakan bersama oleh tim lain.
 
@@ -147,11 +148,11 @@ Di modul-modul berikutnya, kamu akan mulai mempraktikkan perintah-perintah Git s
 
 **Ringkasan:**
 
-| Konsep | Penjelasan Singkat |
-|---|---|
-| VCS | Sistem yang mencatat seluruh riwayat perubahan file dalam sebuah proyek |
-| Git | VCS paling populer, bekerja secara lokal di komputermu |
-| Commit | Satu titik simpan dalam riwayat Git (seperti satu "foto" versi proyek) |
-| GitHub | Layanan web untuk menyimpan dan berbagi repositori Git secara online |
-| `git --version` | Perintah untuk memverifikasi instalasi Git |
-| `git config --global` | Perintah untuk mendaftarkan identitas pengguna Git |
+| Konsep                | Penjelasan Singkat                                                      |
+| --------------------- | ----------------------------------------------------------------------- |
+| VCS                   | Sistem yang mencatat seluruh riwayat perubahan file dalam sebuah proyek |
+| Git                   | VCS paling populer, bekerja secara lokal di komputermu                  |
+| Commit                | Satu titik simpan dalam riwayat Git (seperti satu "foto" versi proyek)  |
+| GitHub                | Layanan web untuk menyimpan dan berbagi repositori Git secara online    |
+| `git --version`       | Perintah untuk memverifikasi instalasi Git                              |
+| `git config --global` | Perintah untuk mendaftarkan identitas pengguna Git                      |

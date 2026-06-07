@@ -4,7 +4,7 @@
 
 - Mampu bernavigasi antar folder menggunakan perintah `pwd`, `ls`, dan `cd`.
 - Mampu membuat, menghapus, serta memindahkan file dan folder melalui Terminal.
-- Memahami konsep *Path* (alamat lokasi file dan folder) di dalam sistem komputer.
+- Memahami konsep _Path_ (alamat lokasi file dan folder) di dalam sistem komputer.
 
 ---
 
@@ -36,12 +36,12 @@ Terdapat dua jenis path:
 
 **Karakter khusus dalam path:**
 
-| Karakter | Artinya |
-|---|---|
-| `/` | Pemisah antar folder dalam path |
-| `~` | Direktori utama pengguna (Home), misalnya `/c/Users/NamaPengguna` |
-| `.` | Direktori saat ini |
-| `..` | Direktori satu tingkat di atas direktori saat ini |
+| Karakter | Artinya                                                           |
+| -------- | ----------------------------------------------------------------- |
+| `/`      | Pemisah antar folder dalam path                                   |
+| `~`      | Direktori utama pengguna (Home), misalnya `/c/Users/NamaPengguna` |
+| `.`      | Direktori saat ini                                                |
+| `..`     | Direktori satu tingkat di atas direktori saat ini                 |
 
 ---
 
@@ -69,12 +69,12 @@ ls
 
 Perintah `ls` juga mendukung beberapa opsi yang berguna:
 
-| Perintah | Fungsi |
-|---|---|
-| `ls` | Tampilkan file dan folder |
-| `ls -l` | Tampilkan dalam format panjang (termasuk ukuran, tanggal, dan izin file) |
-| `ls -a` | Tampilkan semua file termasuk file tersembunyi (yang diawali titik) |
-| `ls -la` | Gabungan keduanya |
+| Perintah | Fungsi                                                                   |
+| -------- | ------------------------------------------------------------------------ |
+| `ls`     | Tampilkan file dan folder                                                |
+| `ls -l`  | Tampilkan dalam format panjang (termasuk ukuran, tanggal, dan izin file) |
+| `ls -a`  | Tampilkan semua file termasuk file tersembunyi (yang diawali titik)      |
+| `ls -la` | Gabungan keduanya                                                        |
 
 ```bash
 ls -la
@@ -88,13 +88,13 @@ ls -la
 
 `cd` (Change Directory) digunakan untuk berpindah dari satu folder ke folder lainnya.
 
-| Perintah | Fungsi |
-|---|---|
-| `cd nama-folder` | Masuk ke folder yang disebutkan |
-| `cd ..` | Naik satu tingkat ke direktori induk |
-| `cd ../..` | Naik dua tingkat sekaligus |
-| `cd ~` | Kembali langsung ke direktori Home |
-| `cd -` | Kembali ke direktori sebelumnya |
+| Perintah         | Fungsi                               |
+| ---------------- | ------------------------------------ |
+| `cd nama-folder` | Masuk ke folder yang disebutkan      |
+| `cd ..`          | Naik satu tingkat ke direktori induk |
+| `cd ../..`       | Naik dua tingkat sekaligus           |
+| `cd ~`           | Kembali langsung ke direktori Home   |
+| `cd -`           | Kembali ke direktori sebelumnya      |
 
 ```bash
 # Contoh sesi navigasi
@@ -184,16 +184,16 @@ cat index.html
 
 #### D. Menghapus File dan Folder (`rm`)
 
-`rm` (Remove) menghapus file atau folder. 
+`rm` (Remove) menghapus file atau folder.
 
 > **Peringatan:** Penghapusan melalui CLI bersifat **permanen**. File yang dihapus tidak akan masuk ke Recycle Bin dan tidak dapat dipulihkan dengan cara biasa. Pastikan kamu sudah yakin sebelum menjalankan perintah ini.
 
-| Perintah | Fungsi |
-|---|---|
-| `rm file.txt` | Menghapus satu file |
-| `rm file1.txt file2.txt` | Menghapus beberapa file sekaligus |
-| `rm -r nama-folder` | Menghapus folder beserta seluruh isinya |
-| `rm -rf nama-folder` | Menghapus folder beserta isinya tanpa meminta konfirmasi |
+| Perintah                 | Fungsi                                                   |
+| ------------------------ | -------------------------------------------------------- |
+| `rm file.txt`            | Menghapus satu file                                      |
+| `rm file1.txt file2.txt` | Menghapus beberapa file sekaligus                        |
+| `rm -r nama-folder`      | Menghapus folder beserta seluruh isinya                  |
+| `rm -rf nama-folder`     | Menghapus folder beserta isinya tanpa meminta konfirmasi |
 
 ```bash
 # Menghapus satu file
@@ -342,21 +342,21 @@ Mengelola file dan folder melalui terminal adalah keterampilan dasar yang akan k
 
 **Referensi Cepat Perintah:**
 
-| Perintah | Fungsi |
-|---|---|
-| `pwd` | Menampilkan direktori aktif saat ini |
-| `ls` | Menampilkan isi direktori |
-| `ls -la` | Menampilkan isi direktori secara detail termasuk file tersembunyi |
-| `cd nama-folder` | Masuk ke folder yang disebutkan |
-| `cd ..` | Naik satu tingkat ke direktori induk |
-| `cd ~` | Kembali ke direktori Home |
-| `mkdir nama` | Membuat folder baru |
-| `touch nama-file` | Membuat file kosong baru |
-| `cat nama-file` | Menampilkan isi file di terminal |
-| `rm nama-file` | Menghapus file (permanen) |
-| `rm -r nama-folder` | Menghapus folder beserta isinya (permanen) |
-| `mv sumber tujuan` | Memindahkan atau mengubah nama file/folder |
-| `cp sumber tujuan` | Menyalin file |
-| `cp -r sumber tujuan` | Menyalin folder beserta isinya |
-| `clear` | Membersihkan tampilan terminal |
-| `history` | Menampilkan riwayat perintah |
+| Perintah              | Fungsi                                                            |
+| --------------------- | ----------------------------------------------------------------- |
+| `pwd`                 | Menampilkan direktori aktif saat ini                              |
+| `ls`                  | Menampilkan isi direktori                                         |
+| `ls -la`              | Menampilkan isi direktori secara detail termasuk file tersembunyi |
+| `cd nama-folder`      | Masuk ke folder yang disebutkan                                   |
+| `cd ..`               | Naik satu tingkat ke direktori induk                              |
+| `cd ~`                | Kembali ke direktori Home                                         |
+| `mkdir nama`          | Membuat folder baru                                               |
+| `touch nama-file`     | Membuat file kosong baru                                          |
+| `cat nama-file`       | Menampilkan isi file di terminal                                  |
+| `rm nama-file`        | Menghapus file (permanen)                                         |
+| `rm -r nama-folder`   | Menghapus folder beserta isinya (permanen)                        |
+| `mv sumber tujuan`    | Memindahkan atau mengubah nama file/folder                        |
+| `cp sumber tujuan`    | Menyalin file                                                     |
+| `cp -r sumber tujuan` | Menyalin folder beserta isinya                                    |
+| `clear`               | Membersihkan tampilan terminal                                    |
+| `history`             | Menampilkan riwayat perintah                                      |

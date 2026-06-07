@@ -1,31 +1,69 @@
-# Bab 1: Pengenalan CSS & Struktur Sintaks di CSS
+# Bab 1: Pengenalan CSS & Struktur Sintaks
 
 ## Tujuan Pembelajaran
 
-- Memahami pengertian CSS dan perannya dalam mempercantik halaman web.
-- Mengetahui struktur sintaks dasar CSS (Selector, Property, dan Value).
+- Memahami pengertian CSS dan perannya dalam tampilan halaman web.
+- Mengetahui struktur sintaks dasar CSS: Selector, Property, dan Value.
 - Memahami fungsi tanda kurung kurawal `{}` dan titik koma `;` dalam penulisan CSS.
+
+---
 
 ## Materi Utama
 
-Setelah kita belajar membuat fondasi dan struktur bangunan menggunakan HTML di Bagian 1, sekarang saatnya kita belajar menjadi seorang arsitek sekaligus desainer interior. Selamat datang di dunia **CSS!**
+Setelah mempelajari HTML sebagai fondasi struktur halaman web, kini saatnya mempelajari CSS — bahasa yang mengatur tampilannya.
+
+---
 
 ### 1. Apa itu CSS?
 
-CSS adalah singkatan dari **Cascading Style Sheets**. Jika HTML bertugas menentukan **APA** yang tampil di layar (teks, gambar, tombol), maka CSS bertugas menentukan **BAGAIMANA** tampilan tersebut terlihat oleh mata (warna, ukuran, posisi, hingga animasi).
+**CSS** (Cascading Style Sheets) adalah bahasa yang digunakan untuk mendefinisikan tampilan dan tata letak elemen-elemen HTML. Jika HTML menentukan **apa** yang tampil di halaman, CSS menentukan **bagaimana** tampilan tersebut terlihat — warna, ukuran, jarak, posisi, hingga animasi.
 
-Tanpa CSS, halaman web hanyalah deretan teks kaku berwarna hitam di atas latar putih. Dengan CSS, kita bisa mengubah sebuah halaman web yang "biasa saja" menjadi terlihat profesional, premium, dan sangat menarik.
+Tanpa CSS, halaman web hanyalah deretan teks hitam di atas latar putih. Dengan CSS, tampilan tersebut dapat diubah menjadi antarmuka yang terstruktur, estetis, dan profesional.
 
-**Analogi Arsitektur Bangunan:**
+**Analogi:**
 
-- **HTML:** Adalah bata, semen, dan tulang besi. Ia membangun rangka rumah, jendela, dan pintu. Tanpa HTML, rumah tidak berdiri.
-- **CSS:** Adalah cat tembok, motif keramik lantai, desain lampu gantung, dan ornamen taman. Ia tidak membangun rangka, tapi ia membuat rumah tersebut layak huni dan indah dipandang.
+- **HTML** adalah struktur bangunan — dinding, lantai, pintu, dan jendela.
+- **CSS** adalah desain interior — cat tembok, pilihan furnitur, pencahayaan, dan ornamen yang membuat ruangan terlihat menarik.
+
+**Contoh perbedaan halaman tanpa dan dengan CSS:**
+
+```html
+<!-- HTML tanpa CSS -->
+<h1>Toko Online Kami</h1>
+<p>Temukan produk terbaik dengan harga terjangkau.</p>
+<button>Belanja Sekarang</button>
+```
+
+Hasilnya adalah teks hitam biasa tanpa tata letak. Dengan CSS:
+
+```css
+h1 {
+  color: #2c3e50;
+  font-size: 2rem;
+}
+
+p {
+  color: #555;
+  font-size: 1rem;
+}
+
+button {
+  background-color: steelblue;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+```
+
+Elemen yang sama kini tampil dengan warna, ukuran, dan gaya yang terstruktur.
+
+---
 
 ### 2. Struktur Sintaks Dasar CSS
 
-Menulis kode CSS berbeda dengan menulis HTML. CSS tidak menggunakan "Tag" yang berpasangan. CSS menggunakan aturan (rules) yang terdiri dari tiga komponen utama: **Selector, Property, dan Value.**
-
-Perhatikan contoh kode berikut:
+CSS tidak menggunakan tag seperti HTML. CSS menggunakan **aturan (rule)** yang terdiri dari tiga komponen: **Selector**, **Property**, dan **Value**.
 
 ```css
 h1 {
@@ -34,37 +72,133 @@ h1 {
 }
 ```
 
-Mari kita bedah anatominya:
+**Anatomi aturan CSS:**
 
-- **Selector (Siapa yang ingin dihias?):** Dalam contoh di atas, `h1` adalah selector. Kita memberi tahu browser: "Cari semua tag `<h1>` yang ada di HTML".
-- **Property (Apanya yang mau diubah?):** Di dalam kurung kurawal, ada kata `color` dan `font-size`. Ini adalah properti yang ingin kita modifikasi arsitekturnya.
-- **Value (Mau diubah jadi apa?):** Di sebelah kanan tanda titik dua `:`, ada nilai `blue` dan `24px`. Inilah instruksi spesifiknya.
+| Komponen     | Contoh               | Peran                                             |
+| ------------ | -------------------- | ------------------------------------------------- |
+| **Selector** | `h1`                 | Menentukan elemen HTML mana yang akan diberi gaya |
+| **Property** | `color`, `font-size` | Aspek tampilan yang ingin diubah                  |
+| **Value**    | `blue`, `24px`       | Nilai yang diterapkan pada properti tersebut      |
 
-### 3. Aturan Penulisan (Tanda Baca)
-
-Dalam CSS, tanda baca sangatlah sakral. Salah sedikit, desainmu tidak akan muncul.
-
-1. **Kurung Kurawal `{ }`**: Digunakan untuk membungkus semua instruksi desain (Property & Value) untuk selector tersebut. Semua keajaiban terjadi di dalam kurung ini.
-2. **Titik Dua `:`**: Digunakan untuk memisahkan antara _Property_ dan _Value_. Ibarat berkata: "Warna tulisan **adalah** Biru".
-3. **Titik Koma `;`**: Digunakan untuk mengakhiri sebuah baris instruksi. Anggap saja ini sebagai "Tanda Titik" di sebuah kalimat. Jika kamu lupa menaruh `;`, browser akan bingung dan instruksi di bawahnya akan terbaca error.
-
-**Tips Penulisan Rapi:**
-Sebenarnya kamu bisa menulis CSS dalam satu baris panjang, tapi demi kerapihan dan kemudahan dibaca oleh rekan kerja atau dirimu sendiri di masa depan, sangat disarankan untuk menulis setiap property di baris yang baru.
+**Penjelasan per bagian:**
 
 ```css
-/* Penulisan yang BURUK (Sulit dibaca) */
-p {
-  color: red;
-  text-align: center;
-  font-family: script;
-}
-
-/* Penulisan yang BAIK (Rapi & Profesional) */
-p {
-  color: red;
-  text-align: center;
-  font-family: script;
+h1 {
+  /* Selector: targetkan semua elemen <h1> */
+  color: blue; /* Property: color | Value: blue */
+  font-size: 24px; /* Property: font-size | Value: 24px */
 }
 ```
 
-Dengan memahami struktur sederhana ini, kamu sudah siap untuk mulai merancang desain website pertamamu!
+**Contoh dengan beberapa elemen:**
+
+```css
+/* Mengatur paragraf */
+p {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Mengatur tombol */
+button {
+  background-color: steelblue;
+  color: white;
+  padding: 8px 16px;
+}
+
+/* Mengatur gambar */
+img {
+  width: 100%;
+  border-radius: 8px;
+}
+```
+
+---
+
+### 3. Aturan Penulisan dan Tanda Baca
+
+Tanda baca dalam CSS bersifat wajib — melewatkan satu karakter pun dapat menyebabkan aturan tidak diterapkan.
+
+| Tanda | Fungsi                                                    | Contoh         |
+| ----- | --------------------------------------------------------- | -------------- |
+| `{}`  | Membungkus seluruh properti dan nilai untuk satu selector | `h1 { ... }`   |
+| `:`   | Memisahkan property dari value                            | `color: blue`  |
+| `;`   | Mengakhiri setiap deklarasi property                      | `color: blue;` |
+
+**Akibat tanda baca yang hilang:**
+
+```css
+/* Titik koma hilang — properti berikutnya tidak akan terbaca */
+p {
+  color: red     /* Tidak ada ; — browser bingung */
+  font-size: 16px;
+}
+
+/* Versi yang benar */
+p {
+  color: red;
+  font-size: 16px;
+}
+```
+
+**Penulisan satu baris vs banyak baris:**
+
+```css
+/* Penulisan satu baris — valid secara teknis, tapi sulit dibaca */
+p {
+  color: red;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Penulisan banyak baris — direkomendasikan untuk keterbacaan */
+p {
+  color: red;
+  font-size: 16px;
+  text-align: center;
+}
+```
+
+Penulisan banyak baris adalah standar yang digunakan dalam pengembangan profesional karena lebih mudah dibaca, ditelusuri, dan diperbaiki saat terjadi kesalahan.
+
+---
+
+### 4. Komentar dalam CSS
+
+Sama seperti HTML dan JavaScript, CSS mendukung komentar untuk menjelaskan kode. Komentar tidak ditampilkan di browser.
+
+```css
+/* Ini adalah komentar — tidak akan berpengaruh pada tampilan */
+
+/* Gaya untuk bagian header */
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+}
+
+/* 
+  Gaya ini dinonaktifkan sementara selama pengembangan
+  p {
+    font-style: italic;
+  }
+*/
+```
+
+---
+
+### Kesimpulan
+
+CSS adalah bahasa yang mengubah struktur HTML menjadi tampilan yang terlihat menarik dan terstruktur. Dengan memahami sintaks dasar — Selector, Property, Value — serta aturan penulisan yang benar, kamu memiliki fondasi yang diperlukan untuk mulai merancang tampilan halaman web.
+
+**Ringkasan:**
+
+| Konsep   | Penjelasan                                                       |
+| -------- | ---------------------------------------------------------------- |
+| CSS      | Bahasa untuk mendefinisikan tampilan elemen HTML                 |
+| Selector | Menentukan elemen mana yang akan diberi gaya                     |
+| Property | Aspek tampilan yang ingin diubah (misalnya `color`, `font-size`) |
+| Value    | Nilai yang diterapkan pada properti                              |
+| `{}`     | Membungkus blok deklarasi CSS untuk satu selector                |
+| `;`      | Mengakhiri setiap deklarasi properti                             |

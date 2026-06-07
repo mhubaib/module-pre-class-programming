@@ -2,20 +2,24 @@
 
 ## Tujuan Pembelajaran
 
-- Memahami konsep Selektor untuk menargetkan elemen HTML tertentu.
+- Memahami konsep Selektor sebagai cara menargetkan elemen HTML tertentu.
 - Mampu menggunakan Element Selector, Class Selector, dan ID Selector dengan tepat.
-- Mengenal Universal Selector dan kegunaannya.
-- Memahami perbedaan penggunaan antara Class dan ID.
+- Mengenal Universal Selector dan penggunaannya.
+- Memahami perbedaan dan kapan menggunakan Class vs ID.
+
+---
 
 ## Materi Utama
 
-Di materi sebelumnya, kita tahu bahwa **Selector** bertugas sebagai "pencari sasaran". Namun, bagaimana jika kita punya sepuluh paragraf tapi hanya ingin mewarnai satu paragraf saja menjadi merah? Atau bagaimana jika kita ingin mewarnai semua elemen di halaman web secara serentak?
+Di materi sebelumnya, kita tahu bahwa **Selector** bertugas menentukan elemen HTML mana yang akan diberi gaya. Namun, bagaimana jika kita punya sepuluh paragraf tetapi hanya ingin mewarnai satu paragraf saja? Atau bagaimana jika kita ingin menerapkan gaya yang sama pada beberapa elemen yang berbeda jenis?
 
-Inilah gunanya kita mempelajari berbagai jenis Selektor.
+Inilah mengapa terdapat berbagai jenis Selektor yang dirancang untuk kebutuhan yang berbeda.
 
-### 1. Element Selector (Tag Selector)
+---
 
-Ini adalah cara paling umum dan sederhana. Kamu langsung memanggil nama tag HTML-nya. Semua tag yang namanya sama akan terkena dampak desain yang sama.
+### 1. Element Selector
+
+Element Selector menargetkan elemen berdasarkan nama tag HTML-nya. Semua elemen dengan tag yang sama akan mendapatkan gaya yang sama.
 
 ```css
 p {
@@ -23,77 +27,250 @@ p {
 }
 ```
 
-_Efeknya: SEMUA paragraf di website tersebut akan berubah warnanya menjadi hijau._
+Seluruh elemen `<p>` di halaman akan berubah warna menjadi hijau.
 
-### 2. Class Selector (Selektor Grup)
-
-Class selector sangat fleksibel karena bisa digunakan berkali-kali pada elemen yang berbeda. Untuk memanggilnya di CSS, kamu wajib menggunakan tanda **titik (.)** diikuti nama kelasnya.
-
-Di HTML:
+**Contoh dengan beberapa element selector:**
 
 ```html
-<p class="teks-penting">Ini paragraf penting.</p>
-<h2 class="teks-penting">Ini judul yang juga penting.</h2>
+<!-- HTML -->
+<h1>Judul Halaman</h1>
+<p>Paragraf pertama.</p>
+<p>Paragraf kedua.</p>
+<a href="#">Tautan</a>
 ```
 
-Di CSS:
+```css
+/* CSS */
+h1 {
+  color: #2c3e50;
+  font-size: 2rem;
+}
+
+p {
+  color: #555;
+  line-height: 1.6;
+}
+
+a {
+  color: steelblue;
+  text-decoration: none;
+}
+```
+
+> **Catatan:** Element Selector bersifat massal — seluruh elemen bertag sama akan terdampak. Gunakan ini untuk mendefinisikan gaya dasar yang memang ingin diterapkan secara menyeluruh.
+
+---
+
+### 2. Class Selector
+
+Class Selector menargetkan elemen berdasarkan nilai atribut `class`-nya. Satu class dapat digunakan pada banyak elemen berbeda, dan satu elemen dapat memiliki lebih dari satu class.
+
+Di CSS, Class Selector ditulis dengan **tanda titik (`.`)** diikuti nama class-nya.
+
+```html
+<!-- HTML -->
+<p class="teks-penting">Ini paragraf penting.</p>
+<h2 class="teks-penting">Ini judul yang juga penting.</h2>
+<span class="teks-penting">Ini span yang penting.</span>
+```
 
 ```css
+/* CSS */
 .teks-penting {
   font-weight: bold;
   color: red;
 }
 ```
 
-**Analogi Seragam Sekolah:**
-Katakanlah di sebuah sekolah ada banyak murid (Element). Murid yang memakai **seragam Pramuka** (Class) akan berkumpul untuk latihan. Siapa pun bisa memakai seragam Pramuka, dan siapa pun yang memakainya akan dianggap sebagai bagian dari grup tersebut.
+Ketiga elemen di atas — meskipun berbeda jenis tag — akan mendapatkan gaya yang sama karena berbagi class yang sama.
 
-### 3. ID Selector (Selektor Unik)
-
-ID selector bersifat sangat eksklusif atau unik. Dalam satu halaman HTML, sebuah nama ID **hanya boleh digunakan oleh satu elemen saja**. Untuk memanggilnya di CSS, gunakan tanda **pagar (#)**.
-
-Di HTML:
+**Menggunakan beberapa class pada satu elemen:**
 
 ```html
-<div id="header-utama">
-  <h1>Selamat Datang</h1>
-</div>
+<!-- Satu elemen dapat memiliki beberapa class, dipisahkan spasi -->
+<button class="tombol tombol-utama besar">Kirim</button>
 ```
 
-Di CSS:
-
 ```css
-#header-utama {
-  background-color: yellow;
-  padding: 20px;
+.tombol {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tombol-utama {
+  background-color: steelblue;
+  color: white;
+}
+
+.besar {
+  font-size: 1.2rem;
+  padding: 12px 24px;
 }
 ```
 
-**Analogi KTP atau NIK:**
-Setiap orang mungkin punya seragam yang sama (Class), tapi setiap orang hanya punya satu Nomor Induk Kependudukan (ID) yang berbeda satu sama lain. ID digunakan untuk menunjuk satu target yang sangat spesifik.
+**Analogi:**
+
+Bayangkan class seperti seragam. Semua murid yang mengenakan seragam Pramuka akan diperlakukan sebagai anggota Pramuka — tidak peduli kelas berapa mereka. Satu murid pun bisa mengenakan lebih dari satu seragam untuk berbagai kegiatan.
+
+---
+
+### 3. ID Selector
+
+ID Selector menargetkan satu elemen spesifik berdasarkan nilai atribut `id`-nya. Dalam satu halaman HTML, setiap nilai `id` **hanya boleh digunakan sekali**.
+
+Di CSS, ID Selector ditulis dengan **tanda pagar (`#`)** diikuti nama ID-nya.
+
+```html
+<!-- HTML -->
+<header id="header-utama">
+  <h1>Nama Website</h1>
+</header>
+
+<footer id="footer-utama">
+  <p>© 2026 Hak Cipta Dilindungi</p>
+</footer>
+```
+
+```css
+/* CSS */
+#header-utama {
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px 40px;
+}
+
+#footer-utama {
+  background-color: #34495e;
+  color: #ccc;
+  text-align: center;
+  padding: 16px;
+}
+```
+
+**Analogi:**
+
+ID seperti Nomor Induk Kependudukan (NIK). Setiap orang mungkin bisa memakai seragam yang sama (class), tetapi NIK setiap orang berbeda dan tidak ada duanya. ID digunakan untuk menunjuk satu target yang benar-benar spesifik dan unik di halaman.
+
+---
 
 ### 4. Universal Selector
 
-Jika kamu ingin mengatur satu properti untuk **seluruh** elemen yang ada di halaman web tanpa terkecuali, gunakan tanda **bintang (\*)**.
+Universal Selector menggunakan tanda **bintang (`*`)** dan menargetkan **semua elemen** di halaman tanpa terkecuali. Selektor ini paling sering digunakan di awal penulisan CSS untuk menyeragamkan pengaturan dasar browser.
 
 ```css
 * {
   margin: 0;
   padding: 0;
-  font-family: Arial;
+  box-sizing: border-box;
 }
 ```
 
-_Selektor ini biasanya digunakan di awal penulisan CSS untuk "meriset" atau menyamakan pengaturan dasar browser agar konsisten._
+Setiap browser memiliki nilai default bawaan yang berbeda-beda untuk `margin` dan `padding`. Penggunaan Universal Selector di awal untuk mereset nilai-nilai tersebut memastikan tampilan halaman konsisten di semua browser.
 
-### 5. Ringkasan Perbedaan: Kapan Pakai Apa?
+**Contoh CSS Reset sederhana:**
 
-| Jenis Selektor |   Simbol   | Sifat             | Kegunaan Utama                                                    |
-| :------------- | :--------: | :---------------- | :---------------------------------------------------------------- |
-| **Element**    | (nama tag) | Massal            | Mengatur tampilan dasar dasar (misal: font untuk semua p).        |
-| **Class**      |    `.`     | Reusable (Banyak) | Mengatur gaya yang bisa dipakai di banyak tempat berbeda.         |
-| **ID**         |    `#`     | Unik (Hanya 1)    | Mengatur elemen besar yang cuma ada satu (misal: Navbar, Footer). |
-| **Universal**  |    `*`     | Seluruh Halaman   | Mengatur reset dasar website.                                     |
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+```
 
-**Aturan Penamaan:**
-Nama Class dan ID bebas kamu tentukan, tapi **tidak boleh** diawali dengan angka, tidak boleh pakai spasi (gunakan tanda hubung `-`), dan sebaiknya gunakan nama yang mendeskripsikan fungsinya agar mudah diingat.
+> **Catatan:** Gunakan Universal Selector dengan hati-hati karena ia diterapkan ke semua elemen, yang dapat memengaruhi performa pada halaman dengan banyak elemen.
+
+---
+
+### 5. Selektor Kombinasi
+
+CSS juga mendukung penulisan beberapa selector sekaligus untuk menerapkan gaya yang sama.
+
+```css
+/* Menerapkan gaya yang sama pada h1, h2, dan h3 sekaligus */
+h1,
+h2,
+h3 {
+  color: #2c3e50;
+  font-family: Georgia, serif;
+}
+
+/* Menargetkan elemen p yang memiliki class "intro" */
+p.intro {
+  font-size: 1.2rem;
+  color: steelblue;
+}
+```
+
+**Contoh lengkap — Halaman artikel:**
+
+```html
+<!-- HTML -->
+<article>
+  <h1 id="judul-artikel">Panduan Belajar CSS</h1>
+  <p class="intro">
+    CSS adalah bahasa yang digunakan untuk mendesain tampilan halaman web.
+  </p>
+  <p>
+    Dengan CSS, kamu dapat mengatur warna, ukuran, tata letak, dan masih banyak
+    lagi.
+  </p>
+  <p class="catatan">Catatan: Artikel ini ditujukan untuk pemula.</p>
+</article>
+```
+
+```css
+/* CSS */
+* {
+  box-sizing: border-box;
+}
+
+#judul-artikel {
+  color: #2c3e50;
+  font-size: 2rem;
+  border-bottom: 3px solid steelblue;
+  padding-bottom: 8px;
+}
+
+.intro {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: steelblue;
+}
+
+p {
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.catatan {
+  background-color: #fff3cd;
+  border-left: 4px solid orange;
+  padding: 8px 12px;
+}
+```
+
+---
+
+### Kesimpulan
+
+Setiap jenis selektor dirancang untuk kebutuhan yang berbeda. Memilih selektor yang tepat membuat CSS lebih terstruktur, mudah dipelihara, dan tidak menimbulkan konflik gaya yang tidak diinginkan.
+
+**Ringkasan Jenis Selektor:**
+
+| Selektor      |  Simbol  | Sifat                         | Kapan Digunakan                                     |
+| :------------ | :------: | :---------------------------- | :-------------------------------------------------- |
+| **Element**   | nama tag | Massal                        | Gaya dasar untuk semua elemen bertag sama           |
+| **Class**     |   `.`    | Dapat digunakan ulang         | Gaya yang diterapkan ke banyak elemen berbeda       |
+| **ID**        |   `#`    | Unik (hanya satu per halaman) | Elemen yang benar-benar unik seperti header, footer |
+| **Universal** |   `*`    | Seluruh halaman               | CSS Reset di awal stylesheet                        |
+
+**Aturan Penamaan Class dan ID:**
+
+- Tidak boleh diawali dengan angka (`1tombol` ✗, `tombol1` ✓)
+- Tidak boleh mengandung spasi (gunakan tanda hubung `-` atau garis bawah `_`)
+- Gunakan nama yang mendeskripsikan fungsi atau tampilan (`tombol-utama`, `teks-peringatan`)
+- Penulisan huruf bersifat case-sensitive: `.tombol` dan `.Tombol` adalah dua class yang berbeda

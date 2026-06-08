@@ -11,7 +11,7 @@
 
 ## Materi Utama
 
-Setelah mempelajari kerangka website (HTML) dan desain tampilannya (CSS), kita tiba pada komponen ketiga yang paling penting dalam pengembangan web modern: **JavaScript**.
+Setelah mempelajari kerangka website (HTML) dan desain tampilannya (CSS), kita tiba pada komponen keempat yang paling penting dalam pengembangan web modern: **JavaScript**.
 
 HTML dan CSS adalah bahasa _markup_ dan _style_, yang berarti mereka hanya mendeskripsikan "apa" dan "bagaimana" sesuatu terlihat. Keduanya bersifat statis. Untuk membuat website tersebut dapat merespons interaksi pengguna dan memiliki logika, kita memerlukan sebuah bahasa pemrograman. Itulah tugas JavaScript.
 

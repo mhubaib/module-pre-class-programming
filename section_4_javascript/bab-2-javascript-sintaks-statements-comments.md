@@ -188,7 +188,7 @@ let totalDenganPajak = harga * 1.11;
 
 ### Kesimpulan
 
-Sintaks, statement, expression, dan komentar adalah fondasi dari setiap kode JavaScript yang kamu tulis. Menguasai aturan-aturan dasar ini sejak awal akan membuat proses belajar topik yang lebih kompleks — seperti fungsi, kondisi, dan perulangan — menjadi jauh lebih mudah.
+Sintaks, statement, expression, dan komentar adalah fondasi dari setiap kode JavaScript yang kamu tulis. Menguasai aturan-aturan dasar ini sejak awal akan membuat proses belajar di topik yang lebih kompleks — seperti fungsi, kondisi, dan perulangan — menjadi jauh lebih mudah.
 
 **Ringkasan:**
 

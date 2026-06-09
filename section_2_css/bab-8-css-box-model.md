@@ -2,64 +2,271 @@
 
 ## Tujuan Pembelajaran
 
-- Memahami konsep "Box Model" sebagai fondasi utama tata letak CSS.
+- Memahami konsep Box Model sebagai dasar tata letak CSS.
 - Membedakan antara Content, Padding, Border, dan Margin.
 - Memahami cara menghitung lebar total sebuah elemen.
-- Menggunakan `box-sizing: border-box` untuk mempermudah perhitungan layout.
+- Menggunakan `box-sizing: border-box` untuk mempermudah perhitungan tata letak.
+
+---
 
 ## Materi Utama
 
-Ini adalah materi paling penting dan "puncak" dari pelajaran CSS dasar. Jika kamu tidak paham Bab ini, kamu akan sering bertengkar dengan tampilan websitemu yang tiba-tiba berantakan atau meluap keluar layar.
+Setiap elemen HTML diperlakukan oleh browser sebagai sebuah kotak berlapis-lapis. Pemahaman tentang lapisan-lapisan ini — yang disebut **Box Model** — adalah fondasi dari semua pekerjaan tata letak CSS. Tanpa memahaminya, ukuran elemen yang tiba-tiba tidak sesuai ekspektasi akan sulit untuk didiagnosis.
 
-Semua elemen di HTML dibayangkan oleh browser sebagai sebuah **Kotak (Box)** yang berlapis-lapis.
+---
 
 ### 1. Lapisan-lapisan Box Model
 
-Dari lapisan paling dalam ke lapisan paling luar, urutannya adalah:
+Dari lapisan paling dalam ke lapisan paling luar:
 
-1. **Content (Isi)**: Area tempat teks, gambar, atau video berada.
-2. **Padding (Bantalan Dalam)**: Area kosong yang mengelilingi konten, namun masih berada di **dalam** kotak. Warnanya ikut dengan warna latar belakang kotak.
-3. **Border (Bingkai)**: Garis yang membungkus padding dan konten.
-4. **Margin (Jarak Luar)**: Area kosong yang berada di **luar** kotak. Margin digunakan untuk memerintahkan kotak tersebut menjauh dari kotak tetangganya.
+```
+┌─────────────────────────────────┐  ← Margin (luar)
+│  ┌───────────────────────────┐  │
+│  │  ┌─────────────────────┐  │  │  ← Border
+│  │  │  ┌───────────────┐  │  │  │
+│  │  │  │               │  │  │  │  ← Padding
+│  │  │  │    Content    │  │  │  │
+│  │  │  │               │  │  │  │
+│  │  │  └───────────────┘  │  │  │
+│  │  └─────────────────────┘  │  │
+│  └───────────────────────────┘  │
+└─────────────────────────────────┘
+```
 
-**Analogi Paket Pengiriman Barang:**
-Bayangkan kamu sedang mengirim **Gelas Kaca** (Content) melalui ekspedisi.
+1. **Content** — Area tempat teks, gambar, atau elemen anak berada. Ukurannya dikontrol oleh `width` dan `height`.
+2. **Padding** — Ruang kosong antara konten dan border. Padding berada di **dalam** kotak, sehingga warnanya mengikuti `background-color` elemen.
+3. **Border** — Garis yang membungkus padding dan konten. Dapat diatur ketebalan, gaya, dan warnanya.
+4. **Margin** — Ruang kosong di **luar** kotak, antara elemen ini dan elemen-elemen di sekitarnya. Margin selalu transparan.
 
-- Gelas tersebut kamu bungkus dengan **Bubble Wrap** (Padding) agar tidak pecah saat terkena goncangan dari dalam.
-- Gelas dan bubble wrap dimasukkan ke dalam **Kardus** (Border).
-- Kardus tersebut ditaruh di dalam truk, dan kamu menjaga agar kardusmu tidak menempel mepet dengan kardus milik orang lain dengan memberikan **Ruang Jarak** (Margin).
+**Analogi Paket Pengiriman:**
 
-### 2. Efek Penambahan Padding dan Border
+- **Content** — Barang yang dikirim (misalnya gelas kaca).
+- **Padding** — Bahan pelindung seperti bubble wrap yang membungkus barang dari dalam.
+- **Border** — Kotak kardus pembungkus.
+- **Margin** — Jarak antara kardus ini dengan kardus lain di dalam truk pengiriman.
 
-Masalah utama pemula: Jika kamu membuat kotak dengan lebar `300px`, lalu kamu memberi `padding: 20px`, maka lebar kotakmu di layar bukan lagi 300px, melainkan menjadi **340px** (300 + 20 kiri + 20 kanan). Kotakmu mendadak jadi "gendut".
+---
 
-Inilah yang sering membuat desain web pecah karena satu kotak tiba-tiba melebar dan mendorong kotak di sebelahnya sampai jatuh ke bawah.
+### 2. Penulisan Padding, Border, dan Margin
 
-### 3. Solusi Cerdas: `box-sizing: border-box`
-
-Agar hidupmu tenang, ada properti ajaib bernama `box-sizing`. Nilai default browser adalah `content-box` (yang membuat kotak jadi gendut tadi).
-Developer profesional selalu menggunakan **`border-box`**.
-
-Dengan `border-box`, jika kamu menentukan lebar kotak `300px`, maka biarpun kamu tambah padding atau border, lebar total kotaknya **TETAP 300px**. Browser yang akan otomatis "mengalah" mengecilkan area isi (content) di dalamnya agar ukuran total tetap sama.
+Setiap properti dapat diterapkan ke keempat sisi secara bersamaan atau ke sisi tertentu saja.
 
 ```css
-/* Selalu gunakan ini untuk semua elemen di awal proyek */
-* {
-  box-sizing: border-box;
+/* Padding — ruang dalam */
+.kotak {
+  padding: 20px; /* Semua sisi 20px */
+  padding: 20px 40px; /* Atas-bawah 20px, kiri-kanan 40px */
+  padding: 10px 20px 30px 40px; /* Atas, kanan, bawah, kiri (searah jarum jam) */
+
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-left: 20px;
 }
 
+/* Border — garis tepi */
 .kotak {
-  width: 300px;
-  padding: 30px;
-  border: 5px solid black;
-  /* Lebar total tetap 300px karena ada border-box */
+  border: 2px solid #333; /* Ketebalan, gaya, warna */
+  border-top: 4px solid steelblue; /* Hanya sisi atas */
+  border-radius: 8px; /* Sudut membulat */
+}
+
+/* Margin — jarak luar */
+.kotak {
+  margin: 24px; /* Semua sisi 24px */
+  margin: 16px auto; /* Atas-bawah 16px, kiri-kanan otomatis (terpusat) */
+  margin-bottom: 12px; /* Hanya sisi bawah */
 }
 ```
 
-### 4. Ringkasan Singkat
+**Gaya border yang tersedia:**
 
-- Ingin teks tidak mepet ke dinding kotak? Gunakan **Padding**.
-- Ingin memberikan garis tepi? Gunakan **Border**.
-- Ingin menjauhkan kotak satu dengan kotak lainnya? Gunakan **Margin**.
+```css
+border: 2px solid #333; /* Garis lurus */
+border: 2px dashed #333; /* Garis putus-putus */
+border: 2px dotted #333; /* Titik-titik */
+border: 2px double #333; /* Garis ganda */
+```
 
-Memahami Box Model adalah kunci untuk membuat layout website yang presisi dan tidak "ajaib" (tiba-tiba berubah ukuran).
+---
+
+### 3. Masalah Perhitungan Lebar Default
+
+Secara default, `width` hanya mengukur area **Content** — tidak termasuk padding dan border. Ini berarti ukuran total elemen di layar bisa berbeda dari nilai `width` yang ditulis.
+
+```css
+.kotak {
+  width: 300px;
+  padding: 20px;
+  border: 5px solid black;
+}
+```
+
+```
+Perhitungan total lebar:
+  Content : 300px
+  Padding : 20px (kiri) + 20px (kanan) = 40px
+  Border  : 5px (kiri)  + 5px (kanan)  = 10px
+  ─────────────────────────────────────────────
+  Total   : 350px  ← lebih lebar dari yang diharapkan
+```
+
+Masalah ini sering menjadi penyebab elemen meluap keluar dari wadahnya atau mendorong elemen lain ke bawah secara tidak terduga.
+
+---
+
+### 4. Solusi: `box-sizing: border-box`
+
+Dengan nilai `border-box`, `width` dan `height` akan mencakup konten, padding, **dan** border sekaligus. Browser akan otomatis menyesuaikan area konten agar ukuran total tetap sesuai dengan nilai `width` yang ditetapkan.
+
+```css
+.kotak {
+  box-sizing: border-box;
+  width: 300px;
+  padding: 20px;
+  border: 5px solid black;
+  /* Lebar total tetap 300px — bukan 350px */
+}
+```
+
+```
+Dengan border-box:
+  Total lebar  : 300px (sesuai width)
+  Border       : 5px + 5px = 10px
+  Padding      : 20px + 20px = 40px
+  Content      : 300 - 10 - 40 = 250px (dikecilkan otomatis)
+```
+
+Karena keunggulan ini, hampir semua pengembang web menerapkan `border-box` ke seluruh elemen sejak awal proyek:
+
+```css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+```
+
+---
+
+### 5. Margin Collapse
+
+Terdapat perilaku CSS yang perlu dipahami: ketika dua elemen block bertetangga secara vertikal, margin mereka tidak dijumlahkan — melainkan yang lebih besar yang digunakan. Fenomena ini disebut **Margin Collapse**.
+
+```css
+.paragraf-atas {
+  margin-bottom: 30px;
+}
+.paragraf-bawah {
+  margin-top: 20px;
+}
+
+/*
+  Jarak antara keduanya bukan 50px (30 + 20),
+  melainkan 30px (yang terbesar di antara keduanya).
+*/
+```
+
+Margin Collapse **tidak terjadi** pada:
+
+- Margin horizontal (kiri-kanan)
+- Elemen dengan `display: flex` atau `display: grid`
+- Elemen yang memiliki padding atau border di antara margin yang bertabrakan
+
+---
+
+### 6. Contoh Lengkap — Kartu Konten
+
+```html
+<!-- HTML -->
+<div class="kartu">
+  <div class="kartu-gambar"></div>
+  <div class="kartu-isi">
+    <h3 class="kartu-judul">Judul Artikel</h3>
+    <p class="kartu-teks">
+      Ringkasan singkat dari artikel ini yang menjelaskan isinya secara umum.
+    </p>
+    <button class="kartu-tombol">Baca Selengkapnya</button>
+  </div>
+</div>
+```
+
+```css
+/* CSS */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.kartu {
+  width: 300px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 16px;
+}
+
+.kartu-gambar {
+  width: 100%;
+  height: 180px;
+  background-color: #cfe2ff;
+}
+
+.kartu-isi {
+  padding: 20px; /* Jarak antara tepi kartu dengan teks */
+}
+
+.kartu-judul {
+  margin: 0 0 8px; /* Tidak ada margin atas, 8px margin bawah */
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.kartu-teks {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.kartu-tombol {
+  width: 100%;
+  padding: 10px;
+  background-color: steelblue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.kartu-tombol:hover {
+  background-color: #2a6496;
+}
+```
+
+---
+
+### Kesimpulan
+
+Box Model adalah konsep yang mendasari semua pekerjaan tata letak CSS. Memahami perbedaan antara padding (ruang dalam), border (garis tepi), dan margin (jarak luar), serta menerapkan `box-sizing: border-box` secara konsisten, akan menghilangkan sebagian besar kebingungan tentang mengapa ukuran elemen tidak sesuai ekspektasi.
+
+**Panduan Cepat:**
+
+| Ingin melakukan apa?                          | Gunakan                                           |
+| --------------------------------------------- | ------------------------------------------------- |
+| Memberi jarak antara teks dan tepi kotak      | `padding`                                         |
+| Memberi garis tepi pada kotak                 | `border`                                          |
+| Memberi jarak antara kotak ini dan kotak lain | `margin`                                          |
+| Memastikan width mencakup padding dan border  | `box-sizing: border-box`                          |
+| Memusatkan elemen secara horizontal           | `margin: 0 auto` (dengan `width` yang ditetapkan) |
+
+**Ringkasan Properti:**
+
+| Properti                  | Fungsi                                             |
+| ------------------------- | -------------------------------------------------- |
+| `padding`                 | Ruang dalam antara konten dan border               |
+| `border`                  | Garis yang mengelilingi padding dan konten         |
+| `margin`                  | Ruang luar antara elemen ini dan elemen sekitarnya |
+| `box-sizing: content-box` | Default — width hanya mengukur area konten         |
+| `box-sizing: border-box`  | Width mencakup konten, padding, dan border         |

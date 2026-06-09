@@ -2,113 +2,226 @@
 
 ## Tujuan Pembelajaran
 
-- Mampu membuat warna gradasi (perpindahan warna) menggunakan `linear-gradient` dan `radial-gradient`.
-- Memahami cara memberikan efek bayangan pada kotak (`box-shadow`).
-- Mengetahui cara memberikan efek bayangan pada tulisan (`text-shadow`).
-- Menambahkan kesan kedalaman (depth) dan modernitas pada desain web.
+- Mampu membuat gradasi warna menggunakan `linear-gradient` dan `radial-gradient`.
+- Memahami cara memberikan efek bayangan pada elemen (`box-shadow`).
+- Mengetahui cara memberikan efek bayangan pada teks (`text-shadow`).
+- Mengenal teknik desain modern: Neumorphism dan Glassmorphism.
 
 ---
 
 ## Materi Utama
 
-Setelah kita belajar warna pekat (solid), sekarang kita akan belajar memberikan efek "kedalaman" agar elemen website terlihat menonjol dan tidak datar (_flat_). Kita akan menggunakan teknik gradasi warna dan bayangan.
+Setelah mempelajari warna solid di Bab 5, kini saatnya menambahkan kesan kedalaman dan dimensi pada elemen. Gradasi warna dan bayangan adalah dua teknik utama yang membuat tampilan web terlihat lebih modern dan tidak datar.
 
 ---
 
-### 1. Warna Gradasi (Gradients)
+### 1. Gradasi Warna (Gradient)
 
-Gradasi adalah perpaduan halus antara dua warna atau lebih. Gradasi bukanlah "Warna" (`color`), melainkan dianggap sebagai "Gambar" oleh CSS, sehingga ia dipasang pada properti `background` atau `background-image`.
+Gradasi adalah transisi halus antara dua warna atau lebih. Dalam CSS, gradasi bukan dikategorikan sebagai properti `color`, melainkan sebagai _gambar_ — sehingga ditulis pada properti `background` atau `background-image`.
 
-#### A. Linear Gradient (Garis Lurus)
+#### A. `linear-gradient` — Gradasi Garis Lurus
 
-Perpindahan warna yang mengalir searah (bisa dari atas ke bawah, atau menyamping).
+Warna bertransisi mengikuti garis lurus ke arah tertentu.
 
 ```css
+/* Dari atas ke bawah (default) */
 .banner {
-  /* Gradasi dari Biru ke Hijau */
-  background: linear-gradient(blue, green);
+  background: linear-gradient(#2c3e50, #3498db);
+}
 
-  /* Bisa juga diarahkan (ke kanan) */
-  background: linear-gradient(to right, red, yellow);
+/* Ke arah kanan */
+.header {
+  background: linear-gradient(to right, #e74c3c, #f39c12);
+}
+
+/* Sudut 135 derajat */
+.hero {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* Tiga warna */
+.pelangi {
+  background: linear-gradient(to right, #e74c3c, #f1c40f, #2ecc71);
 }
 ```
 
-#### B. Radial Gradient (Melingkar)
-
-Perpindahan warna yang memancar dari titik tengah keluar (seperti bentuk matahari atau lampu senter).
+**Mengatur titik henti warna (_color stop_):**
 
 ```css
-.bulatan {
-  background: radial-gradient(white, blue);
+/* Merah mengisi 30% pertama, lalu transisi ke biru */
+.banner {
+  background: linear-gradient(to right, #e74c3c 30%, #3498db);
 }
 ```
 
----
+#### B. `radial-gradient` — Gradasi Melingkar
 
-### 2. Bayangan Kotak (Box Shadow)
-
-Bayangan memberikan efek seolah-olah elemen tersebut "mengambang" di atas kertas. Properti ini membutuhkan 4 nilai utama:
-
-```
-box-shadow: [geser-kanan] [geser-bawah] [tingkat-blur] [warna];
-```
+Warna memancar dari titik tengah ke luar seperti lingkaran cahaya.
 
 ```css
-.kartu {
-  /* Bayangan geser 5px ke kanan, 5px ke bawah, blur 10px, warna hitam samar */
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+/* Dari tengah ke luar */
+.lingkaran {
+  background: radial-gradient(#f39c12, #e74c3c);
+}
+
+/* Ukuran dan posisi dapat dikontrol */
+.sorotan {
+  background: radial-gradient(circle at 30% 70%, #3498db, #1a1a2e);
 }
 ```
 
->  **Tips:** Nilai blur yang lebih tinggi akan membuat bayangan terlihat lebih halus dan realistis.
+**Contoh lengkap — Header dengan gradasi:**
 
----
-
-### 3. Bayangan Teks (Text Shadow)
-
-Sama seperti bayangan kotak, tapi ini khusus diterapkan pada tulisan agar teks lebih mudah dibaca jika diletakkan di atas gambar yang ramai.
+```html
+<!-- HTML -->
+<header class="hero-header">
+  <h1>Selamat Datang</h1>
+  <p>Temukan pengalaman terbaik bersama kami.</p>
+</header>
+```
 
 ```css
-h1 {
-  /* Bayangan tipis agar teks menyala */
-  text-shadow: 2px 2px 4px black;
+/* CSS */
+.hero-header {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   color: white;
+  padding: 80px 40px;
+  text-align: center;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-header h1 {
+  font-size: 3rem;
+  margin: 0 0 12px;
+}
+
+.hero-header p {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.75);
 }
 ```
 
 ---
 
-### 4. Desain Neumorphism dan Glassmorphism (Tren Modern)
+### 2. Bayangan Kotak (`box-shadow`)
 
-Dengan gabungan gradasi dan bayangan, kamu bisa membuat gaya web kekinian:
+`box-shadow` memberikan efek bayangan pada sebuah elemen sehingga tampak "mengambang" di atas permukaan.
 
-| Gaya | Efek | Teknik Utama |
-|---|---|---|
-| **Neumorphism** | Tombol terlihat "timbul" atau "tenggelam" dari permukaan | Dua `box-shadow` berlawanan arah |
-| **Glassmorphism** | Kotak terlihat seperti kaca transparan buram | `backdrop-filter: blur()` + background semi-transparan |
+**Sintaks:**
+
+```
+box-shadow: [offset-x] [offset-y] [blur] [spread] [warna];
+```
+
+| Nilai      | Keterangan                                                          |
+| ---------- | ------------------------------------------------------------------- |
+| `offset-x` | Geser horizontal (positif = ke kanan, negatif = ke kiri)            |
+| `offset-y` | Geser vertikal (positif = ke bawah, negatif = ke atas)              |
+| `blur`     | Tingkat kehalusan bayangan (0 = tajam, semakin besar semakin halus) |
+| `spread`   | Ukuran bayangan (positif = lebih besar, negatif = lebih kecil)      |
+| `warna`    | Warna bayangan (biasanya menggunakan `rgba`)                        |
+
+```css
+/* Bayangan standar */
+.kartu {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Bayangan lebih tegas */
+.tombol {
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Bayangan ke atas (offset-y negatif) */
+.footer {
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tanpa geser, hanya blur merata — bayangan bersih */
+.kartu-bersih {
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.12);
+}
+```
+
+**Beberapa bayangan sekaligus:**
+
+```css
+.kartu-berlapis {
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.12);
+}
+```
+
+**Bayangan ke dalam (`inset`):**
+
+```css
+.input-aktif {
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+```
 
 ---
+
+### 3. Bayangan Teks (`text-shadow`)
+
+`text-shadow` memberikan efek bayangan pada teks, berguna untuk meningkatkan keterbacaan teks di atas gambar atau latar belakang yang kompleks.
+
+**Sintaks:**
+
+```
+text-shadow: [offset-x] [offset-y] [blur] [warna];
+```
+
+```css
+/* Bayangan tipis untuk keterbacaan di atas foto */
+.teks-di-atas-foto {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Efek cahaya (glow) */
+.teks-neon {
+  color: #00ffcc;
+  text-shadow:
+    0 0 8px #00ffcc,
+    0 0 20px #00ffcc;
+}
+
+/* Beberapa lapisan bayangan untuk efek 3D */
+.teks-timbul {
+  color: white;
+  text-shadow:
+    1px 1px 0 #aaa,
+    2px 2px 0 #999,
+    3px 3px 0 #888;
+}
+```
+
+---
+
+### 4. Teknik Desain Modern
 
 #### A. Neumorphism
 
-Neumorphism menciptakan ilusi bahwa elemen seolah **timbul dari permukaan**. Triknya adalah menggunakan dua `box-shadow` sekaligus: satu bayangan gelap di sisi kanan-bawah, dan satu bayangan terang di sisi kiri-atas.
+Neumorphism menciptakan ilusi elemen yang **timbul dari permukaan** menggunakan dua `box-shadow` berlawanan arah — satu bayangan gelap di kanan-bawah dan satu bayangan terang di kiri-atas.
 
->  **Kunci:** Warna `background` tombol **harus sama** dengan warna background halaman agar efeknya bekerja.
-
-**HTML:**
+> **Kunci:** Warna `background` elemen harus sama dengan warna latar belakang halaman agar efeknya bekerja.
 
 ```html
-<!-- Background halaman membungkus tombol -->
+<!-- HTML -->
 <div class="neuo-bg">
   <button class="btn-neuo">Klik Aku</button>
   <button class="btn-neuo">Simpan</button>
 </div>
 ```
 
-**CSS:**
-
 ```css
-/* Background halaman — warna ini HARUS sama dengan tombol */
+/* CSS */
 .neuo-bg {
   background: #e0e5ec;
   padding: 40px;
@@ -116,7 +229,6 @@ Neumorphism menciptakan ilusi bahwa elemen seolah **timbul dari permukaan**. Tri
   gap: 20px;
 }
 
-/* Tombol Neumorphism — efek timbul */
 .btn-neuo {
   padding: 14px 36px;
   border-radius: 12px;
@@ -125,60 +237,47 @@ Neumorphism menciptakan ilusi bahwa elemen seolah **timbul dari permukaan**. Tri
   font-size: 15px;
   font-weight: 500;
   color: #6b7a99;
-  background: #e0e5ec; /* SAMA dengan .neuo-bg */
-
-  /* Dua bayangan: gelap kanan-bawah, terang kiri-atas */
+  background: #e0e5ec; /* Sama dengan .neuo-bg */
   box-shadow:
-     6px  6px 14px #b8bec8,  /* bayangan gelap */
-    -6px -6px 14px #ffffff;  /* bayangan terang */
-
-  transition: box-shadow 0.15s, transform 0.15s;
+    6px 6px 14px #b8bec8,
+    /* Bayangan gelap */ -6px -6px 14px #ffffff; /* Bayangan terang */
+  transition:
+    box-shadow 0.15s,
+    transform 0.15s;
 }
 
-/* Saat tombol ditekan: bayangan dibalik ke dalam (efek tenggelam) */
+/* Efek tenggelam saat ditekan */
 .btn-neuo:active {
   box-shadow:
-    inset  4px  4px 10px #b8bec8,
+    inset 4px 4px 10px #b8bec8,
     inset -4px -4px 10px #ffffff;
   transform: scale(0.98);
 }
 ```
 
----
-
 #### B. Glassmorphism
 
-Glassmorphism membuat elemen tampak seperti **kaca buram** yang melapiskan warna di belakangnya. Efek ini membutuhkan background berwarna-warni di belakang elemen agar terlihat maksimal.
+Glassmorphism membuat elemen tampak seperti **kaca buram** yang melapiskan warna di belakangnya. Efek ini memerlukan background berwarna-warni di belakang elemen.
 
->  **Kunci:** `backdrop-filter: blur()` hanya bekerja jika ada konten (warna/gambar) di belakang elemen. Tanpa background berwarna, efek kaca tidak akan terlihat.
-
-**HTML:**
+> **Kunci:** `backdrop-filter: blur()` hanya bekerja jika ada konten berwarna di belakang elemen. Selalu tambahkan `-webkit-backdrop-filter` untuk kompatibilitas dengan Safari.
 
 ```html
-<!-- Background gradasi diperlukan agar efek kaca terlihat -->
+<!-- HTML -->
 <div class="glass-bg">
   <button class="btn-glass">Klik Aku</button>
   <button class="btn-glass">Masuk</button>
 </div>
 ```
 
-**CSS:**
-
 ```css
-/* Background gradasi warna-warni sebagai "pemandangan" di balik kaca */
+/* CSS */
 .glass-bg {
-  background: linear-gradient(
-    135deg,
-    #6a11cb 0%,
-    #2575fc 50%,
-    #f093fb 100%
-  );
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 50%, #f093fb 100%);
   padding: 40px;
   display: flex;
   gap: 20px;
 }
 
-/* Tombol Glassmorphism — efek kaca buram */
 .btn-glass {
   padding: 14px 36px;
   border-radius: 12px;
@@ -186,29 +285,20 @@ Glassmorphism membuat elemen tampak seperti **kaca buram** yang melapiskan warna
   font-size: 15px;
   font-weight: 500;
   color: #ffffff;
-
-  /* Latar belakang semi-transparan */
   background: rgba(255, 255, 255, 0.15);
-
-  /* INI kuncinya: memburamkan konten di belakang elemen */
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px); /* untuk browser Safari */
-
-  /* Border tipis seperti tepian kaca */
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.35);
-
-  /* Bayangan halus untuk kedalaman */
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
-
-  transition: background 0.15s, transform 0.15s;
+  transition:
+    background 0.15s,
+    transform 0.15s;
 }
 
-/* Saat hover: kaca sedikit lebih terang */
 .btn-glass:hover {
   background: rgba(255, 255, 255, 0.25);
 }
 
-/* Saat ditekan */
 .btn-glass:active {
   background: rgba(255, 255, 255, 0.08);
   transform: scale(0.98);
@@ -217,13 +307,24 @@ Glassmorphism membuat elemen tampak seperti **kaca buram** yang melapiskan warna
 
 ---
 
-### Analogi Pencahayaan
+### Kesimpulan
 
-Menggunakan gradasi dan bayangan ibarat sedang **memberikan lampu sorot** pada sebuah gambar. Tanpa bayangan, mata kita akan menganggap elemen tersebut rata menempel di layar. Dengan bayangan, kita memberi isyarat ke mata pengunjung bahwa elemen tersebut lebih penting dan bisa diklik.
+Gradasi dan bayangan adalah teknik yang mengubah tampilan dua dimensi menjadi terasa memiliki kedalaman. Digunakan dengan tepat, keduanya meningkatkan hierarki visual dan memandu perhatian pengguna ke elemen yang penting.
 
-### Tips Profesional
+**Panduan penggunaan:**
 
-- Jangan terlalu berlebihan menggunakan bayangan hitam pekat dan tajam.
-- Gunakan warna bayangan yang sangat lembut (`rgba` dengan opacity rendah) agar websitemu terlihat elegan dan tidak norak.
-- Untuk Neumorphism, pastikan kontras warna teks dan background cukup agar tetap mudah dibaca.
-- Untuk Glassmorphism, selalu tambahkan `-webkit-backdrop-filter` untuk kompatibilitas dengan browser Safari.
+- Gunakan bayangan dengan nilai `rgba` beropaticy rendah agar terlihat elegan.
+- Gradasi dengan tiga warna atau lebih sebaiknya menggunakan _color stop_ agar transisi lebih terkontrol.
+- Neumorphism cocok untuk antarmuka yang minimalis dan monokromatik.
+- Glassmorphism cocok untuk antarmuka dengan latar belakang berwarna-warni atau bergambar.
+
+**Ringkasan Properti:**
+
+| Properti                  | Fungsi                                                    |
+| ------------------------- | --------------------------------------------------------- |
+| `linear-gradient()`       | Gradasi warna mengikuti garis lurus                       |
+| `radial-gradient()`       | Gradasi warna melingkar dari titik tengah ke luar         |
+| `box-shadow`              | Bayangan pada elemen (kotak)                              |
+| `box-shadow: inset`       | Bayangan ke dalam elemen                                  |
+| `text-shadow`             | Bayangan pada teks                                        |
+| `backdrop-filter: blur()` | Efek buram pada konten di belakang elemen (Glassmorphism) |

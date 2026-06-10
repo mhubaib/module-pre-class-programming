@@ -2,167 +2,192 @@
 
 ## Tujuan Pembelajaran
 
-- Membedah rahasia kemampuan mengubah watak bawaan HTML dengan properti `display`.
-- Menguasai pemosisian elemen ala kordinat peta lewat properti `position`.
-- Memahami bedanya letak statis, melayang abadi (fixed), tertancap (absolute), dan lengket (sticky).
+- Memahami properti `display` dan cara mengubah perilaku bawaan elemen HTML.
+- Menguasai properti `position` untuk menempatkan elemen di luar alur dokumen normal.
+- Membedakan perilaku `static`, `relative`, `fixed`, `absolute`, dan `sticky`.
+
+---
 
 ## Materi Utama
 
-Ini adalah bab yang paling ditakuti, namun akan seketika menaikkan tahta lebel programmer-mu jika dikuasai. Bab ini menjelaskan cara mendeportasi dan melayang-layangkan elemen di manapun sesuka hatimu.
+Dua properti yang dibahas di bab ini — `display` dan `position` — adalah fondasi dari semua pekerjaan tata letak CSS yang lebih kompleks. Memahami keduanya membuka kemampuan untuk menempatkan elemen di posisi yang tepat, kapan pun diperlukan.
 
-### 1. Merubah Watak Asli Kotak (`display`)
+---
 
-Di Bab 13 kita pernah bahas ada dua sifat orisinil elemen HTML: Element Block (Makan batas 1 baris _full_) Element Inline (Nempel sebelahan tanpa nendang ke bawah). Sifat tersebut dibagikan oleh pencipta HTML saat mereka lahir.
+### 1. Properti `display` — Mengubah Perilaku Elemen
 
-Namun CSS mampu melakukan operasi plastik pengubah watak lewat instruksi **`display`**!
+Setiap elemen HTML memiliki nilai `display` bawaan yang menentukan bagaimana ia berperilaku dalam alur dokumen. CSS memungkinkan kita mengubah nilai tersebut.
 
-- `display: block;` : Merayu elemen kalem seperti `<span>` supaya mendadak menjadi serakah turun minta baris baru dan ukurannya bisa di-seting.
-- `display: inline;` : Menghilangkan kekuatan arogansi tag `<div>` atau `<p>` sehingga ukurannya kerucut menyusut dan bisa disusun nempel sebelahan menyamping. Sayangnya ia jadi cacat, tidak bisa disetting ukuran `width` atau `height`-nya.
-- `display: inline-block;` : Kasta **Hibrida Kesempurnaan**! Element ini akan bisa berteman rukun dipasang jejer menyamping (inline), TETAPI wujud dimensinya tetap reaktif bisa dinaikturunkan `width/height` nya selayaknya dewa Block. (Cocok untuk membuat grup menu bar di pojok kanan).
-- `display: none;` : Ilmu menghilang. Element tersebut akan **terhapus lebur mutlak** dari permukaan layar (bahkan sisa ampas ukurannya margin paddingnya semua hilang dari perhitungan tata letak mata manusia, namun masih ngumpet di barisan code asli).
+| Nilai          | Perilaku                                                                |
+| -------------- | ----------------------------------------------------------------------- |
+| `block`        | Elemen menempati satu baris penuh; `width` dan `height` dapat diatur    |
+| `inline`       | Elemen berbagi baris dengan elemen lain; `width` dan `height` diabaikan |
+| `inline-block` | Berbagi baris seperti `inline`, namun `width` dan `height` dapat diatur |
+| `none`         | Elemen dihapus dari tampilan dan tidak menempati ruang                  |
+| `flex`         | Mengaktifkan Flexbox pada elemen (dibahas di Bab 33)                    |
+| `grid`         | Mengaktifkan CSS Grid pada elemen (dibahas di Bab 34)                   |
 
-**Contoh `display`:**
+**Contoh:**
 
 ```html
 <!-- HTML -->
-<span class="label-block">Saya span, tapi bertingkah seperti div!</span>
-<div class="kotak-inline">Saya div, tapi mau berbagi baris!</div>
-<div class="kotak-inline">Saya juga div, nempel di sebelahnya!</div>
+<span class="label-block">Span yang berperilaku seperti div</span>
+<div class="div-inline">Div pertama berbagi baris</div>
+<div class="div-inline">Div kedua di sebelahnya</div>
 <button class="menu-item">Beranda</button>
-<button class="menu-item">Tentang</button>
+<button class="menu-item">Produk</button>
 <button class="menu-item">Kontak</button>
-<p class="hantu">Saya paragraf yang lenyap dari muka bumi.</p>
+<p class="tersembunyi">Elemen ini tidak terlihat dan tidak menempati ruang.</p>
 ```
 
 ```css
-/* span dipaksa jadi block — bisa diatur lebar & tingginya */
+/* CSS */
+
+/* span diubah ke block — dapat diatur lebar dan tingginya */
 .label-block {
   display: block;
-  width: 200px;
-  background-color: salmon;
+  width: 220px;
+  padding: 8px 12px;
+  background-color: #fca5a5;
+  margin-bottom: 8px;
 }
 
-/* div dijinak jadi inline — mengalah berbagi baris */
-.kotak-inline {
+/* div diubah ke inline — berbagi baris */
+.div-inline {
   display: inline;
-  background-color: skyblue;
+  background-color: #bae6fd;
+  padding: 4px 8px;
 }
 
-/* Tombol menu jejer rapi, tapi tetap bisa diatur ukurannya */
+/* Tombol menu sejajar dengan ukuran seragam */
 .menu-item {
   display: inline-block;
   width: 100px;
   height: 40px;
   text-align: center;
+  line-height: 40px;
   background-color: steelblue;
   color: white;
+  border: none;
+  cursor: pointer;
 }
 
-/* Paragraf ini menghilang total dari layar */
-.hantu {
+/* Elemen disembunyikan sepenuhnya */
+.tersembunyi {
   display: none;
 }
 ```
 
-> **Hasil:** Label span kini memakan satu baris penuh, dua div berdampingan mesra, tiga tombol menu berjejer rapi dengan ukuran seragam, dan paragraf `.hantu` lenyap tak berbekas dari tampilan.
+> **Perbedaan `display: none` vs `visibility: hidden`:** Keduanya menyembunyikan elemen, namun `display: none` menghapus elemen dari tata letak sehingga tidak menempati ruang sama sekali. `visibility: hidden` menyembunyikan tampilan elemen tetapi ruangnya tetap ada.
 
 ---
 
-### 2. Memindahkan Kotak dengan Koordinat (`position`)
+### 2. Properti `position` — Menempatkan Elemen
 
-Normalnya, struktur kotak turun mendasar berbaris ke bawah di Web itu dinamakan Document Flow (Alur Normal/`static`). Tapi misal kamu mau nempelin kotak Tombol Bantuan (Call Center) yang melayang terus memburu pelanggan miski digeser webnya... Pakailah keluarga **`position`**.
+Secara default, semua elemen mengikuti **alur dokumen normal** (_Document Flow_) — disusun dari atas ke bawah dan dari kiri ke kanan. Properti `position` memungkinkan elemen dikeluarkan dari alur ini dan ditempatkan di posisi tertentu.
 
-Jika kamu mengubah letak `position`, kamu WAJIB menggunakan tombol kemudi (Steer) berwujud properti: **`top`, `right`, `bottom`, `left`**.
+Saat menggunakan `position` selain `static`, gunakan properti **`top`, `right`, `bottom`, `left`** untuk menentukan posisinya.
 
-**A. Relative (Tarik Ulur dari Tempat Asal)**
-Jika diaktifkan, kordinatnya dihitung **berdasar letak asli awal** elemen itu berdiri. Dan anehnya, meski dia kamu geser-geser layangannya, posisi aslinya yang "kosong ditinggalkan" akan tetap memakan spasi hantu, menolak diinjak elemen lain.
+---
+
+#### A. `static` — Posisi Default
+
+Semua elemen memiliki `position: static` secara default. Elemen mengikuti alur dokumen normal dan properti `top`, `right`, `bottom`, `left` tidak berefek.
+
+```css
+.elemen-normal {
+  position: static; /* Ini adalah nilai default — tidak perlu ditulis eksplisit */
+}
+```
+
+---
+
+#### B. `relative` — Bergeser dari Posisi Asli
+
+Elemen digeser dari posisi aslinya, namun ruang yang ditinggalkan tetap dipertahankan dalam alur dokumen — elemen lain tidak mengisi posisi yang ditinggalkan.
 
 ```css
 .kotak-geser {
   position: relative;
-  top: 20px; /* Saya turun (menjauhi asbes atas) sejauh 20px dari titik awal lahirku! */
-  left: 50px; /* Saya lari ke kanan (menjauhi batas kiri asli) sejauh 50px! */
+  top: 20px; /* Bergeser 20px ke bawah dari posisi aslinya */
+  left: 50px; /* Bergeser 50px ke kanan dari posisi aslinya */
 }
 ```
 
-**Contoh `relative`:**
-
 ```html
 <!-- HTML -->
-<div class="kotak-normal">Kotak Normal A</div>
-<div class="kotak-geser">Kotak Geser B</div>
-<div class="kotak-normal">Kotak Normal C</div>
+<div class="kotak-normal">Kotak A</div>
+<div class="kotak-geser">Kotak B (bergeser)</div>
+<div class="kotak-normal">Kotak C</div>
 ```
 
 ```css
+/* CSS */
 .kotak-normal {
-  background-color: lightgray;
-  margin-bottom: 5px;
+  background-color: #e2e8f0;
+  padding: 12px;
+  margin-bottom: 4px;
 }
 
 .kotak-geser {
   position: relative;
   top: 20px;
   left: 50px;
-  background-color: orange;
+  background-color: #fed7aa;
+  padding: 12px;
 }
 ```
 
-> **Hasil:** Kotak B akan tampak bergeser 20px ke bawah dan 50px ke kanan dari posisi aslinya. Kotak C tidak naik mengisi kekosongan — "bekas tempat duduk" Kotak B tetap dipesan dan dikosongkan.
+Kotak C tidak naik mengisi "bekas posisi" Kotak B — ruang tersebut tetap dikosongkan.
+
+> **Penggunaan utama `relative`:** Menjadi elemen induk (wadah) bagi elemen anak yang menggunakan `position: absolute`.
 
 ---
 
-**B. Fixed (Melayang Abadi di Kaca Layar)**
-Dia lepas berstatus ghaib total dari dimensi rumah HTML (Dimenso document flow). Posisinya berpatokan pada bingkai TV/Layar kacamu (Viewport), BUKAN letak elemen asalnya. Cocok buat bikin "Pita Tanda Diskon" melayang yang nge-stuck terus tak bisa discroll kabur.
+#### C. `fixed` — Menempel pada Viewport
 
-```css
-.tombol-wa-melayang {
-  position: fixed;
-  bottom: 0px;
-  right: 0px;
-  /* Artinya: Menempel rapet di pojok kanan paling bawah bodi monitor, dipantek mati tak perduli discroll panjang sedunia */
-}
-```
-
-**Contoh `fixed`:**
+Elemen dikeluarkan dari alur dokumen dan posisinya ditetapkan relatif terhadap **viewport** (area tampilan browser). Elemen tetap di posisinya meskipun halaman di-scroll.
 
 ```html
 <!-- HTML -->
-<div class="konten-panjang">
-  <!-- Bayangkan ini artikel panjang yang bisa di-scroll -->
-  <p>Paragraf 1... Lorem ipsum panjang sekali...</p>
-  <p>Paragraf 2... terus ke bawah...</p>
-  <!-- ...dan seterusnya... -->
-</div>
+<main class="konten-panjang">
+  <p>Artikel panjang yang bisa di-scroll...</p>
+</main>
 
-<a class="tombol-wa-melayang" href="https://wa.me/6281234567890">
-  💬 Chat WA
-</a>
+<a class="tombol-wa" href="https://wa.me/6281234567890"> 💬 Chat WA </a>
 ```
 
 ```css
-.tombol-wa-melayang {
+/* CSS */
+.konten-panjang {
+  height: 2000px;
+  padding: 24px;
+}
+
+.tombol-wa {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #25D366;
+  bottom: 24px;
+  right: 24px;
+  background-color: #25d366;
   color: white;
   padding: 12px 18px;
   border-radius: 50px;
   text-decoration: none;
   font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 100;
 }
 ```
 
-> **Hasil:** Tombol "Chat WA" akan selalu nongkrong di pojok kanan bawah layar — tidak peduli seberapa jauh pengunjung men-scroll halaman ke bawah, tombol itu tetap setia menempel di sana.
+Tombol WhatsApp selalu terlihat di pojok kanan bawah layar, tidak peduli seberapa jauh pengunjung men-scroll halaman.
 
 ---
 
-**C. Absolute (Tempelan Jangkar Parent)**
-Status pergerakannya **mutlak** lepas hantu liar kayak `fixed`, NAMUN pergerakan kordinatnya patuh (diukur/dijangkarkan) pada pelukan induk terdekat (Bapaknya) yang juga sudah diseting tak-biasa (`relative`). _Ini rumus paling rumit namun andalan UI desain: Jika ingin memanipulasi obyek benda kecil di dalam perut kartu, maka si Kartu Induk harus di set Relative, dan si Benda Kecil (Absolute) bisa bebas lari-lari di dalam pagar batas kartu induknya itu._
+#### D. `absolute` — Menempel pada Elemen Induk
 
-**Contoh `absolute`:**
+Elemen dikeluarkan dari alur dokumen dan posisinya ditetapkan relatif terhadap **elemen leluhur terdekat yang memiliki `position` selain `static`**. Jika tidak ada, posisinya mengacu pada `<body>`.
+
+> **Pola standar:** Elemen induk diberi `position: relative` sebagai batas referensi, elemen anak diberi `position: absolute` untuk ditempatkan di dalam batas tersebut.
 
 ```html
 <!-- HTML -->
@@ -174,42 +199,44 @@ Status pergerakannya **mutlak** lepas hantu liar kayak `fixed`, NAMUN pergerakan
 ```
 
 ```css
-/* Kartu Induk WAJIB di-set relative sebagai "pagar kandang" */
+/* CSS */
 .kartu-produk {
-  position: relative;
-  width: 200px;
+  position: relative; /* Menjadi batas referensi untuk elemen absolute di dalamnya */
+  width: 220px;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
 }
 
-/* Label diskon bebas ditempel di sudut manapun dalam kartu */
+.kartu-produk img {
+  width: 100%;
+  display: block;
+}
+
 .label-diskon {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: red;
+  top: 12px;
+  right: 12px;
+  background-color: #ef4444;
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: bold;
 }
 ```
 
-> **Hasil:** Label "SALE 50%" akan menempel tepat di pojok kanan atas kartu produk, mengambang di atas gambar baju. Ia tidak memengaruhi posisi elemen lain di dalam kartu, dan selalu patuh pada batas si kartu induk — bukan pada batas seluruh halaman.
+Label "SALE 50%" selalu menempel di pojok kanan atas gambar kartu, tanpa memengaruhi posisi elemen lain di dalam kartu.
 
 ---
 
-**D. Sticky (Lem Super Ganda)**
-Penggabungan watak hibrida. Saat awal dia patuh normal diam di barisan `relative`. Namun saaat kamu mulai mescroll layar pelan-pelan ke bawah, dan ujung leher kepala kotak tersebut menabrak bibir atas layar, seketika ia akan berubah wujud jadi `fixed` tak bisa kabur terus ikut nge-scroll nempel di atap, lalu jika scroll dibalik lagi ke atas, lemnya akan luruh lepas dia kembali diam tidur nyantai di pojok asal.
-_(Ini adalah jurus rahasia bikin deretan "Menu Header Navbar" yang nampak melekat lengket di atap saat ngeliat artikel panjang!)._
+#### E. `sticky` — Mengikuti Scroll Hingga Titik Tertentu
 
-**Contoh `sticky`:**
+Elemen berperilaku seperti `relative` hingga posisinya mencapai nilai `top` (atau `bottom`) yang ditetapkan saat di-scroll — setelah itu ia berperilaku seperti `fixed` hingga melewati batas wadah induknya.
 
 ```html
 <!-- HTML -->
-<header class="navbar-lengket">
+<header class="navbar">
   <nav>
     <a href="#">Beranda</a>
     <a href="#">Produk</a>
@@ -218,28 +245,89 @@ _(Ini adalah jurus rahasia bikin deretan "Menu Header Navbar" yang nampak meleka
 </header>
 
 <main>
-  <p>Konten artikel sangat panjang di sini...</p>
-  <!-- banyak paragraf ke bawah... -->
+  <p>Konten artikel yang sangat panjang...</p>
 </main>
 ```
 
 ```css
-.navbar-lengket {
+/* CSS */
+.navbar {
   position: sticky;
-  top: 0; /* Titik "lem aktif": tepat saat menyentuh tepi atas layar, dia nempel! */
+  top: 0; /* Mulai menempel saat menyentuh tepi atas viewport */
   background-color: white;
-  padding: 15px 30px;
-  border-bottom: 2px solid #eee;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  z-index: 100; /* Pastikan navbar tampil di atas konten lain */
+  padding: 16px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 100;
 }
 
-.navbar-lengket a {
-  margin-right: 20px;
+.navbar a {
+  margin-right: 24px;
   text-decoration: none;
-  color: #333;
-  font-weight: bold;
+  color: #334155;
+  font-weight: 500;
 }
 ```
 
-> **Hasil:** Navbar pertama kali muncul di posisi normalnya di atas halaman. Begitu pengguna mulai scroll ke bawah dan navbar menyentuh tepi atas layar, ia langsung "nempel" dan tidak ikut terbawa scroll. Saat pengguna scroll balik ke atas, navbar kembali ke posisi semula dengan mulus.
+Navbar muncul di posisi normalnya saat halaman dimuat. Ketika halaman di-scroll dan navbar menyentuh tepi atas viewport, navbar langsung menempel dan tidak ikut terbawa scroll.
+
+> **Syarat `sticky` bekerja:** Elemen induk tidak boleh memiliki `overflow: hidden` atau `overflow: auto`, dan elemen sticky harus berada di dalam wadah yang cukup tinggi untuk menampung efek sticky.
+
+---
+
+### 3. Properti `z-index` — Urutan Lapisan
+
+Ketika elemen saling tumpang tindih akibat penggunaan `position`, `z-index` menentukan elemen mana yang tampil di lapisan paling atas. Nilai yang lebih tinggi berarti elemen tampil di atas elemen lain.
+
+```css
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200; /* Di atas navbar */
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100; /* Di atas konten biasa */
+}
+
+.konten {
+  position: relative;
+  z-index: 1; /* Lapisan paling bawah */
+}
+```
+
+> **Catatan:** `z-index` hanya berefek pada elemen yang memiliki `position` selain `static`.
+
+---
+
+### 4. Perbandingan Nilai `position`
+
+| Nilai      | Referensi Posisi                        | Keluar dari Alur Dokumen? | Ruang Asli Dipertahankan? |
+| ---------- | --------------------------------------- | ------------------------- | ------------------------- |
+| `static`   | Alur dokumen normal                     | Tidak                     | Ya                        |
+| `relative` | Posisi asli elemen                      | Tidak                     | Ya                        |
+| `fixed`    | Viewport                                | Ya                        | Tidak                     |
+| `absolute` | Leluhur terdekat yang ber-`position`    | Ya                        | Tidak                     |
+| `sticky`   | Alur normal → Viewport (saat threshold) | Sebagian                  | Ya                        |
+
+---
+
+### Kesimpulan
+
+`display` dan `position` adalah dua properti yang memberikan kontrol penuh atas penempatan elemen di halaman. Kombinasi `position: relative` pada induk dan `position: absolute` pada anak adalah pola yang sangat umum digunakan untuk menempatkan elemen overlay, badge, dan dekorasi. Sementara `sticky` adalah solusi elegan untuk navbar yang mengikuti scroll pengguna.
+
+**Ringkasan:**
+
+| Properti                | Nilai Utama | Kegunaan Umum                                                         |
+| ----------------------- | ----------- | --------------------------------------------------------------------- |
+| `display: block`        | —           | Elemen menempati satu baris penuh                                     |
+| `display: inline`       | —           | Elemen berbagi baris                                                  |
+| `display: inline-block` | —           | Berbagi baris dengan ukuran yang dapat diatur                         |
+| `display: none`         | —           | Menyembunyikan elemen dan menghapus ruangnya                          |
+| `position: relative`    | —           | Bergeser dari posisi asli; atau sebagai wadah untuk elemen `absolute` |
+| `position: fixed`       | —           | Menempel pada viewport; tidak ikut scroll                             |
+| `position: absolute`    | —           | Menempel pada elemen induk yang ber-`position`; dikeluarkan dari alur |
+| `position: sticky`      | —           | Relatif hingga threshold tercapai, lalu menempel seperti `fixed`      |
+| `z-index`               | Angka       | Mengatur urutan lapisan elemen yang saling tumpang tindih             |

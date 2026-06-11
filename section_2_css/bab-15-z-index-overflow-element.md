@@ -1,60 +1,72 @@
-# Bab 15: Z-Index & Overflow Element
+# Bab 15: Z-Index & Overflow Elemen
 
 ## Tujuan Pembelajaran
-- Mengerti ilusi lapisan layer kertas 3 Dimensi via konsep Sumbu-Z.
-- Mampu mengendalikan elemen mana yang menimpa atau ditimpa (Z-Index).
-- Menguasai properti Overflow agar halaman web tidak bocor dan rusak struktur.
+
+- Memahami konsep sumbu-Z sebagai dimensi kedalaman dalam tata letak CSS.
+- Mengendalikan urutan tumpukan elemen menggunakan properti `z-index`.
+- Menguasai properti `overflow` untuk mengelola konten yang melebihi batas dimensi elemen.
+- Membedakan keempat nilai `overflow` dan menentukan kapan masing-masing digunakan.
+
+---
 
 ## Materi Utama
 
-Dalam dua bab sebelumnya (termasuk soal Position), kita sadar bahwa elemen kini memiliki kesaktian "melayang di atas" struktur yang wajar, saling bertabrakan dan menjepit lokasi.
+Pada bab-bab sebelumnya yang membahas properti `position`, kita telah melihat bahwa elemen dapat dilepas dari alur normal dokumen dan ditempatkan secara bebas di halaman. Kondisi ini menimbulkan situasi baru: ketika dua elemen atau lebih menempati posisi yang sama secara horizontal dan vertikal, elemen mana yang tampil di atas dan mana yang tertutup?
 
-Kini masalah seriusnya: Jika dua elemen dipaksa bertumpukan melayang di tempat yang persis sama, mana yang terlihat di atas, dan mana yang ketindihan di bawah meja?
+Bab ini membahas dua properti CSS yang menjawab pertanyaan tersebut: `z-index` untuk mengatur urutan tumpukan, dan `overflow` untuk mengelola konten yang melebihi batas elemen.
 
-### 1. Rahasia Sumbu Ketiga (Sumbu-Z) dan `z-index`
+---
 
-Monitor komputer kita itu layar datar 2 Dimensi (Lebar itu sumbu-X, Tinggi itu sumbu-Y). Sumbu-Z adalah ukuran imajinatif "Kedalaman" yang membidik meruncing moncongnya mengarah **tembus ke wajahmu** selaku penonton.
+### 1. Sumbu-Z dan Properti `z-index`
 
-Untuk memanipulasi tumpukan elemen seperti menyusun Kertas Folio di atas meja (siapa di depan mata, siapa dibelakang tertutup), pakailah **`z-index`**.
+Layar komputer menampilkan konten dalam dua dimensi: sumbu-X (horizontal) dan sumbu-Y (vertikal). **Sumbu-Z** adalah dimensi ketiga yang bersifat imajiner — merepresentasikan kedalaman atau jarak elemen dari layar menuju pengguna yang melihatnya.
 
-**Syarat Mutlak Pakai Z-Index:**
-Perintah ini cuma aktif (hidup fungsinya) pada elemen yang properti **`position`**-nya BUKAN statis (alias dia diatur jadi `relative`, `absolute`, `fixed`, atau `sticky`).
+Properti **`z-index`** digunakan untuk menentukan posisi suatu elemen pada sumbu-Z, yaitu mengatur elemen mana yang tampil di lapisan atas dan mana yang tersembunyi di lapisan bawah ketika beberapa elemen saling bertumpukan.
 
-**Aturan Penilaian Angka Leveling:**
-Angkanya berupa bilangan bulat biasa. Tidak butuh px.
-- Semakin **TINGGI** angkanya: Artinya layernya makin tebal naik menimpa mendekat ke layar wajah penonton (Kotak Terdepan).
-- Semakin **RENDAH** (bahkan bisa angka minus `-1`): Artinya kartunya posisinya merayap menyelusup diseret ke posisi alas bawah.
-- (Nilai dasar original otomatis di sistem adalah `auto` atau `0`).
+**Syarat penggunaan `z-index`:**
+Properti `z-index` hanya aktif pada elemen yang memiliki nilai `position` selain `static` — yaitu `relative`, `absolute`, `fixed`, atau `sticky`.
+
+**Aturan nilai `z-index`:**
+
+- Nilai berupa bilangan bulat tanpa satuan.
+- Semakin **besar** nilainya, semakin depan posisi elemen (lebih dekat ke pengguna).
+- Semakin **kecil** nilainya — termasuk nilai negatif seperti `-1` — semakin elemen tersebut berada di lapisan belakang.
+- Nilai bawaan (_default_) adalah `auto`, yang setara dengan `0`.
 
 ```css
-.kertas-atas {
+.elemen-atas {
   position: absolute;
-  z-index: 10; /* Menang tumpukan (Maju tampil utuh) */
+  z-index: 10; /* Tampil di lapisan paling depan */
 }
-.kertas-bawah {
+
+.elemen-bawah {
   position: absolute;
-  z-index: 2; /* Kalah posisi, akan tertutup sebagian wajah si kertas atas */
+  z-index: 2; /* Tertutup oleh elemen dengan z-index lebih tinggi */
 }
 ```
 
-**Contoh `z-index`:**
+**Analogi — Susunan Kertas di Atas Meja:**
+Bayangkan beberapa lembar kertas diletakkan secara bertumpuk di atas meja. Kertas yang diletakkan paling akhir dengan posisi teratas akan menutupi kertas di bawahnya. Nilai `z-index` menentukan urutan tumpukan tersebut — semakin tinggi nilainya, semakin ke atas posisi elemen dalam susunan.
+
+**Contoh penerapan:**
 
 ```html
 <!-- HTML -->
 <div class="arena-tumpuk">
-  <div class="kartu kartu-merah">Merah (z: 1)</div>
-  <div class="kartu kartu-biru">Biru (z: 3)</div>
-  <div class="kartu kartu-hijau">Hijau (z: 2)</div>
+  <div class="kartu kartu-merah">Merah (z-index: 1)</div>
+  <div class="kartu kartu-biru">Biru (z-index: 3)</div>
+  <div class="kartu kartu-hijau">Hijau (z-index: 2)</div>
 </div>
 ```
 
 ```css
+/* CSS */
 .arena-tumpuk {
   position: relative;
   height: 150px;
 }
 
-/* Fondasi bersama: semua kartu harus ber-position agar z-index aktif */
+/* Semua kartu harus memiliki position agar z-index aktif */
 .kartu {
   position: absolute;
   width: 120px;
@@ -69,141 +81,242 @@ Angkanya berupa bilangan bulat biasa. Tidak butuh px.
   background-color: crimson;
   top: 10px;
   left: 10px;
-  z-index: 1; /* Paling bawah, ketindihan dua kartu lainnya */
+  z-index: 1; /* Lapisan paling bawah — tertutup oleh kedua kartu lainnya */
 }
 
 .kartu-biru {
   background-color: steelblue;
   top: 30px;
   left: 40px;
-  z-index: 3; /* Paling atas, menimpa semuanya */
+  z-index: 3; /* Lapisan paling atas — menimpa semua kartu lainnya */
 }
 
 .kartu-hijau {
   background-color: seagreen;
   top: 20px;
   left: 70px;
-  z-index: 2; /* Di tengah: menimpa merah, tapi ditimpa biru */
+  z-index: 2; /* Lapisan tengah — menimpa kartu merah, tertutup oleh kartu biru */
 }
 ```
 
-> **Hasil:** Ketiga kartu saling bertumpukan di area yang sama. Kartu Biru tampil paling depan menimpa semuanya, Kartu Hijau ada di tengah, dan Kartu Merah paling tertindih di lapisan terbawah — persis seperti susunan kertas folio di atas meja.
+> **Hasil:** Ketiga kartu saling bertumpukan di area yang sama. Kartu biru tampil paling depan, kartu hijau berada di tengah, dan kartu merah berada di lapisan paling bawah — mengikuti urutan nilai `z-index` masing-masing.
 
----
-
-### 2. Bahaya Tumpahan Isi Air (`overflow`)
-
-Bayangkan kamu memaksa memasukan air terjun galon ke dalam mulut botol yakult kecil. Hasilnya? Airnya akan banjir berhamburan kemana-mana membanjiri lantai menembus wadah aslinya.
-
-Anatomi Web persis sama. Jika ada wadah `div` kardus yang dikerangkeng mati `width: 200px` dan `height: 100px`, TAPI kamu menjejalkan teks Esai sepanjang 50 Ribu Kata di perut box itu... kalimat tersebut akan hancur tumpah menembus keluar garis kotak (overflow)!
-
-**Gaya Manajemen Pencegahan Tumpah (Properti `overflow`)**
-
-Ada 4 senjata saksi penahan bendungan banjir CSS ini:
-
-1. `overflow: visible;` (Bawaan Defaul Pabrik): Wadah pasrah dan membiarkan teks mbleber kabur dari perbatasan penjara kotak, menembus nimpa kotak orang lain agar kebaca visualisasinya.
-2. `overflow: hidden;` (Besi Algojo Pembunuh): Teks yang tak muat akan **Dipenggal putus Hilang Lenyap** (Gaib disensor browser) secara paksa persis sejajar pagar perbatasan kotaknya terhenti.
-3. `overflow: scroll;` (Teknologi Pintu Cerdas): Memaksa kardusnya merakit rel laci penggulung (**Scrollbar**) mati permanen mau isinya penuh atau kosong agar orang bisa tetep scrol baca isinya.
-4. `overflow: auto;` (Mode Smart Responsive): Mirip `scroll`, namun cuma bakal ngeluarin panel rel penggulung vertikal JIKA memang nyata ada banjir isi data teksnya. Kalau isi datanya secuil dan muat, laci gulung scrool itu gak ditampikan.
-
-**Analogi Pakaian di Koper Wisata:**
-- Bawaan `visible`: Kamu maksa masukin baju sampai koper ga bisa ditutup (Baju ndlawer blewer kemana-mana).
-- Model `hidden`: Semua lengan baju berlebih yang gak muat dijejel ke kardus bakalan digunting dibuang hancur demi koper bisa ketutup dipaksa utuh.
-- Model `auto`: Kopermu punya resleting elastis yang nambah ngembang rapi nyiapin roda penggulung biar isinya bisa masuk tapi tetep ringkas.
-
-_(Note: Kadang developer cuma ingin mengatasi tumpahan memanjang kesamping (Horizontal Scroll). Ia memanggil kodenya pakai spesifik sumbu `overflow-x: auto;` dan menyingkirkan vertikal `overflow-y`)_.
-
-**Contoh `overflow`:**
+**Contoh penerapan umum — Modal dialog di atas konten halaman:**
 
 ```html
-<!-- HTML: Kotak yang sama, keempat mode berbeda -->
-<div class="kotak kotak-visible">
-  <strong>visible (default)</strong><br>
-  Ini teks sangat panjang yang sengaja dijejal ke dalam kotak kecil supaya meluber keluar batas dinding kotaknya dan menimpa elemen di sekitarnya tanpa rasa bersalah.
+<!-- HTML -->
+<div class="halaman-konten">
+  <p>Ini adalah konten utama halaman.</p>
 </div>
 
-<div class="kotak kotak-hidden">
-  <strong>hidden</strong><br>
-  Ini teks sangat panjang yang sengaja dijejal ke dalam kotak kecil supaya meluber keluar batas dinding kotaknya dan menimpa elemen di sekitarnya tanpa rasa bersalah.
-</div>
-
-<div class="kotak kotak-scroll">
-  <strong>scroll</strong><br>
-  Ini teks sangat panjang yang sengaja dijejal ke dalam kotak kecil supaya meluber keluar batas dinding kotaknya dan menimpa elemen di sekitarnya tanpa rasa bersalah.
-</div>
-
-<div class="kotak kotak-auto">
-  <strong>auto</strong><br>
-  Ini teks sangat panjang yang sengaja dijejal ke dalam kotak kecil supaya meluber keluar batas dinding kotaknya dan menimpa elemen di sekitarnya tanpa rasa bersalah.
+<div class="overlay"></div>
+<div class="modal">
+  <h2>Konfirmasi</h2>
+  <p>Apakah Anda yakin ingin melanjutkan tindakan ini?</p>
+  <button>Ya, Lanjutkan</button>
 </div>
 ```
 
 ```css
-/* Fondasi bersama: semua kotak dikunci ukurannya */
-.kotak {
-  width: 200px;
-  height: 80px;
-  border: 2px solid #333;
-  padding: 8px;
-  margin-bottom: 40px; /* Beri jarak ekstra buat si 'visible' yang suka banjir */
-  background-color: #fffbe6;
+/* CSS */
+.halaman-konten {
+  position: relative;
+  z-index: 1; /* Konten utama berada di lapisan dasar */
 }
 
-/* 1. Teks mbleber bebas, tidak dipedulikan */
+/* Lapisan gelap semi-transparan yang menutupi konten di belakang modal */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10; /* Di atas konten utama */
+}
+
+/* Kotak dialog yang tampil di atas overlay */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 32px;
+  border-radius: 8px;
+  z-index: 20; /* Di atas overlay */
+}
+```
+
+---
+
+### 2. Mengelola Konten yang Melampaui Batas Elemen (`overflow`)
+
+Ketika sebuah elemen memiliki dimensi yang ditetapkan secara eksplisit — misalnya `width: 200px` dan `height: 100px` — namun konten di dalamnya melebihi ukuran tersebut, konten akan melampaui batas elemen. Kondisi ini disebut **overflow**.
+
+Properti **`overflow`** digunakan untuk menentukan bagaimana browser menangani konten yang melebihi batas dimensi elemen.
+
+**Empat nilai yang tersedia:**
+
+| Nilai     | Perilaku                                                                                |
+| --------- | --------------------------------------------------------------------------------------- |
+| `visible` | **(Bawaan)** Konten yang melebihi batas tetap ditampilkan di luar area elemen           |
+| `hidden`  | Konten yang melebihi batas dipotong dan tidak ditampilkan                               |
+| `scroll`  | Scrollbar selalu ditampilkan meskipun konten tidak melebihi batas; konten dapat digulir |
+| `auto`    | Scrollbar hanya muncul jika konten benar-benar melebihi batas; tampilan lebih bersih    |
+
+**Analogi — Konten dan Wadahnya:**
+Bayangkan sebuah kotak penyimpanan dengan ukuran tertentu dan sejumlah buku yang perlu disimpan di dalamnya:
+
+- `visible`: Buku yang tidak muat dibiarkan menonjol keluar dari kotak.
+- `hidden`: Buku yang tidak muat dipotong agar kotak tetap rapi dan tertutup.
+- `scroll`: Kotak dilengkapi laci geser yang selalu terpasang, sehingga semua buku dapat diakses dengan menggeser.
+- `auto`: Laci geser hanya terpasang jika buku memang tidak muat; jika muat, kotak tampak seperti biasa.
+
+```css
+/* Contoh dasar keempat nilai */
 .kotak-visible {
   overflow: visible;
 }
-
-/* 2. Teks lebih dipenggal paksa di tepi kotak */
 .kotak-hidden {
   overflow: hidden;
 }
-
-/* 3. Scrollbar selalu muncul, isi bisa digulir */
 .kotak-scroll {
   overflow: scroll;
 }
+.kotak-auto {
+  overflow: auto;
+}
+```
 
-/* 4. Scrollbar hanya muncul jika isi memang meluber */
+**Contoh perbandingan langsung keempat nilai:**
+
+```html
+<!-- HTML -->
+<div class="kotak kotak-visible">
+  <strong>visible (bawaan)</strong><br />
+  Konten yang melebihi batas elemen akan tetap ditampilkan dan dapat menimpa
+  elemen lain di sekitarnya.
+</div>
+
+<div class="kotak kotak-hidden">
+  <strong>hidden</strong><br />
+  Konten yang melebihi batas elemen akan dipotong tepat di tepi elemen dan tidak
+  dapat diakses.
+</div>
+
+<div class="kotak kotak-scroll">
+  <strong>scroll</strong><br />
+  Scrollbar selalu ditampilkan meskipun konten tidak melampaui batas. Konten
+  dapat digulir untuk dibaca seluruhnya.
+</div>
+
+<div class="kotak kotak-auto">
+  <strong>auto</strong><br />
+  Scrollbar hanya muncul jika konten melampaui batas elemen. Tampilan lebih
+  bersih saat konten sedikit.
+</div>
+```
+
+```css
+/* CSS */
+
+/* Dimensi dasar yang diterapkan pada semua kotak */
+.kotak {
+  width: 200px;
+  height: 80px;
+  border: 2px solid #555;
+  padding: 8px;
+  margin-bottom: 40px; /* Jarak ekstra untuk mengantisipasi luberan pada mode visible */
+  background-color: #fafafa;
+  font-size: 0.9rem;
+}
+
+.kotak-visible {
+  overflow: visible;
+}
+.kotak-hidden {
+  overflow: hidden;
+}
+.kotak-scroll {
+  overflow: scroll;
+}
 .kotak-auto {
   overflow: auto;
 }
 ```
 
 > **Hasil:**
-> - Kotak `visible` — teks tumpah keluar dan menimpa kotak di bawahnya.
-> - Kotak `hidden` — teks terpotong rapi tepat di tepi kotak, sisanya hilang tak terbaca.
-> - Kotak `scroll` — scrollbar vertikal dan horizontal selalu terpasang meski kosong, isi bisa digulir.
-> - Kotak `auto` — scrollbar muncul hanya saat dibutuhkan; kotak tampak bersih jika isi sedikit.
+>
+> - Kotak `visible` — konten melampaui batas dan menimpa elemen di sekitarnya.
+> - Kotak `hidden` — konten terpotong rapi di tepi elemen; bagian yang tersembunyi tidak dapat diakses.
+> - Kotak `scroll` — scrollbar vertikal dan horizontal selalu terpasang; seluruh konten dapat digulir.
+> - Kotak `auto` — scrollbar hanya muncul saat dibutuhkan; tampilan lebih rapi.
 
-**Contoh bonus `overflow-x` untuk tabel lebar:**
+---
+
+### 3. Mengontrol Overflow per Sumbu (`overflow-x` dan `overflow-y`)
+
+CSS juga menyediakan properti terpisah untuk mengontrol overflow pada masing-masing sumbu secara independen:
+
+- **`overflow-x`**: Menangani overflow pada arah horizontal.
+- **`overflow-y`**: Menangani overflow pada arah vertikal.
+
+Kombinasi keduanya berguna ketika hanya satu arah yang perlu dikendalikan — misalnya, tabel dengan banyak kolom yang memerlukan scroll horizontal tanpa mengganggu scroll vertikal halaman.
+
+```css
+.wrapper-tabel {
+  overflow-x: auto; /* Scroll horizontal jika tabel lebih lebar dari kontainer */
+  overflow-y: visible; /* Arah vertikal dibiarkan normal */
+}
+```
+
+**Contoh penerapan — Tabel dengan banyak kolom pada layar sempit:**
 
 ```html
 <!-- HTML -->
 <div class="wrapper-tabel">
   <table class="tabel-lebar">
-    <tr>
-      <th>Nama</th><th>Kota</th><th>Pekerjaan</th>
-      <th>Umur</th><th>Status</th><th>Hobi</th>
-    </tr>
-    <tr>
-      <td>Budi</td><td>Yogyakarta</td><td>Developer</td>
-      <td>25</td><td>Lajang</td><td>Ngoding</td>
-    </tr>
+    <thead>
+      <tr>
+        <th>Nama</th>
+        <th>Kota</th>
+        <th>Pekerjaan</th>
+        <th>Usia</th>
+        <th>Status</th>
+        <th>Divisi</th>
+        <th>Tanggal Bergabung</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Andi Pratama</td>
+        <td>Surabaya</td>
+        <td>Frontend Developer</td>
+        <td>27</td>
+        <td>Aktif</td>
+        <td>Teknologi</td>
+        <td>12 Januari 2022</td>
+      </tr>
+    </tbody>
   </table>
 </div>
 ```
 
 ```css
-/* Wrapper hanya diberi scroll horizontal, vertikal dibiarkan normal */
+/* CSS */
+
+/* Wrapper yang membatasi lebar dan mengaktifkan scroll horizontal */
 .wrapper-tabel {
   overflow-x: auto;
   overflow-y: visible;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
+  border-radius: 6px;
 }
 
+/* Tabel dengan lebar lebih besar dari kontainernya */
 .tabel-lebar {
-  width: 800px; /* Lebih lebar dari layar HP — dijamin butuh scroll samping */
+  width: 900px; /* Sengaja lebih lebar dari kontainer untuk mensimulasikan kondisi nyata */
   border-collapse: collapse;
 }
 
@@ -211,8 +324,47 @@ _(Note: Kadang developer cuma ingin mengatasi tumpahan memanjang kesamping (Hori
 .tabel-lebar td {
   border: 1px solid #ddd;
   padding: 10px 16px;
-  white-space: nowrap; /* Mencegah teks patah baris sendiri */
+  white-space: nowrap; /* Mencegah teks dalam sel patah ke baris baru */
+  font-size: 0.9rem;
+}
+
+.tabel-lebar th {
+  background-color: #f0f0f0;
+  text-align: left;
 }
 ```
 
-> **Hasil:** Di layar HP yang sempit, tabel bisa digeser ke kanan-kiri secara horizontal tanpa merusak layout halaman. Scrollbar vertikal halaman tetap normal seperti biasa.
+> **Hasil:** Pada layar yang lebih sempit dari lebar tabel, pengguna dapat menggeser tabel ke arah horizontal untuk melihat seluruh kolom, tanpa memengaruhi scroll vertikal halaman secara keseluruhan.
+
+---
+
+### Kesimpulan
+
+Properti `z-index` dan `overflow` menangani dua kategori masalah yang sering muncul dalam tata letak CSS: elemen yang saling bertumpukan dan konten yang melebihi batas dimensi elemen. Keduanya merupakan alat penting untuk membangun antarmuka yang tertata dan dapat diprediksi.
+
+**Panduan singkat penggunaan:**
+
+- Perlu mengatur elemen mana yang tampil di atas saat bertumpukan? → Gunakan **`z-index`** (pastikan elemen memiliki `position` selain `static`).
+- Perlu menyembunyikan konten yang melebihi batas elemen? → Gunakan **`overflow: hidden`**.
+- Perlu konten yang dapat digulir di dalam elemen? → Gunakan **`overflow: auto`** atau **`overflow: scroll`**.
+- Perlu scroll hanya pada satu arah? → Gunakan **`overflow-x`** atau **`overflow-y`**.
+
+**Ringkasan Properti:**
+
+| Properti     | Fungsi                                                          |
+| ------------ | --------------------------------------------------------------- |
+| `z-index`    | Menentukan urutan lapisan elemen pada sumbu-Z                   |
+| `overflow`   | Menentukan penanganan konten yang melebihi batas dimensi elemen |
+| `overflow-x` | Menentukan penanganan overflow pada arah horizontal             |
+| `overflow-y` | Menentukan penanganan overflow pada arah vertikal               |
+
+**Panduan Pemilihan Nilai:**
+
+| Kebutuhan                                            | Pendekatan yang Disarankan                                |
+| ---------------------------------------------------- | --------------------------------------------------------- |
+| Elemen modal atau tooltip tampil di atas konten lain | `z-index` tinggi dengan `position: fixed` atau `absolute` |
+| Elemen latar belakang tersembunyi di balik konten    | `z-index: -1` dengan `position: relative`                 |
+| Konten yang melampaui batas disembunyikan            | `overflow: hidden`                                        |
+| Area konten dapat digulir dengan tampilan bersih     | `overflow: auto`                                          |
+| Scrollbar selalu ditampilkan tanpa syarat            | `overflow: scroll`                                        |
+| Tabel lebar yang dapat digeser secara horizontal     | `overflow-x: auto` pada elemen pembungkus                 |

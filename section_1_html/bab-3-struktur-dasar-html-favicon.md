@@ -2,21 +2,22 @@
 
 ## Tujuan Pembelajaran
 
-- Mengenali dan menghafalkan struktur kerangka wajib (_boilerplate_) dari kode HTML.
-- Memahami secara mendalam perbedaan fungsi antara bagian `<head>` dan `<body>`.
-- Mampu membuat dan menjalankan file HTML riil di komputermu secara mandiri.
-- Menguasai cara menambahkan Favicon untuk memberikan kesan profesional pada websitemu.
+- Mengenali dan memahami struktur kerangka dasar (_boilerplate_) HTML.
+- Memahami perbedaan fungsi antara bagian `<head>` dan `<body>`.
+- Mampu membuat dan menjalankan file HTML di komputer secara mandiri.
+- Mengetahui cara menambahkan Favicon untuk tampilan tab browser yang lebih profesional.
+
+---
 
 ## Materi Utama
 
-Sama seperti membuat surat resmi yang memiliki aturan baku (ada bagian Tanggal Surat, Alamat Tujuan, Isi Surat, dan Tanda Tangan), HTML juga memiliki kerangka dasar yang mutlak harus ditulis.
-Di dunia programming, kerangka/template dasar sebuah file kode yang berulang-ulang kita pakai sering disebut dengan istilah **Boilerplate**.
+Sama seperti surat resmi yang memiliki struktur baku — tanggal, alamat tujuan, isi, dan tanda tangan — HTML juga memiliki kerangka dasar yang wajib ditulis di setiap file. Kerangka berulang yang selalu digunakan sebagai titik awal disebut **Boilerplate**.
 
-### 1. Membedah Kerangka Dasar HTML5
+---
 
-Setiap kali kamu membuat file dengan akhiran `.html` (contoh: `profil-saya.html`), kamu HARUS mengetikkan rentetan kode ini di baris paling awal. Ini adalah "Surat Pengantar" untuk Web Browser.
+### 1. Boilerplate HTML5
 
-Berikut adalah sintaks standar Boilerplate HTML5:
+Setiap file dengan ekstensi `.html` harus dimulai dengan kerangka berikut:
 
 ```html
 <!DOCTYPE html>
@@ -27,56 +28,226 @@ Berikut adalah sintaks standar Boilerplate HTML5:
     <title>Website Pertamaku</title>
   </head>
   <body>
-    <!-- Di sinilah semua elemen visual diletakkan -->
     <h1>Halo Dunia!</h1>
     <p>Ini adalah langkah pertamaku menjadi Web Developer.</p>
   </body>
 </html>
 ```
 
-Mari kita pecah dan pahami satu demi satu fungsinya agar kamu tidak sekadar menghafal mati:
+> **Pintasan di VSCode:** Ketik `!` lalu tekan Tab atau Enter. VSCode akan menghasilkan boilerplate HTML5 secara otomatis.
 
-- `<!DOCTYPE html>`: Ini adalah Deklarasi (Document Type Declaration). Letaknya wajib ada di baris pertama nomor 1. Fungsinya untuk memberi tahu mesin browser, _"Mulai sekarang, bacalah dokumen di bawah ini dengan standar peraturan HTML5 yang paling baru."_ Jika kode ini ketinggalan, browser kadang akan bingung dan mengacak-acak tampilan websitemu (dikenal dengan istilah _Quirks Mode_).
-- `<html lang="id">`: Ini adalah **Akar Element (Root)** yang "memeluk" seluruh dokumen web. Layaknya kardus besar yang membungkus semua tag lain. Atribut `lang="id"` memberi info ke Google Search bahwa konten website ini berbahasa Indonesia (`en` untuk Inggris).
-- **`<head>`**: Bagian "Kepala".
-- **`<body>`**: Bagian "Badan".
+---
 
-**Analogi Gedung Teater untuk `<head>` vs `<body>`**
+### 2. Penjelasan Setiap Bagian
 
-Bagi pemula, seringkali ada kebingungan di mana harus menaruh kode kita (Apakah di head? Atau body?). Bayangkan file HTML sebagai sebuah Gedung Teater pementasan drama.
+#### `<!DOCTYPE html>`
 
-- **`<head>` adalah Ruang Kendali/Backstage (Ruang Rahasia di belakang panggung).**
-  Segala sesuatu yang kamu tulis di dalam `<head>` ... `</head>` **TIDAK AKAN** terlihat di panggung (di layar putih browser milik pengunjung internet). Ruangan ini murni berisi "Sistem Pengaturan" (_meta data_) yang mengatur lalu lintas website.
-  - `<meta charset="UTF-8">`: Instruksi teknis yang mengatur agar browser mampu merender dan membaca huruf rumit (Jepang, Arab, sampai emoji 🚀) tanpa mengubahnya menjadi simbol kotak-kotak error ``.
-  - `<meta name="viewport"...>`: Senjata rahasia untuk membuat website-mu ramah di layar gawai pintar (Responsive).
-  - `<title>`: Satu-satunya bagian `<head>` yang terlihat oleh pengunjung. Teks "Website Pertamaku" ini akan nongol di Tab Bar atas browsermu, bukan di layarnya.
+Ditulis di baris pertama, sebelum tag apa pun. Baris ini memberitahu browser bahwa dokumen ini menggunakan standar **HTML5** — versi HTML terbaru. Tanpa deklarasi ini, browser mungkin masuk ke mode kompatibilitas lama (_Quirks Mode_) yang dapat menyebabkan tampilan tidak konsisten.
 
-- **`<body>` adalah Panggung Utama (Stage).**
-  Apa pun yang ingin kamu tujukan ke MATA pengunjung (Aktor, Lampu sorot, Properti) WAJIB diletakkan di dalam `<body>` ... `</body>`. Teks, paragraf (`<p>`), judul (`<h1>`), gambar (`<img>`), hingga tombol, jika ditulis di luar `<body>` tidak akan dirender dengan benar/sah oleh browser.
+```html
+<!DOCTYPE html> ← Harus selalu ada di baris pertama
+<html>
+  ...
+</html>
+```
 
-### 2. Mempercantik Tab dengan Favicon (Favorite Icon)
+#### `<html lang="id">`
 
-Pernahkah kamu memperhatikan logo-logo berukuran amat mungil di tab browser saat membuka web besar? Logo kotak biru berhuruf 'F' milik Facebook, ikon keranjang oranye milik Shopee, atau logo huruf 'G' milik Google. Ikon mini yang nongkrong berdampingan dengan teks Title tersebut dinamai **Favicon**.
+Element root yang membungkus seluruh konten dokumen. Atribut `lang` memberitahu browser dan mesin pencari bahwa konten halaman ini berbahasa Indonesia (`id`). Gunakan `en` untuk bahasa Inggris.
 
-Favicon mampu meningkatkan prestise dan kejelasan navigasi websitemu jika pengguna sedang membuka puluhan tab sekaligus.
+```html
+<html lang="id">
+  <!-- Bahasa Indonesia -->
+  <html lang="en">
+    <!-- Bahasa Inggris -->
+  </html>
+</html>
+```
 
-**Bagaimana cara menampilkannya?**
-Karena settingan tab browser masuk teritori "sistem", maka kita harus mengatur Favicon di dalam kurungan `<head>`.
+#### `<head>` — Area Metadata
+
+Bagian `<head>` berisi informasi tentang halaman yang tidak ditampilkan secara visual kepada pengunjung. Isinya adalah instruksi teknis untuk browser, mesin pencari, dan layanan eksternal.
+
+**Isi umum `<head>`:**
+
+| Tag                          | Fungsi                                                      |
+| ---------------------------- | ----------------------------------------------------------- |
+| `<meta charset="UTF-8">`     | Mendukung semua karakter termasuk huruf non-Latin dan emoji |
+| `<meta name="viewport" ...>` | Mengoptimalkan tampilan di perangkat mobile                 |
+| `<title>`                    | Teks yang tampil di tab browser dan hasil pencarian Google  |
+| `<link rel="stylesheet">`    | Menghubungkan file CSS eksternal                            |
+| `<meta name="description">`  | Deskripsi halaman untuk mesin pencari                       |
+
+```html
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Website portofolio Budi Santoso, Front-End Developer."
+  />
+  <title>Portofolio — Budi Santoso</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+```
+
+**Penjelasan meta viewport:**
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+```
+
+- `width=device-width` — Lebar halaman mengikuti lebar layar perangkat.
+- `initial-scale=1.0` — Halaman tidak diperbesar atau diperkecil saat pertama kali dimuat.
+
+Tanpa tag ini, browser mobile akan menampilkan halaman dalam versi desktop yang diperkecil, sehingga teks menjadi sangat kecil dan sulit dibaca.
+
+#### `<body>` — Area Konten Visual
+
+Semua elemen yang ingin ditampilkan kepada pengunjung — teks, gambar, tombol, formulir, navigasi — ditulis di dalam `<body>`. Apa pun yang ditulis di luar `<body>` tidak akan dirender dengan benar oleh browser.
+
+```html
+<body>
+  <header>
+    <nav>...</nav>
+  </header>
+
+  <main>
+    <h1>Selamat Datang</h1>
+    <p>Ini adalah halaman utama.</p>
+  </main>
+
+  <footer>
+    <p>© 2026 Nama Website</p>
+  </footer>
+</body>
+```
+
+**Perbedaan `<head>` vs `<body>`:**
+
+|                           | `<head>`                                    | `<body>`                                    |
+| ------------------------- | ------------------------------------------- | ------------------------------------------- |
+| Terlihat oleh pengunjung? | Tidak (kecuali `<title>`)                   | Ya — semua kontennya terlihat               |
+| Isinya                    | Metadata, pengaturan, tautan file eksternal | Teks, gambar, tombol, formulir, dll.        |
+| Tag umum di dalamnya      | `<meta>`, `<title>`, `<link>`, `<script>`   | `<h1>–<h6>`, `<p>`, `<img>`, `<a>`, `<div>` |
+
+---
+
+### 3. Membuat dan Menjalankan File HTML
+
+**Langkah-langkah:**
+
+1. Buat folder baru di komputer, misalnya `belajar-html`.
+2. Buka folder tersebut di VSCode: `File → Open Folder`.
+3. Buat file baru bernama `index.html`.
+4. Ketik `!` lalu tekan Enter untuk membuat boilerplate otomatis.
+5. Tambahkan konten di dalam `<body>`.
+6. Simpan file (`Ctrl+S` / `Cmd+S`).
+7. Buka file di browser: klik kanan file → **Open with Live Server** (jika menggunakan ekstensi Live Server), atau buka langsung di browser dengan drag-and-drop.
+
+**Contoh file pertama yang lengkap:**
+
+```html
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Halaman Pertama Saya</title>
+  </head>
+  <body>
+    <h1>Halo, nama saya Budi!</h1>
+    <p>Ini adalah halaman web pertama yang saya buat sendiri.</p>
+    <p>Saya sedang belajar HTML dan CSS.</p>
+  </body>
+</html>
+```
+
+---
+
+### 4. Favicon — Ikon di Tab Browser
+
+**Favicon** (Favorite Icon) adalah ikon kecil yang tampil di tab browser di sebelah judul halaman. Favicon membantu pengguna mengenali website dengan cepat ketika membuka banyak tab sekaligus.
+
+Karena favicon adalah pengaturan tampilan tab browser (bukan konten visual halaman), ia didefinisikan di dalam `<head>` menggunakan tag `<link>`.
 
 ```html
 <head>
   <meta charset="UTF-8" />
   <title>Website dengan Favicon</title>
-
-  <!-- Cara menyisipkan Favicon -->
-  <link rel="icon" type="image/x-icon" href="logo-website.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 ```
 
-Langkah kerjanya:
+**Penjelasan atribut:**
 
-1. Tag yang dipakai adalah `<link>`, ia adalah tag tunggal yang mengatur hubungan luar file.
-2. Atribut `rel="icon"` adalah instruksi: "Relasikan (Relation) file ini sebagai 'icon'."
-3. Atribut `href="logo-website.png"` menunjuk nama lokasi file fotonya yang ada di komputermu.
+| Atribut | Nilai           | Fungsi                                  |
+| ------- | --------------- | --------------------------------------- |
+| `rel`   | `"icon"`        | Mendefinisikan relasi file sebagai ikon |
+| `type`  | `"image/png"`   | Format file gambar                      |
+| `href`  | `"favicon.png"` | Lokasi file gambar favicon              |
 
-_Tips: Sangat disarankan rasio gambar Favicon-mu berbentuk persegi sama sisi (contoh: 512x512 pixel) dan menggunakan format .png agar transparansi latar belakang tetap terjaga._
+**Contoh dengan beberapa ukuran favicon:**
+
+Browser modern dapat menggunakan ukuran favicon yang berbeda untuk berbagai konteks (tab, bookmark, layar ponsel). Kamu dapat mendefinisikan lebih dari satu:
+
+```html
+<head>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon-apple.png" />
+</head>
+```
+
+**Rekomendasi file favicon:**
+
+- Format: `.png` (mendukung latar belakang transparan) atau `.ico` (format lama, kompatibel di semua browser)
+- Ukuran: minimal `32x32` pixel; gunakan gambar persegi
+- Nama file yang umum digunakan: `favicon.ico` atau `favicon.png`
+
+**Contoh struktur folder proyek lengkap:**
+
+```
+proyek-website/
+├── index.html
+├── style.css
+├── script.js
+└── favicon.png
+```
+
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Website portofolio saya." />
+    <title>Portofolio Saya</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Selamat datang di portofolio saya.</h1>
+  </body>
+</html>
+```
+
+---
+
+### Kesimpulan
+
+Struktur boilerplate HTML5 adalah fondasi dari setiap halaman web. Memahami fungsi setiap bagiannya — bukan sekadar menghafalnya — akan memudahkan proses pembuatan dan pemeliharaan website di masa mendatang.
+
+**Ringkasan:**
+
+| Bagian                   | Fungsi                                                                       |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| `<!DOCTYPE html>`        | Memberitahu browser untuk menggunakan standar HTML5                          |
+| `<html lang="id">`       | Element root; atribut `lang` mendefinisikan bahasa konten                    |
+| `<head>`                 | Berisi metadata dan pengaturan teknis; tidak terlihat secara visual          |
+| `<meta charset="UTF-8">` | Mendukung seluruh karakter Unicode termasuk non-Latin                        |
+| `<meta name="viewport">` | Mengoptimalkan tampilan di perangkat mobile                                  |
+| `<title>`                | Teks yang tampil di tab browser dan hasil pencarian                          |
+| `<body>`                 | Berisi seluruh konten visual yang ditampilkan ke pengunjung                  |
+| Favicon                  | Ikon kecil di tab browser; didefinisikan via `<link rel="icon">` di `<head>` |

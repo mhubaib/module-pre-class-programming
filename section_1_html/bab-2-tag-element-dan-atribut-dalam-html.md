@@ -2,94 +2,210 @@
 
 ## Tujuan Pembelajaran
 
-- Mengetahui perbedaan mendasar antara Tag, Element, dan Atribut pada kode HTML.
-- Mampu menulis sintaks HTML dasar tanpa bingung membedakan istilah-istilah di atas.
+- Memahami perbedaan mendasar antara Tag, Element, dan Atribut dalam HTML.
+- Mampu menulis sintaks HTML dasar dengan pemahaman istilah yang tepat.
 - Mengenal fungsi Atribut dan cara penulisannya yang benar.
+
+---
 
 ## Materi Utama
 
-Satu-satunya cara HTML berkomunikasi dengan Web Browser adalah menggunakan **"Tanda"**. Dalam kacamata HTML, tulisan tidak sekadar tulisan. Tulisan harus "dibungkus" oleh tanda tertentu agar browser tahu maksudnya.
-Secara teknis, bahasa HTML dibangun dari tiga unsur utama pembentuk anatominya: **Tag, Element, dan Atribut.**
+HTML berkomunikasi dengan browser menggunakan tanda-tanda khusus yang disebut **tag**. Tulisan biasa tidak cukup untuk memberi tahu browser apakah sesuatu adalah judul, paragraf, tautan, atau gambar — semua itu perlu "dibungkus" oleh tag yang sesuai.
 
-### 1. Tag (Tanda atau Label)
+Bahasa HTML dibangun dari tiga unsur utama: **Tag**, **Element**, dan **Atribut**.
 
-Tag adalah instruksi berupa tanda khusus penanda awal dan akhir. Tag bertugas memberitahu browser: _"Tolong tampilkan teks di bagian ini sebagai paragraf, dan bagian yang itu sebagai judul besar."_
-Setiap kali kamu menulis tag HTML, ia wajib dibungkus dengan tanda kurung siku pembuka `<` dan penutup `>`.
+---
 
-Konsep dasar Tag selalu berpasangan: ada **Tag Pembuka** (Opening Tag) dan **Tag Penutup** (Closing Tag). Perbedaannya, tag penutup wajib diimbuhi **garis miring/slash (`/`)** setelah kurung siku pertama.
+### 1. Tag
 
-**Contoh:**
+**Tag** adalah penanda instruksi yang memberi tahu browser bagaimana sebuah konten harus ditampilkan. Tag selalu ditulis di dalam tanda kurung siku `<` dan `>`.
 
-- `<p>` adalah tag pembuka untuk Paragraf.
-- `</p>` adalah tag penutup untuk Paragraf.
-- `<h1>` adalah tag pembuka untuk Judul Besar (Heading 1).
-- `</h1>` adalah tag penutup.
+Sebagian besar tag berpasangan: ada **Tag Pembuka** dan **Tag Penutup**. Tag penutup ditandai dengan garis miring (`/`) setelah tanda kurung siku pembuka.
 
-**Pengecualian (Tag Tunggal):**
-Tidak semua benda di dunia nyata punya akhir. Begitu juga di HTML, ada tag yang tidak punya penutup, dinamakan **Self-Closing Tag**. Biasanya ini dipakai untuk hal yang tidak membungkus teks, melainkan menyisipkan _sebuah objek_.
-Contoh:
+```html
+<p>← Tag Pembuka</p>
+← Tag Penutup
+```
 
-- `<br>` (Break), untuk menyisipkan jeda baris baru (seperti tombol Enter).
-- `<img>` (Image), untuk menyisipkan gambar.
+**Contoh tag yang umum digunakan:**
 
-### 2. Element (Elemen Utuh)
+| Tag Pembuka | Tag Penutup | Fungsi              |
+| ----------- | ----------- | ------------------- |
+| `<h1>`      | `</h1>`     | Judul utama halaman |
+| `<h2>`      | `</h2>`     | Sub-judul           |
+| `<p>`       | `</p>`      | Paragraf teks       |
+| `<a>`       | `</a>`      | Tautan (link)       |
+| `<div>`     | `</div>`    | Wadah blok umum     |
+| `<span>`    | `</span>`   | Wadah inline umum   |
 
-Seringkali programmer pemula terbalik-balik menyebut Tag sebagai Element dan Element sebagai Tag.
+**Self-Closing Tag (Tag Tanpa Penutup):**
 
-**Analogi Kardus Paket:**
-Bayangkan kamu sedang mengirim paket berisi TV melalui kurir SiCepat.
+Beberapa tag tidak membungkus konten teks, melainkan menyisipkan objek. Tag ini tidak memiliki tag penutup dan disebut **Self-Closing Tag**.
 
-- **Tag Pembuka:** Label stiker bertuliskan "Fragile / Mudah Pecah" di bagian atas kardus.
-- **Konten:** TV layar datar yang ada di dalamnya.
-- **Tag Penutup:** Selotip besar/Label segel di bagian bawah kardus.
+```html
+<br />
+<!-- Jeda baris baru -->
+<hr />
+<!-- Garis horizontal pemisah -->
+<img src="foto.jpg" alt="Foto" />
+<!-- Gambar -->
+<input type="text" />
+<!-- Kolom input -->
+<meta charset="UTF-8" />
+<!-- Metadata -->
+<link rel="stylesheet" href="style.css" />
+<!-- Tautan file CSS -->
+```
 
-Nah, **Element** adalah KESELURUHAN paket tersebut: Kardus yang ditempeli label secara utuh beserta TV di dalamnya!
+---
 
-Dalam kacamata kode:
+### 2. Element
+
+**Element** adalah satu kesatuan utuh yang terdiri dari tag pembuka, konten di dalamnya, dan tag penutup. Jika tag adalah tanda, maka element adalah keseluruhan paket tersebut.
 
 ```html
 <p>Halo, ini adalah sebuah paragraf!</p>
 ```
 
-Penjelasan Anatomi:
+Anatomi element di atas:
 
-- `<p>` = Tag Pembuka
-- `Halo, ini adalah sebuah paragraf!` = Konten / Isi
-- `</p>` = Tag Penutup
-  **Kesatuan dari ujung `<p>` sampai menabrak ujung `</p>` itulah yang dinamakan HTML ELEMENT.** Jika seseorang berkata, _"Tolong hapus Element Paragraf tersebut,"_ artinya kamu harus menghapus tag pembuka, isinya, dan tag penutupnya sekaligus.
+| Bagian      | Teks                                | Keterangan             |
+| ----------- | ----------------------------------- | ---------------------- |
+| Tag Pembuka | `<p>`                               | Menandai awal element  |
+| Konten      | `Halo, ini adalah sebuah paragraf!` | Isi yang ditampilkan   |
+| Tag Penutup | `</p>`                              | Menandai akhir element |
 
-### 3. Atribut (Attribute / Informasi Ekstra)
+**Keseluruhan tiga bagian tersebut — dari `<p>` hingga `</p>` — itulah yang disebut Element.**
 
-Terkadang, sekadar label kardus "Fragile" tidak cukup. Kurir perlu tahu, _"Ke mana kardus ini harus dikirim? Berapa beratnya?"_ Di sinilah **Atribut** berperan.
+**Element dapat bersarang (Nested Elements):**
 
-Atribut adalah penyedia informasi tambahan atau modifikasi yang disematkan **khusus di dalam Tag Pembuka** (tidak pernah ditulis di Tag Penutup).
-
-Aturan dasar penulisan Atribut:
-
-1. Ditulis di dalam kurung siku Tag Pembuka, dipisahkan dengan spasi.
-2. Formasi penulisannya selalu berpasangan: `nama_atribut="nilai_atribut"`.
-3. Gunakan tanda sama dengan (`=`) dan bungkus nilai menggunakan tanda kutip ganda (`" "`).
-
-**Contoh Kasus Atribut:**
-
-_Kasus 1: Atribut pada Elemen Link (Tautan)_
+Element boleh berada di dalam element lain. Element di dalamnya disebut **child element**, dan yang membungkusnya disebut **parent element**.
 
 ```html
-<a href="https://google.com">Ayo buka Google</a>
+<div>
+  <h2>Judul Seksi</h2>
+  <p>Ini adalah paragraf di dalam sebuah div.</p>
+</div>
 ```
-
-- `<a ...>` = Tag pembuka `a` (Anchor, pembuat teks bisa diklik).
-- `href` = Nama atribut (Singkatan Hypertext Reference, tempat menyimpan URL tujuan).
-- `"https://google.com"` = Nilai dari atribut tersebut.
-
-_Kasus 2: Atribut pada Elemen Gambar (Tag Tunggal)_
 
 ```html
-<img src="foto-kucing.jpg" alt="Gambar Kucing Anggora sedang tidur" />
+<p>Teks ini memiliki kata yang <strong>ditebalkan</strong> di dalamnya.</p>
 ```
 
-- `<img>` = Tag penyisip gambar.
-- `src` = Atribut Source (Sumber). Di sinilah browser tahu gambar bernama `foto-kucing.jpg` yang harus ditampilkan.
-- `alt` = Atribut Alternative Text. Sebuah teks cadangan. Jika koneksi internet pengguna sangat lambat dan `foto-kucing.jpg` gagal dimuat, teks "Gambar Kucing Anggora sedang tidur"-lah yang akan muncul di layar. Atribut `alt` ini juga krusial bagi penyandang tunanetra yang berselancar di internet menggunakan aplikasi pembaca layar otomatis (Screen Reader).
+**Aturan penting:** Tag anak harus ditutup sebelum tag induknya ditutup.
 
-Sebuah tag bisa memiliki satu atribut, banyak atribut sekaligus (dipisahkan spasi antar atribut), atau tidak sama sekali.
+```html
+<!-- Benar — tag anak ditutup terlebih dahulu -->
+<p><strong>Teks tebal</strong></p>
+
+<!-- Salah — tag saling silang -->
+<p><strong>Teks tebal</p></strong>
+```
+
+---
+
+### 3. Atribut
+
+**Atribut** adalah informasi tambahan yang disisipkan ke dalam tag pembuka untuk memodifikasi perilaku atau tampilan sebuah element.
+
+**Aturan penulisan atribut:**
+
+1. Ditulis di dalam tag pembuka, dipisahkan spasi dari nama tag.
+2. Format penulisan: `nama-atribut="nilai"`.
+3. Gunakan tanda sama dengan (`=`) dan apit nilai dengan tanda kutip ganda (`"`).
+4. Atribut tidak ditulis di tag penutup.
+
+```html
+<tag nama-atribut="nilai">Konten</tag>
+```
+
+**Contoh — Atribut pada elemen tautan:**
+
+```html
+<a href="https://google.com">Buka Google</a>
+```
+
+- `href` — Atribut yang menyimpan URL tujuan tautan.
+- `"https://google.com"` — Nilai dari atribut `href`.
+
+**Contoh — Atribut pada elemen gambar:**
+
+```html
+<img src="foto-kucing.jpg" alt="Kucing Anggora sedang tidur" />
+```
+
+- `src` — Atribut Source, menentukan lokasi file gambar yang akan ditampilkan.
+- `alt` — Atribut Alternative Text, teks yang ditampilkan jika gambar gagal dimuat. Juga digunakan oleh aplikasi pembaca layar (_screen reader_) untuk pengguna dengan gangguan penglihatan.
+
+**Satu element dapat memiliki beberapa atribut sekaligus:**
+
+```html
+<a href="https://contoh.com" target="_blank" title="Buka di tab baru">
+  Kunjungi Website
+</a>
+```
+
+- `href` — URL tujuan.
+- `target="_blank"` — Membuka tautan di tab baru.
+- `title` — Teks tooltip yang muncul saat kursor diarahkan ke tautan.
+
+**Contoh atribut lainnya yang umum digunakan:**
+
+```html
+<!-- Atribut id dan class untuk CSS/JavaScript -->
+<div id="header-utama" class="container">...</div>
+
+<!-- Atribut type dan placeholder pada input -->
+<input type="email" placeholder="Masukkan email Anda" />
+
+<!-- Atribut width dan height pada gambar -->
+<img src="logo.png" alt="Logo" width="200" height="80" />
+
+<!-- Atribut disabled pada tombol -->
+<button disabled>Tidak Dapat Diklik</button>
+```
+
+---
+
+### 4. Ringkasan Hubungan Ketiganya
+
+```html
+<a href="https://google.com">Buka Google</a>
+```
+
+```
+┌─────────────────────────────────────────────────────┐
+│                    ELEMENT                          │
+│                                                     │
+│  ┌──────────────────────┐                          │
+│  │     TAG PEMBUKA       │     KONTEN     TAG PENUTUP│
+│  │  <a href="...com">   │  Buka Google   </a>       │
+│  │      ↑               │                           │
+│  │   ATRIBUT            │                           │
+│  └──────────────────────┘                          │
+└─────────────────────────────────────────────────────┘
+```
+
+| Istilah     | Definisi                                             | Contoh                    |
+| ----------- | ---------------------------------------------------- | ------------------------- |
+| **Tag**     | Penanda instruksi dalam kurung siku                  | `<p>`, `</p>`, `<img>`    |
+| **Atribut** | Informasi tambahan di dalam tag pembuka              | `href="..."`, `src="..."` |
+| **Element** | Keseluruhan unit: tag pembuka + konten + tag penutup | `<p>Teks</p>`             |
+
+---
+
+### Kesimpulan
+
+Memahami perbedaan antara Tag, Element, dan Atribut adalah fondasi untuk membaca dan menulis kode HTML dengan benar. Istilah-istilah ini akan terus muncul sepanjang pembelajaran HTML dan CSS, sehingga pemahaman yang tepat sejak awal akan menghindari kebingungan di kemudian hari.
+
+**Ringkasan:**
+
+| Konsep           | Penjelasan                                                    |
+| ---------------- | ------------------------------------------------------------- |
+| Tag              | Penanda dalam `< >` yang memberi instruksi ke browser         |
+| Tag Pembuka      | `<nama>` — menandai awal element                              |
+| Tag Penutup      | `</nama>` — menandai akhir element                            |
+| Self-Closing Tag | Tag tanpa penutup: `<br>`, `<img>`, `<input>`                 |
+| Element          | Kesatuan tag pembuka + konten + tag penutup                   |
+| Nested Element   | Element di dalam element lain                                 |
+| Atribut          | Informasi tambahan dalam format `nama="nilai"` di tag pembuka |

@@ -2,166 +2,398 @@
 
 ## Tujuan Pembelajaran
 
-- Mengenal tag penyedia nama kolom isian (`<label>`).
-- Menguasai macam-macam bentuk `<input>` (Text, Password, Checkbox, Radio, dll).
-- Mampu menggunakan kotak isian panjang (`<textarea>`) dan opsi gulir ke bawah (`<select>`).
-- Mengetahui kekuatan ragam tipe data khusus bawaan HTML5 (Email, Tanggal, Warna, Angka).
-- Membuat tombol ajaib _"Submit"_ untuk meroketkan data form.
+- Mengenal tag `<label>` sebagai penanda kolom isian.
+- Menguasai berbagai tipe `<input>` yang tersedia di HTML.
+- Mampu menggunakan `<textarea>` untuk teks panjang dan `<select>` untuk menu dropdown.
+- Mengetahui tipe input khusus HTML5 seperti email, tanggal, warna, dan lainnya.
+- Membuat tombol submit untuk mengirimkan data formulir.
+
+---
 
 ## Materi Utama
 
-Dalam wadah ampli `<form>` yang kita bahas di Bab 11, kita siap memasukkan kertas formulirnya. Ada beragam balok komponen penyusun lembar form, mulai dari kotak ketikan polos hingga centang persetujuan (Terms & Conditions).
+Di Bab 11, kita membahas tag `<form>` sebagai wadah formulir. Sekarang saatnya mengisi wadah tersebut dengan berbagai elemen input yang memungkinkan pengguna memasukkan data.
 
-Mari kita preteli organ-organ dalam form!
+---
 
-### 1. Tag Keterangan Kolom: `<label>`
+### 1. Tag Label: `<label>`
 
-Bayangkan ada sebuah kotak putih kosong di layar tanpa ada tulisan "Nama Lengkap" di sampingnya. User pasti kebingungan harus mengisi kotak itu dengan apa. Oleh sebab itu, kita butuh elemen `<label>`.
-
-`<label>` berfungsi sekadar sebagai papan nama (teks petunjuk). Namun ia punya satu rahasia ajaib: Jika atribut `for` pada label disamakan dengan `id` pada kotak input, maka ketika sang pengguna (terutama pemakai HP jari besar) meng-klik teks label tersebut, kursor akan otomatis masuk menyala ke kotak isian di sebelahnya!
+`<label>` adalah teks keterangan yang menjelaskan fungsi sebuah kolom input. Selain sebagai petunjuk visual, `<label>` memiliki fungsi aksesibilitas penting: ketika atribut `for` pada label disamakan dengan atribut `id` pada input, mengklik teks label akan otomatis memindahkan fokus ke kolom input yang bersangkutan.
 
 ```html
-<label for="kotak-username">Nama Pengguna:</label>
-<input type="text" id="kotak-username" />
+<label for="nama-pengguna">Nama Pengguna:</label>
+<input type="text" id="nama-pengguna" />
 ```
 
-### 2. Sang Bunglon: Tag `<input>`
+Ini sangat membantu pengguna di perangkat mobile di mana area klik yang kecil sulit ditekan dengan tepat.
 
-`<input>` adalah elemen terpenting form HTML yang bentuknya bisa berubah rupa menyesuaikan perintah atribut `type` (Tipe). Ingat, `input` adalah bentuk Tag Tunggal.
-
-Dulu di era HTML4, tipe input sangat terbatas. Namun lewat revolusi HTML5, browser modern kini sangat cerdas! Browser HP kini otomatis memunculkan "_keyboard angka saja_" ketika bertemu input angka, atau "_keyboard email (ada tombol @)_" ketika bertemu input email.
-
-Berikut kamus lengkap macam-macam penjelmaan tag `<input>` yang sangat memukau:
-
-**1. Tipe Dasar (Klasik)**
-
-- **Teks Pendek (`type="text"`)**
-  Untuk isian 1 baris umum seperti Nama, Pekerjaan, dll.
+**Cara penulisan alternatif — label membungkus input:**
 
 ```html
-<input type="text" placeholder="Ketik nama kamu di sini" />
+<!-- Input di dalam label — tidak memerlukan atribut for/id -->
+<label>
+  Nama Pengguna:
+  <input type="text" />
+</label>
 ```
 
-_(Tips: Atribut `placeholder` menampilkan teks bayang-bayang abu yang sirna waktu kita mulai mengetik)._
+---
 
-- **Kata Sandi Rahasia (`type="password"`)**
-  Pengguna sedang mengetik, namun di layar yang muncul hanyalah simbol titik hitam bulat tebal atau bintang `*******` agar menghindari orang di belakang mengintip privasimu.
+### 2. Tag Input: `<input>`
+
+`<input>` adalah elemen form paling fleksibel. Tampilannya berubah sesuai nilai atribut `type`. Tag ini bersifat self-closing (tidak memiliki tag penutup).
+
+#### A. Tipe Teks Dasar
+
+**`type="text"` — Teks satu baris:**
 
 ```html
-<input type="password" />
+<label for="nama">Nama Lengkap:</label>
+<input type="text" id="nama" name="nama" placeholder="Contoh: Budi Santoso" />
 ```
 
-- **Centang Pilihan Ganda (`type="checkbox"`)**
-  Berwujud "Kotak Centang". Digunakan kala kamu membebaskan pengguna memilih **LEBIH DARI SATU** jawaban (Multyple Choice).
+Atribut `placeholder` menampilkan teks petunjuk yang menghilang saat pengguna mulai mengetik.
+
+**`type="password"` — Kata sandi tersembunyi:**
 
 ```html
-<input type="checkbox" /> Membaca <input type="checkbox" /> Bersepeda
+<label for="sandi">Kata Sandi:</label>
+<input type="password" id="sandi" name="sandi" />
 ```
 
-- **Pilihan Bulat Mutlak (`type="radio"`)**
-  Berwujud "Lingkaran Bulat". The Rule of The Game: **HANYA BOLEH PILIH SALAH SATU!** Syarat rahasianya: Atribut `name` dari kumpulan tombol-tombol radio tersebut harus di set NAMA PERSIS AGAR BERALIANSI.
+Karakter yang diketik digantikan dengan titik atau bintang untuk melindungi privasi pengguna.
+
+**`type="checkbox"` — Pilihan ganda (boleh memilih lebih dari satu):**
 
 ```html
-<input type="radio" name="gender" /> Laki-laki
-<input type="radio" name="gender" /> Perempuan
+<p>Hobi:</p>
+<label><input type="checkbox" name="hobi" value="membaca" /> Membaca</label>
+<label><input type="checkbox" name="hobi" value="bersepeda" /> Bersepeda</label>
+<label><input type="checkbox" name="hobi" value="memasak" /> Memasak</label>
 ```
 
-**2. Tipe Terpesifikasi Bentuk Data (HTML5 Canggih)**
+**`type="radio"` — Pilihan tunggal (hanya boleh memilih satu):**
 
-- **Alamat Email (`type="email"`)**
-  Visualnya sama dengan teks biasa, tapi browser akan **menolak** jika pengguna salah mengetik format (misal lupa menaruh lambang `@` atau `.com`).
+Seluruh tombol radio yang merupakan satu kelompok harus memiliki atribut `name` yang sama.
 
 ```html
-<input type="email" placeholder="contoh@gmail.com" />
+<p>Jenis Kelamin:</p>
+<label
+  ><input type="radio" name="jenis-kelamin" value="laki-laki" />
+  Laki-laki</label
+>
+<label
+  ><input type="radio" name="jenis-kelamin" value="perempuan" />
+  Perempuan</label
+>
 ```
 
-- **Angka Murni (`type="number"`)**
-  Hanya mengizinkan ketikan format angka numeric. Browser PC akan ngasih tombol panah "naik-turun" kecil di dalam kotaknya. Di HP, keyboard otomatis ganti ke tombol Numerik.
+#### B. Tipe Data Tervalidasi (HTML5)
+
+Browser akan memvalidasi format data sebelum formulir dapat dikirim.
+
+**`type="email"` — Alamat email:**
 
 ```html
-<!-- Atribut min dan max bisa membatasi batas jangkau -->
-<input type="number" min="1" max="100" />
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" placeholder="nama@contoh.com" />
 ```
 
-- **Nomor Handphone (`type="tel"`)**
-  Digunakan untuk memasukkan nomor telepon internasional. Keyboard di HP akan langsung membuka keypad telepon.
+Browser menolak pengiriman jika format email tidak valid (tidak ada `@` atau domain).
+
+**`type="number"` — Angka:**
 
 ```html
-<input type="tel" />
+<label for="usia">Usia:</label>
+<input type="number" id="usia" name="usia" min="1" max="120" />
 ```
 
-- **Link URL (`type="url"`)**
-  Pendeteksi kebenaran sebuah Link. Browser akan mencegat jikalau kamu lupa ngetik awalan `http://` atau `https://`.
+Atribut `min` dan `max` membatasi rentang nilai yang dapat dimasukkan. Keyboard angka otomatis muncul di perangkat mobile.
+
+**`type="tel"` — Nomor telepon:**
 
 ```html
-<input type="url" placeholder="https://websitekamu.com" />
+<label for="telepon">Nomor Telepon:</label>
+<input type="tel" id="telepon" name="telepon" placeholder="+62812345678" />
 ```
 
-**3. Tipe Kalender & Waktu (Date/Time Picker)**
-Tidak perlu repot membuat tabel kalender menyusahkan. HTML5 memanggilkan langsung komponen Kalender bawaan Sistem HP/Windows!
+Keyboard numerik telepon otomatis muncul di perangkat mobile.
 
-- **Tanggal Lengkap (`type="date"`)**: Memunculkan kalender (Tahun-Bulan-Tanggal).
-- **Waktu Jam/Jam (`type="time"`)**: Memunculkan scroll _rotary_ jam dan menit digital.
-- **Bulan Saja (`type="month"`)**: Mengambil data Tahun dan Bulan (Bagus untuk pengisian masa berlaku Kartu Kredit).
+**`type="url"` — Alamat URL:**
 
 ```html
-<label>Tanggal Lahir:</label> <input type="date" />
+<label for="website">Website:</label>
+<input
+  type="url"
+  id="website"
+  name="website"
+  placeholder="https://contoh.com"
+/>
 ```
 
-**4. Tipe Interaktif Visual & Lainnya**
+Browser memvalidasi bahwa nilai diawali dengan `http://` atau `https://`.
 
-- **Pemilih Warna (`type="color"`)**
-  Ajaib! Memunculkan jendela Color Palette (Spektrum Palet Warna) bawaan Windows/Mac di mana kamu bisa mengambil racikan komposisi warna RGB bebas lepas pakai pipet.
+#### C. Tipe Kalender dan Waktu
+
+HTML5 menyediakan komponen kalender dan waktu bawaan tanpa perlu JavaScript tambahan.
 
 ```html
-<input type="color" />
+<!-- Tanggal: menampilkan kalender pilih tanggal -->
+<label for="tgl-lahir">Tanggal Lahir:</label>
+<input type="date" id="tgl-lahir" name="tgl-lahir" />
+
+<!-- Waktu: menampilkan pemilih jam dan menit -->
+<label for="jam-booking">Waktu Booking:</label>
+<input type="time" id="jam-booking" name="jam-booking" />
+
+<!-- Bulan dan tahun: berguna untuk masa berlaku kartu kredit -->
+<label for="berlaku">Berlaku Hingga:</label>
+<input type="month" id="berlaku" name="berlaku" />
+
+<!-- Tanggal dan waktu sekaligus -->
+<label for="jadwal">Jadwal:</label>
+<input type="datetime-local" id="jadwal" name="jadwal" />
 ```
 
-- **Garis Slider (`type="range"`)**
-  Membuat pentolan volume _Slider_ geser horisontal. Pengguna nggeser mentol dari ujung kiri (terendah) mentok ke kanan (tertinggi).
+#### D. Tipe Visual dan Interaktif
+
+**`type="color"` — Pemilih warna:**
 
 ```html
-<input type="range" min="0" max="100" />
+<label for="warna-tema">Warna Tema:</label>
+<input type="color" id="warna-tema" name="warna-tema" value="#3498db" />
 ```
 
-- **File Upload (`type="file"`)**
-  Gembok gerbang utama yang menyuruh sistem membuka "File Explorer/Gallery" buat mendownload Pas Foto atau PDF Lamaran Kerja masuk menclok ke Server.
+Membuka panel pemilih warna bawaan sistem operasi.
+
+**`type="range"` — Slider nilai:**
 
 ```html
-<input type="file" accept=".pdf, .png, .jpg" />
+<label for="volume">Volume: <span id="nilai-volume">50</span></label>
+<input type="range" id="volume" name="volume" min="0" max="100" value="50" />
 ```
 
-**5. Eksekutor Misi**
-
-- **Sembunyi Total (`type="hidden"`)**: Kolom data GHAIB yang tidak terlihat wujudnya di kanvas sama sekali, ini rahasia dipakai Developer Backend nempelkin data racikan robot otomatis ke form.
-- **Tombol Pengirim Final (`type="submit"`)**: The Postman! Kliklah ini agar paketan `<form>` terhisap dan diserahkan ke Server di sebrang awan.
+**`type="file"` — Unggah file:**
 
 ```html
-<input type="submit" value="Kirim Data Sekarang!" />
+<label for="foto">Foto Profil:</label>
+<input type="file" id="foto" name="foto" accept="image/png, image/jpeg" />
 ```
 
-### 3. Kotak Cerita Panjang: `<textarea>`
+Atribut `accept` membatasi jenis file yang dapat dipilih.
 
-Kalau mau menulis "Ulasan/Review" komplain atau sebuah esai sepanjang 3 paragraf, maka kotak input biasa 1 baris bakalan mentok!
-Di sinilah dewa paragraf mendadak muncul `<textarea>`. Menariknya, ini bukan tag tunggal, dia HARUS punya penutup `</textarea>`.
-Kamu bisa atur bawaan rentang kerangkanya dari atribut `rows` (panjang vertikal baris galian) dan `cols` (lebar mendatar per karakter kata).
+#### E. Tipe Khusus
+
+**`type="hidden"` — Data tersembunyi:**
 
 ```html
-<label>Curhat di sini dong bro:</label><br />
-<textarea rows="5" cols="40"></textarea>
+<!-- Tidak terlihat oleh pengguna, namun ikut terkirim bersama form -->
+<input type="hidden" name="csrf-token" value="abc123xyz" />
 ```
 
-### 4. Menu Dropp-Down Gulir Bawah: `<select>` dan `<option>`
+Digunakan untuk menyertakan data teknis yang tidak perlu diisi oleh pengguna.
 
-Pernah berbelanja di _E-Commerce_, lantas dimintai memilih Domisili "Provinsi/Kota Asal Pindahan"? Daripada si pengguna harus membuang napas ngetik manual nama kotanya, kita kasih laci pilihan jatuh ke bawah menggunakan grup elemen bersarang (`<select>` meremaja membungkus pilihan-pilihan `<option>`).
+**`type="submit"` — Tombol kirim:**
 
 ```html
-<label>Pilih Kelas Pelajaran:</label>
-<select>
-  <option>Reguler Pagi</option>
-  <option>Reguler Malam</option>
-  <option>Kelas Eksekutif (Ahli)</option>
+<input type="submit" value="Daftar Sekarang" />
+```
+
+---
+
+### 3. Kotak Teks Panjang: `<textarea>`
+
+Untuk teks yang lebih panjang dari satu baris — seperti komentar, ulasan, atau pesan — gunakan `<textarea>`. Berbeda dengan `<input>`, `<textarea>` memiliki tag penutup.
+
+```html
+<label for="ulasan">Tulis ulasan Anda:</label>
+<textarea
+  id="ulasan"
+  name="ulasan"
+  rows="5"
+  cols="50"
+  placeholder="Ceritakan pengalaman Anda..."
+></textarea>
+```
+
+| Atribut       | Fungsi                                              |
+| ------------- | --------------------------------------------------- |
+| `rows`        | Jumlah baris yang terlihat (tinggi awal textarea)   |
+| `cols`        | Jumlah karakter per baris (lebar awal textarea)     |
+| `placeholder` | Teks petunjuk yang ditampilkan saat textarea kosong |
+
+---
+
+### 4. Menu Dropdown: `<select>` dan `<option>`
+
+Untuk pilihan dari daftar yang sudah ditentukan, gunakan kombinasi `<select>` sebagai wadah dan `<option>` sebagai setiap pilihannya.
+
+```html
+<label for="kota">Pilih Kota:</label>
+<select id="kota" name="kota">
+  <option value="">-- Pilih Kota --</option>
+  <option value="jakarta">Jakarta</option>
+  <option value="bandung">Bandung</option>
+  <option value="yogyakarta">Yogyakarta</option>
+  <option value="surabaya">Surabaya</option>
 </select>
 ```
 
-> **Catatan Pengingat Rantai Utama Form:** Jangan sampai lupa, jika semua hal-hal ajaib di atas tidak dijepit secara solid di dalam lingkup tag `<form>` dan `</form>`, maka data ketikan kamu bakal meluap tidak pernah terkirim alias mentah-mentah masuk neraka Error Log!
+**Mengelompokkan pilihan dengan `<optgroup>`:**
+
+```html
+<select name="kategori-produk">
+  <optgroup label="Pakaian">
+    <option value="kaos">Kaos</option>
+    <option value="kemeja">Kemeja</option>
+  </optgroup>
+  <optgroup label="Elektronik">
+    <option value="laptop">Laptop</option>
+    <option value="smartphone">Smartphone</option>
+  </optgroup>
+</select>
+```
+
+**Pilihan yang dipilih secara default:**
+
+```html
+<select name="metode-bayar">
+  <option value="transfer">Transfer Bank</option>
+  <option value="kartu-kredit" selected>Kartu Kredit</option>
+  <option value="dompet-digital">Dompet Digital</option>
+</select>
+```
+
+---
+
+### 5. Contoh Lengkap — Form Registrasi
+
+```html
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form Registrasi</title>
+  </head>
+  <body>
+    <h1>Buat Akun Baru</h1>
+
+    <form action="/proses-daftar" method="POST">
+      <!-- Informasi Pribadi -->
+      <h2>Informasi Pribadi</h2>
+
+      <label for="nama">Nama Lengkap:</label><br />
+      <input
+        type="text"
+        id="nama"
+        name="nama"
+        placeholder="Contoh: Budi Santoso"
+        required
+      /><br /><br />
+
+      <label for="email">Alamat Email:</label><br />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="nama@contoh.com"
+        required
+      /><br /><br />
+
+      <label for="telepon">Nomor Telepon:</label><br />
+      <input
+        type="tel"
+        id="telepon"
+        name="telepon"
+        placeholder="+62812345678"
+      /><br /><br />
+
+      <label for="tgl-lahir">Tanggal Lahir:</label><br />
+      <input type="date" id="tgl-lahir" name="tgl-lahir" /><br /><br />
+
+      <p>Jenis Kelamin:</p>
+      <label
+        ><input type="radio" name="jenis-kelamin" value="laki-laki" />
+        Laki-laki</label
+      >
+      <label
+        ><input type="radio" name="jenis-kelamin" value="perempuan" />
+        Perempuan</label
+      >
+      <br /><br />
+
+      <!-- Akun -->
+      <h2>Data Akun</h2>
+
+      <label for="sandi">Kata Sandi:</label><br />
+      <input type="password" id="sandi" name="sandi" required /><br /><br />
+
+      <label for="kota">Kota Domisili:</label><br />
+      <select id="kota" name="kota">
+        <option value="">-- Pilih Kota --</option>
+        <option value="jakarta">Jakarta</option>
+        <option value="bandung">Bandung</option>
+        <option value="yogyakarta">Yogyakarta</option></select
+      ><br /><br />
+
+      <!-- Minat -->
+      <p>Minat (boleh pilih lebih dari satu):</p>
+      <label
+        ><input type="checkbox" name="minat" value="desain" /> Desain</label
+      >
+      <label
+        ><input type="checkbox" name="minat" value="coding" /> Coding</label
+      >
+      <label
+        ><input type="checkbox" name="minat" value="bisnis" /> Bisnis</label
+      >
+      <br /><br />
+
+      <label for="bio">Bio Singkat:</label><br />
+      <textarea
+        id="bio"
+        name="bio"
+        rows="4"
+        placeholder="Ceritakan sedikit tentang diri Anda..."
+      ></textarea>
+      <br /><br />
+
+      <!-- Persetujuan -->
+      <label>
+        <input type="checkbox" name="setuju" required />
+        Saya menyetujui <a href="/syarat-ketentuan">Syarat & Ketentuan</a>
+      </label>
+      <br /><br />
+
+      <input type="submit" value="Buat Akun" />
+    </form>
+  </body>
+</html>
+```
+
+---
+
+### Kesimpulan
+
+HTML menyediakan berbagai elemen input yang dirancang untuk jenis data yang berbeda-beda. Memilih tipe input yang tepat tidak hanya meningkatkan pengalaman pengguna (keyboard yang sesuai di mobile, validasi otomatis), tetapi juga membantu memastikan data yang dikirim memiliki format yang benar.
+
+**Ringkasan Elemen Form:**
+
+| Elemen                    | Kegunaan                                          |
+| ------------------------- | ------------------------------------------------- |
+| `<label>`                 | Teks keterangan kolom; meningkatkan aksesibilitas |
+| `<input type="text">`     | Teks satu baris umum                              |
+| `<input type="password">` | Kata sandi tersembunyi                            |
+| `<input type="email">`    | Email dengan validasi format                      |
+| `<input type="number">`   | Angka dengan batas min/max opsional               |
+| `<input type="tel">`      | Nomor telepon                                     |
+| `<input type="date">`     | Pemilih tanggal dengan kalender                   |
+| `<input type="checkbox">` | Pilihan ganda (boleh lebih dari satu)             |
+| `<input type="radio">`    | Pilihan tunggal dari satu kelompok                |
+| `<input type="file">`     | Unggah file                                       |
+| `<input type="color">`    | Pemilih warna                                     |
+| `<input type="range">`    | Slider nilai                                      |
+| `<input type="hidden">`   | Data tersembunyi yang ikut terkirim               |
+| `<input type="submit">`   | Tombol kirim formulir                             |
+| `<textarea>`              | Teks panjang multi-baris                          |
+| `<select>` + `<option>`   | Menu dropdown pilihan                             |

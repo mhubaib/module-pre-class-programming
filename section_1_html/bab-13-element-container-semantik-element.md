@@ -1,72 +1,279 @@
-# Bab 13: Element Container & Semantik Element
+# Bab 13: Elemen Container & Elemen Semantik
 
 ## Tujuan Pembelajaran
 
-- Membedakan perilaku bawaan layout: _Block-level Element_ vs _Inline Element_.
-- Menggunakan Tag `<div>` dan `<span>` sebagai pembungkus layout utama.
-- Mendalami pemahaman lanjutan mengapa kita harus meninggalkan dominasi `<div>` kotor dan pindah menjadi elegan memakai _Semantic Tag_ (HTML5).
+- Membedakan perilaku tata letak bawaan antara _Block-level Element_ dan _Inline Element_.
+- Menerapkan tag `<div>` dan `<span>` sebagai elemen pembungkus untuk keperluan tata letak.
+- Memahami alasan penggunaan _Semantic Tag_ HTML5 sebagai pengganti `<div>` dalam membangun struktur halaman yang bermakna.
+
+---
 
 ## Materi Utama
 
-Pada bab tentang _Style CSS inline_ (Bab 6), kita pernah menyinggung bahwa setiap elemen HTML tanpa disadari memiliki bentukan sifat kotak pembungkus.
-Namun, bagaimana cara menyatukan sekumpulan elemen terpisah—misal: _satu gambar profile_, _satu judul H2 nama_, dan _satu paragraf profesi_—menjadi sebuah "Kotak KTP Visual" gabungan yang solid?
+Pada bab-bab sebelumnya, setiap elemen HTML digunakan secara individual untuk menampilkan konten tertentu. Namun dalam praktik pengembangan web, seringkali beberapa elemen perlu dikelompokkan menjadi satu kesatuan — misalnya menggabungkan gambar profil, nama pengguna, dan deskripsi jabatan menjadi sebuah komponen kartu yang dapat diposisikan dan didesain secara bersamaan.
 
-Jawabannya adalah dibungkus menggunakan dewa pembantu: **Elemen Container**.
+Untuk kebutuhan tersebut, HTML menyediakan **elemen container** — elemen yang berfungsi sebagai pembungkus atau pengelompok elemen-elemen lain.
 
-### 1. Karakteristik "Sifat Alami" HTML (Block vs Inline)
+---
 
-Sebelum main bungkus-bungkus, kita wajb hukumnya mengerti watak temperamen setiap tag HTML sewaktu dicentang jejer di Browser. Element terbagi jadi dua kaum besar.
+### 1. Perilaku Tata Letak Bawaan: Block vs Inline
 
-**Kaum A: Block-Level Element (Penguasa Penuh Garis)**
-Element yang memiliki watak maruk/egois. Ia akan "memaksa" mendorong setiap tetangga di sampingnya buat turun ke baris baru, tak peduli isinya sedikit, ia selalu melebarkan daerah otonomnya _full 100%_ menabrak tembok browser dari ujung kiri ke ujung kanan kertas panggung.
-_Contoh gank ini:_ Paragraf `<p>`, Judul `<h1>...<h6>`, Tabel `<table>`, dan List `<ul> / <ol>`.
+Setiap elemen HTML memiliki perilaku tata letak bawaan yang menentukan bagaimana elemen tersebut ditempatkan relatif terhadap elemen lain di sekitarnya. Terdapat dua kategori utama:
 
-**Kaum B: Inline Element (Toleran Berjejer)**
-Element kalem penakut. Ia akan menempel jejer damai sebalahan dengan tetangganya dalam "satu baris" lurus yang sama selagi ruang kanvas kanan browser masih muat. Ia cuma memakan wilayah sempit persis ukurkan kontennya sendiri tanpa membuat garis break baru.
-_Contoh gank ini:_ Hyperlink `<a>`, Format huruf Tebal Miring `<b>` `<i>`, dan sisipan `<img>`.
+#### Block-Level Element
 
-### 2. Duo Kontainer Kosong: `<div>` vs `<span>`
+Elemen block selalu dimulai dari baris baru dan secara bawaan mengambil lebar penuh dari elemen induknya — dari tepi kiri hingga tepi kanan area tampilan. Elemen berikutnya akan ditempatkan di bawahnya, bukan di sampingnya.
 
-Lalu ada tag spesial bernama **Containers**. Fungsinya hampa (tidak menghasilkan efek visual apa-apa kalau cuma dipanggil berdiri mentah), TAPI kekuatan sakti dewa terbesarnya adalah: Digunakan mempartisi batas wilayah untuk merapikan penyusunan CSS kelas berat Layouting.
-
-Ini terbagi kembali sesuai watak Kaum di atas, yakni:
-
-- **`<div>` (Division)** perwakilan geng **Block-Level**.
-  Digunakan mengikat banyak baris tag raksasa jadi sekumpulan partisi struktur rapi.
-  _Analogi:_ Menyusun piring, sendok, dan sumpit kotor (element-element bebas) dan memasukannya sekaligus ke dalam Ember cucian berskala Jumbo (`<div>`). Saat CSS disuruh menggerakkan embernya, maka otomatis piring dan sendok terikat itu ikutan geser serentak.
+Contoh elemen block: `<p>`, `<h1>`–`<h6>`, `<table>`, `<ul>`, `<ol>`, `<div>`.
 
 ```html
-<div style="background-color: lightgreen;">
-  <h2>Box Kartu Hijau</h2>
-  <p>Halo, saya di dalam pagar container div!</p>
-</div>
+<!-- HTML: Setiap elemen block dimulai dari baris baru -->
+<p>Paragraf pertama mengambil satu baris penuh.</p>
+<p>Paragraf kedua dimulai dari baris baru di bawah paragraf pertama.</p>
+<h2>Judul ini juga dimulai dari baris baru.</h2>
 ```
 
-- **`<span>`** perwakilan geng kalem **Inline**.
-  Secara spesifik digunakan "Menarget modifikasi/CSS" pada sebiji selipan suku kata atau frase di perut aliran kalimat (Tanpa ngebobol turun baris).
+#### Inline Element
+
+Elemen inline tidak memulai baris baru — ia mengikuti aliran teks dan hanya mengambil lebar sesuai dengan ukuran kontennya. Beberapa elemen inline dapat berjajar dalam satu baris selama ruang horizontal masih tersedia.
+
+Contoh elemen inline: `<a>`, `<b>`, `<i>`, `<strong>`, `<em>`, `<span>`, `<img>`.
 
 ```html
+<!-- HTML: Elemen inline berjajar dalam satu baris -->
 <p>
-  Kamera cctv itu merekam
-  <span style="color:red; font-weight:bold;">TINDAKAN KRIMINAL</span> semalam
-  suntuk.
+  Kunjungi <a href="https://developer.mozilla.org">MDN Web Docs</a> untuk
+  referensi <strong>HTML</strong> dan <em>CSS</em> yang lengkap.
 </p>
 ```
 
-### 3. Move On dari "Mabuk Div" (Div-itis) ke Semantic Tag (HTML5)
+**Perbandingan perilaku Block dan Inline:**
 
-Di era internet purba (tahun 2008), saking enaknya mendesain pembungkus pakai `<div>`, orang-orang keranjingan memakai code _Mabuk Div_.
-Di mana-mana `<div>` isinya tumpuk `<div id="navbar">`, lalu ditumpuk `<div id="body-bawah">`, dst. Susunan kodalnya bikin merinding mata coder orang lain (dan Google Bingung total membacanya, tidak bisa membedakan mana isi berita asli, mana sisipan banner iklran sampah!).
+| Aspek                           | Block-Level Element            | Inline Element                             |
+| ------------------------------- | ------------------------------ | ------------------------------------------ |
+| Posisi awal                     | Selalu dimulai dari baris baru | Mengikuti aliran teks pada baris yang sama |
+| Lebar bawaan                    | Mengambil lebar penuh induknya | Menyesuaikan lebar kontennya               |
+| Dapat mengatur `width`/`height` | Ya                             | Tidak (kecuali diubah via CSS)             |
+| Contoh                          | `<p>`, `<div>`, `<h1>`         | `<span>`, `<a>`, `<strong>`                |
 
-Nah, **Semantic Elements (Tag Bermakna)** datang menyelamatkan peradaban layouting web sejak kehadiran paten HTML5. Struktur `<div id="kepala">` buatan programmer digantikan dengan kosa-kata elemen otentik yang spesifik memiliki fungsi definitif. (_(Catatan: Kami telah menyinggung ini di rangkuman SEO Bab 9, kini kita ulik mendalam pemetaan layoutnya!_).
+---
 
-_Blueprint Semantik Standard:_
+### 2. Elemen Container: `<div>` dan `<span>`
 
-1. **`<header>`**: Rumah bagi banner utama hero layar dan Menu.
-2. **`<nav>`**: Lokasi sarang link navigasi (`<a>`).
-3. **`<section>`**: Pemisah Bab Bab Topik artikel raksasa terisolasi independen.
-4. **`<article>`**: Wadah esay inti liputan / produk detail dagangan.
-5. **`<aside>`**: Menyimpan kotak kecil "Iklan Sidebar / Widget Kategori Terpopuler" yang numpang di pojok sisi.
-6. **`<footer>`**: Pijakan basement web terbawah, menyimpan teks _Copyright_ 2026 dan sisa link hukum.
+Elemen container adalah elemen yang tidak memiliki tampilan visual bawaan — tidak menghasilkan perubahan gaya apa pun jika digunakan tanpa CSS. Kegunaannya adalah mengelompokkan beberapa elemen menjadi satu unit yang dapat diatur tampilannya secara bersamaan menggunakan CSS.
 
-Jadilah Developer Front-End bermartabat, ganti `<div>` mu untuk Layout berkerangka besar dengan rajutan Semantic Elements HTML5 ini supaya gawai/komputer robot bersahabat ramah menyapamu.
+#### `<div>` — Container Block
+
+`<div>` (_Division_) adalah elemen block yang digunakan untuk mengelompokkan beberapa elemen menjadi satu blok. Ketika CSS diterapkan pada `<div>`, seluruh elemen di dalamnya ikut terpengaruh.
+
+```html
+<!-- HTML -->
+<div style="background-color: #eaf4fb; padding: 16px; border-radius: 8px;">
+  <h2>Andi Pratama</h2>
+  <p>Frontend Developer</p>
+  <p>Yogyakarta, Indonesia</p>
+</div>
+```
+
+**Contoh penerapan — Dua kartu yang dikelompokkan secara terpisah:**
+
+```html
+<!-- HTML -->
+<div style="background-color: #d5f5e3; padding: 16px; margin-bottom: 12px;">
+  <h3>Produk A</h3>
+  <p>Harga: Rp 250.000</p>
+  <p>Stok: Tersedia</p>
+</div>
+
+<div style="background-color: #fadbd8; padding: 16px;">
+  <h3>Produk B</h3>
+  <p>Harga: Rp 175.000</p>
+  <p>Stok: Habis</p>
+</div>
+```
+
+Dengan `<div>`, setiap kartu produk dikelompokkan sebagai satu unit — sehingga pengaturan tampilan (warna latar, jarak, dan batas) dapat diterapkan pada seluruh isi kartu sekaligus.
+
+#### `<span>` — Container Inline
+
+`<span>` adalah elemen inline yang digunakan untuk menargetkan bagian kecil dari teks di dalam aliran kalimat — misalnya satu kata atau frasa — tanpa memulai baris baru.
+
+```html
+<!-- HTML -->
+<p>
+  Sistem mendeteksi
+  <span style="color: red; font-weight: bold;">kesalahan kritis</span>
+  pada modul autentikasi pukul 03.42 WIB.
+</p>
+```
+
+**Contoh penerapan — Menyoroti informasi penting dalam teks:**
+
+```html
+<!-- HTML -->
+<p>
+  Pendaftaran dibuka mulai
+  <span style="color: #27ae60; font-weight: bold;">1 Juli 2025</span>
+  hingga
+  <span style="color: #e74c3c; font-weight: bold;">31 Juli 2025</span>. Kuota
+  terbatas untuk <span style="font-style: italic;">30 peserta</span> per kelas.
+</p>
+```
+
+**Panduan memilih antara `<div>` dan `<span>`:**
+
+| Kebutuhan                                                         | Elemen yang Digunakan |
+| ----------------------------------------------------------------- | --------------------- |
+| Mengelompokkan beberapa elemen sebagai satu blok                  | `<div>`               |
+| Menargetkan bagian teks dalam satu baris tanpa memulai baris baru | `<span>`              |
+
+---
+
+### 3. Dari `<div>` ke Elemen Semantik HTML5
+
+Penggunaan `<div>` secara berlebihan untuk membangun seluruh struktur halaman menghasilkan kode HTML yang sulit dibaca — baik oleh pengembang lain maupun oleh mesin pencari. Kondisi ini sering disebut _div soup_ atau _divitis_.
+
+```html
+<!-- Contoh struktur non-semantik yang sulit dibaca -->
+<div id="kepala">...</div>
+<div id="navigasi">...</div>
+<div id="konten-utama">
+  <div id="artikel">...</div>
+  <div id="sidebar">...</div>
+</div>
+<div id="bawah">...</div>
+```
+
+Mesin pencari seperti Google tidak dapat membedakan secara otomatis mana bagian yang merupakan konten utama, mana navigasi, dan mana informasi penutup — karena semua menggunakan tag yang sama.
+
+HTML5 memperkenalkan **elemen semantik** — tag dengan nama yang mencerminkan fungsi dan makna kontennya secara eksplisit. Elemen-elemen ini memungkinkan mesin pencari, aplikasi pembaca layar, dan pengembang lain untuk memahami struktur halaman hanya dengan membaca tag HTML-nya.
+
+```html
+<!-- Struktur yang sama, ditulis dengan elemen semantik -->
+<header>...</header>
+<nav>...</nav>
+<main>
+  <article>...</article>
+  <aside>...</aside>
+</main>
+<footer>...</footer>
+```
+
+**Elemen semantik utama dan fungsinya:**
+
+| Elemen      | Setara `<div>` Lama       | Fungsi                                                                        |
+| ----------- | ------------------------- | ----------------------------------------------------------------------------- |
+| `<header>`  | `<div id="header">`       | Area kepala halaman — umumnya berisi logo, judul, dan navigasi utama          |
+| `<nav>`     | `<div id="nav">`          | Area navigasi — berisi kumpulan tautan menu utama                             |
+| `<main>`    | `<div id="main-content">` | Area konten utama — hanya boleh ada satu per halaman                          |
+| `<section>` | `<div class="section">`   | Pengelompokan konten yang saling berkaitan dalam satu topik                   |
+| `<article>` | `<div class="article">`   | Konten mandiri yang dapat berdiri sendiri, seperti postingan blog atau berita |
+| `<aside>`   | `<div id="sidebar">`      | Konten pendukung di sisi halaman, seperti widget atau iklan                   |
+| `<footer>`  | `<div id="footer">`       | Area penutup halaman — umumnya berisi hak cipta dan tautan sekunder           |
+
+**Contoh struktur halaman lengkap menggunakan elemen semantik:**
+
+```html
+<!-- HTML -->
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Blog Teknologi - WebDev Academy</title>
+  </head>
+  <body>
+    <header>
+      <h1>WebDev Academy</h1>
+      <p>Panduan Belajar Web Development untuk Pemula</p>
+    </header>
+
+    <nav>
+      <a href="index.html">Beranda</a> | <a href="artikel.html">Artikel</a> |
+      <a href="kursus.html">Kursus</a> |
+      <a href="kontak.html">Kontak</a>
+    </nav>
+
+    <main>
+      <article>
+        <h2>Mengenal CSS Flexbox: Panduan Lengkap untuk Pemula</h2>
+        <p>Diterbitkan: 10 Juni 2025 | Penulis: Tim Redaksi</p>
+
+        <section>
+          <h3>Apa Itu Flexbox?</h3>
+          <p>
+            Flexbox adalah model tata letak CSS yang dirancang untuk menyusun
+            elemen-elemen dalam satu dimensi — baik secara horizontal maupun
+            vertikal.
+          </p>
+        </section>
+
+        <section>
+          <h3>Kapan Menggunakan Flexbox?</h3>
+          <p>
+            Flexbox paling tepat digunakan untuk menyelaraskan elemen-elemen
+            dalam satu baris atau satu kolom, seperti navigasi, kartu produk,
+            atau baris tombol.
+          </p>
+        </section>
+      </article>
+
+      <aside>
+        <h3>Artikel Terkait</h3>
+        <ul>
+          <li><a href="#">Mengenal CSS Grid</a></li>
+          <li><a href="#">Dasar-Dasar HTML5</a></li>
+          <li><a href="#">Cara Kerja Box Model</a></li>
+        </ul>
+      </aside>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 WebDev Academy. Hak Cipta Dilindungi.</p>
+      <p>
+        <a href="kebijakan-privasi.html">Kebijakan Privasi</a> |
+        <a href="syarat-ketentuan.html">Syarat &amp; Ketentuan</a>
+      </p>
+    </footer>
+  </body>
+</html>
+```
+
+---
+
+### Kesimpulan
+
+Memahami perbedaan antara elemen block dan inline adalah fondasi dalam membangun tata letak halaman web. Elemen `<div>` dan `<span>` menyediakan fleksibilitas sebagai container umum, sementara elemen semantik HTML5 memberikan makna yang jelas pada setiap bagian struktur halaman. Penggunaan elemen semantik yang tepat meningkatkan keterbacaan kode, mendukung aksesibilitas, dan membantu mesin pencari memahami konten halaman secara akurat.
+
+**Panduan singkat penggunaan:**
+
+- Perlu mengelompokkan beberapa elemen menjadi satu blok? → Gunakan **`<div>`**.
+- Perlu menargetkan bagian teks dalam satu baris? → Gunakan **`<span>`**.
+- Membangun struktur bagian-bagian halaman utama? → Gunakan **elemen semantik** (`<header>`, `<nav>`, `<main>`, `<article>`, `<section>`, `<aside>`, `<footer>`).
+
+**Ringkasan Elemen:**
+
+| Elemen      | Kategori             | Fungsi                                                       |
+| ----------- | -------------------- | ------------------------------------------------------------ |
+| `<div>`     | Block, non-semantik  | Container umum untuk mengelompokkan elemen-elemen block      |
+| `<span>`    | Inline, non-semantik | Container umum untuk menargetkan sebagian teks dalam kalimat |
+| `<header>`  | Block, semantik      | Area kepala halaman                                          |
+| `<nav>`     | Block, semantik      | Area navigasi                                                |
+| `<main>`    | Block, semantik      | Area konten utama halaman (satu per halaman)                 |
+| `<section>` | Block, semantik      | Pengelompokan konten berdasarkan topik                       |
+| `<article>` | Block, semantik      | Konten mandiri yang dapat berdiri sendiri                    |
+| `<aside>`   | Block, semantik      | Konten pendukung di luar alur konten utama                   |
+| `<footer>`  | Block, semantik      | Area penutup halaman                                         |
+
+**Panduan Pemilihan Elemen:**
+
+| Kebutuhan                                                       | Elemen yang Digunakan |
+| --------------------------------------------------------------- | --------------------- |
+| Mengelompokkan elemen untuk keperluan CSS tanpa makna khusus    | `<div>`               |
+| Menargetkan kata atau frasa dalam teks untuk diberi gaya CSS    | `<span>`              |
+| Area kepala halaman dengan logo dan navigasi                    | `<header>`            |
+| Kumpulan tautan menu navigasi                                   | `<nav>`               |
+| Konten inti halaman                                             | `<main>`              |
+| Postingan blog, artikel berita, atau ulasan produk              | `<article>`           |
+| Sub-topik dalam sebuah artikel atau halaman                     | `<section>`           |
+| Widget, iklan, atau tautan terkait di sisi halaman              | `<aside>`             |
+| Informasi hak cipta dan tautan sekunder di bagian bawah halaman | `<footer>`            |

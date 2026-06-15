@@ -35,7 +35,7 @@ Mempelajari logika inti pemrograman JS, mulai dari variabel dan tipe data, fungs
 
 ---
 
-## 💬 Hubukan Kami & Kontribusi
+## 💬 Saran & Kontribusi
 
 Kami sangat menghargai setiap proses belajar Anda. Jika Anda menemukan hal yang kurang sesuai, terdapat kesalahan penulisan, atau ada materi penting yang perlu ditambahkan, kami sangat terbuka untuk menerima masukan dan saran profesional dari Anda.
 

@@ -2,8 +2,7 @@
 
 Selamat datang di **Pre-Class Programming Module**! 🚀
 
-> **⚠️ PERINGATAN PENTING:** 
-> Sebelum Anda memulai dan menggunakan modul ini, mohon untuk membaca seluruh isi `README.md` ini terlebih dahulu agar Anda dapat memahami struktur pembelajaran dan cara menggunakan modul dengan benar. Terima kasih atas kerja samanya.
+> ⚠️ Sebelum Anda memulai dan menggunakan modul ini, mohon untuk membaca seluruh isi `README.md` ini terlebih dahulu agar Anda dapat memahami struktur pembelajaran dan cara menggunakan modul dengan benar. Terima kasih atas kerja samanya.
 
 Modul ini dirancang khusus untuk peserta yang baru memulai perjalanan di dunia pemrograman (Front-End Web Development). Materi ini disusun secara mendalam namun mudah dipahami untuk membantu kamu membangun fondasi yang kuat.
 

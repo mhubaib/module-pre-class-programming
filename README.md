@@ -47,7 +47,6 @@ Jika Anda ingin memberikan masukan atau melaporkan kendala, silakan gunakan fitu
 
 ---
 
-⭐ **Mendukung Modul Ini**
-Jika Anda merasa puas, terbantu, dan mendapatkan manfaat dari modul pembelajaran ini, mohon kesediaannya untuk memberikan **Bintang (Star)** pada repositori ini. Dukungan Anda sangat berarti bagi pengembangan modul ini ke depannya.
+⭐ Jika Anda merasa puas, terbantu, dan mendapatkan manfaat dari modul pembelajaran ini, mohon kesediaannya untuk memberikan **Bintang (Star)** pada repositori ini. Dukungan Anda sangat berarti bagi pengembangan modul ini ke depannya.
 
 *Dibuat untuk membantu kamu belajar programming dari nol.*
